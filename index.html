@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EXIF Studio — Luxury Photography for Boutique Hotels</title>
+    <meta name="description" content="EXIF Studio elevates boutique hotels with fine-art, editorial photography and tailored visual experiences.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="site-header" role="banner">
+      <div class="container">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <a href="/" class="brand-name" aria-label="EXIF Studio home">exif studio</a>
+        </div>
+        <nav class="site-nav" aria-label="Primary">
+          <button class="nav-contact" id="openContact" aria-haspopup="dialog" aria-controls="contactPanel">
+            Contact
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1>Luxury photography for boutique hotels</h1>
+            <p>Editorial, timeless, quietly bold. We craft visual narratives that feel like memory.</p>
+            <div class="cta-row">
+              <a class="btn" href="#portfolio">See portfolio</a>
+              <button class="btn ghost" id="openContact2" aria-haspopup="dialog" aria-controls="contactPanel">Book a session</button>
+            </div>
+          </div>
+          <div class="hero-media" role="img" aria-label="Editorial hotel photography showcase"></div>
+        </div>
+      </section>
+
+      <section class="strip">
+        <div class="container strip-inner">
+          <p>Selected collaborators &mdash; Rockhouse • Skylark • Casa Lila • High View Villa • BlueSkies • Royalton</p>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="cols">
+            <div>
+              <h2>About EXIF Studio</h2>
+            </div>
+            <div class="about-copy">
+              <p>EXIF Studio elevates hospitality brands through fine‑art photography that blends architecture, atmosphere, and human presence. Our work is minimal, emotive, and editorial, designed to live beautifully across web, print, and press.</p>
+              <p>Based in the Caribbean, working worldwide.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="portfolio">
+        <div class="container">
+          <h2>Portfolio</h2>
+          <div class="grid">
+            <figure class="card"><div class="img ph1" role="img" aria-label="Sunlit suite with linen textures"></div><figcaption>Hotel Suites</figcaption></figure>
+            <figure class="card"><div class="img ph2" role="img" aria-label="Pool reflections at dusk"></div><figcaption>Pool &amp; Exteriors</figcaption></figure>
+            <figure class="card"><div class="img ph3" role="img" aria-label="Candlelit dining under palms"></div><figcaption>Dining &amp; Lifestyle</figcaption></figure>
+            <figure class="card"><div class="img ph4" role="img" aria-label="Editorial portrait on terrace"></div><figcaption>Editorial Portraits</figcaption></figure>
+            <figure class="card"><div class="img ph5" role="img" aria-label="Architectural detail with shadows"></div><figcaption>Architecture</figcaption></figure>
+            <figure class="card"><div class="img ph6" role="img" aria-label="Wedding by the sea"></div><figcaption>Weddings</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services">
+        <div class="container">
+          <h2>Services</h2>
+          <div class="cols">
+            <div class="svc">
+              <h3>Hotel Campaigns</h3>
+              <p>Seasonal or brand launch campaigns, art direction, shot‑lists, and production.</p>
+            </div>
+            <div class="svc">
+              <h3>Content Retainers</h3>
+              <p>Monthly visuals for web, socials, and PR. Consistent, on‑brand, editorial.</p>
+            </div>
+            <div class="svc">
+              <h3>Weddings &amp; Private</h3>
+              <p>Elegant coverage for boutique venues and select private clients.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="container cta-inner">
+          <h2>Let’s create something unforgettable.</h2>
+          <button class="btn" id="openContact3" aria-haspopup="dialog" aria-controls="contactPanel">Contact Us</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container foot-inner">
+        <div class="brand small">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-name">exif studio</span>
+        </div>
+        <div class="foot-meta">
+          <a href="mailto:hello@exif.studio">hello@exif.studio</a>
+          <span>•</span>
+          <a href="https://instagram.com/exif.studios" target="_blank" rel="noopener">instagram</a>
+          <span>•</span>
+          <small>&copy; <span id="year"></span> EXIF Studio</small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Slide-over Contact Panel -->
+    <div class="overlay" id="overlay" hidden></div>
+
+    <aside class="panel" id="contactPanel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+      <div class="panel-header">
+        <h2 id="panelTitle">Contact Us</h2>
+        <button class="icon-btn" id="closeContact" aria-label="Close contact panel">&times;</button>
+      </div>
+      <div class="panel-body">
+        <p class="panel-intro">Tell us about your property, dates, and vision. We’ll reply within 24 hours.</p>
+        <form class="contact-form" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact">
+          <label>Full name
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>Property / Hotel
+            <input type="text" name="property">
+          </label>
+          <label>Message
+            <textarea name="message" rows="5" placeholder="Dates, scope, mood…"></textarea>
+          </label>
+          <button class="btn full" type="submit">Send</button>
+          <p class="fine">Prefer email? <a href="mailto:hello@exif.studio">hello@exif.studio</a></p>
+        </form>
+      </div>
+    </aside>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
