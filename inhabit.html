@@ -35,7 +35,7 @@ nav.scrolled { background: rgba(7,26,24,.95); backdrop-filter: blur(16px); paddi
 .nav-links { display: flex; gap: 44px; list-style: none; }
 .nav-links a { color: var(--cream); text-decoration: none; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .7; transition: opacity .2s; }
 .nav-links a:hover { opacity: 1; }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 600; position: relative; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 9999; position: relative; }
 .hamburger span { display: block; width: 22px; height: 1px; background: var(--cream); transition: all .3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -147,6 +147,10 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
+  <button onclick="closeMenu()" style="position:absolute;top:24px;right:24px;background:none;border:none;cursor:pointer;padding:8px;">
+    <span style="display:block;width:22px;height:1px;background:var(--cream);transform:rotate(45deg);margin-bottom:-1px;"></span>
+    <span style="display:block;width:22px;height:1px;background:var(--cream);transform:rotate(-45deg);"></span>
+  </button>
   <a href="/">Home</a>
   <a href="#services">Services</a>
   <a href="#about">About</a>
@@ -241,7 +245,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
     <p class="contact-body">Whether you're a villa owner, boutique hotel, or creative agency, we'd love to hear about your project.</p>
     <div class="contact-detail">
       <span>Email</span>
-      <a href="mailto:hello@exif.studio">hello@exif.studio</a>
+      <a href="/cdn-cgi/l/email-protection#0b636e6767644b6e73626d25787f7e6f6264"><span class="__cf_email__" data-cfemail="e28a878e8e8da2879a8b84cc919697868b8d">[email&#160;protected]</span></a>
     </div>
     <div class="contact-detail">
       <span>Instagram</span>
@@ -287,11 +291,11 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   <p>&copy; 2025 EXIF Studio. All rights reserved.</p>
   <div class="footer-links">
     <a href="https://instagram.com/__exif.studio" target="_blank">Instagram</a>
-    <a href="mailto:hello@exif.studio">Email</a>
+    <a href="/cdn-cgi/l/email-protection#234b464f4f4c63465b4a450d505756474a4c">Email</a>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
   var nav = document.getElementById('navbar');
   window.addEventListener('scroll', function() {
@@ -301,12 +305,4 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   var mobileMenu = document.getElementById('mobileMenu');
   function openMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); document.body.style.overflow = 'hidden'; }
   function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }
-  hamburger.addEventListener('click', function() {
-    if (mobileMenu.classList.contains('open')) { closeMenu(); } else { openMenu(); }
-  });
-  var links = mobileMenu.querySelectorAll('a');
-  for (var i = 0; i < links.length; i++) { links[i].addEventListener('click', closeMenu); }
-})();
-</script>
-</body>
-</html>
+  hamburger.addEventListener('clic
