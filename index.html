@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -23,85 +24,86 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 nav.scrolled { background: rgba(242,232,220,.96); backdrop-filter: blur(16px); padding: 18px 56px; }
 .nav-logo { height: 30px; display: block; }
 .nav-links { display: flex; gap: 44px; list-style: none; }
-.nav-links a { color: var(--void); text-decoration: none; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .55; transition: opacity .2s; }
+.nav-links a { color: var(–void); text-decoration: none; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; opacity: .55; transition: opacity .2s; }
 .nav-links a:hover { opacity: 1; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 600; position: relative; }
-.hamburger span { display: block; width: 22px; height: 1px; background: var(--void); transition: all .3s; }
+.hamburger span { display: block; width: 22px; height: 1px; background: var(–void); transition: all .3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 /* MOBILE MENU */
-.mobile-menu { display: none; position: fixed; inset: 0; z-index: 9998; background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 9998; background: var(–cream); flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
 .mobile-menu.open { display: flex; }
-.mobile-menu a { color: var(--void); text-decoration: none; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; padding: 18px 48px; opacity: .7; }
+.mobile-menu a { color: var(–void); text-decoration: none; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; padding: 18px 48px; opacity: .7; }
 
 /* HERO */
 .hero { min-height: 100svh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 140px 56px 80px; gap: 60px; }
-.hero-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--forest); opacity: .6; margin-bottom: 28px; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 5.5vw, 84px); font-weight: 300; line-height: 1.0; color: var(--void); margin-bottom: 32px; }
-.hero-title em { font-style: italic; color: var(--forest); }
+.hero-eyebrow { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(–forest); opacity: .6; margin-bottom: 28px; }
+.hero-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(52px, 5.5vw, 84px); font-weight: 300; line-height: 1.0; color: var(–void); margin-bottom: 32px; }
+.hero-title em { font-style: italic; color: var(–forest); }
 .hero-body { font-size: 14px; line-height: 1.9; color: rgba(7,26,24,.55); max-width: 380px; margin-bottom: 12px; }
 .hero-signature { font-size: 15px; font-style: italic; color: rgba(7,26,24,.45); margin-bottom: 52px; }
-.btn-dark { display: inline-block; background: var(--void); color: var(--cream); text-decoration: none; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; padding: 15px 36px; transition: background .3s; }
-.btn-dark:hover { background: var(--forest); }
+.btn-dark { display: inline-block; background: var(–void); color: var(–cream); text-decoration: none; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; padding: 15px 36px; transition: background .3s; }
+.btn-dark:hover { background: var(–forest); }
 .hero-imgs { position: relative; height: 580px; }
 .hero-img-main { position: absolute; top: 0; right: 0; width: 85%; height: 500px; object-fit: cover; object-position: center; display: block; }
-.hero-img-second { position: absolute; bottom: 0; left: 0; width: 52%; height: 300px; object-fit: cover; object-position: center; display: block; border: 6px solid var(--cream); }
+.hero-img-second { position: absolute; bottom: 0; left: 0; width: 52%; height: 300px; object-fit: cover; object-position: center; display: block; border: 6px solid var(–cream); }
 
 /* DIVIDER */
 .divider-line { height: 1px; background: rgba(7,26,24,.1); margin: 0 56px; }
 
 /* WHAT */
 .what { padding: 100px 56px; display: grid; grid-template-columns: 200px 1fr; gap: 80px; align-items: start; }
-.what-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--forest); opacity: .6; padding-top: 8px; }
-.what-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.1; color: var(--void); margin-bottom: 28px; }
-.what-title em { font-style: italic; color: var(--forest); }
+.what-label { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(–forest); opacity: .6; padding-top: 8px; }
+.what-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.1; color: var(–void); margin-bottom: 28px; }
+.what-title em { font-style: italic; color: var(–forest); }
 .what-body { font-size: 14px; line-height: 1.95; color: rgba(7,26,24,.55); max-width: 560px; }
 
 /* BRANCHES */
 .branches { padding: 0 56px 120px; }
 .branches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.branch-card { background: var(--off); padding: 48px 40px; border: 1px solid rgba(7,26,24,.08); }
-.branch-card.active { background: var(--void); }
+.branch-card { background: var(–off); padding: 48px 40px; border: 1px solid rgba(7,26,24,.08); }
+.branch-card.active { background: var(–void); }
 .branch-card.soon { opacity: .5; }
-.branch-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: rgba(7,26,24,.1); line-height: 1; margin-bottom: 24px; }
+.branch-num { font-family: ‘Cormorant Garamond’, serif; font-size: 48px; font-weight: 300; color: rgba(7,26,24,.1); line-height: 1; margin-bottom: 24px; }
 .branch-card.active .branch-num { color: rgba(242,232,220,.1); }
-.branch-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--void); margin-bottom: 8px; }
-.branch-card.active .branch-name { color: var(--cream); }
+.branch-name { font-family: ‘Cormorant Garamond’, serif; font-size: 24px; font-weight: 300; color: var(–void); margin-bottom: 8px; }
+.branch-card.active .branch-name { color: var(–cream); }
 .branch-sub { font-size: 11px; letter-spacing: .1em; color: rgba(7,26,24,.4); margin-bottom: 16px; }
 .branch-card.active .branch-sub { color: rgba(242,232,220,.4); }
 .branch-desc { font-size: 13px; line-height: 1.85; color: rgba(7,26,24,.5); }
 .branch-card.active .branch-desc { color: rgba(242,232,220,.55); }
-.branch-link { display: inline-block; margin-top: 28px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(242,232,220,.5); padding-bottom: 3px; transition: border-color .2s; }
+.branch-link { display: inline-block; margin-top: 28px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(–cream); text-decoration: none; border-bottom: 1px solid rgba(242,232,220,.5); padding-bottom: 3px; transition: border-color .2s; }
 .branch-soon-tag { margin-top: 28px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(7,26,24,.3); }
 
 /* FOOTER */
-footer { background: var(--void); padding: 52px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+footer { background: var(–void); padding: 52px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
 .footer-logo { height: 26px; filter: brightness(0) invert(1); opacity: .5; }
 footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); }
 .footer-links { display: flex; gap: 28px; }
 .footer-links a { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(242,232,220,.3); text-decoration: none; transition: color .2s; }
-.footer-links a:hover { color: var(--accent); }
+.footer-links a:hover { color: var(–accent); }
 
 /* MOBILE */
 @media (max-width: 768px) {
-  nav { padding: 20px 24px; }
-  nav.scrolled { padding: 14px 24px; }
-  .nav-links { display: none; }
-  .nav-logo { height: 26px; }
-  .hamburger { display: flex; }
-  .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; min-height: auto; }
-  .hero-imgs { height: 380px; }
-  .hero-img-main { width: 90%; height: 340px; }
-  .hero-img-second { width: 50%; height: 220px; }
-  .divider-line { margin: 0 24px; }
-  .what { grid-template-columns: 1fr; gap: 20px; padding: 72px 24px; }
-  .branches { padding: 0 24px 80px; }
-  .branches-grid { grid-template-columns: 1fr; }
-  footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+nav { padding: 20px 24px; }
+nav.scrolled { padding: 14px 24px; }
+.nav-links { display: none; }
+.nav-logo { height: 26px; }
+.hamburger { display: flex; }
+.hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; min-height: auto; }
+.hero-imgs { height: 380px; }
+.hero-img-main { width: 90%; height: 340px; }
+.hero-img-second { width: 50%; height: 220px; }
+.divider-line { margin: 0 24px; }
+.what { grid-template-columns: 1fr; gap: 20px; padding: 72px 24px; }
+.branches { padding: 0 24px 80px; }
+.branches-grid { grid-template-columns: 1fr; }
+footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
 }
 </style>
+
 </head>
 <body>
 
@@ -154,7 +156,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
       <h3 class="branch-name">Inhabit</h3>
       <p class="branch-sub">Hotels + Villas</p>
       <p class="branch-desc">Visual strategy and photography for boutique hotels and luxury villas. We make spaces look like destinations people dream about.</p>
-      <a href="/cdn-cgi/l/email-protection#127a777e7e7d52776a7b743c616667767b7d" class="branch-link">Explore</a>
+      <a href="/inhabit" class="branch-link">Explore</a>
     </div>
     <div class="branch-card soon">
       <div class="branch-num">02</div>
@@ -183,25 +185,26 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
 (function() {
-  var nav = document.getElementById('navbar');
-  window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+var nav = document.getElementById(‘navbar’);
+window.addEventListener(‘scroll’, function() {
+nav.classList.toggle(‘scrolled’, window.scrollY > 60);
+});
 
-  var hamburger = document.getElementById('hamburger');
-  var mobileMenu = document.getElementById('mobileMenu');
+var hamburger = document.getElementById(‘hamburger’);
+var mobileMenu = document.getElementById(‘mobileMenu’);
 
-  function openMenu() {
-    mobileMenu.classList.add('open');
-    hamburger.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+function openMenu() {
+mobileMenu.classList.add(‘open’);
+hamburger.classList.add(‘open’);
+document.body.style.overflow = ‘hidden’;
+}
+function closeMenu() {
+mobileMenu.classList.remove(‘open’);
+hamburger.classList.remove(‘open’);
+document.body.style.overflow = ‘’;
+}
 
-  hamburger.addEventListener('click', function() {
-    if (mobileMenu.cl
+hamburger.addEventListener(‘click’, function() {
+if (mobileMenu.cl
