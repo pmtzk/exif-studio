@@ -40,8 +40,8 @@ nav.scrolled { background: rgba(242,232,220,.95); backdrop-filter: blur(16px); p
 
 /* MOBILE MENU */
 .mobile-menu {
-  display: none; position: fixed; inset: 0; z-index: 400;
-  background: rgba(242,232,220,.98);
+  display: none; position: fixed; inset: 0; z-index: 9998;
+  background: rgba(242,232,220,1);
   flex-direction: column; align-items: center; justify-content: center; gap: 8px;
 }
 .mobile-menu.open { display: flex; }
@@ -79,11 +79,11 @@ nav.scrolled { background: rgba(242,232,220,.95); backdrop-filter: blur(16px); p
 .hero-img-stack { position: relative; height: 600px; }
 .hero-img-main {
   position: absolute; top: 0; right: 0;
-  width: 85%; height: 520px; object-fit: cover; display: block;
+  width: 85%; height: 520px; object-fit: cover; object-position: center; display: block;
 }
 .hero-img-second {
   position: absolute; bottom: 0; left: 0;
-  width: 55%; height: 320px; object-fit: cover; display: block;
+  width: 55%; height: 320px; object-fit: cover; object-position: center; display: block;
   border: 6px solid var(--cream);
 }
 .hero-counter {
@@ -176,7 +176,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#what">About</a>
   <a href="#branches">Work</a>
-  <a href="mailto:hello@exif.studio">Contact</a>
+  <a href="/cdn-cgi/l/email-protection#0e666b6262614e6b766768207d7a7b6a6761">Contact</a>
 </div>
 
 <!-- NAV -->
@@ -185,7 +185,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   <ul class="nav-links">
     <li><a href="#what">About</a></li>
     <li><a href="#branches">Work</a></li>
-    <li><a href="mailto:hello@exif.studio">Contact</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#3c54595050537c5944555a124f4849585553">Contact</a></li>
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -216,7 +216,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   <p class="what-label reveal">What we do</p>
   <div class="what-right">
     <h2 class="what-title reveal d1">We translate <em>atmosphere</em><br>into imagery.</h2>
-    <p class="what-body reveal d2">EXIF Studio is a visual strategy practice rooted in Mexico. We work at the intersection of photography, creative direction, and brand identity — helping exceptional spaces communicate what makes them worth experiencing.</p>
+    <p class="what-body reveal d2">EXIF Studio is a visual strategy practice rooted in Mexico. We work at the intersection of photography, creative direction, and brand identity. Helping exceptional spaces communicate what makes them worth experiencing.</p>
   </div>
 </section>
 
@@ -228,7 +228,7 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
       <h3 class="branch-name">Inhabit</h3>
       <p class="branch-sub">Hotels + Villas</p>
       <p class="branch-desc">Visual strategy and photography for boutique hotels and luxury villas. We make spaces look like destinations people dream about.</p>
-      <a href="mailto:hello@exif.studio" class="branch-link">Explore</a>
+      <a href="/cdn-cgi/l/email-protection#5c34393030331c3924353a722f2829383533" class="branch-link">Explore</a>
     </div>
     <div class="branch-card soon reveal d1">
       <div class="branch-num">02</div>
@@ -239,9 +239,9 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
     </div>
     <div class="branch-card soon reveal d2">
       <div class="branch-num">03</div>
-      <h3 class="branch-name">Academy</h3>
-      <p class="branch-sub">Education</p>
-      <p class="branch-desc">How to build a visual strategy practice in hospitality. Knowledge, tools, and frameworks for creative professionals.</p>
+      <h3 class="branch-name">Feel</h3>
+      <p class="branch-sub">Weddings + Events + Sessions</p>
+      <p class="branch-desc">Portraits, weddings, and personal sessions. The moments that belong to people, not properties.</p>
       <p class="branch-soon-tag">Coming soon</p>
     </div>
   </div>
@@ -253,11 +253,11 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   <p>&copy; 2025 EXIF Studio. All rights reserved.</p>
   <div class="footer-links">
     <a href="https://instagram.com/__exif.studio" target="_blank">Instagram</a>
-    <a href="mailto:hello@exif.studio">Email</a>
+    <a href="/cdn-cgi/l/email-protection#78101d141417381d00111e560b0c0d1c1117">Email</a>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
   var nav = document.getElementById('navbar');
   window.addEventListener('scroll', function() {
@@ -279,7 +279,11 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
   }
 
   hamburger.addEventListener('click', function() {
-    if (mobileMenu.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+    if (mobileMenu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
   var links = mobileMenu.querySelectorAll('a');
@@ -292,14 +296,4 @@ footer p { font-size: 10px; letter-spacing: .1em; color: rgba(242,232,220,.25); 
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.08 });
-    reveals.forEach(function(el) { observer.observe(el); });
-  } catch(e) {
-    var els = document.querySelectorAll('.reveal');
-    for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
-  }
-})();
-</script>
-</body>
-</html>
+      })
