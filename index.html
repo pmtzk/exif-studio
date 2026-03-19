@@ -134,6 +134,10 @@ footer{padding:40px 24px;flex-direction:column;align-items:flex-start;}
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
+  <button onclick="closeMenu()" style="position:absolute;top:24px;right:24px;background:none;border:none;cursor:pointer;padding:8px;">
+    <span style="display:block;width:22px;height:1px;background:var(--void);transform:rotate(45deg);margin-bottom:-1px;"></span>
+    <span style="display:block;width:22px;height:1px;background:var(--void);transform:rotate(-45deg);"></span>
+  </button>
   <a href="#about">About</a>
   <a href="#work">Work</a>
   <a href="#contact">Contact</a>
@@ -276,6 +280,7 @@ footer{padding:40px 24px;flex-direction:column;align-items:flex-start;}
 </footer>
 
 <script>
+function closeMenu(){document.getElementById("mobileMenu").classList.remove("open");document.getElementById("hamburger").classList.remove("open");document.body.style.overflow="";}
 (function(){
   var nav=document.getElementById('navbar');
   window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);});
