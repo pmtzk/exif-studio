@@ -237,15 +237,22 @@ footer p{font-size:10px;letter-spacing:.1em;color:rgba(242,232,220,.25);}
       <a>St. Lucia, Caribbean</a>
     </div>
   </div>
-  <div class="form">
-    <div class="field">
-      <label>Your Name</label>
-      <input type="text" placeholder="Full name">
-    </div>
-    <div class="field">
-      <label>Email</label>
-      <input type="email" placeholder="your@email.com">
-    </div>
+  <form class="form" action="https://formspree.io/f/mqeynvra" method="POST">
+  <div class="field"><label>Your Name</label><input type="text" name="name" placeholder="Full name"></div>
+  <div class="field"><label>Email</label><input type="email" name="email" placeholder="your@email.com"></div>
+  <div class="field"><label>Property / Project</label><input type="text" name="property" placeholder="Villa, hotel, or project name"></div>
+  <div class="field"><label>Service</label>
+    <select name="service">
+      <option value="">Select a service</option>
+      <option>Visual Reset</option>
+      <option>Editorial + Lifestyle Shoot</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="field"><label>Message</label><textarea name="message" placeholder="Tell us about your property..."></textarea></div>
+  <button type="submit" class="submit">Send Message</button>
+</form>
+
     <div class="field">
       <label>Property / Project</label>
       <input type="text" placeholder="Villa, hotel, or project name">
