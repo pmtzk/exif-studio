@@ -68,17 +68,61 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #000;
+  background: var(--cream); /* fondo claro */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: loaderOut 0.8s ease 2.2s forwards;
+  gap: 1.4rem;
+  animation: loaderOut 0.8s ease 2s forwards;
 }
 
-.loader-logo {
-  width: min(58vw, 720px);
-  height: auto;
-  display: block;
+/* ICONO (el ojo) */
+.loader-eye {
+  width: 72px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+/* TEXTO */
+.loader-wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.loader-exif {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--deep);
+}
+
+.loader-studio {
+  font-family: var(--sans);
+  font-size: 0.48rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+/* LÍNEA */
+.loader-bar {
+  width: 54px;
+  height: 1px;
+  background: var(--forest);
+  opacity: 0;
+  animation: fadeIn 1s ease 0.6s forwards;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes loaderOut {
@@ -953,8 +997,15 @@ footer {
   
 <body>
 
-<div id="loader" aria-hidden="true">
-  <img class="loader-logo" src="exif-logo.PNG" alt="EXIF Studio" />
+<div id="loader">
+  <img class="loader-eye" src="exif-icono.PNG" alt="" />
+
+  <div class="loader-wordmark">
+    <span class="loader-exif">EXIF</span>
+    <span class="loader-studio">STUDIO</span>
+  </div>
+
+  <div class="loader-bar"></div>
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
