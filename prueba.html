@@ -153,22 +153,27 @@ nav {
   position: fixed;
   top: 1.15rem;
   right: 1.4rem;
-  z-index: 9999;
+  z-index: 10000;
   flex-direction: column;
   gap: 5px;
   padding: 0.7rem;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: currentColor;
 }
 
+/* líneas normales */
 .hamburger span {
   display: block;
   width: 22px;
   height: 1px;
-  background: currentColor;
+  background: #F2E8DC; /* claro */
   transition: all 0.3s ease;
+}
+
+/* cuando se abre (X) */
+.hamburger.open span {
+  background: #0D2B28; /* oscuro para que se vea en el fondo claro */
 }
 
 .hamburger.open span:nth-child(1) {
