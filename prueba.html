@@ -94,13 +94,13 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.75rem 2.5rem;
-  color: var(--deep);
-  background: transparent;
+  mix-blend-mode: difference;
+  color: var(--cream);
 }
 
 .logo {
@@ -153,7 +153,7 @@ nav {
   position: fixed;
   top: 1.15rem;
   right: 1.4rem;
-  z-index: 10001;
+  z-index: 10000;
   flex-direction: column;
   gap: 5px;
   padding: 0.7rem;
@@ -166,7 +166,7 @@ nav {
   display: block;
   width: 22px;
   height: 1px;
-  background: var(--deep);
+  background: currentColor;
   transition: all 0.3s ease;
 }
 
@@ -925,6 +925,12 @@ footer {
   }
 }
 
+@media (max-width: 900px) {
+  nav {
+    color: #0D2B28;
+  }
+}
+
 @media (max-width: 640px) {
   nav {
     align-items: flex-start;
@@ -942,8 +948,6 @@ footer {
     width: min(76vw, 460px);
   }
 }
-</style>
-</head>
 
 <body>
 
