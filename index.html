@@ -122,6 +122,99 @@
     nav .contact { font-size: 12px; }
   }
 
+  /* ---------- LOADER ---------- */
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    animation: loader-out 0.8s cubic-bezier(0.7, 0, 0.3, 1) 2.2s forwards;
+  }
+
+  @keyframes loader-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .loader-mark {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 42px;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    opacity: 0;
+    animation: loader-fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  }
+
+  .loader-bar {
+    width: 80px;
+    height: 1px;
+    background: rgba(26, 61, 58, 0.12);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: loader-fade-in 0.6s ease 0.6s forwards;
+  }
+
+  .loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--forest);
+    animation: loader-bar-slide 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.8s infinite;
+  }
+
+  @keyframes loader-bar-slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .loader-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0;
+    animation: loader-fade-in 0.6s ease 0.9s forwards;
+  }
+
+  @keyframes loader-fade-in {
+    to { opacity: 0.55; }
+  }
+
+  .loader-mark.fade-in-full {
+    animation: loader-fade-in-mark 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  }
+
+  @keyframes loader-fade-in-mark {
+    to { opacity: 1; }
+  }
+
+  /* Body starts hidden, fades in after loader */
+  body > nav,
+  body > .hero,
+  body > .archive,
+  body > footer {
+    opacity: 0;
+    animation: body-fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards;
+  }
+
+  @keyframes body-fade-in {
+    to { opacity: 1; }
+  }
+
   /* ---------- HERO ---------- */
   .hero {
     min-height: 100vh;
@@ -142,7 +235,7 @@
     color: var(--forest);
     max-width: 14ch;
     opacity: 0;
-    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 3.0s forwards;
   }
 
   .hero h1 em {
@@ -159,7 +252,7 @@
     color: var(--forest);
     opacity: 0;
     margin-top: 40px;
-    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 3.4s forwards;
   }
 
   .hero .subline::before {
@@ -429,6 +522,14 @@
 </head>
 <body>
 
+<!-- LOADER -->
+
+<div id="loader">
+  <div class="loader-mark">EXIF</div>
+  <div class="loader-bar"></div>
+  <div class="loader-label">Studio</div>
+</div>
+
 <nav>
   <div class="mark">EXIF</div>
   <a href="#contact" class="contact">Contact</a>
@@ -460,7 +561,7 @@
   <div class="card-bg"></div>
   <div class="card-label">
     <div>
-      <div class="card-product">Editorial Shoot</div>
+      <div class="card-product">Field Notes</div>
       <div class="card-name" style="margin-top: 6px;">Linger</div>
     </div>
     <div class="card-arrow">→</div>
@@ -471,7 +572,7 @@
   <div class="card-bg"></div>
   <div class="card-label">
     <div>
-      <div class="card-product">F&amp;B</div>
+      <div class="card-product">Mise en Place</div>
       <div class="card-name" style="margin-top: 6px;">Taste</div>
     </div>
     <div class="card-arrow">→</div>
