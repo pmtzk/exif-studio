@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXIF — Visual narratives for exceptional atmospheres</title>
+<meta name="description" content="EXIF is a studio working in visual narratives for exceptional atmospheres. Hotels, villas, restaurants, editorial.">
+
+<!--
+  TYPOGRAPHY NOTE
+  Display font is currently Fraunces (Google Fonts, free) as a stand-in for GT Sectra.
+  To swap to GT Sectra after licensing it from Grilli Type:
+    1. Host GT-Sectra-Regular.woff2 and GT-Sectra-Regular-Italic.woff2 in /fonts/
+    2. Remove the Fraunces <link> tags below
+    3. Uncomment the @font-face blocks at the top of the <style>
+    4. Change --font-display from 'Fraunces' to 'GT Sectra'
+
+  IMAGES
+  Inhabit: images/inhabit.jpeg
+  Linger:  images/linger.jpeg
+  Taste:   images/taste.jpeg
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---- GT Sectra swap (commented out, ready to activate) ----
+  @font-face {
+    font-family: 'GT Sectra';
+    src: url('/fonts/GT-Sectra-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'GT Sectra';
+    src: url('/fonts/GT-Sectra-Regular-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+  ----------------------------------------------------------- */
+
+  :root {
+    --forest: #1A3D3A;
+    --deep:   #0D2B28;
+    --void:   #071A18;
+    --accent: #8BAF88;
+    --cream:  #F2E8DC;
+    --cream-soft: #EDE3D5;
+
+    --font-display: 'Fraunces', 'GT Sectra', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--forest);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(242, 232, 220, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  nav .mark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+  }
+
+  nav .contact {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--forest);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  nav .contact:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 18px 24px; }
+    nav .mark { font-size: 16px; }
+    nav .contact { font-size: 12px; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(38px, 7vw, 96px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    max-width: 14ch;
+    opacity: 0;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--forest);
+  }
+
+  .hero .subline {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    opacity: 0;
+    margin-top: 40px;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  }
+
+  .hero .subline::before {
+    content: "—";
+    margin-right: 12px;
+    color: var(--accent);
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 100px 24px 60px; }
+    .hero .subline { font-size: 13px; }
+  }
+
+  /* ---------- GRID 2x2 ---------- */
+  .archive {
+    padding: 40px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .archive-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.15);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .card {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .card.placeholder {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* Active card (with image bg) */
+  .card.active {
+    background: var(--deep);
+  }
+
+  .card.active .card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card.active:hover .card-bg {
+    transform: scale(1.04);
+  }
+
+  .card.active .card-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 26, 24, 0.20) 0%,
+      rgba(7, 26, 24, 0.60) 100%
+    );
+  }
+
+  #card-inhabit .card-bg {
+    background-image: url('images/inhabit.jpeg');
+  }
+
+  #card-linger .card-bg {
+    background-image: url('images/linger.jpeg');
+  }
+
+  #card-taste .card-bg {
+    background-image: url('images/taste.jpeg');
+  }
+
+  /* Placeholder cards (Frame) */
+  .card.placeholder {
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Card label (visible always on active cards) */
+  .card-label {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    right: 28px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .card.active .card-label {
+    color: var(--cream);
+  }
+
+  .card-name {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .card-product {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .card-arrow {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card.active:hover .card-arrow {
+    transform: translateX(6px);
+  }
+
+  /* Placeholder labels (Frame) */
+  .card.placeholder .card-name {
+    color: var(--cream);
+  }
+
+  .card.placeholder .card-product {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .archive { padding: 24px 24px 60px; }
+    .grid { gap: 6px; }
+    .card-label { bottom: 20px; left: 20px; right: 20px; }
+  }
+
+  /* ---------- SIGNATURE / FOOTER ---------- */
+  footer {
+    padding: 120px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(26, 61, 58, 0.12);
+    margin-top: 40px;
+  }
+
+  .signature {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.3;
+    color: var(--forest);
+    max-width: 28ch;
+    margin-bottom: 80px;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-block a {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(24px, 3.6vw, 44px);
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+    width: fit-content;
+  }
+
+  .contact-block a:hover {
+    color: var(--accent);
+  }
+
+  .contact-block .label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 100px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26, 61, 58, 0.08);
+  }
+
+  .meta-line {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    opacity: 0.6;
+  }
+
+  .meta-line em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0;
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    footer { padding: 80px 24px 40px; }
+    .signature { margin-bottom: 60px; }
+    .meta { flex-direction: column; gap: 16px; align-items: flex-start; margin-top: 60px; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="mark">EXIF</div>
+  <a href="#contact" class="contact">Contact</a>
+</nav>
+
+<section class="hero">
+  <h1>Visual narratives for <em>exceptional</em> atmospheres.</h1>
+  <div class="subline">A studio rooted in Mexico. Working in the Caribbean and beyond.</div>
+</section>
+
+<section class="archive">
+  <div class="archive-label">THE STUDIO · FOUR PRACTICES</div>
+
+  <div class="grid">
+
+    <a href="/inhabit" class="card active" id="card-inhabit">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">Visual Reset</div>
+          <div class="card-name" style="margin-top: 6px;">Inhabit</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="/linger" class="card active" id="card-linger">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">Editorial Shoot</div>
+          <div class="card-name" style="margin-top: 6px;">Linger</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+    <a href="/taste" class="card active" id="card-taste">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">F&amp;B</div>
+          <div class="card-name" style="margin-top: 6px;">Taste</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
+    <div class="card placeholder">
+      <div class="card-label">
+        <div>
+          <div class="card-product">Soon</div>
+          <div class="card-name" style="margin-top: 6px;">Frame</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="signature">
+    To the daily beauty <br>that goes unnoticed.
+  </div>
+
+  <div class="contact-block">
+    <div class="label">BEGIN A CONVERSATION</div>
+    <a href="mailto:hello@exif.studio">hello@exif.studio</a>
+  </div>
+
+  <div class="meta">
+    <div class="meta-line">EXIF Studio · MX</div>
+    <div class="meta-line"><em>nur</em></div>
+  </div>
+</footer>
+
+</body>
+</html>
