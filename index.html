@@ -1,1130 +1,511 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EXIF Studio — Visual narratives for exceptional atmospheres</title>
-<meta name="description" content="EXIF Studio creates editorial visual narratives for boutique hotels, luxury villas, and exceptional atmospheres across the Caribbean." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXIF — Visual narratives for exceptional atmospheres</title>
+<meta name="description" content="EXIF is a studio working in visual narratives for exceptional atmospheres. Hotels, villas, restaurants, editorial.">
 
-<link rel="icon" type="image/png" href="exif-icono.PNG" />
-<link rel="apple-touch-icon" href="exif-icono.PNG" />
+<!--
+  TYPOGRAPHY NOTE
+  Display font is currently Fraunces (Google Fonts, free) as a stand-in for GT Sectra.
+  To swap to GT Sectra after licensing it from Grilli Type:
+    1. Host GT-Sectra-Regular.woff2 and GT-Sectra-Regular-Italic.woff2 in /fonts/
+    2. Remove the Fraunces <link> tags below
+    3. Uncomment the @font-face blocks at the top of the <style>
+    4. Change --font-display from 'Fraunces' to 'GT Sectra'
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  IMAGES
+  Inhabit: images/inhabit.jpeg
+  Linger:  images/linger.jpeg
+  Taste:   images/taste.jpeg
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --forest: #1A3D3A;
-  --deep: #0D2B28;
-  --void: #071A18;
-  --accent: #8BAF88;
-  --cream: #F2E8DC;
-  --cream-soft: #EDE2D2;
-  --line: rgba(13, 43, 40, 0.14);
-  --serif: 'Fraunces', 'Times New Roman', serif;
-  --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--cream);
-  color: var(--deep);
-  font-family: var(--sans);
-  font-weight: 300;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-::selection {
-  background: var(--forest);
-  color: var(--cream);
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.17 0 0 0 0 0.16 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
-
-/* LOADER */
-#loader {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: var(--cream);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: loaderOut 0.8s ease 1.8s forwards;
-}
-
-.loader-eye {
-  width: 76px;
-  height: auto;
-  display: block;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-}
-
-@keyframes loaderOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
+  /* ---- GT Sectra swap (commented out, ready to activate) ----
+  @font-face {
+    font-family: 'GT Sectra';
+    src: url('/fonts/GT-Sectra-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.75rem 2.5rem;
-  background: transparent;
-  color: var(--deep);
-  pointer-events: none;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  pointer-events: auto;
-  transition: opacity 0.35s ease;
-}
-
-nav.scrolled .logo {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.nav-logo-img {
-  width: 132px;
-  height: auto;
-  display: block;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-  pointer-events: auto;
-}
-
-.nav-links a {
-  color: var(--deep);
-  text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-/* HAMBURGER */
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 1.15rem;
-  right: 1.4rem;
-  z-index: 10002;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0.7rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: var(--deep);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.hamburger.open span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.open span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* MOBILE MENU */
-.mobile-menu {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--cream);
-}
-
-.mobile-menu.open {
-  display: flex;
-}
-
-.mobile-menu a {
-  padding: 1.25rem 3rem;
-  color: var(--deep);
-  text-decoration: none;
-  font-size: 0.82rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  opacity: 0.72;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
-  min-height: 100vh;
-  padding: 8rem 2.5rem 4rem;
-  background: var(--cream);
-}
-
-.hero-eyebrow {
-  position: absolute;
-  top: 50%;
-  left: 2.5rem;
-  transform: translateY(-50%) rotate(-90deg);
-  transform-origin: left center;
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--forest);
-  white-space: nowrap;
-  opacity: 0;
-  animation: fadeIn 1.2s ease 0.6s forwards;
-}
-
-.hero-content {
-  align-self: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding-left: 4rem;
-}
-
-.hero-headline {
-  margin-bottom: 2.5rem;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.8rem, 7.5vw, 7rem);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
-  color: var(--deep);
-}
-
-.hero-headline .italic {
-  font-style: italic;
-  font-weight: 300;
-  color: var(--forest);
-}
-
-.hero-headline .word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.hero-body-row {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 4rem;
-  max-width: 900px;
-  align-items: end;
-  opacity: 0;
-  animation: fadeIn 1s ease 1.4s forwards;
-}
-
-.hero-body {
-  max-width: 38ch;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--deep);
-  font-weight: 300;
-}
-
-.hero-cta {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.8rem;
-  align-self: end;
-  justify-self: end;
-  padding-bottom: 0.4rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.15rem;
-  color: var(--forest);
-  text-decoration: none;
-  border-bottom: 1px solid var(--forest);
-}
-
-.hero-cta::after {
-  content: '→';
-  font-style: normal;
-}
-
-.hero-meta {
-  position: absolute;
-  right: 2.5rem;
-  bottom: 2.5rem;
-  display: flex;
-  gap: 3rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--forest);
-  opacity: 0;
-  animation: fadeIn 1s ease 1.8s forwards;
-}
-
-.hero-meta-item span {
-  display: block;
-  margin-top: 0.3rem;
-  font-family: var(--serif);
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 0.85rem;
-  color: var(--deep);
-}
-
-section {
-  position: relative;
-  padding: 8rem 2.5rem;
-}
-
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 4rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--forest);
-}
-
-.section-label::before {
-  content: '';
-  width: 32px;
-  height: 1px;
-  background: var(--forest);
-}
-
-/* SERVICES */
-.services {
-  background: var(--cream-soft);
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.service {
-  position: relative;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
-
-.service:nth-child(2) {
-  margin-top: 8rem;
-}
-
-.service-num {
-  display: block;
-  margin-bottom: 1.5rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 0.95rem;
-  color: var(--forest);
-}
-
-.service-title {
-  margin-bottom: 2rem;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--deep);
-}
-
-.service-title em {
-  font-style: italic;
-  color: var(--forest);
-  font-weight: 300;
-}
-
-.service-body {
-  max-width: 42ch;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--deep);
-}
-
-.service-tag {
-  display: inline-block;
-  margin-top: 2rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--forest);
-  font-weight: 400;
-}
-
-/* WORK */
-.work {
-  background: var(--deep);
-  color: var(--cream);
-  padding-bottom: 4rem;
-}
-
-.work .section-label {
-  color: var(--accent);
-}
-
-.work .section-label::before {
-  background: var(--accent);
-}
-
-.work-intro {
-  max-width: 900px;
-  margin: 0 auto 5rem;
-}
-
-.work-intro p {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: var(--cream);
-}
-
-.work-intro em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1.2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.work-item {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: var(--void);
-}
-
-.work-item:nth-child(1) {
-  grid-column: 1 / 7;
-  aspect-ratio: 4 / 3;
-}
-
-.work-item:nth-child(2) {
-  grid-column: 7 / 13;
-  grid-row: 1 / 3;
-  aspect-ratio: 3 / 4;
-}
-
-.work-item:nth-child(3) {
-  grid-column: 1 / 4;
-  aspect-ratio: 1 / 1;
-}
-
-.work-item:nth-child(4) {
-  grid-column: 4 / 7;
-  aspect-ratio: 1 / 1;
-}
-
-.work-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(0.15) brightness(0.92);
-  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.work-item:hover img {
-  filter: grayscale(0) brightness(1);
-  transform: scale(1.04);
-}
-
-.work-item-meta {
-  position: absolute;
-  left: 1.5rem;
-  bottom: 1.5rem;
-  color: var(--cream);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.work-item-meta span {
-  display: block;
-  margin-top: 0.3rem;
-  font-family: var(--serif);
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 1rem;
-  color: var(--accent);
-}
-
-.work-item:hover .work-item-meta {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ABOUT */
-.about {
-  background: var(--cream);
-  padding: 10rem 2.5rem;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 6rem;
-  max-width: 1300px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.about-aside {
-  position: sticky;
-  top: 6rem;
-}
-
-.about-aside-text {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: var(--forest);
-}
-
-.about-content h2 {
-  margin-bottom: 3rem;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--deep);
-}
-
-.about-content h2 em {
-  font-style: italic;
-  color: var(--forest);
-}
-
-.about-content p {
-  max-width: 58ch;
-  margin-bottom: 1.6rem;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--deep);
-}
-
-.about-divider {
-  width: 60px;
-  height: 1px;
-  margin: 3rem 0;
-  background: var(--forest);
-}
-
-/* CONTACT */
-.contact {
-  position: relative;
-  overflow: hidden;
-  background: var(--void);
-  color: var(--cream);
-  padding: 10rem 2.5rem 6rem;
-}
-
-.contact::before {
-  content: '';
-  position: absolute;
-  top: -200px;
-  right: -200px;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 175, 136, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.contact .section-label {
-  color: var(--accent);
-}
-
-.contact .section-label::before {
-  background: var(--accent);
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 5rem;
-  align-items: end;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.contact-headline {
-  margin-bottom: 2.5rem;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--cream);
-}
-
-.contact-headline em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-.contact-body {
-  max-width: 50ch;
-  margin-bottom: 3rem;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--cream);
-  opacity: 0.85;
-}
-
-.contact-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem 2rem 1.2rem 2.4rem;
-  background: var(--cream);
-  color: var(--deep);
-  text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 400;
-  border-radius: 999px;
-}
-
-.contact-cta::after {
-  content: '→';
-  font-size: 1rem;
-}
-
-.contact-aside {
-  border-left: 1px solid rgba(242, 232, 220, 0.2);
-  padding-left: 3rem;
-}
-
-.contact-aside-label {
-  margin-bottom: 1rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.contact-aside-text {
-  margin-bottom: 2.5rem;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 1.15rem;
-  line-height: 1.5;
-  color: var(--cream);
-}
-
-.contact-direct {
-  font-size: 0.9rem;
-  color: var(--cream);
-  opacity: 0.8;
-}
-
-.contact-direct a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-/* FOOTER */
-footer {
-  background: var(--void);
-  color: var(--cream);
-  padding: 4rem 2.5rem 2.5rem;
-  border-top: 1px solid rgba(242, 232, 220, 0.1);
-}
-
-.footer-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: end;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.footer-closing {
-  max-width: 28ch;
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(1.2rem, 2.4vw, 2rem);
-  line-height: 1.3;
-  color: var(--accent);
-}
-
-.footer-meta {
-  text-align: right;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream);
-  opacity: 0.7;
-  line-height: 2;
-}
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  @font-face {
+    font-family: 'GT Sectra';
+    src: url('/fonts/GT-Sectra-Regular-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
   }
-}
+  ----------------------------------------------------------- */
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+  :root {
+    --forest: #1A3D3A;
+    --deep:   #0D2B28;
+    --void:   #071A18;
+    --accent: #8BAF88;
+    --cream:  #F2E8DC;
+    --cream-soft: #EDE3D5;
+
+    --font-display: 'Fraunces', 'GT Sectra', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
   }
-}
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--forest);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
   nav {
-    padding: 1.25rem 1.5rem;
-  }
-
-  .nav-logo-img {
-    width: 128px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .hamburger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(242, 232, 220, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
+  nav .mark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+  }
+
+  nav .contact {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--forest);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  nav .contact:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 18px 24px; }
+    nav .mark { font-size: 16px; }
+    nav .contact { font-size: 12px; }
+  }
+
+  /* ---------- HERO ---------- */
   .hero {
-    min-height: auto;
-    padding: 8rem 1.5rem 3rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .hero-content {
-    padding-left: 0;
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(38px, 7vw, 96px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    max-width: 14ch;
+    opacity: 0;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
   }
 
-  .hero-eyebrow {
-    display: none;
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--forest);
   }
 
-  .hero-body-row {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .hero .subline {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    opacity: 0;
+    margin-top: 40px;
+    animation: fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
   }
 
-  .hero-cta {
-    justify-self: start;
+  .hero .subline::before {
+    content: "—";
+    margin-right: 12px;
+    color: var(--accent);
   }
 
-  .hero-meta {
-    position: static;
-    margin-top: 3rem;
-    gap: 2rem;
-    flex-wrap: wrap;
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  section {
-    padding: 5rem 1.5rem;
+  @media (max-width: 640px) {
+    .hero { padding: 100px 24px 60px; }
+    .hero .subline { font-size: 13px; }
   }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 4rem;
+  /* ---------- GRID 2x2 ---------- */
+  .archive {
+    padding: 40px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .service:nth-child(2) {
-    margin-top: 0;
+  .archive-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.15);
   }
 
-  .work-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
 
-  .work-item:nth-child(1),
-  .work-item:nth-child(2),
-  .work-item:nth-child(3),
-  .work-item:nth-child(4) {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    aspect-ratio: 4 / 3;
+  .card {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
-  .about {
-    padding: 6rem 1.5rem;
+  .card.placeholder {
+    cursor: default;
+    pointer-events: none;
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+  /* Active card (with image bg) */
+  .card.active {
+    background: var(--deep);
   }
 
-  .about-aside {
-    position: static;
+  .card.active .card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .contact {
-    padding: 6rem 1.5rem 4rem;
+  .card.active:hover .card-bg {
+    transform: scale(1.04);
   }
 
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+  .card.active .card-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 26, 24, 0.20) 0%,
+      rgba(7, 26, 24, 0.60) 100%
+    );
   }
 
-  .contact-aside {
-    border-left: none;
-    border-top: 1px solid rgba(242, 232, 220, 0.2);
-    padding-left: 0;
-    padding-top: 2rem;
+  #card-inhabit .card-bg {
+    background-image: url('images/inhabit.jpeg');
   }
 
-  .footer-inner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  #card-linger .card-bg {
+    background-image: url('images/linger.jpeg');
   }
 
-  .footer-meta {
-    text-align: left;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero-headline {
-    font-size: clamp(3.1rem, 16vw, 5rem);
+  #card-taste .card-bg {
+    background-image: url('images/taste.jpeg');
   }
 
-  .section-label {
-    letter-spacing: 0.22em;
+  /* Placeholder cards (Frame) */
+  .card.placeholder {
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .loader-eye {
-    width: 74px;
+  /* Card label (visible always on active cards) */
+  .card-label {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    right: 28px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
-}
+
+  .card.active .card-label {
+    color: var(--cream);
+  }
+
+  .card-name {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .card-product {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .card-arrow {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card.active:hover .card-arrow {
+    transform: translateX(6px);
+  }
+
+  /* Placeholder labels (Frame) */
+  .card.placeholder .card-name {
+    color: var(--cream);
+  }
+
+  .card.placeholder .card-product {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .archive { padding: 24px 24px 60px; }
+    .grid { gap: 6px; }
+    .card-label { bottom: 20px; left: 20px; right: 20px; }
+  }
+
+  /* ---------- SIGNATURE / FOOTER ---------- */
+  footer {
+    padding: 120px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(26, 61, 58, 0.12);
+    margin-top: 40px;
+  }
+
+  .signature {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.3;
+    color: var(--forest);
+    max-width: 28ch;
+    margin-bottom: 80px;
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-block a {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(24px, 3.6vw, 44px);
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+    width: fit-content;
+  }
+
+  .contact-block a:hover {
+    color: var(--accent);
+  }
+
+  .contact-block .label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 100px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26, 61, 58, 0.08);
+  }
+
+  .meta-line {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    opacity: 0.6;
+  }
+
+  .meta-line em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0;
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    footer { padding: 80px 24px 40px; }
+    .signature { margin-bottom: 60px; }
+    .meta { flex-direction: column; gap: 16px; align-items: flex-start; margin-top: 60px; }
+  }
+
 </style>
-</head>
 
+</head>
 <body>
 
-<div id="loader">
-  <img class="loader-eye" src="exif-icono.PNG" alt="" />
-</div>
-
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#services">Services</a>
-  <a href="#work">Work</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<nav aria-label="Primary navigation">
-  <a class="logo" href="#top" aria-label="EXIF Studio home">
-    <img src="exif-logo.PNG" alt="EXIF Studio" class="nav-logo-img" />
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-
-  <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+<nav>
+  <div class="mark">EXIF</div>
+  <a href="#contact" class="contact">Contact</a>
 </nav>
 
-<main id="top">
-  <section class="hero" aria-label="EXIF Studio introduction">
-    <div class="hero-eyebrow">Visual narratives for exceptional atmospheres</div>
+<section class="hero">
+  <h1>Visual narratives for <em>exceptional</em> atmospheres.</h1>
+  <div class="subline">A studio rooted in Mexico. Working in the Caribbean and beyond.</div>
+</section>
 
-    <div class="hero-content">
-      <h1 class="hero-headline">
-        <span class="word" style="animation-delay: 0.2s">Your</span>
-        <span class="word" style="animation-delay: 0.28s">property</span>
-        <span class="word" style="animation-delay: 0.36s">is</span>
-        <span class="word italic" style="animation-delay: 0.44s">stronger</span><br />
-        <span class="word" style="animation-delay: 0.52s">than</span>
-        <span class="word" style="animation-delay: 0.6s">your</span>
-        <span class="word" style="animation-delay: 0.68s">visuals</span>
-        <span class="word italic" style="animation-delay: 0.76s">suggest.</span>
-      </h1>
+<section class="archive">
+  <div class="archive-label">THE STUDIO · FOUR PRACTICES</div>
 
-      <div class="hero-body-row">
-        <p class="hero-body">
-          EXIF Studio creates editorial imagery for boutique hotels and luxury villas whose online presence no longer reflects the experience they deliver. We close the gap between what guests see, what they expect, and what they are willing to book.
-        </p>
-        <a href="#contact" class="hero-cta">Request a visual audit</a>
-      </div>
+  <div class="grid">
+
+```
+<a href="/inhabit" class="card active" id="card-inhabit">
+  <div class="card-bg"></div>
+  <div class="card-label">
+    <div>
+      <div class="card-product">Visual Reset</div>
+      <div class="card-name" style="margin-top: 6px;">Inhabit</div>
     </div>
+    <div class="card-arrow">→</div>
+  </div>
+</a>
 
-    <div class="hero-meta" aria-label="Studio location">
-      <div class="hero-meta-item">
-        Based in <span>The Caribbean</span>
-      </div>
-      <div class="hero-meta-item">
-        Available <span>Worldwide</span>
-      </div>
+<a href="/linger" class="card active" id="card-linger">
+  <div class="card-bg"></div>
+  <div class="card-label">
+    <div>
+      <div class="card-product">Editorial Shoot</div>
+      <div class="card-name" style="margin-top: 6px;">Linger</div>
     </div>
-  </section>
+    <div class="card-arrow">→</div>
+  </div>
+</a>
 
-  <section class="services" id="services" aria-label="EXIF Studio services">
-    <div class="section-label reveal">What we offer</div>
-
-    <div class="services-grid">
-      <article class="service reveal">
-        <span class="service-num">01 / Visual Reset</span>
-        <h2 class="service-title">A sharper <em>first impression.</em></h2>
-        <p class="service-body">
-          For properties with a strong product and a weaker visual presence. We assess how the hotel is being read online, identify where perception falls below the actual experience, and rebuild the visual layer with editorial direction and conversion in mind.
-        </p>
-        <span class="service-tag">For repositioning</span>
-      </article>
-
-      <article class="service reveal">
-        <span class="service-num">02 / Editorial &amp; Lifestyle Shoot</span>
-        <h2 class="service-title">Imagery that filters <em>the right guest.</em></h2>
-        <p class="service-body">
-          Narrative photography built around atmosphere, rhythm, detail, and use. Not staged content for the sake of content. Imagery that helps the right guest understand the category, the feeling, and the value before they arrive.
-        </p>
-        <span class="service-tag">For category signaling</span>
-      </article>
+<a href="/taste" class="card active" id="card-taste">
+  <div class="card-bg"></div>
+  <div class="card-label">
+    <div>
+      <div class="card-product">F&amp;B</div>
+      <div class="card-name" style="margin-top: 6px;">Taste</div>
     </div>
-  </section>
+    <div class="card-arrow">→</div>
+  </div>
+</a>
 
-  <section class="work" id="work" aria-label="Selected editorial work">
-    <div class="section-label reveal">Selected work</div>
-
-    <div class="work-intro reveal">
-      <p>
-        Every frame is a positioning decision. The work is built around what a property needs to communicate before a guest ever speaks to the hotel. <em>Aesthetics are visible. Strategy is what makes them work.</em>
-      </p>
-    </div>
-
-    <div class="work-grid">
-      <div class="work-item reveal">
-        <img src="work-01-restaurant.JPG" alt="Editorial restaurant atmosphere with warm evening light" />
-        <div class="work-item-meta">Space <span>Interior atmosphere</span></div>
-      </div>
-
-      <div class="work-item reveal">
-        <img src="work-02-walkway.JPG" alt="Guests walking through a tropical resort path" />
-        <div class="work-item-meta">Experience <span>Guest rhythm</span></div>
-      </div>
-
-      <div class="work-item reveal">
-        <img src="work-03-sea-view.JPG" alt="Caribbean sea view framed by resort greenery" />
-        <div class="work-item-meta">Setting <span>Place identity</span></div>
-      </div>
-
-      <div class="work-item reveal">
-        <img src="work-04-pool-lounge.JPG" alt="Poolside lounge with architectural shadows" />
-        <div class="work-item-meta">Detail <span>Atmosphere study</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about" aria-label="About EXIF Studio">
-    <div class="section-label reveal">About the studio</div>
-
-    <div class="about-grid">
-      <aside class="about-aside reveal">
-        <p class="about-aside-text">
-          Built from inside hospitality, not from the edge of it.
-        </p>
-      </aside>
-
-      <div class="about-content reveal">
-        <h2>Visuals are the <em>first sales conversation</em> your property has.</h2>
-
-        <p>
-          EXIF Studio was built from years on property, inside hospitality operations, sales conversations, guest experience, and the small moments where people decide what feels worth paying for.
-        </p>
-
-        <p>
-          That context changes the way we shoot. We are not looking for beautiful images in isolation. We are looking for the visual signals that shape expectation, perceived value, and booking intent.
-        </p>
-
-        <div class="about-divider"></div>
-
-        <p>
-          We work with hotels, villas, and operators who already deliver something exceptional, but whose imagery has not caught up to the level of the experience.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact" aria-label="Contact EXIF Studio">
-    <div class="section-label reveal">Start here</div>
-
-    <div class="contact-grid">
-      <div class="reveal">
-        <h2 class="contact-headline">Start with <em>a visual audit.</em></h2>
-        <p class="contact-body">
-          Send your property name and current website. We will return a concise read on how your imagery is positioning you, where it may be working against the experience, and what a stronger visual layer could change. No deck. No pressure. Something useful either way.
-        </p>
-
-        <a href="mailto:hello@exif.studio?subject=Visual%20Audit%20Request" class="contact-cta">
-          Request a visual audit
-        </a>
-      </div>
-
-      <aside class="contact-aside reveal">
-        <div class="contact-aside-label">Direct</div>
-
-        <p class="contact-aside-text">
-          For boutique properties, villa managers, hospitality partners, and hotel groups exploring visual repositioning.
-        </p>
-
-        <div class="contact-direct">
-          <a href="mailto:hello@exif.studio">hello@exif.studio</a><br />
-          <a href="https://instagram.com/__exif.studio" target="_blank" rel="noopener">@__exif.studio</a>
-        </div>
-      </aside>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <p class="footer-closing">to the daily beauty that goes unnoticed.</p>
-
-    <div class="footer-meta">
-      EXIF Studio<br />
-      Saint Lucia &middot; The Caribbean<br />
-      &copy; 2026
+<div class="card placeholder">
+  <div class="card-label">
+    <div>
+      <div class="card-product">Soon</div>
+      <div class="card-name" style="margin-top: 6px;">Frame</div>
     </div>
   </div>
+</div>
+```
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="signature">
+    To the daily beauty <br>that goes unnoticed.
+  </div>
+
+  <div class="contact-block">
+    <div class="label">BEGIN A CONVERSATION</div>
+    <a href="mailto:hello@exif.studio">hello@exif.studio</a>
+  </div>
+
+  <div class="meta">
+    <div class="meta-line">EXIF Studio · MX</div>
+    <div class="meta-line"><em>nur</em></div>
+  </div>
 </footer>
-
-<script>
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const nav = document.querySelector('nav');
-
-function closeMenu() {
-  hamburger.classList.remove('open');
-  mobileMenu.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
-}
-
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-});
-
-mobileMenu.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', closeMenu);
-});
-
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -60px 0px'
-});
-
-document.querySelectorAll('.reveal').forEach((element) => io.observe(element));
-</script>
 
 </body>
 </html>
