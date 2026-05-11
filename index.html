@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -12,44 +11,11 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://exif.studio">
 
-<!--
-  TYPOGRAPHY NOTE
-  Display font is currently Fraunces (Google Fonts, free) as a stand-in for GT Sectra.
-  To swap to GT Sectra after licensing it from Grilli Type:
-    1. Host GT-Sectra-Regular.woff2 and GT-Sectra-Regular-Italic.woff2 in /fonts/
-    2. Remove the Fraunces <link> tags below
-    3. Uncomment the @font-face blocks at the top of the <style>
-    4. Change --font-display from 'Fraunces' to 'GT Sectra'
-
-  IMAGES
-  All image files live next to index.html (same folder, no subfolder).
-  Inhabit: inhabit.jpeg
-  Linger:  linger.jpeg
-  Taste:   taste.jpeg
--->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  /* ---- GT Sectra swap (commented out, ready to activate) ----
-  @font-face {
-    font-family: 'GT Sectra';
-    src: url('/fonts/GT-Sectra-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'GT Sectra';
-    src: url('/fonts/GT-Sectra-Regular-Italic.woff2') format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-  }
-  ----------------------------------------------------------- */
-
   :root {
     --forest: #1A3D3A;
     --deep:   #0D2B28;
@@ -200,15 +166,6 @@
     to { opacity: 0.55; }
   }
 
-  .loader-mark.fade-in-full {
-    animation: loader-fade-in-mark 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-  }
-
-  @keyframes loader-fade-in-mark {
-    to { opacity: 1; }
-  }
-
-  /* Body starts hidden, fades in after loader */
   body > nav,
   body > .hero,
   body > .archive,
@@ -324,7 +281,6 @@
     pointer-events: none;
   }
 
-  /* Active card (with image bg) */
   .card.active {
     background: var(--deep);
   }
@@ -364,7 +320,6 @@
     background-image: url('taste.jpeg');
   }
 
-  /* Placeholder cards (Frame) */
   .card.placeholder {
     background: var(--forest);
     display: flex;
@@ -372,7 +327,6 @@
     justify-content: center;
   }
 
-  /* Card label (visible always on active cards) */
   .card-label {
     position: absolute;
     bottom: 28px;
@@ -416,7 +370,6 @@
     transform: translateX(6px);
   }
 
-  /* Placeholder labels (Frame) */
   .card.placeholder .card-name {
     color: var(--cream);
   }
@@ -528,8 +481,6 @@
 </head>
 <body>
 
-<!-- LOADER -->
-
 <div id="loader">
   <div class="loader-mark">EXIF</div>
   <div class="loader-bar"></div>
@@ -551,49 +502,47 @@
 
   <div class="grid">
 
-```
-<a href="inhabit.html" class="card active" id="card-inhabit">
-  <div class="card-bg"></div>
-  <div class="card-label">
-    <div>
-      <div class="card-product">Visual Reset</div>
-      <div class="card-name" style="margin-top: 6px;">Inhabit</div>
-    </div>
-    <div class="card-arrow">→</div>
-  </div>
-</a>
+    <a href="inhabit.html" class="card active" id="card-inhabit">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">Visual Reset</div>
+          <div class="card-name" style="margin-top: 6px;">Inhabit</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
 
-<a href="/linger" class="card active" id="card-linger">
-  <div class="card-bg"></div>
-  <div class="card-label">
-    <div>
-      <div class="card-product">Field Notes</div>
-      <div class="card-name" style="margin-top: 6px;">Linger</div>
-    </div>
-    <div class="card-arrow">→</div>
-  </div>
-</a>
+    <a href="linger.html" class="card active" id="card-linger">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">Field Notes</div>
+          <div class="card-name" style="margin-top: 6px;">Linger</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
 
-<a href="/taste" class="card active" id="card-taste">
-  <div class="card-bg"></div>
-  <div class="card-label">
-    <div>
-      <div class="card-product">Mise en Place</div>
-      <div class="card-name" style="margin-top: 6px;">Taste</div>
-    </div>
-    <div class="card-arrow">→</div>
-  </div>
-</a>
+    <a href="taste.html" class="card active" id="card-taste">
+      <div class="card-bg"></div>
+      <div class="card-label">
+        <div>
+          <div class="card-product">Mise en Place</div>
+          <div class="card-name" style="margin-top: 6px;">Taste</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
 
-<div class="card placeholder">
-  <div class="card-label">
-    <div>
-      <div class="card-product">Soon</div>
-      <div class="card-name" style="margin-top: 6px;">Frame</div>
+    <div class="card placeholder">
+      <div class="card-label">
+        <div>
+          <div class="card-product">Soon</div>
+          <div class="card-name" style="margin-top: 6px;">Frame</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-```
 
   </div>
 </section>
