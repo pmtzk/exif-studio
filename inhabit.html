@@ -1,13 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- ============================================================
-     SEO (invisible to visitors, read by Google)
-     ============================================================ -->
 
 <title>Inhabit · Visual Reset for Boutique Hotels & Villas — EXIF</title>
 <meta name="description" content="Visual Reset is a complete photography project for boutique hotels, villas, and luxury properties. A repositioning made visual. EXIF studio, rooted in Mexico, working across the Caribbean.">
@@ -66,6 +61,7 @@
     justify-content: center;
     gap: 28px;
     animation: loader-out 0.8s cubic-bezier(0.7, 0, 0.3, 1) 1.6s forwards;
+    pointer-events: none;
   }
 
   @keyframes loader-out {
@@ -116,7 +112,6 @@
     to { opacity: 0.6; }
   }
 
-  /* Body fades in after loader */
   body > nav, body > main, body > footer {
     opacity: 0;
     animation: body-fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
@@ -195,7 +190,7 @@
   }
 
   .product-tag::before {
-    content: "—";
+    content: "·";
     margin-right: 12px;
     color: var(--accent);
   }
@@ -263,23 +258,6 @@
     background: var(--deep);
   }
 
-  .gallery-item.placeholder {
-    background: var(--forest);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .gallery-item.placeholder::after {
-    content: "Soon";
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 16px;
-    color: var(--accent);
-    opacity: 0.85;
-  }
-
   .gallery-item img {
     width: 100%;
     height: 100%;
@@ -325,7 +303,7 @@
   }
 
   .section-label::before {
-    content: "—";
+    content: "·";
     margin-right: 12px;
     color: var(--accent);
   }
@@ -364,7 +342,48 @@
     font-style: italic;
   }
 
-  /* ---------- DIAGNOSTIC LIST (estilo Nomadic People, en voz EXIF) ---------- */
+  /* ---------- SCOPE LIST ---------- */
+  .scope-list {
+    list-style: none;
+    margin-top: 16px;
+  }
+
+  .scope-list li {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--forest);
+    padding: 16px 0;
+    padding-left: 32px;
+    position: relative;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.08);
+  }
+
+  .scope-list li:last-child {
+    border-bottom: none;
+  }
+
+  .scope-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .scope-note {
+    margin-top: 32px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--forest);
+    opacity: 0.6;
+    max-width: 50ch;
+  }
+
+  /* ---------- DIAGNOSTIC LIST ---------- */
   .diagnostic {
     margin-top: 16px;
   }
@@ -398,47 +417,6 @@
     line-height: 1.5;
     color: var(--forest);
     opacity: 0.85;
-  }
-
-  /* ---------- SCOPE LIST ---------- */
-  .scope-list {
-    list-style: none;
-    margin-top: 16px;
-  }
-
-  .scope-list li {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(17px, 1.5vw, 20px);
-    line-height: 1.5;
-    color: var(--forest);
-    padding: 16px 0;
-    padding-left: 32px;
-    position: relative;
-    border-bottom: 1px solid rgba(26, 61, 58, 0.08);
-  }
-
-  .scope-list li:last-child {
-    border-bottom: none;
-  }
-
-  .scope-list li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
-
-  .scope-note {
-    margin-top: 32px;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--forest);
-    opacity: 0.6;
-    max-width: 50ch;
   }
 
   /* ---------- CONTACT BLOCK ---------- */
@@ -582,8 +560,6 @@
 </head>
 <body>
 
-<!-- LOADER -->
-
 <div id="loader">
   <div class="loader-mark">Inhabit</div>
   <div class="loader-bar"></div>
@@ -596,15 +572,11 @@
 
 <main>
 
-  <!-- TITLE BLOCK -->
-
   <section class="title-block">
     <div class="product-tag">Visual Reset</div>
     <h1>Inhabit<em>.</em></h1>
     <div class="subline">For properties whose images no longer match what they are.</div>
   </section>
-
-  <!-- GALLERY 2x3 -->
 
   <section class="gallery">
     <div class="gallery-label">SELECTED WORK · ST. LUCIA · MEXICO</div>
@@ -630,80 +602,68 @@
     </div>
   </section>
 
-  <!-- CONTENT -->
-
   <div class="content">
 
-```
-<!-- Section 1: Qué resuelve -->
-<section class="section">
-  <div class="section-label">The translation problem</div>
-  <h2>Most properties don't have a <em>photography problem.</em></h2>
-  <p>They have a translation problem.</p>
-  <p>What guests see before arriving rarely matches the experience that follows. The atmosphere, the rituals, the texture of a place — these are what justify the rate. When the images don't carry them, the property is left selling rooms instead of a stay.</p>
+    <section class="section">
+      <div class="section-label">The work</div>
+      <h2>The slow work of <em>looking again.</em></h2>
+      <p>Two days on property. One to walk it, read it, find what it is actually offering. One to photograph it.</p>
+      <p>The result is a body of images that speaks the same language as the place itself.</p>
+    </section>
 
-  <!-- Diagnostic list (estilo Nomadic People, en voz EXIF) -->
-  <div class="diagnostic">
-    <div class="diag-item">
-      <div class="diag-num">01</div>
-      <div class="diag-text">The brand they've built doesn't show up online.</div>
-    </div>
-    <div class="diag-item">
-      <div class="diag-num">02</div>
-      <div class="diag-text">Guests arrive expecting one thing and find another.</div>
-    </div>
-    <div class="diag-item">
-      <div class="diag-num">03</div>
-      <div class="diag-text">The rates can't move up because the images don't justify them.</div>
-    </div>
-    <div class="diag-item">
-      <div class="diag-num">04</div>
-      <div class="diag-text">They keep selling rooms, instead of a stay.</div>
-    </div>
-  </div>
-</section>
+    <section class="section">
+      <div class="section-label">Scope</div>
+      <h2>What's <em>included.</em></h2>
+      <ul class="scope-list">
+        <li>Scoping call</li>
+        <li>One day on property. Scouting and shotlist.</li>
+        <li>One day of production</li>
+        <li>30 to 50 final edited images</li>
+        <li>One round of revisions</li>
+        <li>One week of post-production</li>
+        <li>Commercial usage rights, retained by the property</li>
+      </ul>
+      <p class="scope-note">Images may appear in EXIF's archive and editorial channels.</p>
+    </section>
 
-<!-- Section 2: Cómo -->
-<section class="section">
-  <div class="section-label">The work</div>
-  <h2>The slow work of <em>looking again.</em></h2>
-  <p>Two days on property. One to walk it, read it, find what it's actually offering. One to photograph it.</p>
-  <p>The result is a body of images that speaks the same language as the place itself.</p>
-</section>
+    <section class="section">
+      <div class="section-label">Why this matters</div>
+      <h2>Most properties don't have a <em>photography problem.</em></h2>
+      <p>They have a translation problem. What guests see before arriving rarely matches the experience that follows.</p>
 
-<!-- Section 3: Scope -->
-<section class="section">
-  <div class="section-label">Scope</div>
-  <h2>What's <em>included.</em></h2>
-  <ul class="scope-list">
-    <li>Scoping call</li>
-    <li>One day on property — scouting and shotlist</li>
-    <li>One day of production</li>
-    <li>30–50 final edited images</li>
-    <li>One round of revisions</li>
-    <li>One week of post-production</li>
-    <li>Commercial usage rights, retained by the property</li>
-  </ul>
-  <p class="scope-note">Images may appear in EXIF's archive and editorial channels.</p>
-</section>
+      <div class="diagnostic">
+        <div class="diag-item">
+          <div class="diag-num">01</div>
+          <div class="diag-text">The brand they've built doesn't show up online.</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-num">02</div>
+          <div class="diag-text">Guests arrive expecting one thing and find another.</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-num">03</div>
+          <div class="diag-text">The rates can't move up because the images don't justify them.</div>
+        </div>
+        <div class="diag-item">
+          <div class="diag-num">04</div>
+          <div class="diag-text">They keep selling rooms, instead of a stay.</div>
+        </div>
+      </div>
+    </section>
 
-<!-- Section 4: Begin -->
-<section class="section">
-  <div class="section-label">Begin</div>
-  <div class="contact-block">
-    <h2>A few words about the property.</h2>
-    <a href="mailto:hello@exif.studio" class="email">hello@exif.studio</a>
-    <p class="contact-line">Project basis. Pricing varies with scope and location.</p>
-  </div>
-</section>
-```
+    <section class="section">
+      <div class="section-label">Begin</div>
+      <div class="contact-block">
+        <h2>A few words about the property.</h2>
+        <a href="mailto:hello@exif.studio" class="email">hello@exif.studio</a>
+        <p class="contact-line">Project basis. Pricing varies with scope and location.</p>
+      </div>
+    </section>
 
   </div>
-
-  <!-- NEXT -->
 
   <section class="next-block">
-    <div class="next-label">— Next</div>
+    <div class="next-label">· Next</div>
     <a href="linger.html" class="next-link">
       Linger
       <span class="next-arrow">→</span>
