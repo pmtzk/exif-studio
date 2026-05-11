@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     SEO (invisible to visitors, read by Google)
+     ============================================================ -->
+
+<title>Inhabit · Visual Reset for Boutique Hotels & Villas — EXIF</title>
+<meta name="description" content="Visual Reset is a complete photography project for boutique hotels, villas, and luxury properties. A repositioning made visual. EXIF studio, rooted in Mexico, working across the Caribbean.">
+<meta name="keywords" content="boutique hotel photography, luxury villa photography, hospitality photography, hotel photographer Caribbean, hotel photographer Mexico, visual identity hotel, EXIF studio">
+<meta property="og:title" content="Inhabit · Visual Reset for Boutique Hotels & Villas">
+<meta property="og:description" content="A complete reset of how a property shows up to the world. Photography and visual identity for boutique hotels and villas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exif.studio/inhabit">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --forest: #1A3D3A;
+    --deep:   #0D2B28;
+    --void:   #071A18;
+    --accent: #8BAF88;
+    --cream:  #F2E8DC;
+    --cream-soft: #EDE3D5;
+
+    --font-display: 'Fraunces', 'GT Sectra', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--forest);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- LOADER ---------- */
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    animation: loader-out 0.8s cubic-bezier(0.7, 0, 0.3, 1) 1.6s forwards;
+  }
+
+  @keyframes loader-out {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  .loader-mark {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 36px;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    opacity: 0;
+    animation: loader-fade-mark 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  }
+
+  @keyframes loader-fade-mark {
+    to { opacity: 1; }
+  }
+
+  .loader-bar {
+    width: 60px;
+    height: 1px;
+    background: rgba(26, 61, 58, 0.12);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: loader-fade-bar 0.6s ease 0.5s forwards;
+  }
+
+  .loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--forest);
+    animation: loader-bar-slide 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.6s infinite;
+  }
+
+  @keyframes loader-bar-slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  @keyframes loader-fade-bar {
+    to { opacity: 0.6; }
+  }
+
+  /* Body fades in after loader */
+  body > nav, body > main, body > footer {
+    opacity: 0;
+    animation: body-fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+  }
+
+  @keyframes body-fade-in {
+    to { opacity: 1; }
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    background: rgba(242, 232, 220, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  nav .mark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+    text-decoration: none;
+  }
+
+  nav .back {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--forest);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  nav .back:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 18px 24px; }
+    nav .mark { font-size: 16px; }
+    nav .back { font-size: 12px; }
+  }
+
+  /* ---------- MAIN ---------- */
+  main {
+    padding-top: 100px;
+  }
+
+  /* ---------- TITLE BLOCK ---------- */
+  .title-block {
+    padding: 40px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .product-tag {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.55;
+    margin-bottom: 16px;
+  }
+
+  .product-tag::before {
+    content: "—";
+    margin-right: 12px;
+    color: var(--accent);
+  }
+
+  .title-block h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(48px, 9vw, 120px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--forest);
+  }
+
+  .title-block h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .title-block .subline {
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 2.2vw, 26px);
+    line-height: 1.4;
+    color: var(--forest);
+    opacity: 0.7;
+    max-width: 24ch;
+  }
+
+  @media (max-width: 640px) {
+    .title-block { padding: 24px 24px 40px; }
+  }
+
+  /* ---------- GALLERY 2x3 ---------- */
+  .gallery {
+    padding: 0 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .gallery-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.15);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--deep);
+  }
+
+  .gallery-item.placeholder {
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gallery-item.placeholder::after {
+    content: "Soon";
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 640px) {
+    .gallery { padding: 0 24px 60px; }
+    .gallery-grid { gap: 6px; }
+  }
+
+  /* ---------- CONTENT SECTIONS ---------- */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section {
+    padding: 80px 0;
+    border-top: 1px solid rgba(26, 61, 58, 0.12);
+  }
+
+  .section:first-of-type {
+    border-top: none;
+  }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 32px;
+  }
+
+  .section-label::before {
+    content: "—";
+    margin-right: 12px;
+    color: var(--accent);
+  }
+
+  .section h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--forest);
+    margin-bottom: 32px;
+    max-width: 18ch;
+  }
+
+  .section h2 em {
+    font-style: italic;
+  }
+
+  .section p {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.6;
+    color: var(--forest);
+    opacity: 0.85;
+    margin-bottom: 20px;
+    max-width: 56ch;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section p em {
+    font-style: italic;
+  }
+
+  /* ---------- DIAGNOSTIC LIST (estilo Nomadic People, en voz EXIF) ---------- */
+  .diagnostic {
+    margin-top: 16px;
+  }
+
+  .diag-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.1);
+  }
+
+  .diag-item:last-child {
+    border-bottom: none;
+  }
+
+  .diag-num {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--forest);
+    opacity: 0.4;
+    letter-spacing: 0.02em;
+  }
+
+  .diag-text {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--forest);
+    opacity: 0.85;
+  }
+
+  /* ---------- SCOPE LIST ---------- */
+  .scope-list {
+    list-style: none;
+    margin-top: 16px;
+  }
+
+  .scope-list li {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--forest);
+    padding: 16px 0;
+    padding-left: 32px;
+    position: relative;
+    border-bottom: 1px solid rgba(26, 61, 58, 0.08);
+  }
+
+  .scope-list li:last-child {
+    border-bottom: none;
+  }
+
+  .scope-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .scope-note {
+    margin-top: 32px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--forest);
+    opacity: 0.6;
+    max-width: 50ch;
+  }
+
+  /* ---------- CONTACT BLOCK ---------- */
+  .contact-block {
+    text-align: left;
+  }
+
+  .contact-block a.email {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 4.5vw, 52px);
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    transition: color 0.3s ease;
+    margin-top: 8px;
+  }
+
+  .contact-block a.email:hover {
+    color: var(--accent);
+  }
+
+  .contact-line {
+    margin-top: 32px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--forest);
+    opacity: 0.65;
+    max-width: 50ch;
+  }
+
+  @media (max-width: 640px) {
+    .content { padding: 0 24px; }
+    .section { padding: 60px 0; }
+    .diag-item { grid-template-columns: 44px 1fr; gap: 16px; padding: 22px 0; }
+  }
+
+  /* ---------- NEXT + FOOTER ---------- */
+  .next-block {
+    padding: 80px 40px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(26, 61, 58, 0.12);
+    margin-top: 40px;
+  }
+
+  .next-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 40px);
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .next-link .next-arrow {
+    font-size: 0.7em;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .next-link:hover {
+    gap: 24px;
+  }
+
+  .next-link:hover .next-arrow {
+    transform: translateX(4px);
+  }
+
+  .next-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--forest);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  footer {
+    padding: 80px 40px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .signature {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.3;
+    color: var(--forest);
+    opacity: 0.75;
+    max-width: 28ch;
+    margin-bottom: 60px;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26, 61, 58, 0.08);
+  }
+
+  .meta-line {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--forest);
+    opacity: 0.6;
+  }
+
+  .meta-line em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0;
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .next-block { padding: 60px 24px 30px; }
+    footer { padding: 60px 24px 30px; }
+    .meta { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+
+</style>
+
+</head>
+<body>
+
+<!-- LOADER -->
+
+<div id="loader">
+  <div class="loader-mark">Inhabit</div>
+  <div class="loader-bar"></div>
+</div>
+
+<nav>
+  <a href="index.html" class="mark">EXIF</a>
+  <a href="index.html" class="back">← Back</a>
+</nav>
+
+<main>
+
+  <!-- TITLE BLOCK -->
+
+  <section class="title-block">
+    <div class="product-tag">Visual Reset</div>
+    <h1>Inhabit<em>.</em></h1>
+    <div class="subline">For properties whose images no longer match what they are.</div>
+  </section>
+
+  <!-- GALLERY 2x3 -->
+
+  <section class="gallery">
+    <div class="gallery-label">SELECTED WORK · ST. LUCIA · MEXICO</div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="inhabit-01.jpeg" alt="Boutique hotel architecture at golden hour, St. Lucia Caribbean">
+      </div>
+      <div class="gallery-item">
+        <img src="inhabit-02.jpeg" alt="Mexican boutique property architectural detail with native wildlife">
+      </div>
+      <div class="gallery-item">
+        <img src="inhabit-03.jpeg" alt="Colonial Mexican hotel architecture facade detail">
+      </div>
+      <div class="gallery-item">
+        <img src="inhabit-04.jpeg" alt="Boutique hotel lounge interior atmosphere with natural materials">
+      </div>
+      <div class="gallery-item">
+        <img src="inhabit-05.jpeg" alt="Tropical garden detail at boutique hospitality property, lush foliage texture">
+      </div>
+      <div class="gallery-item">
+        <img src="inhabit-06.jpeg" alt="Caribbean beach at golden hour with palm and lifeguard tower, St. Lucia">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+
+  <div class="content">
+
+```
+<!-- Section 1: Qué resuelve -->
+<section class="section">
+  <div class="section-label">The translation problem</div>
+  <h2>Most properties don't have a <em>photography problem.</em></h2>
+  <p>They have a translation problem.</p>
+  <p>What guests see before arriving rarely matches the experience that follows. The atmosphere, the rituals, the texture of a place — these are what justify the rate. When the images don't carry them, the property is left selling rooms instead of a stay.</p>
+
+  <!-- Diagnostic list (estilo Nomadic People, en voz EXIF) -->
+  <div class="diagnostic">
+    <div class="diag-item">
+      <div class="diag-num">01</div>
+      <div class="diag-text">The brand they've built doesn't show up online.</div>
+    </div>
+    <div class="diag-item">
+      <div class="diag-num">02</div>
+      <div class="diag-text">Guests arrive expecting one thing and find another.</div>
+    </div>
+    <div class="diag-item">
+      <div class="diag-num">03</div>
+      <div class="diag-text">The rates can't move up because the images don't justify them.</div>
+    </div>
+    <div class="diag-item">
+      <div class="diag-num">04</div>
+      <div class="diag-text">They keep selling rooms, instead of a stay.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Cómo -->
+<section class="section">
+  <div class="section-label">The work</div>
+  <h2>The slow work of <em>looking again.</em></h2>
+  <p>Two days on property. One to walk it, read it, find what it's actually offering. One to photograph it.</p>
+  <p>The result is a body of images that speaks the same language as the place itself.</p>
+</section>
+
+<!-- Section 3: Scope -->
+<section class="section">
+  <div class="section-label">Scope</div>
+  <h2>What's <em>included.</em></h2>
+  <ul class="scope-list">
+    <li>Scoping call</li>
+    <li>One day on property — scouting and shotlist</li>
+    <li>One day of production</li>
+    <li>30–50 final edited images</li>
+    <li>One round of revisions</li>
+    <li>One week of post-production</li>
+    <li>Commercial usage rights, retained by the property</li>
+  </ul>
+  <p class="scope-note">Images may appear in EXIF's archive and editorial channels.</p>
+</section>
+
+<!-- Section 4: Begin -->
+<section class="section">
+  <div class="section-label">Begin</div>
+  <div class="contact-block">
+    <h2>A few words about the property.</h2>
+    <a href="mailto:hello@exif.studio" class="email">hello@exif.studio</a>
+    <p class="contact-line">Project basis. Pricing varies with scope and location.</p>
+  </div>
+</section>
+```
+
+  </div>
+
+  <!-- NEXT -->
+
+  <section class="next-block">
+    <div class="next-label">— Next</div>
+    <a href="linger.html" class="next-link">
+      Linger
+      <span class="next-arrow">→</span>
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="signature">
+    To the daily beauty <br>that goes unnoticed.
+  </div>
+  <div class="meta">
+    <div class="meta-line">EXIF Studio · MX</div>
+    <div class="meta-line"><em>nur</em></div>
+  </div>
+</footer>
+
+</body>
+</html>
