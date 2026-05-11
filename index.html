@@ -108,12 +108,13 @@
     animation: loader-out 0.8s cubic-bezier(0.7, 0, 0.3, 1) 2.2s forwards;
   }
 
-  @keyframes loader-out {
-    to {
-      opacity: 0;
-      visibility: hidden;
-    }
+@keyframes loader-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
+}
 
   .loader-mark {
     font-family: var(--font-display);
