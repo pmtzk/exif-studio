@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXIF — Hospitality Perception Studio</title>
+<meta name="description" content="EXIF is a hospitality perception studio with integrated visual production. We help boutique hotels and villas be perceived the way they deserve, before a guest ever arrives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B18;
+    --paper:#F4F1EA;
+    --stone:#E8E2D6;
+    --sage:#6B7F6E;
+    --sage-deep:#54665A;
+    --mute:#8A857A;
+    --line:#D4CCBD;
+    --line-soft:#E0D9CC;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:var(--sage);color:var(--paper)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  @media(max-width:560px){.wrap{padding:0 22px}}
+
+  .eyebrow{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-deep);font-weight:500}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:-.01em}
+  h1{font-size:clamp(2.4rem,5.6vw,4.2rem)}
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem)}
+  h3{font-size:clamp(1.15rem,1.8vw,1.4rem)}
+  p{max-width:60ch}
+  .lead{font-size:clamp(1.02rem,1.5vw,1.22rem);color:#3c3a33;line-height:1.62}
+  a{color:inherit}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:60;background:rgba(244,241,234,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  .navrow{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:'Fraunces',serif;font-size:1.2rem;letter-spacing:.02em}
+  .brand b{color:var(--sage-deep);font-weight:400}
+  .navlink{font-size:13px;letter-spacing:.01em;text-decoration:none;padding:10px 18px;border:1px solid var(--ink);border-radius:100px;transition:.22s ease;white-space:nowrap}
+  .navlink:hover{background:var(--ink);color:var(--paper)}
+
+  /* hero */
+  header{padding:clamp(56px,10vw,116px) 0 clamp(40px,6vw,64px)}
+  .hero h1{max-width:15ch;margin:30px 0 26px}
+  .hero .lead{max-width:50ch;margin-bottom:40px}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;font-size:14px;font-weight:500;letter-spacing:.01em;text-decoration:none;padding:14px 28px;border-radius:100px;transition:.22s ease;cursor:pointer;border:none;font-family:inherit}
+  .btn-solid{background:var(--ink);color:var(--paper)}
+  .btn-solid:hover{background:var(--sage-deep)}
+  .btn-ghost{border:1px solid var(--ink);color:var(--ink);background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+  /* threshold signature */
+  .threshold{margin-top:clamp(52px,8vw,92px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 1px 1fr}
+  .th-side{padding:34px 0}
+  .th-side .eyebrow{margin-bottom:12px;display:block}
+  .th-side p{font-family:'Fraunces',serif;font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.32;max-width:22ch}
+  .th-side.left{padding-right:44px}
+  .th-side.right{padding-left:44px}
+  .th-side.right p{color:var(--mute)}
+  .th-rule{background:var(--line);position:relative}
+  .th-rule::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:var(--sage)}
+  @media(max-width:640px){
+    .threshold{grid-template-columns:1fr}
+    .th-rule{display:none}
+    .th-side.left{padding:30px 0 16px;border-bottom:1px solid var(--line)}
+    .th-side.right{padding:16px 0 30px}
+    .th-side.left,.th-side.right{padding-left:0;padding-right:0}
+  }
+
+  section{padding:clamp(54px,7vw,88px) 0}
+  .divide{border-top:1px solid var(--line-soft)}
+  .tint{background:var(--stone)}
+  .sec-eye{display:block;margin-bottom:22px}
+
+  /* gap section */
+  .gap-head{max-width:20ch;margin-bottom:22px}
+  .gap-sub{max-width:56ch;color:#3c3a33}
+
+  /* services */
+  .svc-intro{margin-bottom:42px;max-width:46ch}
+  .card{border:1px solid var(--line);background:var(--paper);border-radius:6px;margin-bottom:18px;overflow:hidden;transition:border-color .22s ease}
+  .card.tinted{background:#EFE9DD}
+  .card:hover{border-color:var(--sage)}
+  .card-head{padding:30px 32px}
+  @media(max-width:560px){.card-head{padding:24px 22px}}
+  .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .card-label{display:block;margin-bottom:14px}
+  .card h3{margin-bottom:12px}
+  .card-2line{font-size:15.5px;color:#403d36;max-width:52ch;line-height:1.55}
+  .disclose{margin-top:22px;display:inline-flex;align-items:center;gap:9px;background:none;border:none;font-family:inherit;font-size:13.5px;font-weight:500;color:var(--sage-deep);cursor:pointer;padding:0;letter-spacing:.01em}
+  .disclose .ic{width:16px;height:16px;border:1px solid var(--sage-deep);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;line-height:1;transition:.25s ease}
+  .disclose[aria-expanded="true"] .ic{transform:rotate(45deg);background:var(--sage-deep);color:var(--paper)}
+  .panel{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+  .panel-inner{padding:4px 32px 32px}
+  @media(max-width:560px){.panel-inner{padding:4px 22px 26px}}
+  .defrow{display:grid;grid-template-columns:128px 1fr;gap:22px;padding:16px 0;border-top:1px solid var(--line-soft)}
+  .defrow:first-child{border-top:1px solid var(--line)}
+  .defrow dt{font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--sage-deep);padding-top:3px}
+  .defrow dd{font-size:14.5px;color:#3a382f;line-height:1.55;max-width:54ch}
+  @media(max-width:520px){.defrow{grid-template-columns:1fr;gap:4px}}
+  .founding{margin-top:20px;background:var(--ink);color:var(--paper);padding:24px 26px;border-radius:5px}
+  .founding .eyebrow{color:var(--sage);display:block;margin-bottom:11px}
+  .founding p{font-size:14px;color:#ded8cb;line-height:1.6;max-width:60ch}
+
+  /* why */
+  .why h2{max-width:20ch;margin-bottom:26px}
+  .why-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start}
+  @media(max-width:780px){.why-grid{grid-template-columns:1fr;gap:30px}}
+  .why p{color:#3c3a33}.why p+p{margin-top:18px}
+  .why-aside{border-left:1px solid var(--line);padding-left:30px}
+  .why-aside .eyebrow{display:block;margin-bottom:16px}
+  .why-aside p{font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.34;color:var(--ink)}
+  @media(max-width:780px){.why-aside{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:26px}}
+
+  /* method accordion */
+  .method-head{max-width:22ch;margin-bottom:38px}
+  .step{border-top:1px solid var(--line)}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step-btn{width:100%;background:none;border:none;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:26px;padding:26px 4px;text-align:left;transition:.2s ease}
+  .step-btn:hover{padding-left:12px}
+  .step-no{font-family:'Fraunces',serif;font-size:13px;letter-spacing:.14em;color:var(--sage-deep);min-width:30px}
+  .step-name{font-family:'Fraunces',serif;font-size:clamp(1.3rem,2.6vw,1.85rem);color:var(--ink);flex:1}
+  .step-ic{width:20px;height:20px;position:relative;flex-shrink:0}
+  .step-ic::before,.step-ic::after{content:"";position:absolute;background:var(--ink);transition:.3s ease}
+  .step-ic::before{top:9px;left:0;width:20px;height:1.5px}
+  .step-ic::after{top:0;left:9px;width:1.5px;height:20px}
+  .step-btn[aria-expanded="true"] .step-ic::after{transform:scaleY(0)}
+  .step-panel{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+  .step-panel p{padding:0 4px 30px 56px;font-size:15.5px;color:#403d36;line-height:1.6;max-width:64ch}
+  @media(max-width:560px){.step-panel p{padding-left:30px}}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.38fr .62fr;gap:52px;align-items:start}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr;gap:22px}}
+  .about p{font-size:1.04rem;color:#3a382f;line-height:1.7}
+
+  /* faq */
+  .faq-head{margin-bottom:34px}
+  .q{border-top:1px solid var(--line)}
+  .q:last-of-type{border-bottom:1px solid var(--line)}
+  .q-btn{width:100%;background:none;border:none;font-family:inherit;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;text-align:left}
+  .q-btn span{font-size:16px;font-weight:500;color:var(--ink)}
+  .q-ic{width:14px;height:14px;position:relative;flex-shrink:0}
+  .q-ic::before,.q-ic::after{content:"";position:absolute;background:var(--sage-deep);transition:.3s ease}
+  .q-ic::before{top:6.5px;left:0;width:14px;height:1.5px}
+  .q-ic::after{top:0;left:6.5px;width:1.5px;height:14px}
+  .q-btn[aria-expanded="true"] .q-ic::after{transform:scaleY(0)}
+  .q-panel{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+  .q-panel p{padding:0 4px 24px;font-size:14.5px;color:#403d36;line-height:1.6;max-width:62ch}
+
+  /* final */
+  .final{background:var(--ink);color:var(--paper)}
+  .final .eyebrow{color:var(--sage)}
+  .final h2{color:var(--paper);max-width:18ch;margin:22px 0 22px}
+  .final p{color:#cdc7ba;margin-bottom:36px;max-width:48ch}
+  .final .btn-solid{background:var(--paper);color:var(--ink)}
+  .final .btn-solid:hover{background:var(--sage)}
+  .final .ask{margin-top:24px;font-size:14px;color:#a8a294}
+  .final .ask a{color:var(--paper);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--sage)}
+
+  footer{padding:36px 0;background:var(--ink);color:#8d8779;border-top:1px solid rgba(244,241,234,.14)}
+  .footrow{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:12.5px}
+  .footrow .brand{color:var(--paper)}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    .panel,.step-panel,.q-panel{transition:none}
+  }
+  :focus-visible{outline:2px solid var(--sage-deep);outline-offset:3px;border-radius:2px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navrow">
+    <div class="brand">EXIF<b>.</b></div>
+    <a href="#contact" class="navlink">Request an Atmosphere Audit</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <span class="eyebrow">Hospitality Perception Studio · Integrated visual production</span>
+    <h1>Be perceived the way you deserve, before a guest ever arrives.</h1>
+    <p class="lead">Most properties are better in person than they are online. EXIF closes that gap, so your property communicates why it is worth what it charges, on the screens where guests decide.</p>
+    <div class="ctas">
+      <a href="#contact" class="btn btn-solid">Request an Atmosphere Audit</a>
+      <a href="#method" class="btn btn-ghost">See how we work</a>
+    </div>
+    <div class="threshold reveal">
+      <div class="th-side left">
+        <span class="eyebrow">In person</span>
+        <p>The light at five o&rsquo;clock. The materials. The quiet that earns the rate.</p>
+      </div>
+      <div class="th-rule"></div>
+      <div class="th-side right">
+        <span class="eyebrow">On screen</span>
+        <p>A lead image. A booking page. The seconds where the decision is made.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="divide">
+  <div class="wrap">
+    <span class="eyebrow sec-eye">The gap</span>
+    <h2 class="gap-head">Guests decide from the screen, long before they reach the door.</h2>
+    <p class="lead gap-sub">When the images undersell the property, bookings move to the OTAs, rate gets harder to hold, and the property ends up competing on price instead of on the experience that makes it worth choosing. That is a perception problem, and perception can be measured and rebuilt.</p>
+  </div>
+</section>
+
+<section class="tint divide">
+  <div class="wrap">
+    <span class="eyebrow sec-eye">What we offer</span>
+    <p class="lead svc-intro">Two services, one method. Every engagement begins with the Audit, and most continue into the Reset.</p>
+
+    <div class="card reveal">
+      <div class="card-head">
+        <span class="eyebrow card-label">Where every engagement begins</span>
+        <h3>The Atmosphere Audit</h3>
+        <p class="card-2line">A scored read on how your property is perceived across your website, OTAs and social, and where that perception is costing you bookings.</p>
+        <button class="disclose" aria-expanded="false" aria-controls="p-audit"><span class="ic">+</span> See what&rsquo;s included</button>
+      </div>
+      <div class="panel" id="p-audit">
+        <div class="panel-inner">
+          <dl>
+            <div class="defrow"><dt>What it covers</dt><dd>Your imagery across website, OTAs and social, scored across ten booking-relevant categories, with annotated examples from your own channels and a side-by-side against your direct competitors.</dd></div>
+            <div class="defrow"><dt>You receive</dt><dd>A prioritized list of what to change first and why, with a walkthrough conversation to talk through the findings.</dd></div>
+            <div class="defrow"><dt>Timeline</dt><dd>About one week from the day we have access to your channels.</dd></div>
+            <div class="defrow"><dt>What we need</dt><dd>Links to your site, your OTA listings and your social. Nothing else, and no time from your team.</dd></div>
+            <div class="defrow"><dt>Pricing</dt><dd>Set per property, based on size and channel count. Shared in the first reply.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="card tinted reveal">
+      <div class="card-head">
+        <span class="eyebrow card-label">The production phase</span>
+        <h3>The Visual Reset</h3>
+        <p class="card-2line">A focused re-shoot built around the moments that earn bookings and justify your rate, delivered as an organized image system rather than a folder of files.</p>
+        <button class="disclose" aria-expanded="false" aria-controls="p-reset"><span class="ic">+</span> See what&rsquo;s included</button>
+      </div>
+      <div class="panel" id="p-reset">
+        <div class="panel-inner">
+          <dl>
+            <div class="defrow"><dt>What it is</dt><dd>A shoot architected in advance around your property&rsquo;s experience and your booking priorities, then delivered sorted and mapped to where each image works.</dd></div>
+            <div class="defrow"><dt>Who it is for</dt><dd>Properties ready to act on the Audit, with a real sense of place worth communicating properly.</dd></div>
+            <div class="defrow"><dt>You receive</dt><dd>Images placed where they work hardest, from booking page to OTA to social, with guidance on how to use each one.</dd></div>
+            <div class="defrow"><dt>Timeline</dt><dd>Three to four weeks from booking to delivery.</dd></div>
+          </dl>
+          <div class="founding">
+            <span class="eyebrow">Founding clients</span>
+            <p>EXIF is working with a small founding cohort of properties in Mexico at a founding rate, in exchange for being an early reference and allowing the work to be featured. Your Audit becomes the first phase of the Reset rather than a separate cost. This founding window closes after the first three properties.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why divide">
+  <div class="wrap">
+    <span class="eyebrow sec-eye">Why EXIF</span>
+    <div class="why-grid">
+      <div>
+        <h2>A hospitality operator who produces the imagery, not a photographer who happens to like hotels.</h2>
+        <div>
+          <p>EXIF came to hospitality through the floor. Years inside resorts across sales, guest experience and operations, where the daily question was why a guest chooses one property over another, books direct or does not, returns or does not.</p>
+          <p>Most people who understand how a property earns its rate cannot produce the imagery. Most people who can produce the imagery have never sat inside the operation. EXIF does both, so the work starts with how the property is perceived and how it books, and the images follow from there.</p>
+        </div>
+      </div>
+      <div class="why-aside">
+        <span class="eyebrow">The difference</span>
+        <p>A photographer makes the rooms look correct. EXIF makes the property communicate its value. Only one of those moves bookings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="method" class="tint divide">
+  <div class="wrap">
+    <span class="eyebrow sec-eye">How we work</span>
+    <h2 class="method-head">Every engagement begins by understanding the property before changing anything about it.</h2>
+    <div class="method">
+      <div class="step">
+        <button class="step-btn" aria-expanded="true" aria-controls="s1"><span class="step-no">01</span><span class="step-name">Read</span><span class="step-ic"></span></button>
+        <div class="step-panel" id="s1"><p>We study the property the way a guest experiences it, and the way a booking decision actually gets made. We note what is distinctive about being there, and where the current perception falls short of the reality.</p></div>
+      </div>
+      <div class="step">
+        <button class="step-btn" aria-expanded="false" aria-controls="s2"><span class="step-no">02</span><span class="step-name">Audit</span><span class="step-ic"></span></button>
+        <div class="step-panel" id="s2"><p>The Atmosphere Audit puts that read on paper. A scored, specific diagnosis of how the property is perceived across site, OTAs and social, and where it is costing bookings and rate.</p></div>
+      </div>
+      <div class="step">
+        <button class="step-btn" aria-expanded="false" aria-controls="s3"><span class="step-no">03</span><span class="step-name">Architect</span><span class="step-ic"></span></button>
+        <div class="step-panel" id="s3"><p>We decide what needs to change and in what order, prioritized by commercial impact rather than by what is easiest to shoot.</p></div>
+      </div>
+      <div class="step">
+        <button class="step-btn" aria-expanded="false" aria-controls="s4"><span class="step-no">04</span><span class="step-name">Produce</span><span class="step-ic"></span></button>
+        <div class="step-panel" id="s4"><p>We create and deliver the imagery as an organized system, mapped to where each asset works hardest across every channel a guest passes through.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="divide">
+  <div class="wrap about-grid about">
+    <div><span class="eyebrow">Behind EXIF</span></div>
+    <div>
+      <p>EXIF is led by Katia, who has spent years inside hospitality across Mexico and the Caribbean, in resort sales, guest experience, operations and photography. The studio exists because of a pattern she saw from the inside: strong properties, consistently undersold by how they are perceived online. EXIF was built to close that gap, and to treat perception as what it is for a property, a commercial asset rather than a gallery.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tint divide">
+  <div class="wrap">
+    <span class="eyebrow sec-eye">Common questions</span>
+    <h2 class="faq-head">Before you reach out.</h2>
+    <div class="faq">
+      <div class="q">
+        <button class="q-btn" aria-expanded="false" aria-controls="q1"><span>Is this just a photography service?</span><span class="q-ic"></span></button>
+        <div class="q-panel" id="q1"><p>No. The work starts with how the property is perceived and how it books. Photography is one of the tools used to fix that, and it comes after the diagnosis, not before it.</p></div>
+      </div>
+      <div class="q">
+        <button class="q-btn" aria-expanded="false" aria-controls="q2"><span>Do we have to commit to the full project to start?</span><span class="q-ic"></span></button>
+        <div class="q-panel" id="q2"><p>No. Every engagement begins with the Audit, which is low commitment and specific to your property. If you decide to continue, the Audit fee becomes the first phase of the Reset.</p></div>
+      </div>
+      <div class="q">
+        <button class="q-btn" aria-expanded="false" aria-controls="q3"><span>How much time does it take from our team?</span><span class="q-ic"></span></button>
+        <div class="q-panel" id="q3"><p>The Audit takes none. It runs from your public channels. The Reset needs access for the shoot itself and a short conversation to set priorities.</p></div>
+      </div>
+      <div class="q">
+        <button class="q-btn" aria-expanded="false" aria-controls="q4"><span>What does it cost?</span><span class="q-ic"></span></button>
+        <div class="q-panel" id="q4"><p>Pricing is set per property, based on size and the number of channels involved. You receive a figure in the first reply, before any commitment.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="final">
+  <div class="wrap">
+    <span class="eyebrow">Start here</span>
+    <h2>Find out what your property is saying before guests arrive.</h2>
+    <p>The Audit is the place to start. A clear, specific read on where your perception is winning bookings and where it is losing them.</p>
+    <a href="mailto:hello@exif.studio?subject=EXIF%20%E2%80%94%20Atmosphere%20Audit" class="btn btn-solid">Request an Atmosphere Audit</a>
+    <p class="ask">Prefer to ask first? <a href="mailto:hello@exif.studio?subject=A%20question%20about%20EXIF">Send a message</a> and I will tell you what an engagement would look like for your property.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footrow">
+    <div class="brand">EXIF<b style="color:var(--sage)">.</b></div>
+    <div>Hospitality Perception Studio · Mexico</div>
+    <div>hello@exif.studio</div>
+  </div>
+</footer>
+
+<script>
+  // progressive reveal with safety net
+  const reveals=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  reveals.forEach(el=>io.observe(el));
+  setTimeout(()=>reveals.forEach(el=>el.classList.add('in')),2200);
+
+  function toggle(btn,panel){
+    const open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!open));
+    panel.style.maxHeight=open?null:panel.scrollHeight+'px';
+  }
+  // service disclosures (independent)
+  document.querySelectorAll('.disclose').forEach(btn=>{
+    const panel=document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click',()=>{
+      const willOpen=btn.getAttribute('aria-expanded')!=='true';
+      btn.querySelector('.ic').textContent=willOpen?'+':'+';
+      toggle(btn,panel);
+    });
+  });
+  // method accordion (exclusive: opening one closes others)
+  const stepBtns=document.querySelectorAll('.step-btn');
+  function setStep(btn,open){
+    const panel=document.getElementById(btn.getAttribute('aria-controls'));
+    btn.setAttribute('aria-expanded',String(open));
+    panel.style.maxHeight=open?panel.scrollHeight+'px':null;
+  }
+  stepBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const isOpen=btn.getAttribute('aria-expanded')==='true';
+      stepBtns.forEach(b=>setStep(b,false));
+      if(!isOpen)setStep(btn,true);
+    });
+  });
+  // open first method step by default
+  window.addEventListener('load',()=>{const f=document.querySelector('.step-btn[aria-expanded="true"]');if(f)setStep(f,true);});
+  // faq (independent)
+  document.querySelectorAll('.q-btn').forEach(btn=>{
+    const panel=document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click',()=>toggle(btn,panel));
+  });
+  // recalc open panels on resize
+  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{
+    document.querySelectorAll('[aria-expanded="true"]').forEach(btn=>{
+      const panel=document.getElementById(btn.getAttribute('aria-controls'));
+      if(panel&&panel.classList.contains('panel')||panel&&panel.classList.contains('step-panel')||panel&&panel.classList.contains('q-panel')){
+        panel.style.maxHeight=panel.scrollHeight+'px';
+      }
+    });
+  },120)});
+</script>
+</body>
+</html>
