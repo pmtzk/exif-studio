@@ -46,7 +46,7 @@ export async function onRequestPost({ request, env }) {
     return reply(
       {
         success: false,
-        message: "BREVO_API_KEY is unavailable in this deployment."      },
+        message: "BREVO_API_KEY is unavailable to this deployment."      },
       500
     );
   }
