@@ -158,7 +158,12 @@ contactForm?.addEventListener('submit', async (event) => {
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new Error(result.message || 'Request failed');
+      const formspreeError =
+        result?.errors?.map((item) => item.message).filter(Boolean).join(' ') ||
+        result?.error ||
+        result?.message;
+
+      throw new Error(formspreeError || 'Request failed');
     }
 
     contactForm.reset();
