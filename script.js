@@ -97,41 +97,6 @@ updateActiveSection();
 window.addEventListener('scroll', updateActiveSection, { passive: true });
 window.addEventListener('resize', updateActiveSection);
 
-/* TURNSTILE EXPLICIT RENDER */
-let turnstileToken = '';
-let turnstileWidgetId = null;
-
-window.renderTurnstile = function renderTurnstile() {
-  const container = document.querySelector('#turnstile-widget');
-
-  if (!container || !window.turnstile) return;
-
-  turnstileWidgetId = window.turnstile.render(container, {
-    sitekey: '0x4AAAAAADsZAJdPONZMOD05',
-    theme: 'dark',
-    size: 'flexible',
-    appearance: 'always',
-
-    callback(token) {
-      turnstileToken = token;
-    },
-
-    'expired-callback'() {
-      turnstileToken = '';
-    },
-
-    'error-callback'(errorCode) {
-      turnstileToken = '';
-      console.error('Turnstile error:', errorCode);
-      return true;
-    },
-
-    'timeout-callback'() {
-      turnstileToken = '';
-    }
-  });
-};
-
 const contactForm = document.querySelector('[data-contact-form]');
 
 function getFormMessage(key) {
@@ -140,7 +105,6 @@ function getFormMessage(key) {
       required: 'Please complete the required fields.',
       sending: 'Sending…',
       success: 'Thank you. We’ll review the property before we reply.',
-      verification: 'Please complete the verification and try again.',
       error: 'Something went wrong. Please try again or email hello@exif.studio.',
       send: 'Send inquiry'
     },
@@ -148,7 +112,6 @@ function getFormMessage(key) {
       required: 'Completa los campos obligatorios.',
       sending: 'Enviando…',
       success: 'Gracias. Revisaremos la propiedad antes de responder.',
-      verification: 'Completa la verificación e intenta nuevamente.',
       error: 'Algo salió mal. Intenta nuevamente o escribe a hello@exif.studio.',
       send: 'Enviar consulta'
     }
@@ -180,13 +143,6 @@ contactForm?.addEventListener('submit', async (event) => {
   }
 
   const data = new FormData(contactForm);
-  const hiddenToken = data.get('cf-turnstile-response');
-  const token = turnstileToken || hiddenToken;
-
-  if (token) {
-    data.set('cf-turnstile-response', token);
-  }
-
   button.disabled = true;
   button.textContent = getFormMessage('sending');
   status.textContent = '';
@@ -206,19 +162,10 @@ contactForm?.addEventListener('submit', async (event) => {
     }
 
     contactForm.reset();
-    turnstileToken = '';
-    if (turnstileWidgetId !== null) {
-      window.turnstile?.reset(turnstileWidgetId);
-    }
-
     status.textContent = getFormMessage('success');
     status.className = 'form-status is-success';
   } catch (error) {
     console.error('Contact form error:', error);
-    turnstileToken = '';
-    if (turnstileWidgetId !== null) {
-      window.turnstile?.reset(turnstileWidgetId);
-    }
     status.textContent = error.message || getFormMessage('error');
     status.className = 'form-status is-error';
   } finally {
