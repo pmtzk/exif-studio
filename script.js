@@ -163,13 +163,9 @@ contactForm?.addEventListener('submit', async (event) => {
   const hiddenToken = data.get('cf-turnstile-response');
   const token = turnstileToken || hiddenToken;
 
-  if (!token) {
-    status.textContent = getFormMessage('verification');
-    status.className = 'form-status is-error';
-    return;
+  if (token) {
+    data.set('cf-turnstile-response', token);
   }
-
-  data.set('cf-turnstile-response', token);
 
   button.disabled = true;
   button.textContent = getFormMessage('sending');
@@ -199,7 +195,7 @@ contactForm?.addEventListener('submit', async (event) => {
     console.error('Contact form error:', error);
     turnstileToken = '';
     window.turnstile?.reset();
-    status.textContent = getFormMessage('error');
+    status.textContent = error.message || getFormMessage('error');
     status.className = 'form-status is-error';
   } finally {
     button.disabled = false;
