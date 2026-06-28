@@ -284,9 +284,3 @@ details p { max-width: 750px; margin: 22px 0 4px; line-height: 1.7; opacity: .7;
   .audit-summary h3 { font-size:35px; }
   .score-main strong { font-size:88px; }
 }
-/* Desktop uses the primary header navigation only */
-@media (min-width: 901px) {
-  .section-nav {
-    display: none;
-  }
-}
