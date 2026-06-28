@@ -652,3 +652,12 @@ body.menu-open .section-nav {
 .menu-toggle-label {
   display: none;
 }
+/* Linked service titles */
+.service-heading h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-heading h2 a:hover {
+  opacity: .72;
+}
