@@ -97,7 +97,7 @@ updateActiveSection();
 window.addEventListener('scroll', updateActiveSection, { passive: true });
 window.addEventListener('resize', updateActiveSection);
 
-/* TURNSTILE CALLBACKS */
+/* TURNSTILE EXPLICIT RENDER */
 let turnstileToken = '';
 let turnstileWidgetId = null;
 
@@ -208,17 +208,17 @@ contactForm?.addEventListener('submit', async (event) => {
     contactForm.reset();
     turnstileToken = '';
     if (turnstileWidgetId !== null) {
-  window.turnstile?.reset(turnstileWidgetId);
-}
+      window.turnstile?.reset(turnstileWidgetId);
+    }
 
     status.textContent = getFormMessage('success');
     status.className = 'form-status is-success';
   } catch (error) {
     console.error('Contact form error:', error);
     turnstileToken = '';
-  if (turnstileWidgetId !== null) {
-  window.turnstile?.reset(turnstileWidgetId);
-}
+    if (turnstileWidgetId !== null) {
+      window.turnstile?.reset(turnstileWidgetId);
+    }
     status.textContent = error.message || getFormMessage('error');
     status.className = 'form-status is-error';
   } finally {
