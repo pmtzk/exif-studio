@@ -99,17 +99,37 @@ window.addEventListener('resize', updateActiveSection);
 
 /* TURNSTILE CALLBACKS */
 let turnstileToken = '';
+let turnstileWidgetId = null;
 
-window.onTurnstileSuccess = function onTurnstileSuccess(token) {
-  turnstileToken = token;
-};
+window.renderTurnstile = function renderTurnstile() {
+  const container = document.querySelector('#turnstile-widget');
 
-window.onTurnstileExpired = function onTurnstileExpired() {
-  turnstileToken = '';
-};
+  if (!container || !window.turnstile) return;
 
-window.onTurnstileError = function onTurnstileError() {
-  turnstileToken = '';
+  turnstileWidgetId = window.turnstile.render(container, {
+    sitekey: '0x4AAAAAADsZAJdPONZMOD05',
+    theme: 'dark',
+    size: 'flexible',
+    appearance: 'always',
+
+    callback(token) {
+      turnstileToken = token;
+    },
+
+    'expired-callback'() {
+      turnstileToken = '';
+    },
+
+    'error-callback'(errorCode) {
+      turnstileToken = '';
+      console.error('Turnstile error:', errorCode);
+      return true;
+    },
+
+    'timeout-callback'() {
+      turnstileToken = '';
+    }
+  });
 };
 
 const contactForm = document.querySelector('[data-contact-form]');
@@ -187,14 +207,18 @@ contactForm?.addEventListener('submit', async (event) => {
 
     contactForm.reset();
     turnstileToken = '';
-    window.turnstile?.reset();
+    if (turnstileWidgetId !== null) {
+  window.turnstile?.reset(turnstileWidgetId);
+}
 
     status.textContent = getFormMessage('success');
     status.className = 'form-status is-success';
   } catch (error) {
     console.error('Contact form error:', error);
     turnstileToken = '';
-    window.turnstile?.reset();
+  if (turnstileWidgetId !== null) {
+  window.turnstile?.reset(turnstileWidgetId);
+}
     status.textContent = error.message || getFormMessage('error');
     status.className = 'form-status is-error';
   } finally {
