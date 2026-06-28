@@ -678,3 +678,18 @@ body.menu-open .section-nav {
 .score-main {
   margin-top: 0;
 }
+/* The Initial Report */
+.deliverable-title {
+  margin: 16px 0 10px;
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 300;
+}
+
+.deliverable-intro {
+  margin: 0 0 24px;
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: .72;
+}
