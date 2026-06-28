@@ -46,8 +46,7 @@ export async function onRequestPost({ request, env }) {
     return reply(
       {
         success: false,
-        message: "Server configuration is incomplete."
-      },
+        message: "BREVO_API_KEY is unavailable in this deployment."      },
       500
     );
   }
