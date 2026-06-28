@@ -614,7 +614,12 @@ body.menu-open {
 }
 
 .contact-direct a {
-  margin-left: 5px;
+  margin-left: 0;
+  color: var(--cream);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242,232,220,.45);
+  padding-bottom: 4px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
