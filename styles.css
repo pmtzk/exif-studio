@@ -661,3 +661,20 @@ body.menu-open .section-nav {
 .service-heading h2 a:hover {
   opacity: .72;
 }
+/* Total score label */
+.score-main-wrap {
+  margin-top: auto;
+}
+
+.score-label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: rgba(242,232,220,.58);
+}
+
+.score-main {
+  margin-top: 0;
+}
