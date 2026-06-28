@@ -246,7 +246,22 @@
       <textarea id="message" maxlength="2000" name="message" rows="5"></textarea></div>
    
     <!-- TURNSTILE VERIFICATION -->
-    <div class="form-field form-field-full turnstile-wrap"><div class="cf-turnstile" data-sitekey="0x4AAAAAADsZAJdPONZMOD05" data-size="flexible" data-theme="dark" data-appearance="always" data-response-field="true" data-response-field-name="cf-turnstile-response"></div></div>
+   <!-- TURNSTILE VERIFICATION -->
+<div class="form-field form-field-full turnstile-wrap">
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAADsZAJdPONZMOD05"
+    data-size="flexible"
+    data-theme="dark"
+    data-appearance="always"
+    data-response-field="true"
+    data-response-field-name="cf-turnstile-response"
+    data-callback="onTurnstileSuccess"
+    data-expired-callback="onTurnstileExpired"
+  ></div>
+</div>
+
+    
     <div class="form-actions form-field-full">
       
       <button class="button-light" data-en="Send inquiry" data-es="Enviar consulta" data-submit-label="" type="submit">Send inquiry</button><p aria-live="polite" class="form-status" data-form-status="" role="status"></p></div></form></div><div class="closing-coordinate">EXIF / MX · CARIBBEAN / 2026</div>
