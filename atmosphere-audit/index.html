@@ -68,12 +68,12 @@
   <section class="aa-hero" id="top">
     <div class="aa-hero-grid">
       <div>
-        <p class="aa-kicker reveal" data-en="The Atmosphere Audit" data-es="The Atmosphere Audit">The Atmosphere Audit</p>
-        <h1 class="reveal" data-en="Some properties feel more distinctive in person than they appear online." data-es="Algunas propiedades son más distintivas en persona de lo que parecen en línea.">Some properties feel more distinctive in person than they appear online.</h1>
-        <p class="reveal" data-en="They may offer the better setting, the stronger stay or the more considered experience, yet become easier to overlook on a screen." data-es="Pueden ofrecer el mejor entorno, la estancia más cuidada o la experiencia más considerada, y aun así ser más fáciles de ignorar en una pantalla.">They may offer the better setting, the stronger stay or the more considered experience, yet become easier to overlook on a screen.</p>
-        <a class="aa-cta reveal" href="#comparison" data-en="See what your property makes visible" data-es="Ver qué hace visible tu propiedad">See what your property makes visible</a>
+        <p class="aa-kicker" data-en="The Atmosphere Audit" data-es="The Atmosphere Audit">The Atmosphere Audit</p>
+        <h1 data-en="Some properties feel more distinctive in person than they appear online." data-es="Algunas propiedades son más distintivas en persona de lo que parecen en línea.">Some properties feel more distinctive in person than they appear online.</h1>
+        <p data-en="They may offer the better setting, the stronger stay or the more considered experience, yet become easier to overlook on a screen." data-es="Pueden ofrecer el mejor entorno, la estancia más cuidada o la experiencia más considerada, y aun así ser más fáciles de ignorar en una pantalla.">They may offer the better setting, the stronger stay or the more considered experience, yet become easier to overlook on a screen.</p>
+        <a class="aa-cta" href="#comparison" data-en="See what your property makes visible" data-es="Ver qué hace visible tu propiedad">See what your property makes visible</a>
       </div>
-      <div class="lens" data-state="visible" aria-hidden="true">
+      <div class="lens" data-state="visible" aria-label="Switch between what a property shows and what a guest understands">
         <div class="lens-frame">
           <div class="lens-text">
             <div class="lens-title" id="lens-title">What is visible</div>
@@ -98,6 +98,7 @@
           <p class="aa-muted" data-en="Switch between the property itself and the way it appears online." data-es="Cambia entre la propiedad en sí y la forma en que aparece en línea.">Switch between the property itself and the way it appears online.</p>
         </div>
         <div class="compare-stage">
+          <div class="compare-reading" id="compare-reading">Reading: the quality of the property itself</div>
           <div class="compare-switch" role="group" aria-label="View toggle">
             <button data-compare="property" aria-pressed="true" data-en="The property" data-es="La propiedad">The property</button>
             <button data-compare="presentation" aria-pressed="false" data-en="The presentation" data-es="La presentación">The presentation</button>
@@ -105,7 +106,7 @@
           <div class="pair">
             <article class="property-card lead" data-card="a">
               <small>Property A</small>
-              <div class="score-big" data-score="a">88</div>
+              <div class="score-context" data-score-label="a">Offer strength</div><div class="score-wrap"><span class="score-big" data-score="a">88</span><span class="score-denom">/100</span></div>
               <ul data-list="a">
                 <li>Stronger setting</li>
                 <li>More considered stay</li>
@@ -114,7 +115,7 @@
             </article>
             <article class="property-card" data-card="b">
               <small>Property B</small>
-              <div class="score-big" data-score="b">72</div>
+              <div class="score-context" data-score-label="b">Offer strength</div><div class="score-wrap"><span class="score-big" data-score="b">72</span><span class="score-denom">/100</span></div>
               <ul data-list="b">
                 <li>More ordinary offer</li>
                 <li>Less distinctive setting</li>

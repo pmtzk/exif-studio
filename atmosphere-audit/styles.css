@@ -792,3 +792,193 @@
 
   .canvas-bars i { animation: none !important; }
 }
+
+/* ── V1.1 refinements ───────────────────────────────────────────── */
+
+/* Keep the global header visually consistent with the homepage geometry,
+   while adapting its contrast to this light opening. */
+.site-header {
+  background: rgba(242, 232, 220, .92) !important;
+  color: var(--ink) !important;
+  border-bottom: 1px solid rgba(13, 43, 40, .12);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.site-header .wordmark,
+.site-header .lang-toggle,
+.site-header .menu-toggle,
+.site-header .menu-toggle-label { color: var(--ink) !important; }
+.site-header .menu-toggle-icon i { background: var(--ink) !important; }
+.progress { top: 84px; }
+
+/* Prevent the global reveal system from leaving the opening blank. */
+.aa-hero .reveal,
+.aa-hero [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* A calmer opening, closer to the homepage type scale. */
+.aa-hero {
+  min-height: auto;
+  padding-top: calc(84px + clamp(54px, 7vw, 96px));
+  padding-bottom: clamp(84px, 10vw, 130px);
+}
+.aa-hero-grid { align-items: start; }
+.aa-hero h1 {
+  font-size: clamp(3.8rem, 7.1vw, 7.25rem);
+  line-height: .92;
+  letter-spacing: -.048em;
+  text-wrap: balance;
+}
+.aa-hero p { line-height: 1.55; }
+
+/* Keep decorative lens layers from stealing taps. */
+.lens::before,
+.lens::after,
+.lens-frame,
+.lens-frame::before,
+.lens-frame::after { pointer-events: none; }
+.lens-controls {
+  z-index: 10;
+  pointer-events: auto;
+}
+.lens-controls button {
+  position: relative;
+  z-index: 11;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Make the comparison communicate what the numbers mean. */
+.compare-reading {
+  padding: 15px 0 5px;
+  color: #68736e;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.score-context {
+  margin-top: auto;
+  margin-bottom: 6px;
+  font-size: .68rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  opacity: .68;
+}
+.score-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.score-denom {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  opacity: .58;
+}
+.property-card.lead .score-context,
+.property-card.lead .score-denom { opacity: .72; }
+
+/* Reduce accidental dead zones without making the page cramped. */
+.aa-comparison-inner,
+.aa-measure-inner,
+.aa-roles-inner,
+.aa-reviews-inner,
+.aa-signals-inner,
+.aa-process-inner,
+.aa-report-inner,
+.aa-modes-inner,
+.aa-scope-inner,
+.aa-after-inner,
+.aa-founder-inner,
+.aa-faq-inner {
+  padding-top: clamp(96px, 10vw, 132px);
+  padding-bottom: clamp(96px, 10vw, 132px);
+}
+.conclusion { margin-top: 30px; }
+
+@media (max-width: 900px) {
+  .aa-hero {
+    padding-top: calc(84px + 46px);
+    padding-bottom: 88px;
+  }
+  .aa-hero-grid { gap: 56px; }
+  .aa-hero h1 {
+    font-size: clamp(3.45rem, 11.5vw, 5.7rem);
+    line-height: .93;
+  }
+  .lens { min-height: 500px; }
+  .aa-comparison-inner,
+  .aa-measure-inner,
+  .aa-roles-inner,
+  .aa-reviews-inner,
+  .aa-signals-inner,
+  .aa-process-inner,
+  .aa-report-inner,
+  .aa-modes-inner,
+  .aa-scope-inner,
+  .aa-after-inner,
+  .aa-founder-inner,
+  .aa-faq-inner {
+    padding-top: 94px;
+    padding-bottom: 94px;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-header { min-height: 76px; }
+  .progress { top: 76px; }
+  .aa-hero {
+    padding-top: calc(76px + 38px);
+    padding-bottom: 76px;
+  }
+  .aa-hero-grid { gap: 48px; }
+  .aa-hero h1 {
+    font-size: clamp(3.15rem, 13.2vw, 4.85rem);
+    line-height: .94;
+    letter-spacing: -.045em;
+  }
+  .aa-hero p { margin-top: 22px; }
+  .aa-cta { margin-top: 22px; }
+  .lens {
+    min-height: 430px;
+    margin-top: 0;
+  }
+  .lens-frame { inset: 28px; }
+  .lens-title { font-size: clamp(2.25rem, 10.5vw, 3.8rem); }
+  .lens-controls { left: 14px; right: 14px; bottom: 14px; }
+  .lens-controls button { min-height: 48px; }
+
+  .aa-comparison-inner,
+  .aa-measure-inner,
+  .aa-roles-inner,
+  .aa-reviews-inner,
+  .aa-signals-inner,
+  .aa-process-inner,
+  .aa-report-inner,
+  .aa-modes-inner,
+  .aa-scope-inner,
+  .aa-after-inner,
+  .aa-founder-inner,
+  .aa-faq-inner {
+    padding-top: 78px;
+    padding-bottom: 78px;
+  }
+  .aa-two,
+  .aa-measure-inner,
+  .aa-roles-inner,
+  .aa-scope-inner,
+  .aa-after-inner,
+  .aa-faq-inner,
+  .mode-content { gap: 44px; }
+  .pair { min-height: 0; }
+  .property-card { min-height: 310px; }
+  .conclusion {
+    font-size: clamp(2.1rem, 10vw, 3.35rem);
+    margin-top: 34px;
+  }
+  .aa-absence { min-height: 135vh; }
+  .card-stack { min-height: 430px; }
+}

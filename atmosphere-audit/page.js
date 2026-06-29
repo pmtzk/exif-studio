@@ -64,11 +64,19 @@
       document.querySelectorAll('[data-compare]').forEach((b) =>
         b.setAttribute('aria-pressed', String(b === btn))
       );
+      const comparisonReading = document.getElementById('compare-reading');
+      if (comparisonReading) {
+        comparisonReading.textContent = btn.dataset.compare === 'property'
+          ? 'Reading: the quality of the property itself'
+          : 'Reading: the strength of the first impression online';
+      }
       ['a', 'b'].forEach((k) => {
         const scoreEl = document.querySelector(`[data-score="${k}"]`);
+        const labelEl = document.querySelector(`[data-score-label="${k}"]`);
         const listEl  = document.querySelector(`[data-list="${k}"]`);
         const cardEl  = document.querySelector(`[data-card="${k}"]`);
         if (scoreEl) scoreEl.textContent = d[k].score;
+        if (labelEl) labelEl.textContent = btn.dataset.compare === 'property' ? 'Offer strength' : 'Presentation strength';
         if (listEl)  listEl.innerHTML = d[k].items.map((x) => `<li>${x}</li>`).join('');
         if (cardEl)  cardEl.classList.toggle('lead', d[k].lead);
       });
