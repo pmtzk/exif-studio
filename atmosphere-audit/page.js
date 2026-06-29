@@ -16,15 +16,41 @@
   addEventListener('scroll', () => { if (!progTicking) { requestAnimationFrame(updateProgress); progTicking = true; } }, {passive:true});
   updateProgress();
 
-  // Section navigation
+  // Section navigation: robust current-state tracking + horizontal affordance
+  const sectionNav = $('.section-nav');
+  const sectionTrack = $('.section-nav-track');
   const sectionLinks = $$('.section-nav a');
   const observedSections = sectionLinks.map(a => $(a.getAttribute('href'))).filter(Boolean);
-  const sectionObserver = new IntersectionObserver(entries => {
-    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio-a.intersectionRatio)[0];
-    if (!visible) return;
-    sectionLinks.forEach(a => a.classList.toggle('is-current', a.getAttribute('href') === `#${visible.target.id}`));
-  }, {rootMargin:'-28% 0px -62% 0px', threshold:[0,.1,.3,.6]});
-  observedSections.forEach(s => sectionObserver.observe(s));
+
+  function setCurrentSection() {
+    const offset = (innerWidth <= 620 ? 118 : 132);
+    let current = observedSections[0];
+    for (const section of observedSections) {
+      if (section.getBoundingClientRect().top <= offset + 24) current = section;
+    }
+    if (!current) return;
+    const href = `#${current.id}`;
+    sectionLinks.forEach(a => {
+      const active = a.getAttribute('href') === href;
+      a.classList.toggle('is-current', active);
+      if (active) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
+    });
+    const activeLink = sectionLinks.find(a => a.getAttribute('href') === href);
+    activeLink?.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }
+  let navTicking = false;
+  addEventListener('scroll', () => {
+    if (!navTicking) requestAnimationFrame(() => { setCurrentSection(); navTicking = false; });
+    navTicking = true;
+  }, {passive:true});
+  sectionLinks.forEach(a => a.addEventListener('click', () => {
+    sectionLinks.forEach(x => x.classList.toggle('is-current', x === a));
+  }));
+  $('.section-nav-next')?.addEventListener('click', () => {
+    sectionTrack?.scrollBy({left: Math.max(180, innerWidth * .55), behavior:'smooth'});
+  });
+  setCurrentSection();
 
   const lensData = {
     visible:{en:{title:'What is visible',list:'Room · Pool · Restaurant · View'},es:{title:'Lo que se ve',list:'Habitación · Alberca · Restaurante · Vista'}},
@@ -32,7 +58,12 @@
   };
   let lensState='visible';
   function renderLens(){ const d=lensData[lensState][lang()]; $('#lens-title').textContent=d.title; $('#lens-list').textContent=d.list; $('.lens').dataset.state=lensState; $$('[data-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lens===lensState))); }
-  $$('[data-lens]').forEach(btn=>btn.addEventListener('click',()=>{lensState=btn.dataset.lens;renderLens();}));
+  $('.lens-controls')?.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-lens]');
+    if (!btn) return;
+    lensState = btn.dataset.lens;
+    renderLens();
+  });
 
   const compareData={
     property:{
@@ -63,7 +94,7 @@
 
   const insights={
     en:['Recognition is the difference between showing a beautiful property and showing this property.','Translation asks whether the experience promised in words becomes visible in evidence.','Hierarchy determines what the viewer understands before attention begins to fade.','Consistency allows every active channel to reinforce the same impression.','Coverage reveals whether the reasons behind the booking decision are actually present.','Currency protects the property from being represented by a version that no longer exists.','Direction gives future collaborators a world they can continue without diluting it.'],
-    es:['El reconocimiento es la diferencia entre mostrar una propiedad bonita y mostrar esta propiedad.','La traducción pregunta si la experiencia prometida en palabras se vuelve visible en la evidencia.','La jerarquía determina qué entiende el espectador antes de que su atención comience a disminuir.','La consistencia permite que cada canal activo refuerce la misma impresión.','La cobertura revela si las razones detrás de la reserva realmente están presentes.','La vigencia evita que la propiedad sea representada por una versión que ya no existe.','La dirección da a futuros colaboradores un universo que pueden continuar sin diluirlo.']
+    es:['El reconocimiento marca la diferencia entre mostrar una propiedad bonita y mostrar esta propiedad.','La correspondencia revela si la experiencia prometida en palabras también aparece en las imágenes y los materiales.','La jerarquía determina qué entiende el visitante antes de que su atención empiece a dispersarse.','La coherencia permite que todos los canales refuercen una misma impresión.','La cobertura muestra si las razones que impulsan la reserva realmente están presentes.','La vigencia evita que la propiedad siga representada por una versión que ya dejó atrás.','La dirección ofrece a futuros colaboradores un universo claro que pueden continuar sin diluirlo.']
   };
   let criterionIndex=0;
   function renderCriterion(){ $('#mcount').textContent=`${String(criterionIndex+1).padStart(2,'0')} / 07`; $('#mfill').style.width=`${((criterionIndex+1)/7)*100}%`; $('#insight').textContent=insights[lang()][criterionIndex]; $$('.criterion').forEach((b,i)=>b.setAttribute('aria-selected',String(i===criterionIndex))); }
@@ -83,7 +114,27 @@
   function renderRole(){ const d=rolesData[roleState][lang()]; $('#role-reading').textContent=d.pill; $('#role-title').textContent=d.title; $('#role-copy').textContent=d.copy; $('#role-benefits').innerHTML=d.benefits.map(x=>`<span>${x}</span>`).join(''); $$('[data-role]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.role===roleState))); }
   $$('[data-role]').forEach(btn=>btn.addEventListener('click',()=>{roleState=btn.dataset.role;renderRole();}));
 
-  $$('[data-layer]').forEach(btn=>btn.addEventListener('click',()=>{const i=+btn.dataset.layer;$$('[data-layer]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));$$('.stack-card').forEach((c,j)=>c.classList.toggle('active',i===j));}));
+  const revealedLayers = new Set([0]);
+  let activeLayer = 0;
+  function renderLayerStack() {
+    const cards = $$('.stack-card');
+    const revealed = [...revealedLayers];
+    cards.forEach((card, index) => {
+      const order = revealed.indexOf(index);
+      card.classList.toggle('revealed', order !== -1);
+      card.classList.toggle('active', index === activeLayer);
+      if (order !== -1) card.style.setProperty('--stack-order', order);
+    });
+    const stack = $('.card-stack');
+    if (stack) stack.style.setProperty('--stack-count', revealed.length);
+    $$('[data-layer]').forEach((button, index) => button.setAttribute('aria-pressed', String(index === activeLayer)));
+  }
+  $$('[data-layer]').forEach((btn, index) => btn.addEventListener('click', () => {
+    activeLayer = index;
+    revealedLayers.add(index);
+    renderLayerStack();
+  }));
+  renderLayerStack();
 
   const stepObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');}),{threshold:.35});
   $$('.process-step').forEach(s=>stepObserver.observe(s));
@@ -112,7 +163,22 @@
   const msgs={en:{required:'Please complete the required fields.',sending:'Sending…',success:'Thank you. We will review the property before we reply.',error:'Something went wrong. Please try again or email hello@exif.studio.',send:'Share the context'},es:{required:'Completa los campos obligatorios.',sending:'Enviando…',success:'Gracias. Revisaremos la propiedad antes de responder.',error:'Algo salió mal. Intenta de nuevo o escribe a hello@exif.studio.',send:'Compartir el contexto'}};
   aaForm?.addEventListener('submit',async e=>{e.preventDefault();const status=$('[data-form-status]',aaForm),button=$('[type="submit"]',aaForm),required=$$('[required]',aaForm);let valid=true;required.forEach(f=>{const ok=f.checkValidity();f.setAttribute('aria-invalid',String(!ok));if(!ok)valid=false;});if(!valid){status.textContent=msgs[lang()].required;status.className='form-status is-error';required.find(f=>!f.checkValidity())?.focus();return;}button.disabled=true;button.textContent=msgs[lang()].sending;status.textContent='';status.className='form-status';try{const res=await fetch(aaForm.action,{method:'POST',body:new FormData(aaForm),headers:{Accept:'application/json'}});const result=await res.json().catch(()=>({}));if(!res.ok)throw new Error(result?.errors?.map(x=>x.message).join(' ')||result?.error||'Request failed');aaForm.reset();status.textContent=msgs[lang()].success;status.className='form-status is-success';}catch(err){status.textContent=err.message||msgs[lang()].error;status.className='form-status is-error';}finally{button.disabled=false;button.textContent=msgs[lang()].send;}});
 
-  function renderDynamic(){renderLens();renderCompare();renderCriterion();renderRole();renderReport();renderMode();}
+  function applyStaticLanguage() {
+    const current = lang();
+    $$('[data-en][data-es]').forEach(el => {
+      // Dynamic regions are rendered by their dedicated functions.
+      if (el.matches('#lens-title,#lens-list,#compare-reading,#insight,#role-reading,#role-title,#role-copy,#report-title,#report-copy,#report-counter,#mode-title,#mode-copy,#ring')) return;
+      if (el.closest('#role-benefits,#mode-meta')) return;
+      const value = el.dataset[current];
+      if (value == null) return;
+      // Preserve intentionally rich inline markup.
+      if (el.children.length && !el.matches('button,option')) return;
+      el.textContent = value;
+    });
+    const hint = $('.section-nav-next');
+    if (hint) hint.setAttribute('aria-label', current === 'es' ? hint.dataset.esLabel : hint.dataset.enLabel);
+  }
+  function renderDynamic(){applyStaticLanguage();renderLens();renderCompare();renderCriterion();renderRole();renderReport();renderMode();}
   const langObserver=new MutationObserver(muts=>{if(muts.some(m=>m.attributeName==='data-lang'))requestAnimationFrame(renderDynamic);});
   langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
   renderDynamic();
