@@ -919,3 +919,28 @@ svg {
 .section-nav{background:var(--void)!important;}
 .section-nav-next{display:none!important;}
 .section-nav-track{width:100%;}
+
+/* v22: stable discrepancy sizing and stronger channel conclusion */
+.compare-stage{
+  height:680px;
+  min-height:680px;
+}
+.compare-copy{
+  min-height:0;
+  overflow:hidden;
+}
+.diagnosis-close{
+  font-family:var(--serif);
+  font-size:clamp(28px,3.2vw,46px)!important;
+  line-height:1.12;
+  max-width:900px;
+}
+@media(max-width:900px){
+  .compare-stage{height:auto;min-height:0}
+  .compare-image{height:560px;min-height:560px}
+  .compare-copy{min-height:330px}
+}
+@media(max-width:560px){
+  .compare-image{height:430px;min-height:430px}
+  .compare-copy{min-height:320px}
+}
