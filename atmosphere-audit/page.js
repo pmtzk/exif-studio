@@ -12,7 +12,21 @@ let dragging=false,startX=0,startScroll=0;
 navTrack?.addEventListener('pointerdown',e=>{dragging=true;startX=e.clientX;startScroll=navTrack.scrollLeft;navTrack.setPointerCapture(e.pointerId)});
 navTrack?.addEventListener('pointermove',e=>{if(!dragging)return;navTrack.scrollLeft=startScroll-(e.clientX-startX)});
 navTrack?.addEventListener('pointerup',()=>dragging=false);navTrack?.addEventListener('pointercancel',()=>dragging=false);
-function updateNav(){const offset=(innerWidth<=900?118:132);let current=sections[0];for(const section of sections){if(section.getBoundingClientRect().top<=offset+30)current=section}navLinks.forEach(a=>{const active=a.getAttribute('href')===`#${current?.id}`;a.classList.toggle('is-current',active);active?a.setAttribute('aria-current','location'):a.removeAttribute('aria-current')});const active=navLinks.find(a=>a.classList.contains('is-current'));active?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest',inline:'center'})}
+let lastCenteredNavHref='';
+function centerNavLinkHorizontally(link){
+  if(!navTrack||!link)return;
+  const target=link.offsetLeft-(navTrack.clientWidth-link.offsetWidth)/2;
+  navTrack.scrollTo({left:Math.max(0,target),behavior:reduced?'auto':'smooth'});
+}
+function updateNav(){
+  const offset=(innerWidth<=900?118:132);
+  let current=sections[0];
+  for(const section of sections){if(section.getBoundingClientRect().top<=offset+30)current=section}
+  navLinks.forEach(a=>{const active=a.getAttribute('href')===`#${current?.id}`;a.classList.toggle('is-current',active);active?a.setAttribute('aria-current','location'):a.removeAttribute('aria-current')});
+  const active=navLinks.find(a=>a.classList.contains('is-current'));
+  const href=active?.getAttribute('href')||'';
+  if(active&&href!==lastCenteredNavHref){lastCenteredNavHref=href;centerNavLinkHorizontally(active)}
+}
 addEventListener('scroll',updateNav,{passive:true});addEventListener('resize',updateNav);updateNav();
 
 const showsData={
