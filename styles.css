@@ -823,3 +823,11 @@ canvas,
 svg {
   max-width: 100%;
 }
+
+
+/* v18: header, progress, and local navigation behave as one stacked unit */
+.scroll-progress{opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+.scroll-progress.is-visible{opacity:1;visibility:visible}
+.section-nav{top:88px}
+@media(max-width:900px){.section-nav{top:74px}}
+@media(prefers-reduced-motion:reduce){.scroll-progress{transition:none}}

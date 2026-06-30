@@ -46,7 +46,9 @@ document.addEventListener('keydown', (event) => {
 });
 
 function updateScrollState() {
-  header?.classList.toggle('scrolled', window.scrollY > 30);
+  const hasScrolled = window.scrollY > 30;
+  header?.classList.toggle('scrolled', hasScrolled);
+  document.querySelector('.scroll-progress')?.classList.toggle('is-visible', hasScrolled);
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
   const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
   if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
@@ -139,7 +141,7 @@ const homeCompareObserver = new IntersectionObserver((entries) => entries.forEac
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     compareAutoTimer = window.setInterval(() => {
       setHomeCompare(compareState === 'person' ? 'screen' : 'person', true);
-    }, 5200);
+    }, 4600);
   }
 }), { threshold: .38 });
 if (compare) homeCompareObserver.observe(compare);
