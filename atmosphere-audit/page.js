@@ -40,12 +40,12 @@
 
   const lensData = {
     visible: {
-      en: ['What the property shows', 'Room · Pool · Restaurant · View'],
-      es: ['Lo que muestra la propiedad', 'Habitación · Alberca · Restaurante · Vista']
+      en: ['The property shows:', 'A room · A pool · A restaurant · A view'],
+      es: ['La propiedad muestra:', 'Una habitación · Una alberca · Un restaurante · Una vista']
     },
     understood: {
-      en: ['What the guest understands', 'Stillness · Privacy · Ritual · Place'],
-      es: ['Lo que entiende el huésped', 'Quietud · Privacidad · Ritual · Lugar']
+      en: ['The guest needs to see:', 'The stillness · The privacy · The ambience · The experience'],
+      es: ['El huésped necesita ver:', 'La calma · La privacidad · El ambiente · La experiencia']
     }
   };
   let lensState = 'visible';
@@ -69,31 +69,31 @@
     property: {
       en: {
         reading: 'Comparing the stay itself',
-        label: 'Property strength',
-        a: 'Stronger stay',
-        b: 'Less distinctive stay'
+        label: 'Score out of 100',
+        a: 'Beautiful, distinctive stay in person',
+        b: 'Less distinctive stay in person'
       },
       es: {
         reading: 'Comparando la estancia en sí',
-        label: 'Solidez de la propiedad',
-        a: 'Estancia más sólida',
-        b: 'Estancia menos distintiva'
+        label: 'Puntuación sobre 100',
+        a: 'Estancia hermosa y distintiva en persona',
+        b: 'Estancia menos distintiva en persona'
       },
-      scores: { a: '88', b: '72' },
+      scores: { a: '88', b: '56' },
       lead: 'a'
     },
     presentation: {
       en: {
-        reading: 'Comparing what appears on screen',
-        label: 'Presentation strength',
-        a: 'Harder to recognize',
-        b: 'Clearer first impression'
+        reading: 'Comparing what guests see online',
+        label: 'Score out of 100',
+        a: 'Weak online presence',
+        b: 'Impactful first impression online'
       },
       es: {
-        reading: 'Comparando lo que aparece en pantalla',
-        label: 'Solidez de la presentación',
-        a: 'Más difícil de reconocer',
-        b: 'Primera impresión más clara'
+        reading: 'Comparando lo que el huésped ve en línea',
+        label: 'Puntuación sobre 100',
+        a: 'Presencia digital débil',
+        b: 'Primera impresión digital de alto impacto'
       },
       scores: { a: '58', b: '91' },
       lead: 'b'
@@ -124,16 +124,16 @@
 
   const translationData = {
     room: {
-      en: ['A well-designed room.', 'The stillness, privacy and pace of the stay.'],
-      es: ['Una habitación bien diseñada.', 'La quietud, la privacidad y el ritmo de la estancia.']
+      en: ['A nice-looking room.', 'The stillness, privacy and pace of the stay.'],
+      es: ['Una habitación agradable.', 'La calma, la privacidad y el ritmo de la estancia.']
     },
     dining: {
-      en: ['A restaurant and its food.', 'The ritual, mood and sense of occasion around them.'],
-      es: ['Un restaurante y su comida.', 'El ritual, el ambiente y el sentido de ocasión que los rodea.']
+      en: ['Good-looking food.', 'The interaction, mood and sense of occasion around it.'],
+      es: ['Comida que se ve bien.', 'La interacción, el ambiente y el sentido de ocasión que la rodean.']
     },
     arrival: {
-      en: ['An entrance and a lobby.', 'The first feeling of being received by this particular place.'],
-      es: ['Una entrada y un lobby.', 'La primera sensación de ser recibido por este lugar en particular.']
+      en: ['A lobby with compelling architecture.', 'An arrival that creates impact at first glance.'],
+      es: ['Un lobby con arquitectura atractiva.', 'Una llegada que genera impacto desde el primer vistazo.']
     }
   };
   let translationState = 'room';
@@ -171,72 +171,6 @@
   bindSingleOpenGroup('.review-trigger', '.review-item', 'is-open');
   bindSingleOpenGroup('.audit-group-trigger', '.audit-group', 'is-open');
 
-  const reportData = {
-    en: [
-      ['Overall Read', 'How the property is currently understood, and where that understanding begins to lose clarity.'],
-      ['Score', 'A structured view of where the presentation is clear, consistent and recognizable.'],
-      ['Evidence', 'The specific assets, sequences, gaps and contradictions behind each finding.'],
-      ['Channels', 'How the website, listings, social presence and selected materials compare.'],
-      ['Priorities', 'What can be corrected now, what needs definition and what requires investment.'],
-      ['Next Scope', 'A clear recommendation for what should happen next.']
-    ],
-    es: [
-      ['Lectura general', 'Cómo se entiende actualmente la propiedad y dónde esa lectura comienza a perder claridad.'],
-      ['Puntuación', 'Una lectura estructurada de dónde la presentación es clara, coherente y reconocible.'],
-      ['Evidencia', 'Los activos, secuencias, vacíos y contradicciones específicos detrás de cada hallazgo.'],
-      ['Canales', 'Cómo se comparan el sitio web, los listados, la presencia social y los materiales seleccionados.'],
-      ['Prioridades', 'Qué puede corregirse ahora, qué necesita definición y qué requiere inversión.'],
-      ['Siguiente alcance', 'Una recomendación clara sobre lo que debe ocurrir después.']
-    ]
-  };
-  const bars = [[72,88,58,82],[42,76,63,91,55,69],[82,24,66,38,92],[88,61,46,72],[100,74,48],[34,55,78,100]];
-  let reportIndex = 0;
-  function renderReport() {
-    const data = reportData[lang()][reportIndex];
-    $('#report-title').textContent = data[0];
-    $('#report-copy').textContent = data[1];
-    $('#report-counter').textContent = (lang() === 'es' ? 'Explora el informe ' : 'Explore the report ') + `${String(reportIndex + 1).padStart(2, '0')} / 06`;
-    $('#report-bars').innerHTML = bars[reportIndex].map((height, index) => `<i style="height:${height}%;animation-delay:${index * .05}s"></i>`).join('');
-    $$('[data-report]').forEach((button, index) => button.setAttribute('aria-selected', String(index === reportIndex)));
-  }
-  $$('[data-report]').forEach((button, index) => {
-    button.addEventListener('click', () => {
-      reportIndex = index;
-      renderReport();
-    });
-  });
-
-  const modes = {
-    sharp: {
-      en: { title: 'Sharp', copy: 'A concentrated review built around one defined question. Best suited to a smaller property or a specific decision.', mark: 'One defined question', meta: [['Focus','One problem'],['Channels','Limited'],['Outcome','Clear next step']] },
-      es: { title: 'Sharp', copy: 'Una revisión concentrada en una pregunta definida. Ideal para una propiedad más pequeña o una decisión específica.', mark: 'Una pregunta definida', meta: [['Enfoque','Un problema'],['Canales','Limitados'],['Resultado','Siguiente paso claro']] }
-    },
-    exhaustive: {
-      en: { title: 'Exhaustive', copy: 'A full reading of the property’s active presentation as one connected system.', mark: 'The active system', meta: [['Focus','Full presentation'],['Channels','Several'],['Outcome','Connected priorities']] },
-      es: { title: 'Exhaustive', copy: 'Una lectura completa de la presentación activa de la propiedad como un sistema conectado.', mark: 'El sistema activo', meta: [['Enfoque','Presentación completa'],['Canales','Varios'],['Resultado','Prioridades conectadas']] }
-    },
-    catalyst: {
-      en: { title: 'Catalyst', copy: 'A broader review for a property approaching renovation, repositioning, launch or significant investment.', mark: 'A defining change', meta: [['Focus','Major decision'],['Channels','Current + planned'],['Outcome','Direction before investment']] },
-      es: { title: 'Catalyst', copy: 'Una revisión más amplia para una propiedad que se acerca a una renovación, reposicionamiento, lanzamiento o inversión significativa.', mark: 'Un cambio decisivo', meta: [['Enfoque','Decisión importante'],['Canales','Actuales + previstos'],['Resultado','Dirección antes de invertir']] }
-    }
-  };
-  let mode = 'sharp';
-  function renderMode() {
-    const data = modes[mode][lang()];
-    $('#mode-title').textContent = data.title;
-    $('#mode-copy').textContent = data.copy;
-    $('#mode-mark').textContent = data.mark;
-    $('#mode-mark').classList.toggle('is-large', mode === 'catalyst');
-    $('#mode-meta').innerHTML = data.meta.map((item) => `<div><small>${item[0]}</small>${item[1]}</div>`).join('');
-    $$('[data-mode]').forEach((button) => button.setAttribute('aria-selected', String(button.dataset.mode === mode)));
-  }
-  $$('[data-mode]').forEach((button) => {
-    button.addEventListener('click', () => {
-      mode = button.dataset.mode;
-      renderMode();
-    });
-  });
-
   $$('.faq-q').forEach((button) => {
     button.addEventListener('click', () => {
       const open = button.getAttribute('aria-expanded') === 'true';
@@ -255,8 +189,6 @@
     renderLens();
     renderCompare();
     renderTranslation();
-    renderReport();
-    renderMode();
     updatePlaceholders();
   });
   languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
@@ -304,7 +236,5 @@
   renderLens();
   renderCompare();
   renderTranslation();
-  renderReport();
-  renderMode();
   updatePlaceholders();
 })();
