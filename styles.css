@@ -801,7 +801,7 @@ html,
 body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -831,3 +831,14 @@ svg {
 .section-nav{top:88px}
 @media(max-width:900px){.section-nav{top:74px}}
 @media(prefers-reduced-motion:reduce){.scroll-progress{transition:none}}
+
+
+/* v19: keep the homepage local nav attached beneath header + progress */
+.section-nav {
+  position: sticky !important;
+  top: 88px !important;
+  z-index: 120;
+}
+@media (max-width: 900px) {
+  .section-nav { top: 74px !important; }
+}
