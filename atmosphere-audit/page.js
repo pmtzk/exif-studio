@@ -17,8 +17,12 @@
 
   const navTrack = $('.section-nav-track');
   const navLinks = $$('.section-nav a');
-  $('.section-nav-next')?.addEventListener('click', () => {
-    navTrack?.scrollBy({ left: Math.max(220, innerWidth * .55), behavior: 'smooth' });
+  const navNext = $('.section-nav-next');
+  navNext?.addEventListener('click', () => {
+    if (!navTrack) return;
+    const nextLeft = Math.min(navTrack.scrollLeft + Math.max(220, innerWidth * .55), navTrack.scrollWidth - navTrack.clientWidth);
+    navTrack.scrollTo({ left: nextLeft, behavior: 'smooth' });
+    if (nextLeft >= navTrack.scrollWidth - navTrack.clientWidth - 4) navNext.disabled = true;
   });
 
   function updateNav() {
@@ -68,13 +72,13 @@
   const compareData = {
     property: {
       en: {
-        reading: 'Comparing the stay itself',
+        reading: 'The stay itself',
         label: 'Score out of 100',
         a: 'Beautiful, distinctive stay in person',
         b: 'Less distinctive stay in person'
       },
       es: {
-        reading: 'Comparando la estancia en sí',
+        reading: 'La estancia en sí',
         label: 'Puntuación sobre 100',
         a: 'Estancia hermosa y distintiva en persona',
         b: 'Estancia menos distintiva en persona'
@@ -84,13 +88,13 @@
     },
     presentation: {
       en: {
-        reading: 'Comparing what guests see online',
+        reading: 'What guests see online',
         label: 'Score out of 100',
         a: 'Weak online presence',
         b: 'Impactful first impression online'
       },
       es: {
-        reading: 'Comparando lo que el huésped ve en línea',
+        reading: 'Lo que el huésped ve en línea',
         label: 'Puntuación sobre 100',
         a: 'Presencia digital débil',
         b: 'Primera impresión digital de alto impacto'
@@ -122,35 +126,6 @@
     });
   });
 
-  const translationData = {
-    room: {
-      en: ['A nice-looking room.', 'The stillness, privacy and pace of the stay.'],
-      es: ['Una habitación agradable.', 'La calma, la privacidad y el ritmo de la estancia.']
-    },
-    dining: {
-      en: ['Good-looking food.', 'The interaction, mood and sense of occasion around it.'],
-      es: ['Comida que se ve bien.', 'La interacción, el ambiente y el sentido de ocasión que la rodean.']
-    },
-    arrival: {
-      en: ['A lobby with compelling architecture.', 'An arrival that creates impact at first glance.'],
-      es: ['Un lobby con arquitectura atractiva.', 'Una llegada que genera impacto desde el primer vistazo.']
-    }
-  };
-  let translationState = 'room';
-  function renderTranslation() {
-    const data = translationData[translationState][lang()];
-    $('#translation-visible').textContent = data[0];
-    $('#translation-understood').textContent = data[1];
-    $$('[data-translation]').forEach((button) => {
-      button.setAttribute('aria-selected', String(button.dataset.translation === translationState));
-    });
-  }
-  $$('[data-translation]').forEach((button) => {
-    button.addEventListener('click', () => {
-      translationState = button.dataset.translation;
-      renderTranslation();
-    });
-  });
 
   function bindSingleOpenGroup(triggerSelector, itemSelector, openClass) {
     $$(triggerSelector).forEach((button) => {
@@ -188,7 +163,6 @@
   const languageObserver = new MutationObserver(() => {
     renderLens();
     renderCompare();
-    renderTranslation();
     updatePlaceholders();
   });
   languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
