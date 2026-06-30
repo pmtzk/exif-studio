@@ -1,4 +1,4 @@
-/* Atmosphere Audit — page interactions, V3 */
+/* Atmosphere Audit — page interactions, V6 */
 (function () {
   'use strict';
 
@@ -15,15 +15,16 @@
   addEventListener('resize', updateProgress);
   updateProgress();
 
+  /* Horizontal section navigation: native two-way swipe, active section centered. */
   const navTrack = $('.section-nav-track');
   const navLinks = $$('.section-nav a');
   const navNext = $('.section-nav-next');
-  navNext?.addEventListener('click', () => {
-    if (!navTrack) return;
-    const nextLeft = Math.min(navTrack.scrollLeft + Math.max(220, innerWidth * .55), navTrack.scrollWidth - navTrack.clientWidth);
-    navTrack.scrollTo({ left: nextLeft, behavior: 'smooth' });
-    if (nextLeft >= navTrack.scrollWidth - navTrack.clientWidth - 4) navNext.disabled = true;
-  });
+
+  function centerNavLink(link, behavior = 'smooth') {
+    if (!navTrack || !link) return;
+    const left = link.offsetLeft - (navTrack.clientWidth - link.offsetWidth) / 2;
+    navTrack.scrollTo({ left: Math.max(0, left), behavior });
+  }
 
   function updateNav() {
     let current = navLinks[0];
@@ -38,8 +39,24 @@
       if (active) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
+    centerNavLink(current);
   }
-  addEventListener('scroll', updateNav, { passive: true });
+
+  let navTicking = false;
+  addEventListener('scroll', () => {
+    if (navTicking) return;
+    navTicking = true;
+    requestAnimationFrame(() => {
+      updateNav();
+      navTicking = false;
+    });
+  }, { passive: true });
+
+  navLinks.forEach((link) => link.addEventListener('click', () => centerNavLink(link)));
+  navNext?.addEventListener('click', () => {
+    if (!navTrack) return;
+    navTrack.scrollBy({ left: Math.max(180, innerWidth * .48), behavior: 'smooth' });
+  });
   updateNav();
 
   const lensData = {
@@ -53,6 +70,7 @@
     }
   };
   let lensState = 'visible';
+  let lensTouched = false;
   function renderLens() {
     const data = lensData[lensState][lang()];
     $('#lens-title').textContent = data[0];
@@ -64,46 +82,40 @@
   }
   $$('[data-lens]').forEach((button) => {
     button.addEventListener('click', () => {
+      lensTouched = true;
       lensState = button.dataset.lens;
       renderLens();
     });
   });
 
+  const lensObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || lensTouched || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      setTimeout(() => {
+        if (!lensTouched) {
+          lensState = 'understood';
+          renderLens();
+        }
+      }, 1400);
+      lensObserver.disconnect();
+    });
+  }, { threshold: .55 });
+  if ($('.lens')) lensObserver.observe($('.lens'));
+
   const compareData = {
     property: {
-      en: {
-        reading: 'The stay itself',
-        label: 'Score out of 100',
-        a: 'Beautiful, distinctive stay in person',
-        b: 'Less distinctive stay in person'
-      },
-      es: {
-        reading: 'La estancia en sí',
-        label: 'Puntuación sobre 100',
-        a: 'Estancia hermosa y distintiva en persona',
-        b: 'Estancia menos distintiva en persona'
-      },
-      scores: { a: '88', b: '56' },
-      lead: 'a'
+      en: { reading: 'The stay itself', label: 'Score out of 100', a: 'Beautiful, distinctive stay in person', b: 'Less distinctive stay in person' },
+      es: { reading: 'La estancia en sí', label: 'Puntuación sobre 100', a: 'Estancia hermosa y distintiva en persona', b: 'Estancia menos distintiva en persona' },
+      scores: { a: '88', b: '56' }, lead: 'a'
     },
     presentation: {
-      en: {
-        reading: 'What guests see online',
-        label: 'Score out of 100',
-        a: 'Weak online presence',
-        b: 'Impactful first impression online'
-      },
-      es: {
-        reading: 'Lo que el huésped ve en línea',
-        label: 'Puntuación sobre 100',
-        a: 'Presencia digital débil',
-        b: 'Primera impresión digital de alto impacto'
-      },
-      scores: { a: '58', b: '91' },
-      lead: 'b'
+      en: { reading: 'What guests see online', label: 'Score out of 100', a: 'Weak online presence', b: 'Impactful first impression online' },
+      es: { reading: 'Lo que el huésped ve en línea', label: 'Puntuación sobre 100', a: 'Presencia digital débil', b: 'Primera impresión digital de alto impacto' },
+      scores: { a: '58', b: '91' }, lead: 'b'
     }
   };
   let compareState = 'property';
+  let compareTouched = false;
   function renderCompare() {
     const base = compareData[compareState];
     const data = base[lang()];
@@ -115,36 +127,42 @@
       $(`[data-card="${key}"]`).classList.toggle('lead', base.lead === key);
       $(`[data-card="${key}"] small`).textContent = (lang() === 'es' ? 'Propiedad ' : 'Property ') + key.toUpperCase();
     });
-    $$('[data-compare]').forEach((button) => {
-      button.setAttribute('aria-pressed', String(button.dataset.compare === compareState));
-    });
+    $$('[data-compare]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.compare === compareState)));
   }
   $$('[data-compare]').forEach((button) => {
     button.addEventListener('click', () => {
+      compareTouched = true;
       compareState = button.dataset.compare;
       renderCompare();
     });
   });
 
+  const comparisonObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || compareTouched || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      setTimeout(() => {
+        if (!compareTouched) {
+          compareState = 'presentation';
+          renderCompare();
+        }
+      }, 1700);
+      comparisonObserver.disconnect();
+    });
+  }, { threshold: .42 });
+  if ($('.compare-stage')) comparisonObserver.observe($('.compare-stage'));
 
-  function bindSingleOpenGroup(triggerSelector, itemSelector, openClass) {
-    $$(triggerSelector).forEach((button) => {
-      button.addEventListener('click', () => {
-        const item = button.closest(itemSelector);
-        const wasOpen = item.classList.contains(openClass);
-        $$(itemSelector).forEach((entry) => {
-          entry.classList.remove(openClass);
-          $(triggerSelector, entry)?.setAttribute('aria-expanded', 'false');
-        });
-        if (!wasOpen) {
-          item.classList.add(openClass);
-          button.setAttribute('aria-expanded', 'true');
+  const question = $('.comparison-question');
+  if (question) {
+    const questionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          question.classList.add('is-visible');
+          questionObserver.disconnect();
         }
       });
-    });
+    }, { threshold: .45 });
+    questionObserver.observe(question);
   }
-  bindSingleOpenGroup('.review-trigger', '.review-item', 'is-open');
-  bindSingleOpenGroup('.audit-group-trigger', '.audit-group', 'is-open');
 
   $$('.faq-q').forEach((button) => {
     button.addEventListener('click', () => {
@@ -209,6 +227,5 @@
 
   renderLens();
   renderCompare();
-  renderTranslation();
   updatePlaceholders();
 })();
