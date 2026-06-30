@@ -4,6 +4,7 @@ const header = document.querySelector('[data-header]');
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const siteMenu = document.querySelector('[data-site-menu]');
 const menuLinks = document.querySelectorAll('[data-menu-link]');
+const progressBar = document.querySelector('[data-scroll-progress]');
 
 function setLanguage(lang) {
   root.dataset.lang = lang;
@@ -13,10 +14,14 @@ function setLanguage(lang) {
     element.textContent = element.dataset[lang];
   });
 
+  document.querySelectorAll('[data-en-placeholder][data-es-placeholder]').forEach((element) => {
+    element.placeholder = element.dataset[`${lang}Placeholder`];
+  });
+
+  updateCompareCopy();
+  updateChannelCopy();
   localStorage.setItem('exif-lang', lang);
 }
-
-setLanguage(localStorage.getItem('exif-lang') || 'en');
 
 languageToggle?.addEventListener('click', () => {
   setLanguage(root.dataset.lang === 'en' ? 'es' : 'en');
@@ -28,77 +33,116 @@ function setMenu(open) {
   menuToggle?.setAttribute('aria-label', open ? 'Close site menu' : 'Open site menu');
   siteMenu?.setAttribute('aria-hidden', String(!open));
 
-  if (open) {
-    siteMenu?.querySelector('a')?.focus();
-  } else {
-    menuToggle?.focus();
-  }
+  if (open) siteMenu?.querySelector('a')?.focus();
 }
 
 menuToggle?.addEventListener('click', () => {
-  const open = menuToggle.getAttribute('aria-expanded') !== 'true';
-  setMenu(open);
+  setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
 });
 
-menuLinks.forEach((link) => {
-  link.addEventListener('click', () => setMenu(false));
-});
-
+menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && document.body.classList.contains('menu-open')) {
-    setMenu(false);
-  }
+  if (event.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
 });
 
-const onScroll = () => {
+function updateScrollState() {
   header?.classList.toggle('scrolled', window.scrollY > 30);
-};
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
+  if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+}
 
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
+updateScrollState();
+window.addEventListener('scroll', updateScrollState, { passive: true });
+window.addEventListener('resize', updateScrollState);
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.12 }
-);
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
 
-document.querySelectorAll('.reveal').forEach((element) => {
-  revealObserver.observe(element);
-});
+document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
 const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
-const trackedSections = sectionLinks
-  .map((link) => document.getElementById(link.dataset.sectionLink))
-  .filter(Boolean);
+const trackedSections = sectionLinks.map((link) => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
 
 function updateActiveSection() {
   const headerHeight = header?.offsetHeight || 70;
   let current = trackedSections[0]?.id;
-
   trackedSections.forEach((section) => {
-    if (section.getBoundingClientRect().top <= headerHeight + 70) {
-      current = section.id;
-    }
+    if (section.getBoundingClientRect().top <= headerHeight + 86) current = section.id;
   });
-
-  sectionLinks.forEach((link) => {
-    link.classList.toggle('active', link.dataset.sectionLink === current);
-  });
+  sectionLinks.forEach((link) => link.classList.toggle('active', link.dataset.sectionLink === current));
 }
 
 updateActiveSection();
 window.addEventListener('scroll', updateActiveSection, { passive: true });
 window.addEventListener('resize', updateActiveSection);
 
-const contactForm = document.querySelector('[data-contact-form]');
+const compare = document.querySelector('[data-property-compare]');
+let compareState = 'person';
 
+function updateCompareCopy() {
+  if (!compare) return;
+  const lang = root.dataset.lang || 'en';
+  const observation = compare.querySelector('[data-compare-observation]');
+  const context = compare.querySelector('[data-compare-context]');
+  const image = compare.querySelector('[data-compare-image]');
+  if (observation) observation.textContent = observation.dataset[`${compareState}${lang === 'en' ? 'En' : 'Es'}`];
+  if (context) context.textContent = context.dataset[`${compareState}${lang === 'en' ? 'En' : 'Es'}`];
+  image?.classList.toggle('image-person', compareState === 'person');
+  image?.classList.toggle('image-screen', compareState === 'screen');
+}
+
+compare?.querySelectorAll('[data-compare-tab]').forEach((button) => {
+  button.addEventListener('click', () => {
+    compareState = button.dataset.compareTab;
+    compare.querySelectorAll('[data-compare-tab]').forEach((tab) => {
+      const active = tab === button;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    updateCompareCopy();
+  });
+});
+
+const channelReader = document.querySelector('[data-channel-reader]');
+let channelState = 'website';
+
+function updateChannelCopy() {
+  if (!channelReader) return;
+  const lang = root.dataset.lang || 'en';
+  const copy = channelReader.querySelector('[data-channel-copy]');
+  if (copy) copy.textContent = copy.dataset[`${channelState}${lang === 'en' ? 'En' : 'Es'}`];
+}
+
+channelReader?.querySelectorAll('[data-channel-tab]').forEach((button) => {
+  button.addEventListener('click', () => {
+    channelState = button.dataset.channelTab;
+    channelReader.querySelectorAll('[data-channel-tab]').forEach((tab) => {
+      const active = tab === button;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    updateChannelCopy();
+  });
+});
+
+const faqItems = [...document.querySelectorAll('.faq-list details')];
+faqItems.forEach((item) => {
+  item.addEventListener('toggle', () => {
+    if (!item.open) return;
+    faqItems.forEach((other) => {
+      if (other !== item) other.open = false;
+    });
+  });
+});
+
+const contactForm = document.querySelector('[data-contact-form]');
 function getFormMessage(key) {
   const messages = {
     en: {
@@ -106,27 +150,24 @@ function getFormMessage(key) {
       sending: 'Sending…',
       success: 'Thank you. We’ll review the property before we reply.',
       error: 'Something went wrong. Please try again or email hello@exif.studio.',
-      send: 'Send inquiry'
+      send: 'Send property details'
     },
     es: {
       required: 'Completa los campos obligatorios.',
       sending: 'Enviando…',
       success: 'Gracias. Revisaremos la propiedad antes de responder.',
       error: 'Algo salió mal. Intenta nuevamente o escribe a hello@exif.studio.',
-      send: 'Enviar consulta'
+      send: 'Enviar datos de la propiedad'
     }
   };
-
   return messages[root.dataset.lang || 'en'][key];
 }
 
 contactForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-
   const status = contactForm.querySelector('[data-form-status]');
   const button = contactForm.querySelector('[type="submit"]');
   const requiredFields = [...contactForm.querySelectorAll('[required]')];
-
   let valid = true;
 
   requiredFields.forEach((field) => {
@@ -149,24 +190,14 @@ contactForm?.addEventListener('submit', async (event) => {
   status.className = 'form-status';
 
   try {
-    const response = await fetch(contactForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' }
-    });
-
+    const response = await fetch(contactForm.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     const result = await response.json().catch(() => ({}));
-
     if (!response.ok) {
-      const formspreeError =
-        result?.errors?.map((item) => item.message).filter(Boolean).join(' ') ||
-        result?.error ||
-        result?.message;
-
+      const formspreeError = result?.errors?.map((item) => item.message).filter(Boolean).join(' ') || result?.error || result?.message;
       throw new Error(formspreeError || 'Request failed');
     }
-
     contactForm.reset();
+    setLanguage(root.dataset.lang || 'en');
     status.textContent = getFormMessage('success');
     status.className = 'form-status is-success';
   } catch (error) {
@@ -180,17 +211,13 @@ contactForm?.addEventListener('submit', async (event) => {
 });
 
 const localSectionNav = document.querySelector('.section-nav');
-
 function updateSectionNavHint() {
   if (!localSectionNav) return;
-
-  const reachedEnd =
-    localSectionNav.scrollLeft + localSectionNav.clientWidth >=
-    localSectionNav.scrollWidth - 12;
-
+  const reachedEnd = localSectionNav.scrollLeft + localSectionNav.clientWidth >= localSectionNav.scrollWidth - 12;
   localSectionNav.classList.toggle('has-reached-end', reachedEnd);
 }
-
 localSectionNav?.addEventListener('scroll', updateSectionNavHint, { passive: true });
 window.addEventListener('resize', updateSectionNavHint);
 updateSectionNavHint();
+
+setLanguage(localStorage.getItem('exif-lang') || 'en');
