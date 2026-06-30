@@ -30,13 +30,32 @@ let compareState='person',comparePlayed=false,compareTimers=[];
 function clearCompareTimers(){compareTimers.forEach(clearTimeout);compareTimers=[]}
 function resetCards(){$$('[data-card]').forEach(card=>{card.classList.remove('is-revealed');card.classList.add('is-waiting')})}
 function revealCard(key){const card=$(`[data-card="${key}"]`);card?.classList.remove('is-waiting');card?.classList.add('is-revealed')}
-function renderCompare(state,animate=false){clearCompareTimers();compareState=state;const d=compareData[state][lang()];['a','b'].forEach(k=>{$(`[data-score="${k}"]`).textContent=d[k][0];$(`[data-summary="${k}"]`).textContent=d[k][1]});const lead=state==='person'?'a':'b';$$('[data-card]').forEach(card=>{const isLead=card.dataset.card===lead;card.classList.toggle('is-lead',isLead);card.classList.toggle('is-secondary',!isLead)});$$('[data-compare]').forEach(b=>{const active=b.dataset.compare===state;b.setAttribute('aria-pressed',String(active));b.classList.toggle('is-pulsing',active&&animate&&!reduced)});if(!animate||reduced){$$('[data-card]').forEach(c=>{c.classList.remove('is-waiting');c.classList.add('is-revealed')});return}resetCards();compareTimers.push(setTimeout(()=>revealCard('a'),180));compareTimers.push(setTimeout(()=>revealCard('b'),980));compareTimers.push(setTimeout(()=>$$('[data-compare]').forEach(b=>b.classList.remove('is-pulsing')),900))}
-$$('[data-compare]').forEach(b=>b.addEventListener('click',()=>renderCompare(b.dataset.compare,true)));
-const compareObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting&&!comparePlayed){comparePlayed=true;renderCompare('person',true);if(!reduced){compareTimers.push(setTimeout(()=>renderCompare('online',true),2350));}else $('[data-comparison-question]').classList.add('is-visible');compareObserver.disconnect()}}),{threshold:.28});compareObserver.observe($('[data-comparison]'));
-
-
+function applyCompareState(state){
+  compareState=state;const d=compareData[state][lang()];
+  ['a','b'].forEach(k=>{$(`[data-score="${k}"]`).textContent=d[k][0];$(`[data-summary="${k}"]`).textContent=d[k][1]});
+  const lead=state==='person'?'a':'b';
+  $$('[data-card]').forEach(card=>{const isLead=card.dataset.card===lead;card.classList.toggle('is-lead',isLead);card.classList.toggle('is-secondary',!isLead)});
+  $$('[data-compare]').forEach(b=>{const active=b.dataset.compare===state;b.setAttribute('aria-pressed',String(active));b.classList.toggle('is-pulsing',active&&!reduced)});
+}
+function renderCompare(state,animate=false){
+  clearCompareTimers();applyCompareState(state);
+  if(!animate||reduced){$$('[data-card]').forEach(c=>{c.classList.remove('is-waiting');c.classList.add('is-revealed')});return}
+  resetCards();compareTimers.push(setTimeout(()=>revealCard('a'),220));compareTimers.push(setTimeout(()=>revealCard('b'),1050));compareTimers.push(setTimeout(()=>$$('[data-compare]').forEach(b=>b.classList.remove('is-pulsing')),900));
+}
+function revealComparisonQuestion(){ $('[data-comparison-question]')?.classList.add('is-visible'); }
+$$('[data-compare]').forEach(b=>b.addEventListener('click',()=>{clearCompareTimers();renderCompare(b.dataset.compare,true);revealComparisonQuestion()}));
+const compareObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(!e.isIntersecting||comparePlayed)return;comparePlayed=true;
+  renderCompare('person',true);
+  if(!reduced){
+    setTimeout(()=>renderCompare('online',true),2550);
+    setTimeout(revealComparisonQuestion,4700);
+  }else revealComparisonQuestion();
+  compareObserver.disconnect();
+}),{threshold:.25});
+const comparisonSection=$('[data-comparison]');if(comparisonSection)compareObserver.observe(comparisonSection);
 const comparisonQuestion=$('[data-comparison-question]');
-const questionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){comparisonQuestion?.classList.add('is-visible');questionObserver.disconnect()}}),{threshold:.45});
+const questionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){revealComparisonQuestion();questionObserver.disconnect()}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
 if(comparisonQuestion)questionObserver.observe(comparisonQuestion);
 
 const cards=$$('[data-review-card]');let cardIndex=0,startSwipeX=null;

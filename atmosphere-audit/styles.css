@@ -63,3 +63,17 @@
 .review-card{will-change:transform}
 .next-actions span:last-child{grid-column:auto}
 @media(max-width:620px){.comparison-question{font-size:46px}.review-stack{min-height:610px}}
+
+
+/* v8: final clarity refinements */
+.progress{height:4px;background:rgba(7,26,24,.28)}
+.section-nav{top:calc(var(--aa-header) + 4px)}
+.compare-stage{display:block}
+.compare-switch{width:100%;justify-content:center;position:relative;z-index:2}
+.pair{width:100%}
+.comparison-question{position:relative;margin:90px auto 8px;padding:34px 18px;font-size:clamp(44px,5.4vw,76px);line-height:.98}
+.comparison-question::before{content:"";position:absolute;left:50%;top:0;width:1px;height:0;background:var(--forest);transition:height .7s .1s}
+.comparison-question.is-visible::before{height:22px}
+.comparison-question.is-visible{animation:questionArrival .95s cubic-bezier(.22,.61,.36,1) both}
+@keyframes questionArrival{0%{opacity:0;transform:translateY(34px) scale(.97)}100%{opacity:1;transform:none}}
+@media(max-width:620px){.comparison-question{margin-top:68px;padding-top:30px;font-size:48px}}
