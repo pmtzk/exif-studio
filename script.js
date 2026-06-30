@@ -103,8 +103,8 @@ function updateCompareCopy() {
   image?.classList.toggle('image-screen', compareState === 'screen');
 }
 
-let compareSequencePlayed = false;
-let compareSequenceTimer;
+let compareAutoTimer;
+let compareAutoStopped = false;
 function setHomeCompare(state, animate = true) {
   if (!compare) return;
   compareState = state;
@@ -123,16 +123,25 @@ function setHomeCompare(state, animate = true) {
     window.setTimeout(() => compare.querySelectorAll('[data-compare-tab]').forEach(tab => tab.classList.remove('is-pulsing')), 800);
   }, animate ? 220 : 0);
 }
+function stopHomeCompareAuto() {
+  compareAutoStopped = true;
+  window.clearInterval(compareAutoTimer);
+}
 compare?.querySelectorAll('[data-compare-tab]').forEach((button) => {
-  button.addEventListener('click', () => { clearTimeout(compareSequenceTimer); setHomeCompare(button.dataset.compareTab, true); });
+  button.addEventListener('click', () => {
+    stopHomeCompareAuto();
+    setHomeCompare(button.dataset.compareTab, true);
+  });
 });
 const homeCompareObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-  if (!entry.isIntersecting || compareSequencePlayed) return;
-  compareSequencePlayed = true;
+  if (!entry.isIntersecting || compareAutoStopped || compareAutoTimer) return;
   setHomeCompare('person', true);
-  compareSequenceTimer = window.setTimeout(() => setHomeCompare('screen', true), 1900);
-  homeCompareObserver.disconnect();
-}), { threshold: .42 });
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    compareAutoTimer = window.setInterval(() => {
+      setHomeCompare(compareState === 'person' ? 'screen' : 'person', true);
+    }, 5200);
+  }
+}), { threshold: .38 });
 if (compare) homeCompareObserver.observe(compare);
 
 const channelReader = document.querySelector('[data-channel-reader]');
