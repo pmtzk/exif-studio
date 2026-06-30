@@ -1,45 +1,310 @@
-(function(){
-'use strict';
-const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
-const lang=()=>document.documentElement.dataset.lang==='es'?'es':'en';
-const progress=$('.progress i');
-function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight; if(progress) progress.style.transform=`scaleX(${max?scrollY/max:0})`;}
-addEventListener('scroll',updateProgress,{passive:true}); addEventListener('resize',updateProgress); updateProgress();
+/* Atmosphere Audit — page interactions, V3 */
+(function () {
+  'use strict';
 
-const navTrack=$('.section-nav-track'), navLinks=$$('.section-nav a');
-$('.section-nav-next')?.addEventListener('click',()=>navTrack?.scrollBy({left:Math.max(220,innerWidth*.55),behavior:'smooth'}));
-function updateNav(){let current=navLinks[0]; const offset=(innerWidth<=900?122:136); navLinks.forEach(a=>{const section=$(a.getAttribute('href'));if(section&&section.getBoundingClientRect().top<=offset+28)current=a;});navLinks.forEach(a=>a.classList.toggle('is-current',a===current));}
-addEventListener('scroll',updateNav,{passive:true}); updateNav();
+  const $ = (selector, context = document) => context.querySelector(selector);
+  const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
+  const lang = () => document.documentElement.dataset.lang === 'es' ? 'es' : 'en';
 
-const lensData={visible:{en:['What is visible','Room · Pool · Restaurant · View'],es:['Lo que se ve','Habitación · Alberca · Restaurante · Vista']},understood:{en:['What is understood','Stillness · Privacy · Ritual · Place'],es:['Lo que se entiende','Quietud · Privacidad · Ritual · Lugar']}};
-let lensState='visible';
-function renderLens(){const d=lensData[lensState][lang()];$('#lens-title').textContent=d[0];$('#lens-list').textContent=d[1];$('.lens').dataset.state=lensState;$$('[data-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lens===lensState)));}
-$$('[data-lens]').forEach(b=>b.addEventListener('click',()=>{lensState=b.dataset.lens;renderLens();}));
+  const progress = $('.progress i');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (progress) progress.style.transform = `scaleX(${max ? scrollY / max : 0})`;
+  }
+  addEventListener('scroll', updateProgress, { passive: true });
+  addEventListener('resize', updateProgress);
+  updateProgress();
 
-const compareData={property:{en:{reading:'Reading: the quality of the property itself',label:'Offer strength',a:['Stronger setting','More considered stay','Clearer sense of place'],b:['More ordinary offer','Less distinctive setting','Fewer memorable details']},es:{reading:'Lectura: la calidad de la propiedad en sí',label:'Solidez de la oferta',a:['Mejor entorno','Estancia más cuidada','Mayor sentido de lugar'],b:['Oferta más ordinaria','Entorno menos distintivo','Menos detalles memorables']},scores:{a:'88',b:'72'},lead:'a'},presentation:{en:{reading:'Reading: the strength of the first impression online',label:'Presentation strength',a:['Best images appear late','Repeated room coverage','Atmosphere left implicit'],b:['Clear opening sequence','Disciplined hierarchy','Distinct first impression']},es:{reading:'Lectura: la fuerza de la primera impresión en línea',label:'Solidez de la presentación',a:['Las mejores imágenes aparecen tarde','Cobertura repetitiva de habitaciones','La atmósfera queda implícita'],b:['Secuencia inicial clara','Jerarquía disciplinada','Primera impresión distintiva']},scores:{a:'58',b:'91'},lead:'b'}};
-let compareState='property';
-function renderCompare(){const base=compareData[compareState],d=base[lang()];$('#compare-reading').textContent=d.reading;['a','b'].forEach(k=>{$(`[data-score="${k}"]`).textContent=base.scores[k];$(`[data-score-label="${k}"]`).textContent=d.label;$(`[data-list="${k}"]`).innerHTML=d[k].map(x=>`<li>${x}</li>`).join('');$(`[data-card="${k}"]`).classList.toggle('lead',base.lead===k);$(`[data-card="${k}"] small`).textContent=(lang()==='es'?'Propiedad ':'Property ')+k.toUpperCase();});$$('[data-compare]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.compare===compareState)));}
-$$('[data-compare]').forEach(b=>b.addEventListener('click',()=>{compareState=b.dataset.compare;renderCompare();}));
+  const navTrack = $('.section-nav-track');
+  const navLinks = $$('.section-nav a');
+  $('.section-nav-next')?.addEventListener('click', () => {
+    navTrack?.scrollBy({ left: Math.max(220, innerWidth * .55), behavior: 'smooth' });
+  });
 
-$$('.review-trigger').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.review-item'),open=item.classList.contains('is-open');$$('.review-item').forEach(x=>{x.classList.remove('is-open');$('.review-trigger',x).setAttribute('aria-expanded','false');});if(!open){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}}));
+  function updateNav() {
+    let current = navLinks[0];
+    const offset = innerWidth <= 900 ? 122 : 136;
+    navLinks.forEach((link) => {
+      const section = $(link.getAttribute('href'));
+      if (section && section.getBoundingClientRect().top <= offset + 28) current = link;
+    });
+    navLinks.forEach((link) => {
+      const active = link === current;
+      link.classList.toggle('is-current', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 
-const reportData={en:[['Overall Read','How the property is currently understood, and where that understanding begins to lose clarity.'],['Score','A structured view of where the presentation is clear, consistent and recognizable.'],['Evidence','The specific assets, sequences, gaps and contradictions behind each finding.'],['Channels','How the website, listings, social presence and selected materials compare.'],['Priorities','What can be corrected now, what needs definition and what requires investment.'],['Next Scope','A clear recommendation for what should happen next.']],es:[['Lectura general','Cómo se entiende actualmente la propiedad y dónde esa lectura comienza a perder claridad.'],['Puntuación','Una lectura estructurada de dónde la presentación es clara, coherente y reconocible.'],['Evidencia','Los activos, secuencias, vacíos y contradicciones específicos detrás de cada hallazgo.'],['Canales','Cómo se comparan el sitio web, los listados, la presencia social y los materiales seleccionados.'],['Prioridades','Qué puede corregirse ahora, qué necesita definición y qué requiere inversión.'],['Siguiente alcance','Una recomendación clara sobre lo que debe ocurrir después.']]};
-const bars=[[72,88,58,82],[42,76,63,91,55,69],[82,24,66,38,92],[88,61,46,72],[100,74,48],[34,55,78,100]];let reportIndex=0;
-function renderReport(){const d=reportData[lang()][reportIndex];$('#report-title').textContent=d[0];$('#report-copy').textContent=d[1];$('#report-counter').textContent=(lang()==='es'?'Explora el informe ':'Explore the report ')+`${String(reportIndex+1).padStart(2,'0')} / 06`;$('#report-bars').innerHTML=bars[reportIndex].map((h,i)=>`<i style="height:${h}%;animation-delay:${i*.05}s"></i>`).join('');$$('[data-report]').forEach((b,i)=>b.setAttribute('aria-selected',String(i===reportIndex)));}
-$$('[data-report]').forEach((b,i)=>b.addEventListener('click',()=>{reportIndex=i;renderReport();}));
+  const lensData = {
+    visible: {
+      en: ['What the property shows', 'Room · Pool · Restaurant · View'],
+      es: ['Lo que muestra la propiedad', 'Habitación · Alberca · Restaurante · Vista']
+    },
+    understood: {
+      en: ['What the guest understands', 'Stillness · Privacy · Ritual · Place'],
+      es: ['Lo que entiende el huésped', 'Quietud · Privacidad · Ritual · Lugar']
+    }
+  };
+  let lensState = 'visible';
+  function renderLens() {
+    const data = lensData[lensState][lang()];
+    $('#lens-title').textContent = data[0];
+    $('#lens-list').textContent = data[1];
+    $('.lens').dataset.state = lensState;
+    $$('[data-lens]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.lens === lensState));
+    });
+  }
+  $$('[data-lens]').forEach((button) => {
+    button.addEventListener('click', () => {
+      lensState = button.dataset.lens;
+      renderLens();
+    });
+  });
 
-const modes={sharp:{en:{title:'Sharp',copy:'A concentrated review built around one defined question. Best suited to a smaller property or a specific decision.',mark:'One defined question',meta:[['Focus','One problem'],['Channels','Limited'],['Outcome','Clear next step']]},es:{title:'Sharp',copy:'Una revisión concentrada en una pregunta definida. Ideal para una propiedad más pequeña o una decisión específica.',mark:'Una pregunta definida',meta:[['Enfoque','Un problema'],['Canales','Limitados'],['Resultado','Siguiente paso claro']]}},exhaustive:{en:{title:'Exhaustive',copy:'A full reading of the property’s active presentation as one connected system.',mark:'The active system',meta:[['Focus','Full presentation'],['Channels','Several'],['Outcome','Connected priorities']]},es:{title:'Exhaustive',copy:'Una lectura completa de la presentación activa de la propiedad como un sistema conectado.',mark:'El sistema activo',meta:[['Enfoque','Presentación completa'],['Canales','Varios'],['Resultado','Prioridades conectadas']]}},catalyst:{en:{title:'Catalyst',copy:'A broader review for a property approaching renovation, repositioning, launch or significant investment.',mark:'A defining change',meta:[['Focus','Major decision'],['Channels','Current + planned'],['Outcome','Direction before investment']]},es:{title:'Catalyst',copy:'Una revisión más amplia para una propiedad que se acerca a una renovación, reposicionamiento, lanzamiento o inversión significativa.',mark:'Un cambio decisivo',meta:[['Enfoque','Decisión importante'],['Canales','Actuales + previstos'],['Resultado','Dirección antes de invertir']]}}};let mode='sharp';
-function renderMode(){const d=modes[mode][lang()];$('#mode-title').textContent=d.title;$('#mode-copy').textContent=d.copy;$('#mode-mark').textContent=d.mark;$('#mode-mark').classList.toggle('is-large',mode==='catalyst');$('#mode-meta').innerHTML=d.meta.map(x=>`<div><small>${x[0]}</small>${x[1]}</div>`).join('');$$('[data-mode]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mode===mode)));}
-$$('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;renderMode();}));
+  const compareData = {
+    property: {
+      en: {
+        reading: 'Comparing the stay itself',
+        label: 'Property strength',
+        a: 'Stronger stay',
+        b: 'Less distinctive stay'
+      },
+      es: {
+        reading: 'Comparando la estancia en sí',
+        label: 'Solidez de la propiedad',
+        a: 'Estancia más sólida',
+        b: 'Estancia menos distintiva'
+      },
+      scores: { a: '88', b: '72' },
+      lead: 'a'
+    },
+    presentation: {
+      en: {
+        reading: 'Comparing what appears on screen',
+        label: 'Presentation strength',
+        a: 'Harder to recognize',
+        b: 'Clearer first impression'
+      },
+      es: {
+        reading: 'Comparando lo que aparece en pantalla',
+        label: 'Solidez de la presentación',
+        a: 'Más difícil de reconocer',
+        b: 'Primera impresión más clara'
+      },
+      scores: { a: '58', b: '91' },
+      lead: 'b'
+    }
+  };
+  let compareState = 'property';
+  function renderCompare() {
+    const base = compareData[compareState];
+    const data = base[lang()];
+    $('#compare-reading').textContent = data.reading;
+    ['a', 'b'].forEach((key) => {
+      $(`[data-score="${key}"]`).textContent = base.scores[key];
+      $(`[data-score-label="${key}"]`).textContent = data.label;
+      $(`[data-summary="${key}"]`).textContent = data[key];
+      $(`[data-card="${key}"]`).classList.toggle('lead', base.lead === key);
+      $(`[data-card="${key}"] small`).textContent = (lang() === 'es' ? 'Propiedad ' : 'Property ') + key.toUpperCase();
+    });
+    $$('[data-compare]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.compare === compareState));
+    });
+  }
+  $$('[data-compare]').forEach((button) => {
+    button.addEventListener('click', () => {
+      compareState = button.dataset.compare;
+      renderCompare();
+    });
+  });
 
-$$('.faq-q').forEach(btn=>btn.addEventListener('click',()=>{const open=btn.getAttribute('aria-expanded')==='true';$$('.faq-q').forEach(x=>x.setAttribute('aria-expanded','false'));if(!open)btn.setAttribute('aria-expanded','true');}));
+  const translationData = {
+    room: {
+      en: ['A well-designed room.', 'The stillness, privacy and pace of the stay.'],
+      es: ['Una habitación bien diseñada.', 'La quietud, la privacidad y el ritmo de la estancia.']
+    },
+    dining: {
+      en: ['A restaurant and its food.', 'The ritual, mood and sense of occasion around them.'],
+      es: ['Un restaurante y su comida.', 'El ritual, el ambiente y el sentido de ocasión que los rodea.']
+    },
+    arrival: {
+      en: ['An entrance and a lobby.', 'The first feeling of being received by this particular place.'],
+      es: ['Una entrada y un lobby.', 'La primera sensación de ser recibido por este lugar en particular.']
+    }
+  };
+  let translationState = 'room';
+  function renderTranslation() {
+    const data = translationData[translationState][lang()];
+    $('#translation-visible').textContent = data[0];
+    $('#translation-understood').textContent = data[1];
+    $$('[data-translation]').forEach((button) => {
+      button.setAttribute('aria-selected', String(button.dataset.translation === translationState));
+    });
+  }
+  $$('[data-translation]').forEach((button) => {
+    button.addEventListener('click', () => {
+      translationState = button.dataset.translation;
+      renderTranslation();
+    });
+  });
 
-function updatePlaceholders(){$$('[data-en-placeholder][data-es-placeholder]').forEach(el=>el.placeholder=el.dataset[lang()+'Placeholder']);}
-const observer=new MutationObserver(()=>{renderLens();renderCompare();renderReport();renderMode();updatePlaceholders();});observer.observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+  function bindSingleOpenGroup(triggerSelector, itemSelector, openClass) {
+    $$(triggerSelector).forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest(itemSelector);
+        const wasOpen = item.classList.contains(openClass);
+        $$(itemSelector).forEach((entry) => {
+          entry.classList.remove(openClass);
+          $(triggerSelector, entry)?.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add(openClass);
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+  bindSingleOpenGroup('.review-trigger', '.review-item', 'is-open');
+  bindSingleOpenGroup('.audit-group-trigger', '.audit-group', 'is-open');
 
-const form=$('[data-aa-form]');
-const messages={en:{required:'Please complete the required fields.',sending:'Sending…',success:'Thank you. We’ll review the property before we reply.',error:'Something went wrong. Please try again or email hello@exif.studio.',send:'Send property details'},es:{required:'Completa los campos obligatorios.',sending:'Enviando…',success:'Gracias. Revisaremos la propiedad antes de responder.',error:'Algo salió mal. Intenta nuevamente o escribe a hello@exif.studio.',send:'Enviar datos de la propiedad'}};
-form?.addEventListener('submit',async e=>{e.preventDefault();const status=$('[data-form-status]',form),button=$('[type="submit"]',form),required=$$('[required]',form);let valid=true;required.forEach(f=>{const ok=f.checkValidity();f.setAttribute('aria-invalid',String(!ok));if(!ok)valid=false;});if(!valid){status.textContent=messages[lang()].required;status.className='form-status is-error';required.find(f=>!f.checkValidity())?.focus();return;}button.disabled=true;button.textContent=messages[lang()].sending;status.textContent='';try{const r=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!r.ok)throw new Error();form.reset();status.textContent=messages[lang()].success;status.className='form-status is-success';}catch(_){status.textContent=messages[lang()].error;status.className='form-status is-error';}finally{button.disabled=false;button.textContent=messages[lang()].send;}});
+  const reportData = {
+    en: [
+      ['Overall Read', 'How the property is currently understood, and where that understanding begins to lose clarity.'],
+      ['Score', 'A structured view of where the presentation is clear, consistent and recognizable.'],
+      ['Evidence', 'The specific assets, sequences, gaps and contradictions behind each finding.'],
+      ['Channels', 'How the website, listings, social presence and selected materials compare.'],
+      ['Priorities', 'What can be corrected now, what needs definition and what requires investment.'],
+      ['Next Scope', 'A clear recommendation for what should happen next.']
+    ],
+    es: [
+      ['Lectura general', 'Cómo se entiende actualmente la propiedad y dónde esa lectura comienza a perder claridad.'],
+      ['Puntuación', 'Una lectura estructurada de dónde la presentación es clara, coherente y reconocible.'],
+      ['Evidencia', 'Los activos, secuencias, vacíos y contradicciones específicos detrás de cada hallazgo.'],
+      ['Canales', 'Cómo se comparan el sitio web, los listados, la presencia social y los materiales seleccionados.'],
+      ['Prioridades', 'Qué puede corregirse ahora, qué necesita definición y qué requiere inversión.'],
+      ['Siguiente alcance', 'Una recomendación clara sobre lo que debe ocurrir después.']
+    ]
+  };
+  const bars = [[72,88,58,82],[42,76,63,91,55,69],[82,24,66,38,92],[88,61,46,72],[100,74,48],[34,55,78,100]];
+  let reportIndex = 0;
+  function renderReport() {
+    const data = reportData[lang()][reportIndex];
+    $('#report-title').textContent = data[0];
+    $('#report-copy').textContent = data[1];
+    $('#report-counter').textContent = (lang() === 'es' ? 'Explora el informe ' : 'Explore the report ') + `${String(reportIndex + 1).padStart(2, '0')} / 06`;
+    $('#report-bars').innerHTML = bars[reportIndex].map((height, index) => `<i style="height:${height}%;animation-delay:${index * .05}s"></i>`).join('');
+    $$('[data-report]').forEach((button, index) => button.setAttribute('aria-selected', String(index === reportIndex)));
+  }
+  $$('[data-report]').forEach((button, index) => {
+    button.addEventListener('click', () => {
+      reportIndex = index;
+      renderReport();
+    });
+  });
 
-renderLens();renderCompare();renderReport();renderMode();updatePlaceholders();
+  const modes = {
+    sharp: {
+      en: { title: 'Sharp', copy: 'A concentrated review built around one defined question. Best suited to a smaller property or a specific decision.', mark: 'One defined question', meta: [['Focus','One problem'],['Channels','Limited'],['Outcome','Clear next step']] },
+      es: { title: 'Sharp', copy: 'Una revisión concentrada en una pregunta definida. Ideal para una propiedad más pequeña o una decisión específica.', mark: 'Una pregunta definida', meta: [['Enfoque','Un problema'],['Canales','Limitados'],['Resultado','Siguiente paso claro']] }
+    },
+    exhaustive: {
+      en: { title: 'Exhaustive', copy: 'A full reading of the property’s active presentation as one connected system.', mark: 'The active system', meta: [['Focus','Full presentation'],['Channels','Several'],['Outcome','Connected priorities']] },
+      es: { title: 'Exhaustive', copy: 'Una lectura completa de la presentación activa de la propiedad como un sistema conectado.', mark: 'El sistema activo', meta: [['Enfoque','Presentación completa'],['Canales','Varios'],['Resultado','Prioridades conectadas']] }
+    },
+    catalyst: {
+      en: { title: 'Catalyst', copy: 'A broader review for a property approaching renovation, repositioning, launch or significant investment.', mark: 'A defining change', meta: [['Focus','Major decision'],['Channels','Current + planned'],['Outcome','Direction before investment']] },
+      es: { title: 'Catalyst', copy: 'Una revisión más amplia para una propiedad que se acerca a una renovación, reposicionamiento, lanzamiento o inversión significativa.', mark: 'Un cambio decisivo', meta: [['Enfoque','Decisión importante'],['Canales','Actuales + previstos'],['Resultado','Dirección antes de invertir']] }
+    }
+  };
+  let mode = 'sharp';
+  function renderMode() {
+    const data = modes[mode][lang()];
+    $('#mode-title').textContent = data.title;
+    $('#mode-copy').textContent = data.copy;
+    $('#mode-mark').textContent = data.mark;
+    $('#mode-mark').classList.toggle('is-large', mode === 'catalyst');
+    $('#mode-meta').innerHTML = data.meta.map((item) => `<div><small>${item[0]}</small>${item[1]}</div>`).join('');
+    $$('[data-mode]').forEach((button) => button.setAttribute('aria-selected', String(button.dataset.mode === mode)));
+  }
+  $$('[data-mode]').forEach((button) => {
+    button.addEventListener('click', () => {
+      mode = button.dataset.mode;
+      renderMode();
+    });
+  });
+
+  $$('.faq-q').forEach((button) => {
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      $$('.faq-q').forEach((entry) => entry.setAttribute('aria-expanded', 'false'));
+      if (!open) button.setAttribute('aria-expanded', 'true');
+    });
+  });
+
+  function updatePlaceholders() {
+    $$('[data-en-placeholder][data-es-placeholder]').forEach((element) => {
+      element.placeholder = element.dataset[lang() + 'Placeholder'];
+    });
+  }
+
+  const languageObserver = new MutationObserver(() => {
+    renderLens();
+    renderCompare();
+    renderTranslation();
+    renderReport();
+    renderMode();
+    updatePlaceholders();
+  });
+  languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+
+  const form = $('[data-aa-form]');
+  const messages = {
+    en: { required: 'Please complete the required fields.', sending: 'Sending…', success: 'Thank you. We’ll review the property before we reply.', error: 'Something went wrong. Please try again or email hello@exif.studio.', send: 'Send property details' },
+    es: { required: 'Completa los campos obligatorios.', sending: 'Enviando…', success: 'Gracias. Revisaremos la propiedad antes de responder.', error: 'Algo salió mal. Intenta nuevamente o escribe a hello@exif.studio.', send: 'Enviar datos de la propiedad' }
+  };
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = $('[data-form-status]', form);
+    const button = $('[type="submit"]', form);
+    const required = $$('[required]', form);
+    let valid = true;
+    required.forEach((field) => {
+      const ok = field.checkValidity();
+      field.setAttribute('aria-invalid', String(!ok));
+      if (!ok) valid = false;
+    });
+    if (!valid) {
+      status.textContent = messages[lang()].required;
+      status.className = 'form-status is-error';
+      required.find((field) => !field.checkValidity())?.focus();
+      return;
+    }
+    button.disabled = true;
+    button.textContent = messages[lang()].sending;
+    status.textContent = '';
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error();
+      form.reset();
+      status.textContent = messages[lang()].success;
+      status.className = 'form-status is-success';
+    } catch (_) {
+      status.textContent = messages[lang()].error;
+      status.className = 'form-status is-error';
+    } finally {
+      button.disabled = false;
+      button.textContent = messages[lang()].send;
+    }
+  });
+
+  renderLens();
+  renderCompare();
+  renderTranslation();
+  renderReport();
+  renderMode();
+  updatePlaceholders();
 })();
