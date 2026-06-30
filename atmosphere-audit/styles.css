@@ -136,3 +136,45 @@ html,body{overflow-x:clip}
   z-index:118!important;
   margin:0!important;
 }
+
+/* v23: force the cream local navigation to render above page content */
+.section-nav {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: var(--aa-nav) !important;
+  min-height: var(--aa-nav) !important;
+  background-color: var(--cream) !important;
+  color: var(--forest) !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid rgba(13,43,40,.16) !important;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+.section-nav-track {
+  display: flex !important;
+  align-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: 100% !important;
+  min-width: 0;
+}
+.section-nav a,
+.section-nav a:link,
+.section-nav a:visited {
+  display: inline-flex !important;
+  align-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: rgba(13,43,40,.62) !important;
+  background: transparent;
+}
+.section-nav a.is-current,
+.section-nav a:hover,
+.section-nav a:focus-visible {
+  color: var(--forest) !important;
+  background: rgba(26,61,58,.10) !important;
+}
+@media (max-width: 900px) {
+  :root { --aa-header: 70px; }
+}
