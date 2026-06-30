@@ -66,6 +66,11 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+const discrepancyConclusion = document.querySelector('.discrepancy-conclusion');
+const conclusionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+  if (entry.isIntersecting) { discrepancyConclusion?.classList.add('is-visible'); conclusionObserver.disconnect(); }
+}), { threshold: .5 });
+if (discrepancyConclusion) conclusionObserver.observe(discrepancyConclusion);
 
 const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
 const trackedSections = sectionLinks.map((link) => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
@@ -98,17 +103,37 @@ function updateCompareCopy() {
   image?.classList.toggle('image-screen', compareState === 'screen');
 }
 
-compare?.querySelectorAll('[data-compare-tab]').forEach((button) => {
-  button.addEventListener('click', () => {
-    compareState = button.dataset.compareTab;
+let compareSequencePlayed = false;
+let compareSequenceTimer;
+function setHomeCompare(state, animate = true) {
+  if (!compare) return;
+  compareState = state;
+  const stage = compare.querySelector('.compare-image');
+  const copy = compare.querySelector('.compare-copy');
+  if (animate) { stage?.classList.add('is-transitioning'); copy?.classList.add('is-transitioning'); }
+  window.setTimeout(() => {
     compare.querySelectorAll('[data-compare-tab]').forEach((tab) => {
-      const active = tab === button;
+      const active = tab.dataset.compareTab === state;
       tab.classList.toggle('is-active', active);
+      tab.classList.toggle('is-pulsing', active && animate);
       tab.setAttribute('aria-selected', String(active));
     });
     updateCompareCopy();
-  });
+    stage?.classList.remove('is-transitioning'); copy?.classList.remove('is-transitioning');
+    window.setTimeout(() => compare.querySelectorAll('[data-compare-tab]').forEach(tab => tab.classList.remove('is-pulsing')), 800);
+  }, animate ? 220 : 0);
+}
+compare?.querySelectorAll('[data-compare-tab]').forEach((button) => {
+  button.addEventListener('click', () => { clearTimeout(compareSequenceTimer); setHomeCompare(button.dataset.compareTab, true); });
 });
+const homeCompareObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+  if (!entry.isIntersecting || compareSequencePlayed) return;
+  compareSequencePlayed = true;
+  setHomeCompare('person', true);
+  compareSequenceTimer = window.setTimeout(() => setHomeCompare('screen', true), 1900);
+  homeCompareObserver.disconnect();
+}), { threshold: .42 });
+if (compare) homeCompareObserver.observe(compare);
 
 const channelReader = document.querySelector('[data-channel-reader]');
 let channelState = 'website';
@@ -120,17 +145,37 @@ function updateChannelCopy() {
   if (copy) copy.textContent = copy.dataset[`${channelState}${lang === 'en' ? 'En' : 'Es'}`];
 }
 
-channelReader?.querySelectorAll('[data-channel-tab]').forEach((button) => {
-  button.addEventListener('click', () => {
-    channelState = button.dataset.channelTab;
+let channelSequencePlayed = false;
+let channelSequenceTimers = [];
+function setHomeChannel(state, animate = true) {
+  if (!channelReader) return;
+  channelState = state;
+  const result = channelReader.querySelector('.channel-result');
+  if (animate) result?.classList.add('is-transitioning');
+  window.setTimeout(() => {
     channelReader.querySelectorAll('[data-channel-tab]').forEach((tab) => {
-      const active = tab === button;
+      const active = tab.dataset.channelTab === state;
       tab.classList.toggle('is-active', active);
+      tab.classList.toggle('is-pulsing', active && animate);
       tab.setAttribute('aria-selected', String(active));
     });
     updateChannelCopy();
-  });
+    result?.classList.remove('is-transitioning');
+    window.setTimeout(() => channelReader.querySelectorAll('[data-channel-tab]').forEach(tab => tab.classList.remove('is-pulsing')), 800);
+  }, animate ? 200 : 0);
+}
+channelReader?.querySelectorAll('[data-channel-tab]').forEach((button) => {
+  button.addEventListener('click', () => { channelSequenceTimers.forEach(clearTimeout); setHomeChannel(button.dataset.channelTab, true); });
 });
+const channelObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+  if (!entry.isIntersecting || channelSequencePlayed) return;
+  channelSequencePlayed = true;
+  setHomeChannel('website', true);
+  channelSequenceTimers.push(window.setTimeout(() => setHomeChannel('ota', true), 1550));
+  channelSequenceTimers.push(window.setTimeout(() => setHomeChannel('social', true), 3100));
+  channelObserver.disconnect();
+}), { threshold: .42 });
+if (channelReader) channelObserver.observe(channelReader);
 
 const faqItems = [...document.querySelectorAll('.faq-list details')];
 faqItems.forEach((item) => {

@@ -757,3 +757,13 @@ body.menu-open .section-nav {
   .closing-section footer{grid-template-columns:1fr;gap:14px}
   .closing-section footer span:nth-child(2),.closing-section footer span:last-child{text-align:left}
 }
+
+/* Guided homepage interactions */
+.compare-tab.is-pulsing,.channel-tab.is-pulsing{animation:homeSoftPulse .75s ease}
+.compare-image.is-transitioning,.channel-result.is-transitioning{opacity:.28;transform:translateY(5px)}
+.compare-image,.channel-result{transition:opacity .32s ease,transform .32s ease}
+.discrepancy-conclusion{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.discrepancy-conclusion.is-visible{opacity:1;transform:none}
+.channel-tab{position:relative}
+@keyframes homeSoftPulse{0%,100%{box-shadow:inset 0 0 0 0 rgba(139,175,136,0)}50%{box-shadow:inset 0 0 0 3px rgba(139,175,136,.38)}}
+@media(prefers-reduced-motion:reduce){.compare-tab.is-pulsing,.channel-tab.is-pulsing{animation:none}.compare-image,.channel-result,.discrepancy-conclusion{transition:none}.discrepancy-conclusion{opacity:1;transform:none}}
