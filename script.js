@@ -77,6 +77,19 @@ if (discrepancyConclusion) conclusionObserver.observe(discrepancyConclusion);
 const sectionLinks = [...document.querySelectorAll('[data-section-link]')];
 const trackedSections = sectionLinks.map((link) => document.getElementById(link.dataset.sectionLink)).filter(Boolean);
 
+const homeNavTrack = document.querySelector('[data-home-nav-track]');
+const homeNavNext = document.querySelector('[data-home-nav-next]');
+let lastCenteredSection = null;
+
+function centerHomeNavLink(link) {
+  if (!homeNavTrack || !link) return;
+  const target = link.offsetLeft - (homeNavTrack.clientWidth - link.offsetWidth) / 2;
+  homeNavTrack.scrollTo({
+    left: Math.max(0, target),
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+}
+
 function updateActiveSection() {
   const headerHeight = header?.offsetHeight || 70;
   let current = trackedSections[0]?.id;
@@ -84,7 +97,18 @@ function updateActiveSection() {
     if (section.getBoundingClientRect().top <= headerHeight + 86) current = section.id;
   });
   sectionLinks.forEach((link) => link.classList.toggle('active', link.dataset.sectionLink === current));
+  if (current && current !== lastCenteredSection) {
+    lastCenteredSection = current;
+    centerHomeNavLink(sectionLinks.find((link) => link.dataset.sectionLink === current));
+  }
 }
+
+homeNavNext?.addEventListener('click', () => {
+  homeNavTrack?.scrollBy({
+    left: Math.max(180, window.innerWidth * 0.5),
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+});
 
 updateActiveSection();
 window.addEventListener('scroll', updateActiveSection, { passive: true });

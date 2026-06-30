@@ -842,3 +842,75 @@ svg {
 @media (max-width: 900px) {
   .section-nav { top: 74px !important; }
 }
+
+
+/* v20: stable comparison height and Atmosphere-style forest navigation */
+.section-nav{
+  display:flex!important;
+  align-items:stretch;
+  justify-content:stretch;
+  height:44px;
+  padding:0;
+  gap:0;
+  background:var(--forest)!important;
+  border-top:1px solid rgba(242,232,220,.12)!important;
+  border-bottom:1px solid rgba(242,232,220,.18)!important;
+  backdrop-filter:none;
+  overflow:hidden;
+}
+.section-nav-track{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:1;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  padding:6px max(20px,calc((100vw - 1380px)/2));
+  cursor:grab;
+  touch-action:pan-x;
+}
+.section-nav-track:active{cursor:grabbing}
+.section-nav-track::-webkit-scrollbar{display:none}
+.section-nav a{
+  flex:0 0 auto;
+  padding:8px 13px;
+  color:rgba(242,232,220,.62)!important;
+  background:transparent!important;
+  white-space:nowrap;
+}
+.section-nav a.active,.section-nav a:hover{
+  color:var(--cream)!important;
+  background:rgba(242,232,220,.11)!important;
+}
+.section-nav-next{
+  flex:0 0 46px;
+  width:46px;
+  border:0;
+  border-left:1px solid rgba(242,232,220,.16);
+  background:var(--forest);
+  color:var(--cream);
+  cursor:pointer;
+  font-size:16px;
+}
+.compare-stage{height:620px;min-height:620px}
+.compare-image{height:100%;min-height:0}
+.compare-copy{height:100%;min-height:0;overflow:hidden}
+.compare-copy p{min-height:3.2em}
+.compare-copy span{min-height:3.2em}
+@media(max-width:900px){
+  .compare-stage{height:auto;min-height:0}
+  .compare-image{height:520px;min-height:520px}
+  .compare-copy{height:auto;min-height:285px;justify-content:flex-end}
+  .compare-copy p{min-height:3.3em}
+  .compare-copy span{min-height:3.2em}
+}
+@media(max-width:560px){
+  .compare-image{height:390px;min-height:390px}
+  .compare-copy{min-height:270px}
+  .compare-copy p{min-height:4.2em}
+  .compare-copy span{min-height:4.6em}
+  .section-nav-track{padding-left:14px;padding-right:14px}
+}
