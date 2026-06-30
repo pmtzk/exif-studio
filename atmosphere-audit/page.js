@@ -40,7 +40,7 @@ function applyCompareState(state){
 function renderCompare(state,animate=false){
   clearCompareTimers();applyCompareState(state);
   if(!animate||reduced){$$('[data-card]').forEach(c=>{c.classList.remove('is-waiting');c.classList.add('is-revealed')});return}
-  resetCards();compareTimers.push(setTimeout(()=>revealCard('a'),220));compareTimers.push(setTimeout(()=>revealCard('b'),1050));compareTimers.push(setTimeout(()=>$$('[data-compare]').forEach(b=>b.classList.remove('is-pulsing')),900));
+  resetCards();const secondDelay=state==='online'?220:1050;compareTimers.push(setTimeout(()=>revealCard('a'),220));compareTimers.push(setTimeout(()=>revealCard('b'),secondDelay));compareTimers.push(setTimeout(()=>$$('[data-compare]').forEach(b=>b.classList.remove('is-pulsing')),900));
 }
 function revealComparisonQuestion(){ $('[data-comparison-question]')?.classList.add('is-visible'); }
 $$('[data-compare]').forEach(b=>b.addEventListener('click',()=>{clearCompareTimers();renderCompare(b.dataset.compare,true);revealComparisonQuestion()}));
