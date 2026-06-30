@@ -1,7 +1,7 @@
 :root{--aa-header:84px;--aa-nav:46px}
-.site-header{background:rgba(242,232,220,.96)!important;color:var(--ink)!important;border-bottom:1px solid rgba(13,43,40,.12);backdrop-filter:blur(16px)}
+.site-header{background:var(--cream)!important;color:var(--ink)!important;border-bottom:1px solid rgba(13,43,40,.12);backdrop-filter:blur(16px)}
 .progress{position:fixed;top:var(--aa-header);left:0;right:0;height:2px;z-index:105;background:rgba(26,61,58,.12);pointer-events:none}.progress i{display:block;height:100%;background:var(--forest);transform:scaleX(0);transform-origin:left}
-.section-nav{position:fixed;top:calc(var(--aa-header) + 2px);left:0;right:0;z-index:104;height:var(--aa-nav);background:rgba(242,232,220,.97);border-bottom:1px solid var(--line);display:flex;align-items:center;overflow:hidden;backdrop-filter:blur(16px)}
+.section-nav{position:fixed;top:calc(var(--aa-header) + 2px);left:0;right:0;z-index:104;height:var(--aa-nav);background:var(--cream);border-bottom:1px solid var(--line);display:flex;align-items:center;overflow:hidden;backdrop-filter:blur(16px)}
 .section-nav-track{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:6px max(20px,calc((100vw - 1380px)/2));width:100%;cursor:grab;touch-action:pan-x}.section-nav-track:active{cursor:grabbing}.section-nav-track::-webkit-scrollbar{display:none}.section-nav a{flex:0 0 auto;text-decoration:none;padding:8px 13px;border-radius:999px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(13,43,40,.54);white-space:nowrap}.section-nav a.is-current{background:rgba(26,61,58,.09);color:var(--forest)}
 .aa-shell{width:var(--page);margin:auto}.aa-kicker{margin:0 0 18px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--forest)}
 .aa-hero{min-height:100svh;padding:calc(var(--aa-header) + var(--aa-nav) + 110px) 0 100px;display:flex;align-items:center;background:var(--cream);color:var(--ink)}.aa-hero-copy{max-width:1180px}.aa-hero h1{max-width:1160px;margin:0;font-family:var(--serif);font-size:clamp(58px,8.5vw,136px);font-weight:300;line-height:.9;letter-spacing:-.052em}.aa-hero-copy>p:last-child{max-width:620px;margin:38px 0 0;font-size:18px;line-height:1.65;color:#596b65}
@@ -110,3 +110,6 @@ canvas,
 svg {
   max-width: 100%;
 }
+
+/* v21: fully opaque cream header and local navigation */
+.site-header,.section-nav{background:var(--cream)!important;}
