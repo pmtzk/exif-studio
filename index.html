@@ -16,7 +16,7 @@
   <meta name="twitter:description" content="A study of how hospitality properties are perceived and compared before guests arrive." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root{
       --paper:#F1EBDF;
@@ -25,8 +25,8 @@
       --meta:#6E6759;
       --line:rgba(13,42,34,.16);
       --line-inv:rgba(241,235,223,.24);
-      --serif:"Instrument Serif", Georgia, serif;
-      --sans:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+      --serif:"Libre Caslon Display", Georgia, serif;
+      --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
       --ease:cubic-bezier(.22,.61,.21,1);
       --pad:clamp(20px,4.5vw,64px);
     }
@@ -37,7 +37,7 @@
     a{color:inherit;text-decoration:none}
     button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-    h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.01em}
+    h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.018em}
     p{margin:0}
     .k{font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--meta)}
     .num{font-size:.68rem;font-weight:500;letter-spacing:.15em;color:var(--meta)}
@@ -45,7 +45,7 @@
     .skip:focus{top:16px}
 
     .header{position:fixed;top:0;left:0;right:0;z-index:90;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(241,235,223,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
-    .brand{font-family:var(--serif);font-size:1.4rem}
+    .brand{font-family:var(--serif);font-size:1.42rem;letter-spacing:-.025em}
     .nav-desktop{display:none;gap:32px}
     .nav-desktop a{font-size:.72rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .25s ease}
     .nav-desktop a:hover{border-bottom-color:var(--green)}
@@ -61,7 +61,10 @@
     .menu{position:fixed;inset:0;z-index:120;background:var(--green);color:var(--paper);padding:calc(18px + env(safe-area-inset-top)) var(--pad) calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
     .menu.open{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
     .menu-top{display:flex;justify-content:space-between;align-items:center;height:42px}
-    .menu-close{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:12px 0 12px 12px}
+    .menu-close{position:relative;width:44px;height:44px;margin-right:-10px;display:grid;place-items:center}
+    .menu-close::before,.menu-close::after{content:"";position:absolute;width:22px;height:1.5px;background:currentColor}
+    .menu-close::before{transform:rotate(45deg)}
+    .menu-close::after{transform:rotate(-45deg)}
     .menu-list{list-style:none;margin:0;padding:0;align-self:stretch}
     .menu-list a{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-top:1px solid var(--line-inv);font-family:var(--serif);font-size:clamp(2.4rem,9vw,4.6rem);line-height:1}
     .menu-list li:last-child a{border-bottom:1px solid var(--line-inv)}
@@ -76,7 +79,7 @@
     .m1-sticky{position:relative;min-height:calc(100vh - 124px);overflow:hidden;display:flex;flex-direction:column;padding:0;transform:translateZ(0);backface-visibility:hidden}
     .m1.no-fx .m1-sticky{position:relative;min-height:auto;padding-bottom:0}
     .m1-head{position:relative;z-index:3;max-width:1200px}
-    .m1-head h1{font-size:clamp(2.7rem,7.4vw,6.6rem);line-height:.98;max-width:15ch}
+    .m1-head h1{font-size:clamp(2.7rem,7.1vw,6.35rem);line-height:.99;max-width:15.5ch}
     .m1-head h1 em{font-style:italic}
     .m1-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(16px,2.5vh,26px)}
     .m1-sub p{max-width:44ch;font-size:clamp(.95rem,1.2vw,1.1rem);font-weight:300;line-height:1.5}
@@ -102,7 +105,7 @@
       .m1-slot.s1{left:49%}.m1-slot.s2{left:75%}
     }
 
-    .m2{padding:clamp(64px,11vh,120px) var(--pad) clamp(56px,9vh,100px);position:relative}
+    .m2{padding:clamp(76px,13vh,138px) var(--pad) clamp(66px,10vh,112px);position:relative}
     .m2 h2{font-size:clamp(1.9rem,4.4vw,3.9rem);line-height:1.02;max-width:24ch}
     .ch-tabs{display:flex;gap:clamp(18px,3vw,40px);margin-top:clamp(26px,4vh,44px);border-bottom:1px solid var(--line)}
     html:not(.js) .ch-tabs{display:none}
@@ -122,18 +125,18 @@
     .ch-copy .st{font-family:var(--serif);font-size:clamp(1.5rem,2.7vw,2.5rem);line-height:1.06;max-width:19ch}
     .ch-copy .cm{display:flex;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--meta)}
     .cv-site{height:clamp(300px,56vh,560px);overflow:hidden;box-shadow:0 26px 60px rgba(13,42,34,.14)}
-    .cv-site img{width:100%;height:100%;object-fit:cover;filter:saturate(.84)}
+    .cv-site img{width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.72) contrast(.98)}
     .cv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     .cv-cell{display:flex;flex-direction:column;gap:9px}
     .cv-cell .ph,.cv-cell .im{height:clamp(120px,22vh,210px);border:1px solid var(--line);overflow:hidden}
-    .cv-cell .im img{width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.8)}
+    .cv-cell .im img{width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.7) contrast(.98)}
     .cv-cell .ph{background:rgba(183,176,162,.3)}
     .cv-cell .dims{display:flex;justify-content:space-between;font-size:.6rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--meta)}
     .cv-reel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
     .cv-reel figure{margin:0;overflow:hidden;height:clamp(220px,40vh,420px)}
     .cv-reel figure:nth-child(2){transform:translateY(18px)}
     .cv-reel figure:nth-child(3){transform:translateY(36px)}
-    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.84)}
+    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98)}
     .cv-reel .p1 img{object-position:18% 50%}.cv-reel .p2 img{object-position:50% 40%}.cv-reel .p3 img{object-position:82% 55%}
     @media(min-width:900px){.ch-state{grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,64px);align-items:end}}
     @media(max-width:520px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid .c3{display:none}.cv-reel{gap:8px}.cv-reel figure{height:180px}}
@@ -148,7 +151,7 @@
     .m3.in .w b{transform:translateY(0);transition:transform .7s var(--ease)}
     .m3.in .w:nth-child(2) b{transition-delay:.05s}.m3.in .w:nth-child(3) b{transition-delay:.1s}.m3.in .w:nth-child(4) b{transition-delay:.15s}.m3.in .w:nth-child(5) b{transition-delay:.2s}.m3.in .w:nth-child(6) b{transition-delay:.25s}.m3.in .w:nth-child(7) b{transition-delay:.3s}.m3.in .w:nth-child(8) b{transition-delay:.35s}.m3.in .w:nth-child(9) b{transition-delay:.4s}
 
-    .m4{background:rgba(183,176,162,.34);padding:clamp(64px,11vh,120px) var(--pad)}
+    .m4{background:rgba(183,176,162,.28);padding:clamp(72px,12vh,128px) var(--pad)}
     .m4-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
     .m4-head h2{font-size:clamp(2.1rem,4.6vw,4rem);line-height:1}
     .m4-head .side{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline}
@@ -243,7 +246,7 @@
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 </header>
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
-  <div class="menu-top"><span class="brand">EXIF.</span><button class="menu-close" id="menuClose">Close</button></div>
+  <div class="menu-top"><span class="brand">EXIF.</span><button class="menu-close" id="menuClose" aria-label="Close menu"></button></div>
   <nav aria-label="Main, mobile"><ul class="menu-list">
     <li><a href="/"><span>01</span>Home</a></li><li><a href="/observations/"><span>02</span>Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span>Atmosphere Audit</a></li><li><a href="#about"><span>04</span>About</a></li><li><a href="#contact"><span>05</span>Contact</a></li>
   </ul></nav>
@@ -266,9 +269,9 @@
       <button class="ch-tab" role="tab" id="tabS" aria-selected="false" aria-controls="stS" tabindex="-1" type="button">Social<span class="ct">03</span></button>
     </div>
     <div class="ch-stage">
-      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/website.jpg" alt="Property presented full width on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">Room to build a point of view.</p><p class="cm"><span>Narrative</span><span>Context</span><span>Sequence</span></p></div></div>
-      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO"><div class="ch-visual"><div class="cv-grid"><div class="cv-cell c1"><div class="im"><img src="/website.jpg" alt="The property reduced to one framed image inside a listing grid" width="600" height="450" /></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c2" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c3" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div></div></div><div class="ch-copy"><p class="st">A handful of images inside a grid of alternatives.</p><p class="cm"><span>Less time</span><span>Less space</span><span>Direct comparison</span></p></div></div>
-      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS"><div class="ch-visual"><div class="cv-reel"><figure class="p1"><img src="/website.jpg" alt="Detail of the property cropped for a social feed" width="500" height="700" /></figure><figure class="p2" aria-hidden="true"><img src="/website.jpg" alt="" width="500" height="700" /></figure><figure class="p3" aria-hidden="true"><img src="/website.jpg" alt="" width="500" height="700" /></figure></div></div><div class="ch-copy"><p class="st">Signals repeated until the place feels familiar.</p><p class="cm"><span>Repetition</span><span>Familiarity</span></p></div></div>
+      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/reset.jpg" alt="The same hospitality property presented on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">Room to build a point of view.</p><p class="cm"><span>Narrative</span><span>Context</span><span>Sequence</span></p></div></div>
+      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO"><div class="ch-visual"><div class="cv-grid"><div class="cv-cell c1"><div class="im"><img src="/reset.jpg" alt="The same hospitality property reduced to one framed image inside a listing grid" width="600" height="450" /></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c2" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c3" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div></div></div><div class="ch-copy"><p class="st">A handful of images inside a grid of alternatives.</p><p class="cm"><span>Less time</span><span>Less space</span><span>Direct comparison</span></p></div></div>
+      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS"><div class="ch-visual"><div class="cv-reel"><figure class="p1"><img src="/reset.jpg" alt="The same hospitality property cropped for a social feed" width="500" height="700" /></figure><figure class="p2" aria-hidden="true"><img src="/reset.jpg" alt="" width="500" height="700" /></figure><figure class="p3" aria-hidden="true"><img src="/reset.jpg" alt="" width="500" height="700" /></figure></div></div><div class="ch-copy"><p class="st">Signals repeated until the place feels familiar.</p><p class="cm"><span>Repetition</span><span>Familiarity</span></p></div></div>
     </div>
   </section>
 
