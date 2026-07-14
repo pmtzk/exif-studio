@@ -46,7 +46,12 @@
 
     .header{position:fixed;top:0;left:0;right:0;z-index:140;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(241,235,223,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
     .brand{font-family:var(--serif);font-size:1.42rem;letter-spacing:-.025em}
-    .nav-desktop{display:none;gap:32px}
+    .nav-desktop{display:none;gap:32px;align-items:center}
+
+    .lang-switch{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--meta)}
+    .header.menu-open .lang-switch{color:rgba(241,235,223,.72)}
+    .menu .lang-switch{color:rgba(241,235,223,.72)}
+
     .nav-desktop a{font-size:.72rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .25s ease}
     .nav-desktop a:hover{border-bottom-color:var(--green)}
     .menu-btn{width:44px;height:44px;margin-right:-10px;display:grid;place-items:center}
@@ -128,29 +133,26 @@
     .ch-copy .cm{display:flex;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--meta)}
     .cv-site{height:clamp(300px,56vh,560px);overflow:hidden;box-shadow:0 26px 60px rgba(13,42,34,.14)}
     .cv-site img{width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:saturate(.78) contrast(.98)}
-    .cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    .cv-listing{border:1px solid var(--line);background:rgba(241,235,223,.72);padding:8px;display:grid;gap:9px;min-width:0}
-    .cv-listing.primary{background:var(--paper);box-shadow:0 16px 34px rgba(13,42,34,.10)}
-    .cv-listing .listing-image{aspect-ratio:4/3;overflow:hidden;background:rgba(183,176,162,.28)}
-    .cv-listing .listing-image img{width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:saturate(.76) contrast(.98)}
-    .cv-listing.alt .listing-image{position:relative}
-    .cv-listing.alt .listing-image::before,
-    .cv-listing.alt .listing-image::after{content:"";position:absolute;background:rgba(13,42,34,.09)}
-    .cv-listing.alt .listing-image::before{inset:18% 16% 42%}
-    .cv-listing.alt .listing-image::after{left:16%;right:38%;bottom:18%;height:1px}
-    .listing-copy{display:grid;gap:6px}
-    .listing-place{font-family:var(--serif);font-size:clamp(.9rem,2.5vw,1.08rem);line-height:1}
-    .listing-data{display:flex;justify-content:space-between;gap:8px;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--meta)}
-    .listing-rule{height:1px;background:var(--line);width:68%}
-    .cv-reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start}
-    .cv-reel figure{position:relative;margin:0;overflow:hidden;height:clamp(230px,42vh,430px);background:rgba(183,176,162,.24)}
-    .cv-reel figure:nth-child(2){transform:translateY(20px)}
-    .cv-reel figure:nth-child(3){transform:translateY(40px)}
-    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98);transform:scale(1.08)}
-    .cv-reel .p1 img{object-position:12% 52%;transform:scale(1.28)}
-    .cv-reel .p2 img{object-position:52% 60%;transform:scale(1.38)}
-    .cv-reel .p3 img{object-position:90% 46%;transform:scale(1.3)}
-    .fragment-label{position:absolute;left:10px;bottom:10px;font-size:.56rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--paper);text-shadow:0 1px 12px rgba(13,42,34,.55)}
+    .cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .cv-listing{border:1px solid var(--line);background:rgba(241,235,223,.62);padding:7px;display:grid;gap:7px;min-width:0}
+    .cv-listing .listing-image{aspect-ratio:4/3;overflow:hidden;background:rgba(183,176,162,.22)}
+    .cv-listing .listing-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98)}
+    .cv-listing.primary{background:var(--paper)}
+    .cv-listing.primary .listing-image img{object-position:center 52%}
+    .cv-listing.a2 .listing-image img{object-position:center 44%}
+    .cv-listing.a3 .listing-image img{object-position:center 58%}
+    .cv-listing.a4 .listing-image img{object-position:center 48%}
+    .listing-data{display:flex;justify-content:space-between;gap:8px;padding-top:2px;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--meta)}
+    .cv-reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:start}
+    .cv-reel figure{margin:0;overflow:hidden;height:clamp(230px,42vh,430px);background:rgba(183,176,162,.24)}
+    .cv-reel figure:nth-child(2){transform:translateY(22px)}
+    .cv-reel figure:nth-child(3){transform:translateY(44px)}
+    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.76) contrast(.98)}
+    .cv-reel .p1 img{object-position:10% 52%;transform:scale(1.34)}
+    .cv-reel .p2 img{object-position:50% 62%;transform:scale(1.48)}
+    .cv-reel .p3 img{object-position:92% 46%;transform:scale(1.34)}
+    .ch-state.visual-only{display:block}
+    .ch-state.visual-only .ch-visual{width:100%}
     @media(min-width:900px){.ch-state{grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,64px);align-items:end}}
     @media(max-width:520px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid .c3{display:none}.cv-reel{gap:8px}.cv-reel figure{height:180px}}
 
@@ -197,7 +199,7 @@
     .ax p{font-family:var(--serif);font-size:1.18rem;line-height:1.1;color:var(--green)}
     .m5-audit{position:relative}
     .m5-fig{height:clamp(300px,50vh,540px);overflow:hidden;margin-left:clamp(0px,6vw,90px)}
-    .m5-fig img{width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:saturate(.82) contrast(.99)}
+    .m5-fig img{width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.84) contrast(.99)}
     .m5-panel{position:relative;margin:-72px clamp(0px,4vw,60px) 0 0;max-width:640px;background:var(--paper);border:1px solid var(--line);padding:clamp(22px,3vw,36px);box-shadow:0 26px 58px rgba(13,42,34,.14)}
     .m5-panel h3{font-size:clamp(1.9rem,3.6vw,3rem);line-height:.98}
     .m5-panel .ai{margin-top:14px;font-weight:300;max-width:46ch}
@@ -253,7 +255,7 @@
 <header class="header">
   <a class="brand" href="/" aria-label="EXIF home">EXIF.</a>
   <nav class="nav-desktop" aria-label="Main">
-    <a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="#about">About</a><a href="#contact">Contact</a>
+    <a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="#about">About</a><a href="#contact">Contact</a><span class="lang-switch" aria-label="Language"><span aria-current="page">EN</span><span>•</span><span>ES</span></span>
   </nav>
   <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span class="b"></span></button>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
@@ -263,7 +265,7 @@
   <nav aria-label="Main, mobile"><ul class="menu-list">
     <li><a href="/"><span>01</span>Home</a></li><li><a href="/observations/"><span>02</span>Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span>Atmosphere Audit</a></li><li><a href="#about"><span>04</span>About</a></li><li><a href="#contact"><span>05</span>Contact</a></li>
   </ul></nav>
-  <div class="menu-foot"><span>Mexico · The Caribbean · Worldwide</span><a href="mailto:hello@exif.studio">hello@exif.studio</a></div>
+  <div class="menu-foot"><span>Mexico · The Caribbean · Worldwide</span><span class="lang-switch" aria-label="Language"><span aria-current="page">EN</span><span>•</span><span>ES</span></span><a href="mailto:hello@exif.studio">hello@exif.studio</a></div>
 </div>
 <main id="main">
   <section class="m1" id="m1" aria-label="Opening">
@@ -275,48 +277,51 @@
 
   <section class="m2" aria-labelledby="m2t">
     <p class="mk"><span class="num">02</span></p>
-    <h2 id="m2t" class="rv">The property stays the same. The conditions of viewing do not.</h2>
+    <h2 id="m2t" class="rv">The property stays the same.</h2>
     <div class="ch-tabs" role="tablist" aria-label="Where the property is viewed">
       <button class="ch-tab" role="tab" id="tabW" aria-selected="true" aria-controls="stW" type="button">Website<span class="ct">01</span></button>
       <button class="ch-tab" role="tab" id="tabO" aria-selected="false" aria-controls="stO" tabindex="-1" type="button">OTA<span class="ct">02</span></button>
       <button class="ch-tab" role="tab" id="tabS" aria-selected="false" aria-controls="stS" tabindex="-1" type="button">Social<span class="ct">03</span></button>
     </div>
     <div class="ch-stage">
-      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/website.jpg" alt="The same hospitality property presented on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">The place held in full context.</p><p class="cm"><span>Scale</span><span>Context</span><span>Sequence</span></p></div></div>
-      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO">
-        <div class="ch-visual">
-          <div class="cv-grid" aria-label="The property shown among comparable listings">
-            <article class="cv-listing primary">
-              <div class="listing-image"><img src="/website.jpg" alt="The property reduced to one listing image among alternatives" width="640" height="480" /></div>
-              <div class="listing-copy"><span class="listing-place">The property</span><span class="listing-rule"></span><div class="listing-data"><span>$280</span><span>4.9</span></div></div>
-            </article>
-            <article class="cv-listing alt" aria-hidden="true">
-              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$245</span><span>4.8</span></div></div>
-            </article>
-            <article class="cv-listing alt" aria-hidden="true">
-              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$310</span><span>4.9</span></div></div>
-            </article>
-            <article class="cv-listing alt" aria-hidden="true">
-              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$270</span><span>4.7</span></div></div>
-            </article>
+      <div class="ch-state visual-only" id="stW" role="tabpanel" aria-labelledby="tabW">
+        <div class="ch-visual rv rv-fig">
+          <div class="cv-site">
+            <img src="/website.jpg" alt="The property shown with room for context and sequence" width="1400" height="900" />
           </div>
-        </div>
-        <div class="ch-copy">
-          <p class="st">One property inside a field of alternatives.</p>
-          <p class="cm"><span>Same scale</span><span>Shared dimensions</span><span>Direct comparison</span></p>
         </div>
       </div>
-      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS">
+
+      <div class="ch-state visual-only" id="stO" role="tabpanel" aria-labelledby="tabO">
         <div class="ch-visual">
-          <div class="cv-reel" aria-label="Fragments of the same property repeated as social signals">
-            <figure class="p1"><img src="/website.jpg" alt="A detail cropped from the same property image" width="500" height="700" /><span class="fragment-label">Setting</span></figure>
-            <figure class="p2"><img src="/website.jpg" alt="A second detail cropped from the same property image" width="500" height="700" /><span class="fragment-label">Presence</span></figure>
-            <figure class="p3"><img src="/website.jpg" alt="A third detail cropped from the same property image" width="500" height="700" /><span class="fragment-label">Form</span></figure>
+          <div class="cv-grid" aria-label="Four properties shown at equal scale">
+            <article class="cv-listing primary">
+              <div class="listing-image"><img src="/website.jpg" alt="The property shown as one listing among alternatives" width="640" height="480" /></div>
+              <div class="listing-data"><span>$280</span><span>4.9</span></div>
+            </article>
+            <article class="cv-listing a2" aria-hidden="true">
+              <div class="listing-image"><img src="/ota.jpg" alt="" width="640" height="480" /></div>
+              <div class="listing-data"><span>$245</span><span>4.8</span></div>
+            </article>
+            <article class="cv-listing a3" aria-hidden="true">
+              <div class="listing-image"><img src="/social.jpg" alt="" width="640" height="480" /></div>
+              <div class="listing-data"><span>$310</span><span>4.9</span></div>
+            </article>
+            <article class="cv-listing a4" aria-hidden="true">
+              <div class="listing-image"><img src="/in-person.jpg" alt="" width="640" height="480" /></div>
+              <div class="listing-data"><span>$270</span><span>4.7</span></div>
+            </article>
           </div>
         </div>
-        <div class="ch-copy">
-          <p class="st">Fragments repeated until the place feels familiar.</p>
-          <p class="cm"><span>Crop</span><span>Repetition</span><span>Recognition</span></p>
+      </div>
+
+      <div class="ch-state visual-only" id="stS" role="tabpanel" aria-labelledby="tabS">
+        <div class="ch-visual">
+          <div class="cv-reel" aria-label="Three fragments cropped from the same property image">
+            <figure class="p1"><img src="/website.jpg" alt="First fragment of the property image" width="500" height="700" /></figure>
+            <figure class="p2"><img src="/website.jpg" alt="Second fragment of the same property image" width="500" height="700" /></figure>
+            <figure class="p3"><img src="/website.jpg" alt="Third fragment of the same property image" width="500" height="700" /></figure>
+          </div>
         </div>
       </div>
     </div>
@@ -330,7 +335,7 @@
     <div class="m4-continuation" aria-hidden="true"><span>Ongoing series</span><i></i></div>
   </section>
 
-  <section class="m5" aria-labelledby="m5t"><div class="m5-grid"><div class="m5-axes rv"><p class="mk"><span class="num">05</span></p><p class="k">What EXIF examines</p><h2 id="m5t">What becomes visible, comparable and worth changing.</h2><ol class="ax"><li><span class="an">Character</span><p>What makes the place memorable?</p></li><li><span class="an">Visibility</span><p>What can guests perceive while choosing?</p></li><li><span class="an">Comparison</span><p>Where does distinction give way to price and rating?</p></li><li><span class="an">Channels</span><p>What shifts between website, OTA and social?</p></li><li><span class="an">Priority</span><p>What should change first?</p></li></ol></div><div class="m5-audit"><div class="m5-fig rv rv-fig"><img src="/in-person.jpg" alt="A hospitality dining room observed through reflections and late light" width="1300" height="900" /></div><div class="m5-panel rv"><h3>The Atmosphere Audit.</h3><p class="ai">A structured review of how a property is currently perceived across the channels guests use to decide.</p><div class="m5-rows"><div><span>01</span><p>Preserve what already works.</p></div><div><span>02</span><p>Locate where distinction is lost.</p></div><div><span>03</span><p>See what guests will compare.</p></div><div><span>04</span><p>Decide what changes first.</p></div></div><a class="m5-cta" href="/atmosphere-audit/"><span>About the Atmosphere Audit</span><span aria-hidden="true">→</span></a></div><p class="m5-coda rv">Diagnosis first. Direction and production when needed.</p></div></div></section>
+  <section class="m5" aria-labelledby="m5t"><div class="m5-grid"><div class="m5-axes rv"><p class="mk"><span class="num">05</span></p><p class="k">What EXIF examines</p><h2 id="m5t">What becomes visible, comparable and worth changing.</h2><ol class="ax"><li><span class="an">Character</span><p>What makes the place memorable?</p></li><li><span class="an">Visibility</span><p>What can guests perceive while choosing?</p></li><li><span class="an">Comparison</span><p>Where does distinction give way to price and rating?</p></li><li><span class="an">Channels</span><p>What shifts between website, OTA and social?</p></li><li><span class="an">Priority</span><p>What should change first?</p></li></ol></div><div class="m5-audit"><div class="m5-fig rv rv-fig"><img src="/reset.jpg" alt="Two guests walking through the property landscape" width="1300" height="900" /></div><div class="m5-panel rv"><h3>The Atmosphere Audit.</h3><p class="ai">A structured review of how a property is currently perceived across the channels guests use to decide.</p><div class="m5-rows"><div><span>01</span><p>Preserve what already works.</p></div><div><span>02</span><p>Locate where distinction is lost.</p></div><div><span>03</span><p>See what guests will compare.</p></div><div><span>04</span><p>Decide what changes first.</p></div></div><a class="m5-cta" href="/atmosphere-audit/"><span>About the Atmosphere Audit</span><span aria-hidden="true">→</span></a></div><p class="m5-coda rv">Diagnosis first. Direction and production when needed.</p></div></div></section>
 
   <section class="m6a" id="about" aria-labelledby="m6at"><p class="mk"><span class="num">06</span></p><div class="m6a-grid"><div class="rv"><h2 id="m6at">Hospitality came first.</h2><p>EXIF grew inside resorts across Mexico and the Caribbean, moving between photography, sales, guest experience and operations.</p><p>That experience became a practice focused on what a place communicates before the stay begins.</p></div><div class="m6a-fig rv rv-fig"><img src="/founder.jpg" alt="Reviewing photographs inside a property" width="1100" height="1300" /></div></div></section>
 
