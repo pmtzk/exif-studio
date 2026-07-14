@@ -44,7 +44,7 @@
     .skip{position:fixed;left:16px;top:-60px;z-index:300;background:var(--green);color:var(--paper);padding:10px 14px;font-size:.85rem;transition:top .2s var(--ease)}
     .skip:focus{top:16px}
 
-    .header{position:fixed;top:0;left:0;right:0;z-index:90;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(241,235,223,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+    .header{position:fixed;top:0;left:0;right:0;z-index:140;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(241,235,223,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
     .brand{font-family:var(--serif);font-size:1.42rem;letter-spacing:-.025em}
     .nav-desktop{display:none;gap:32px}
     .nav-desktop a{font-size:.72rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .25s ease}
@@ -54,6 +54,12 @@
     .menu-btn .b::after{transform:translateY(6px)}
     .menu-btn[aria-expanded="true"] .b{transform:rotate(45deg)}
     .menu-btn[aria-expanded="true"] .b::after{transform:rotate(-90deg) translateX(6px)}
+
+    .header.menu-open{background:transparent;color:var(--paper);border-bottom-color:var(--line-inv);backdrop-filter:none}
+    .header.menu-open .brand{color:var(--paper)}
+    .header.menu-open .progress{opacity:0}
+    .header.menu-open .menu-btn{color:var(--paper)}
+
     .progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:rgba(13,42,34,.08)}
     .progress span{display:block;height:100%;width:100%;background:var(--green);transform:scaleX(0);transform-origin:left center;will-change:transform}
     @media(min-width:900px){.nav-desktop{display:flex}.menu-btn{display:none}}
@@ -61,10 +67,6 @@
     .menu{position:fixed;inset:0;z-index:120;background:var(--green);color:var(--paper);padding:calc(18px + env(safe-area-inset-top)) var(--pad) calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
     .menu.open{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
     .menu-top{display:flex;justify-content:space-between;align-items:center;height:42px}
-    .menu-close{position:relative;width:44px;height:44px;margin-right:-10px;display:grid;place-items:center}
-    .menu-close::before,.menu-close::after{content:"";position:absolute;width:22px;height:1.5px;background:currentColor}
-    .menu-close::before{transform:rotate(45deg)}
-    .menu-close::after{transform:rotate(-45deg)}
     .menu-list{list-style:none;margin:0;padding:0;align-self:stretch}
     .menu-list a{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-top:1px solid var(--line-inv);font-family:var(--serif);font-size:clamp(2.4rem,9vw,4.6rem);line-height:1}
     .menu-list li:last-child a{border-bottom:1px solid var(--line-inv)}
@@ -126,18 +128,29 @@
     .ch-copy .cm{display:flex;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--meta)}
     .cv-site{height:clamp(300px,56vh,560px);overflow:hidden;box-shadow:0 26px 60px rgba(13,42,34,.14)}
     .cv-site img{width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.72) contrast(.98)}
-    .cv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .cv-cell{display:flex;flex-direction:column;gap:9px}
-    .cv-cell .ph,.cv-cell .im{height:clamp(120px,22vh,210px);border:1px solid var(--line);overflow:hidden}
-    .cv-cell .im img{width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.7) contrast(.98)}
-    .cv-cell .ph{background:rgba(183,176,162,.3)}
-    .cv-cell .dims{display:flex;justify-content:space-between;font-size:.6rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--meta)}
-    .cv-reel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
-    .cv-reel figure{margin:0;overflow:hidden;height:clamp(220px,40vh,420px)}
-    .cv-reel figure:nth-child(2){transform:translateY(18px)}
-    .cv-reel figure:nth-child(3){transform:translateY(36px)}
-    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98)}
-    .cv-reel .p1 img{object-position:18% 50%}.cv-reel .p2 img{object-position:50% 40%}.cv-reel .p3 img{object-position:82% 55%}
+    .cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .cv-listing{border:1px solid var(--line);background:rgba(241,235,223,.72);padding:8px;display:grid;gap:9px;min-width:0}
+    .cv-listing.primary{background:var(--paper);box-shadow:0 16px 34px rgba(13,42,34,.10)}
+    .cv-listing .listing-image{aspect-ratio:4/3;overflow:hidden;background:rgba(183,176,162,.28)}
+    .cv-listing .listing-image img{width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.7) contrast(.98)}
+    .cv-listing.alt .listing-image{position:relative}
+    .cv-listing.alt .listing-image::before,
+    .cv-listing.alt .listing-image::after{content:"";position:absolute;background:rgba(13,42,34,.09)}
+    .cv-listing.alt .listing-image::before{inset:18% 16% 42%}
+    .cv-listing.alt .listing-image::after{left:16%;right:38%;bottom:18%;height:1px}
+    .listing-copy{display:grid;gap:6px}
+    .listing-place{font-family:var(--serif);font-size:clamp(.9rem,2.5vw,1.08rem);line-height:1}
+    .listing-data{display:flex;justify-content:space-between;gap:8px;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--meta)}
+    .listing-rule{height:1px;background:var(--line);width:68%}
+    .cv-reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start}
+    .cv-reel figure{position:relative;margin:0;overflow:hidden;height:clamp(230px,42vh,430px);background:rgba(183,176,162,.24)}
+    .cv-reel figure:nth-child(2){transform:translateY(20px)}
+    .cv-reel figure:nth-child(3){transform:translateY(40px)}
+    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98);transform:scale(1.08)}
+    .cv-reel .p1 img{object-position:20% 52%}
+    .cv-reel .p2 img{object-position:51% 58%}
+    .cv-reel .p3 img{object-position:84% 48%}
+    .fragment-label{position:absolute;left:10px;bottom:10px;font-size:.56rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--paper);text-shadow:0 1px 12px rgba(13,42,34,.55)}
     @media(min-width:900px){.ch-state{grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,64px);align-items:end}}
     @media(max-width:520px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid .c3{display:none}.cv-reel{gap:8px}.cv-reel figure{height:180px}}
 
@@ -246,7 +259,7 @@
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 </header>
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
-  <div class="menu-top"><span class="brand">EXIF.</span><button class="menu-close" id="menuClose" aria-label="Close menu"></button></div>
+  <div class="menu-top" aria-hidden="true"><span></span><span></span></div>
   <nav aria-label="Main, mobile"><ul class="menu-list">
     <li><a href="/"><span>01</span>Home</a></li><li><a href="/observations/"><span>02</span>Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span>Atmosphere Audit</a></li><li><a href="#about"><span>04</span>About</a></li><li><a href="#contact"><span>05</span>Contact</a></li>
   </ul></nav>
@@ -269,9 +282,43 @@
       <button class="ch-tab" role="tab" id="tabS" aria-selected="false" aria-controls="stS" tabindex="-1" type="button">Social<span class="ct">03</span></button>
     </div>
     <div class="ch-stage">
-      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/reset.jpg" alt="The same hospitality property presented on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">Room to build a point of view.</p><p class="cm"><span>Narrative</span><span>Context</span><span>Sequence</span></p></div></div>
-      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO"><div class="ch-visual"><div class="cv-grid"><div class="cv-cell c1"><div class="im"><img src="/reset.jpg" alt="The same hospitality property reduced to one framed image inside a listing grid" width="600" height="450" /></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c2" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c3" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div></div></div><div class="ch-copy"><p class="st">A handful of images inside a grid of alternatives.</p><p class="cm"><span>Less time</span><span>Less space</span><span>Direct comparison</span></p></div></div>
-      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS"><div class="ch-visual"><div class="cv-reel"><figure class="p1"><img src="/reset.jpg" alt="The same hospitality property cropped for a social feed" width="500" height="700" /></figure><figure class="p2" aria-hidden="true"><img src="/reset.jpg" alt="" width="500" height="700" /></figure><figure class="p3" aria-hidden="true"><img src="/reset.jpg" alt="" width="500" height="700" /></figure></div></div><div class="ch-copy"><p class="st">Signals repeated until the place feels familiar.</p><p class="cm"><span>Repetition</span><span>Familiarity</span></p></div></div>
+      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/reset.jpg" alt="The same hospitality property presented on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">The place held in full context.</p><p class="cm"><span>Scale</span><span>Context</span><span>Sequence</span></p></div></div>
+      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO">
+        <div class="ch-visual">
+          <div class="cv-grid" aria-label="The property shown among comparable listings">
+            <article class="cv-listing primary">
+              <div class="listing-image"><img src="/reset.jpg" alt="The property reduced to one listing image among alternatives" width="640" height="480" /></div>
+              <div class="listing-copy"><span class="listing-place">The property</span><span class="listing-rule"></span><div class="listing-data"><span>$280</span><span>4.9</span></div></div>
+            </article>
+            <article class="cv-listing alt" aria-hidden="true">
+              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$245</span><span>4.8</span></div></div>
+            </article>
+            <article class="cv-listing alt" aria-hidden="true">
+              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$310</span><span>4.9</span></div></div>
+            </article>
+            <article class="cv-listing alt" aria-hidden="true">
+              <div class="listing-image"></div><div class="listing-copy"><span class="listing-place">Alternative</span><span class="listing-rule"></span><div class="listing-data"><span>$270</span><span>4.7</span></div></div>
+            </article>
+          </div>
+        </div>
+        <div class="ch-copy">
+          <p class="st">One property inside a field of alternatives.</p>
+          <p class="cm"><span>Same scale</span><span>Shared dimensions</span><span>Direct comparison</span></p>
+        </div>
+      </div>
+      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS">
+        <div class="ch-visual">
+          <div class="cv-reel" aria-label="Fragments of the same property repeated as social signals">
+            <figure class="p1"><img src="/reset.jpg" alt="Foliage cropped from the property image" width="500" height="700" /><span class="fragment-label">Setting</span></figure>
+            <figure class="p2"><img src="/reset.jpg" alt="Guests cropped from the same property image" width="500" height="700" /><span class="fragment-label">Presence</span></figure>
+            <figure class="p3"><img src="/reset.jpg" alt="Architecture cropped from the same property image" width="500" height="700" /><span class="fragment-label">Form</span></figure>
+          </div>
+        </div>
+        <div class="ch-copy">
+          <p class="st">Fragments repeated until the place feels familiar.</p>
+          <p class="cm"><span>Crop</span><span>Repetition</span><span>Recognition</span></p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -293,10 +340,10 @@
 (function(){
   'use strict';
   var rm=document.documentElement.classList.contains('rm');
-  var menuBtn=document.getElementById('menuBtn'),menuClose=document.getElementById('menuClose'),menu=document.getElementById('menu'),lastFocus=null;
-  function openMenu(){lastFocus=document.activeElement;menuBtn.setAttribute('aria-expanded','true');menu.classList.add('open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';menuClose.focus()}
-  function closeMenu(){menuBtn.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';(lastFocus&&document.contains(lastFocus)?lastFocus:menuBtn).focus()}
-  menuBtn.addEventListener('click',function(){menuBtn.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()});menuClose.addEventListener('click',closeMenu);menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open'))closeMenu()});menu.addEventListener('keydown',function(e){if(e.key!=='Tab'||!menu.classList.contains('open'))return;var f=menu.querySelectorAll('a[href],button'),first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
+  var menuBtn=document.getElementById('menuBtn'),menu=document.getElementById('menu'),header=document.querySelector('.header'),lastFocus=null;
+  function openMenu(){lastFocus=document.activeElement;menuBtn.setAttribute('aria-expanded','true');menuBtn.setAttribute('aria-label','Close menu');menu.classList.add('open');header.classList.add('menu-open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';menuBtn.focus()}
+  function closeMenu(){menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open menu');menu.classList.remove('open');header.classList.remove('menu-open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';menuBtn.focus()}
+  menuBtn.addEventListener('click',function(){menuBtn.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open'))closeMenu()});menu.addEventListener('keydown',function(e){if(e.key!=='Tab'||!menu.classList.contains('open'))return;var links=[].slice.call(menu.querySelectorAll('a[href]')),first=menuBtn,last=links[links.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
   var tabs=[].slice.call(document.querySelectorAll('.ch-tab')),states=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))}),current=0,switching=false;
   function setTab(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(j===i));t.tabIndex=j===i?0:-1})}
   function show(i){if(i===current||switching)return;switching=true;setTab(i);var from=states[current],to=states[i];current=i;if(rm){from.hidden=true;to.hidden=false;switching=false;return}from.classList.add('out');setTimeout(function(){from.hidden=true;from.classList.remove('out');to.classList.add('pre');to.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){to.classList.remove('pre');switching=false})})},340)}
