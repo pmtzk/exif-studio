@@ -1,216 +1,336 @@
-<!DOCTYPE html>
-<html data-lang="en" lang="en">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>EXIF Studio — Hospitality Positioning &amp; Visual Direction</title>
-<meta content="EXIF helps hospitality brands define what makes a place unmistakable and how it should be seen before anyone arrives." name="description"/>
-<meta content="#071A18" name="theme-color"/>
-<link href="/favicon.ico" rel="icon" sizes="any"/>
-<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="/site.webmanifest" rel="manifest"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="/styles.css?v=16" rel="stylesheet"/>
-<link href="https://exif.studio/" rel="canonical"/>
-<meta content="website" property="og:type"/>
-<meta content="EXIF Studio" property="og:site_name"/>
-<meta content="EXIF Studio — A place, made unmistakable." property="og:title"/>
-<meta content="Positioning and visual direction for hospitality brands with a strong sense of identity." property="og:description"/>
-<meta content="https://exif.studio/" property="og:url"/>
-<meta content="https://exif.studio/og-image.jpg" property="og:image"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="EXIF Studio — A place, made unmistakable." name="twitter:title"/>
-<meta content="Positioning and visual direction for hospitality brands with a strong sense of identity." name="twitter:description"/>
-<meta content="https://exif.studio/og-image.jpg" name="twitter:image"/>
-<meta content="83C4A0EA1862A511E724DE21159E34A8" name="msvalidate.01"/>
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://exif.studio/#organization",
-  "name": "EXIF Studio",
-  "alternateName": "EXIF Hospitality Positioning & Visual Studio",
-  "url": "https://exif.studio/",
-  "logo": "https://exif.studio/icon-512.png",
-  "image": "https://exif.studio/og-image.jpg",
-  "email": "hello@exif.studio",
-  "founder": {"@type": "Person", "name": "Katia Pérez", "jobTitle": "Founder"},
-  "description": "EXIF helps hospitality brands define what makes a place unmistakable and how it should be seen before anyone arrives.",
-  "areaServed": [
-    {"@type": "Country", "name": "Mexico"},
-    {"@type": "Place", "name": "The Caribbean"}
-  ]
-}</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D2A22" />
+  <title>EXIF. Guests choose a representation before they experience the place.</title>
+  <meta name="description" content="EXIF studies how a hospitality property is perceived and compared across website, OTA and social before guests arrive. The Atmosphere Audit is the available engagement." />
+  <link rel="canonical" href="https://exif.studio/" />
+  <meta property="og:title" content="EXIF" />
+  <meta property="og:description" content="Guests choose a representation before they experience the place. EXIF studies the distance between the place that exists and the version guests compare." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://exif.studio/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="EXIF" />
+  <meta name="twitter:description" content="A study of how hospitality properties are perceived and compared before guests arrive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --paper:#F1EBDF;
+      --green:#0D2A22;
+      --stone:#B7B0A2;
+      --meta:#6E6759;
+      --line:rgba(13,42,34,.16);
+      --line-inv:rgba(241,235,223,.24);
+      --serif:"Instrument Serif", Georgia, serif;
+      --sans:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+      --ease:cubic-bezier(.22,.61,.21,1);
+      --pad:clamp(20px,4.5vw,64px);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--green);font-family:var(--sans);font-weight:400;font-size:1rem;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+    h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.01em}
+    p{margin:0}
+    .k{font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--meta)}
+    .num{font-size:.68rem;font-weight:500;letter-spacing:.15em;color:var(--meta)}
+    .skip{position:fixed;left:16px;top:-60px;z-index:300;background:var(--green);color:var(--paper);padding:10px 14px;font-size:.85rem;transition:top .2s var(--ease)}
+    .skip:focus{top:16px}
+
+    .header{position:fixed;top:0;left:0;right:0;z-index:90;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(241,235,223,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+    .brand{font-family:var(--serif);font-size:1.4rem}
+    .nav-desktop{display:none;gap:32px}
+    .nav-desktop a{font-size:.72rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .25s ease}
+    .nav-desktop a:hover{border-bottom-color:var(--green)}
+    .menu-btn{width:44px;height:44px;margin-right:-10px;display:grid;place-items:center}
+    .menu-btn .b,.menu-btn .b::after{content:"";display:block;width:22px;height:1.5px;background:currentColor;transition:transform .3s var(--ease)}
+    .menu-btn .b::after{transform:translateY(6px)}
+    .menu-btn[aria-expanded="true"] .b{transform:rotate(45deg)}
+    .menu-btn[aria-expanded="true"] .b::after{transform:rotate(-90deg) translateX(6px)}
+    .progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:rgba(13,42,34,.08)}
+    .progress span{display:block;height:100%;width:100%;background:var(--green);transform:scaleX(0);transform-origin:left center;will-change:transform}
+    @media(min-width:900px){.nav-desktop{display:flex}.menu-btn{display:none}}
+
+    .menu{position:fixed;inset:0;z-index:120;background:var(--green);color:var(--paper);padding:calc(18px + env(safe-area-inset-top)) var(--pad) calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .32s var(--ease),visibility 0s linear .32s}
+    .menu.open{opacity:1;visibility:visible;transition:opacity .32s var(--ease)}
+    .menu-top{display:flex;justify-content:space-between;align-items:center;height:42px}
+    .menu-close{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:12px 0 12px 12px}
+    .menu-list{list-style:none;margin:0;padding:0;align-self:stretch}
+    .menu-list a{display:flex;align-items:baseline;gap:18px;padding:14px 0;border-top:1px solid var(--line-inv);font-family:var(--serif);font-size:clamp(2.4rem,9vw,4.6rem);line-height:1}
+    .menu-list li:last-child a{border-bottom:1px solid var(--line-inv)}
+    .menu-list a span{font-family:var(--sans);font-size:.66rem;font-weight:500;letter-spacing:.15em;opacity:.55}
+    .menu-foot{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;opacity:.72}
+
+    .mk{display:flex;align-items:center;gap:14px;margin-bottom:clamp(22px,3.5vh,40px)}
+    .mk::after{content:"";height:1px;background:var(--line);flex:0 0 44px}
+
+    .m1{position:relative;min-height:calc(100vh - 60px);padding:76px var(--pad) 48px}
+    .m1.no-fx{min-height:auto}
+    .m1-sticky{position:relative;min-height:calc(100vh - 124px);overflow:hidden;display:flex;flex-direction:column;padding:0;transform:translateZ(0);backface-visibility:hidden}
+    .m1.no-fx .m1-sticky{position:relative;min-height:auto;padding-bottom:0}
+    .m1-head{position:relative;z-index:3;max-width:1200px}
+    .m1-head h1{font-size:clamp(2.7rem,7.4vw,6.6rem);line-height:.98;max-width:15ch}
+    .m1-head h1 em{font-style:italic}
+    .m1-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(16px,2.5vh,26px)}
+    .m1-sub p{max-width:44ch;font-size:clamp(.95rem,1.2vw,1.1rem);font-weight:300;line-height:1.5}
+    .m1-cue{display:flex;flex-direction:column;align-items:center;gap:10px;flex:0 0 auto}
+    .m1-cue span{font-size:.66rem;font-weight:500;letter-spacing:.18em;color:var(--meta)}
+    .m1-cue i{display:block;width:1px;height:52px;background:var(--green);opacity:.45}
+    .m1-stage{position:relative;flex:1;margin-top:clamp(18px,3vh,34px)}
+    .m1-fig{position:absolute;inset:0;overflow:hidden;background:#c8c2b4;transform-origin:32% 86%;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden;box-shadow:0 16px 34px rgba(13,42,34,.10)}
+    .m1-fig img{width:100%;height:100%;object-fit:cover;transform:translateZ(0);backface-visibility:hidden}
+    .m1-frame{position:absolute;inset:0;border:1px solid var(--green);opacity:0;pointer-events:none}
+    .m1-slot{position:absolute;top:42%;height:42%;width:22%;background:rgba(241,235,223,.78);border:1px solid var(--line);opacity:0;transform:translateX(26px);will-change:transform,opacity;display:flex;flex-direction:column;justify-content:space-between;padding:12px}
+    .m1-slot::before{font-size:.56rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
+    .m1-slot::after{content:"";display:block;height:1px;width:58%;background:var(--line)}
+    .m1-slot.s1{left:53%}.m1-slot.s1::before{content:"OTA"}
+    .m1-slot.s2{left:77%}.m1-slot.s2::before{content:"Social"}
+    .m1.no-fx .m1-fig{position:relative;inset:auto;height:min(62svh,640px)}
+    .m1.no-fx .m1-slot,.m1.no-fx .m1-frame{display:none}
+    @media(max-width:899px){
+      .m1{min-height:auto;padding:78px var(--pad) 40px}
+      .m1-sticky{min-height:calc(100svh - 118px);padding-top:0}
+      .m1-fig{transform-origin:38% 88%}
+      .m1-slot{top:48%;height:34%;width:24%;padding:9px}
+      .m1-slot.s1{left:49%}.m1-slot.s2{left:75%}
+    }
+
+    .m2{padding:clamp(64px,11vh,120px) var(--pad) clamp(56px,9vh,100px);position:relative}
+    .m2 h2{font-size:clamp(1.9rem,4.4vw,3.9rem);line-height:1.02;max-width:24ch}
+    .ch-tabs{display:flex;gap:clamp(18px,3vw,40px);margin-top:clamp(26px,4vh,44px);border-bottom:1px solid var(--line)}
+    html:not(.js) .ch-tabs{display:none}
+    .ch-tab{padding:12px 2px 13px;margin-bottom:-1px;font-family:var(--serif);font-size:clamp(1.15rem,2vw,1.6rem);line-height:1;color:var(--meta);border-bottom:1px solid transparent;transition:color .25s ease}
+    .ch-tab[aria-selected="true"]{color:var(--green);border-bottom-color:var(--green)}
+    .ch-tab .ct{font-family:var(--sans);font-size:.62rem;font-weight:500;letter-spacing:.14em;vertical-align:super;margin-left:4px}
+    .ch-stage{position:relative;margin-top:clamp(26px,4.5vh,46px)}
+    .ch-state{display:grid;grid-template-columns:1fr;gap:24px}
+    html:not(.js) .ch-state + .ch-state{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
+    html.js .ch-state{position:relative}
+    html.js .ch-state[hidden]{display:none}
+    html.js .ch-state{opacity:1;transform:none;transition:opacity .34s var(--ease),transform .34s var(--ease)}
+    html.js .ch-state.out{opacity:0;transform:translateY(10px)}
+    html.js .ch-state.pre{opacity:0;transform:translateY(14px)}
+    .ch-visual{position:relative}
+    .ch-copy{display:flex;flex-direction:column;gap:16px;justify-content:flex-end}
+    .ch-copy .st{font-family:var(--serif);font-size:clamp(1.5rem,2.7vw,2.5rem);line-height:1.06;max-width:19ch}
+    .ch-copy .cm{display:flex;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--meta)}
+    .cv-site{height:clamp(300px,56vh,560px);overflow:hidden;box-shadow:0 26px 60px rgba(13,42,34,.14)}
+    .cv-site img{width:100%;height:100%;object-fit:cover;filter:saturate(.84)}
+    .cv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .cv-cell{display:flex;flex-direction:column;gap:9px}
+    .cv-cell .ph,.cv-cell .im{height:clamp(120px,22vh,210px);border:1px solid var(--line);overflow:hidden}
+    .cv-cell .im img{width:100%;height:100%;object-fit:cover;object-position:center 54%;filter:saturate(.8)}
+    .cv-cell .ph{background:rgba(183,176,162,.3)}
+    .cv-cell .dims{display:flex;justify-content:space-between;font-size:.6rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--meta)}
+    .cv-reel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+    .cv-reel figure{margin:0;overflow:hidden;height:clamp(220px,40vh,420px)}
+    .cv-reel figure:nth-child(2){transform:translateY(18px)}
+    .cv-reel figure:nth-child(3){transform:translateY(36px)}
+    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.84)}
+    .cv-reel .p1 img{object-position:18% 50%}.cv-reel .p2 img{object-position:50% 40%}.cv-reel .p3 img{object-position:82% 55%}
+    @media(min-width:900px){.ch-state{grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,64px);align-items:end}}
+    @media(max-width:520px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid .c3{display:none}.cv-reel{gap:8px}.cv-reel figure{height:180px}}
+
+    .m3{position:relative;background:var(--green);color:var(--paper);padding:clamp(90px,17vh,180px) var(--pad)}
+    .m3 .thread{position:absolute;left:calc(var(--pad) + 3px);top:-46px;width:1px;height:92px;background:var(--green)}
+    .m3 h2{font-size:clamp(2.3rem,6.6vw,6rem);line-height:1;max-width:16ch}
+    .m3 h2 em{font-style:italic}
+    .m3 .w{display:inline-block;overflow:hidden;vertical-align:top}
+    .m3 .w b{display:inline-block;font-weight:400;transform:translateY(112%)}
+    html:not(.js) .m3 .w b,.rm .m3 .w b{transform:none}
+    .m3.in .w b{transform:translateY(0);transition:transform .7s var(--ease)}
+    .m3.in .w:nth-child(2) b{transition-delay:.05s}.m3.in .w:nth-child(3) b{transition-delay:.1s}.m3.in .w:nth-child(4) b{transition-delay:.15s}.m3.in .w:nth-child(5) b{transition-delay:.2s}.m3.in .w:nth-child(6) b{transition-delay:.25s}.m3.in .w:nth-child(7) b{transition-delay:.3s}.m3.in .w:nth-child(8) b{transition-delay:.35s}.m3.in .w:nth-child(9) b{transition-delay:.4s}
+
+    .m4{background:rgba(183,176,162,.34);padding:clamp(64px,11vh,120px) var(--pad)}
+    .m4-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+    .m4-head h2{font-size:clamp(2.1rem,4.6vw,4rem);line-height:1}
+    .m4-head .side{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline}
+    .m4-head .side a{border-bottom:1px solid var(--line);padding-bottom:2px}
+    .m4-head .side a:hover{border-bottom-color:var(--green)}
+    .m4-entry{display:grid;grid-template-columns:1fr;gap:clamp(26px,4vw,56px);padding:clamp(32px,5vh,56px) 0;border-bottom:1px solid var(--line)}
+    .ob-cover{background:var(--paper);color:var(--green);aspect-ratio:3/4;max-width:340px;width:100%;padding:20px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);box-shadow:0 24px 54px rgba(13,42,34,.12)}
+    .ob-cover .top{font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--meta);display:flex;justify-content:space-between}
+    .ob-cover .ttl{font-family:var(--serif);font-style:italic;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.02}
+    .ob-cover .bt{display:flex;justify-content:space-between;align-items:flex-end;font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--meta)}
+    .ob-cover .bt .n{font-family:var(--serif);font-size:2rem;letter-spacing:0;color:var(--green)}
+    .m4-meta{display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+    .m4-meta h3{font-size:clamp(2rem,4.4vw,3.8rem);line-height:.98}
+    .m4-meta h3 a:hover em{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+    .m4-meta h3 em{font-style:italic}
+    .m4-meta p{max-width:42ch;font-weight:300}
+    .m4-meta .rd{align-self:flex-start;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--green);padding-bottom:4px}
+    .m4-continuation{display:flex;justify-content:space-between;gap:20px;align-items:center;padding-top:18px;color:var(--meta)}
+    .m4-continuation span{font-size:.66rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+    .m4-continuation i{display:block;flex:1;height:1px;background:var(--line)}
+    @media(min-width:900px){.m4-entry{grid-template-columns:340px 1fr;align-items:stretch}}
+
+    .m5{padding:clamp(72px,12vh,130px) var(--pad)}
+    .m5-grid{display:grid;grid-template-columns:1fr;gap:clamp(40px,6vh,60px)}
+    .m5-axes{align-self:start}
+    .m5-axes h2{font-size:clamp(1.8rem,3.6vw,3rem);line-height:1.04;max-width:15ch;margin-top:14px}
+    .ax{list-style:none;margin:clamp(22px,3.5vh,36px) 0 0;padding:0;border-top:1px solid var(--line)}
+    .ax li{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+    .ax .an{font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
+    .ax p{font-family:var(--serif);font-size:1.18rem;line-height:1.1;color:var(--green)}
+    .m5-audit{position:relative}
+    .m5-fig{height:clamp(300px,50vh,540px);overflow:hidden;margin-left:clamp(0px,6vw,90px)}
+    .m5-fig img{width:100%;height:100%;object-fit:cover;filter:saturate(.84)}
+    .m5-panel{position:relative;margin:-72px clamp(0px,4vw,60px) 0 0;max-width:640px;background:var(--paper);border:1px solid var(--line);padding:clamp(22px,3vw,36px);box-shadow:0 26px 58px rgba(13,42,34,.14)}
+    .m5-panel h3{font-size:clamp(1.9rem,3.6vw,3rem);line-height:.98}
+    .m5-panel .ai{margin-top:14px;font-weight:300;max-width:46ch}
+    .m5-rows{margin-top:20px;border-top:1px solid var(--line)}
+    .m5-rows div{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.94rem;font-weight:300}
+    .m5-rows span{font-size:.64rem;font-weight:500;letter-spacing:.13em;color:var(--meta);padding-top:3px}
+    .m5-cta{display:flex;justify-content:space-between;gap:20px;margin-top:20px;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+    .m5-coda{margin-top:clamp(30px,5vh,48px);font-family:var(--serif);font-size:clamp(1.25rem,2.1vw,1.7rem)}
+    @media(min-width:900px){.m5-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(48px,5vw,96px)}.m5-axes{position:sticky;top:96px}}
+
+    .m6a{padding:clamp(64px,11vh,120px) var(--pad) 0}
+    .m6a-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,64px);align-items:end}
+    .m6a h2{font-size:clamp(2.1rem,5vw,4.4rem);line-height:1}
+    .m6a p{margin-top:18px;max-width:46ch;font-weight:300}
+    .m6a-fig{position:relative;z-index:2;height:clamp(340px,56vh,620px);overflow:hidden;margin-bottom:-84px;box-shadow:0 28px 60px rgba(13,42,34,.18)}
+    .m6a-fig img{width:100%;height:100%;object-fit:cover;filter:saturate(.86)}
+    @media(min-width:900px){.m6a-grid{grid-template-columns:1.05fr .95fr}.m6a-fig{margin-bottom:-110px}}
+    .m6b{background:var(--green);color:var(--paper);padding:clamp(150px,22vh,210px) var(--pad) 30px}
+    .m6b h2{font-size:clamp(2.4rem,6vw,5.2rem);line-height:.98}
+    .m6b-grid{display:grid;grid-template-columns:1fr;gap:clamp(34px,5vh,54px);margin-top:clamp(26px,4vh,44px)}
+    .m6b-intro p{max-width:40ch;font-weight:300;color:rgba(241,235,223,.85)}
+    .m6b-intro .mail{display:inline-block;margin-top:22px;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--line-inv);padding-bottom:5px}
+    .m6b-intro .mail:hover{border-bottom-color:var(--paper)}
+    .cform{display:grid;grid-template-columns:1fr;gap:22px;border-top:1px solid var(--line-inv);padding-top:26px}
+    .ff{display:flex;flex-direction:column;gap:8px}
+    .ff label{font-size:.66rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,235,223,.68)}
+    .ff input,.ff textarea{width:100%;border:0;border-bottom:1px solid var(--line-inv);border-radius:0;background:transparent;color:var(--paper);font:400 1rem/1.4 var(--sans);padding:9px 0 12px}
+    .ff input:focus-visible,.ff textarea:focus-visible{outline:none;border-bottom-color:var(--paper)}
+    .ff ::placeholder{color:rgba(241,235,223,.38)}
+    .ff textarea{min-height:120px;resize:vertical}
+    .factions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px}
+    .fsubmit{background:var(--paper);color:var(--green);padding:15px 22px;min-height:48px;font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+    .fsubmit[disabled]{opacity:.55;cursor:default}
+    .fstatus{font-size:.85rem;color:rgba(241,235,223,.82);max-width:38ch}
+    .hp{position:absolute!important;left:-9999px!important;top:auto!important}
+    @media(min-width:900px){.m6b-grid{grid-template-columns:.85fr 1.15fr;gap:clamp(48px,5vw,100px)}.cform{grid-template-columns:1fr 1fr;column-gap:22px}.fw{grid-column:1/-1}}
+    .footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:clamp(56px,9vh,96px);padding:20px 0 calc(env(safe-area-inset-bottom));border-top:1px solid var(--line-inv);font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(241,235,223,.7)}
+    .footer nav{display:flex;flex-wrap:wrap;gap:18px}
+
+    .rv{opacity:1;transform:none}
+    html.js:not(.rm) .rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    html.js:not(.rm) .rv.in{opacity:1;transform:none}
+    html.js:not(.rm) .rv-fig{clip-path:inset(0 0 12% 0);transition:clip-path .9s var(--ease)}
+    html.js:not(.rm) .rv-fig img{transform:scale(1.06);transition:transform 1.1s var(--ease)}
+    html.js:not(.rm) .rv-fig.in{clip-path:inset(0 0 0 0)}
+    html.js:not(.rm) .rv-fig.in img{transform:scale(1)}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}html.js .rv,html.js .rv-fig{opacity:1;transform:none;clip-path:none}html.js .rv-fig img{transform:none}}
+  </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" data-header>
-  <a aria-label="EXIF home" class="wordmark" href="/">EXIF.</a>
-  <div class="header-controls">
-    <button aria-label="Switch language" class="lang-toggle" data-lang-toggle type="button">EN · ES</button>
-    <button aria-controls="site-menu" aria-expanded="false" aria-label="Open site menu" class="menu-toggle" data-menu-toggle type="button">
-      <span aria-hidden="true" class="menu-toggle-icon"><i></i><i></i></span>
-    </button>
-  </div>
+<script>document.documentElement.classList.add('js');if(matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('rm')}</script>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <a class="brand" href="/" aria-label="EXIF home">EXIF.</a>
+  <nav class="nav-desktop" aria-label="Main">
+    <a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span class="b"></span></button>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 </header>
-<div class="scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
-
-<aside aria-hidden="true" class="site-menu" data-site-menu id="site-menu">
-  <div class="site-menu-inner">
-    <div class="site-menu-top">
-      <span class="site-menu-wordmark">EXIF.</span>
-      <span class="site-menu-note" data-en="Hospitality positioning &amp; visual studio" data-es="Posicionamiento y dirección visual para hospitalidad">Hospitality positioning &amp; visual studio</span>
-    </div>
-    <nav aria-label="Site navigation" class="site-menu-nav">
-      <a data-menu-link href="/"><span class="site-menu-number">01</span><span class="site-menu-label" data-en="Home" data-es="Inicio">Home</span></a>
-      <a data-menu-link href="/atmosphere-audit/"><span class="site-menu-number">02</span><span class="site-menu-label">The Atmosphere Audit</span></a>
-      <a data-menu-link href="/#about"><span class="site-menu-number">03</span><span class="site-menu-label" data-en="About EXIF" data-es="Sobre EXIF">About EXIF</span></a>
-      <a data-menu-link href="/#contact"><span class="site-menu-number">04</span><span class="site-menu-label" data-en="Contact" data-es="Contacto">Contact</span></a>
-    </nav>
-    <div class="site-menu-footer"><a href="mailto:hello@exif.studio">hello@exif.studio</a><span>Mexico · The Caribbean · Worldwide</span></div>
-  </div>
-</aside>
-
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+  <div class="menu-top"><span class="brand">EXIF.</span><button class="menu-close" id="menuClose">Close</button></div>
+  <nav aria-label="Main, mobile"><ul class="menu-list">
+    <li><a href="/"><span>01</span>Home</a></li><li><a href="/observations/"><span>02</span>Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span>Atmosphere Audit</a></li><li><a href="#about"><span>04</span>About</a></li><li><a href="#contact"><span>05</span>Contact</a></li>
+  </ul></nav>
+  <div class="menu-foot"><span>Mexico · The Caribbean · Worldwide</span><a href="mailto:hello@exif.studio">hello@exif.studio</a></div>
+</div>
 <main id="main">
-<section aria-labelledby="hero-title" class="hero" id="top">
-  <div aria-label="Atmospheric hospitality image" class="hero-visual image-slot image-hero" role="img"></div>
-  <div class="hero-shade"></div>
-  <div class="hero-content">
-    <p class="eyebrow" data-en="Hospitality positioning &amp; visual studio" data-es="Posicionamiento y dirección visual para hospitalidad">Hospitality positioning &amp; visual studio</p>
-    <h1 id="hero-title"><span data-en="Guests decide" data-es="El huésped decide">Guests decide</span><br/><em data-en="before they arrive." data-es="antes de llegar.">before they arrive.</em></h1>
-    <div class="hero-lower hero-lower-single">
-      <p data-en="Make sure they can see what makes your property worth choosing." data-es="Asegúrate de que puedan ver qué hace que tu propiedad valga la pena elegir.">Make sure they can see what makes your property worth choosing.</p>
+  <section class="m1" id="m1" aria-label="Opening">
+    <div class="m1-sticky">
+      <div class="m1-head"><h1 id="heroTitle">Guests choose a <em>representation</em> before they experience the place.</h1><div class="m1-sub"><p>EXIF studies the distance between the place that exists and the version guests compare.</p><div class="m1-cue" aria-hidden="true"><span>01</span><i></i></div></div></div>
+      <div class="m1-stage" id="heroStage"><div class="m1-fig" id="heroFig"><img src="/hero.jpg" alt="Hospitality interior in warm natural light" width="1600" height="1000" /><span class="m1-frame" id="heroFrame"></span></div><span class="m1-slot s1" id="slot1" aria-hidden="true"></span><span class="m1-slot s2" id="slot2" aria-hidden="true"></span></div>
     </div>
-  </div>
-  <div class="hero-meta"><span>Mexico</span><span>The Caribbean</span><span>Worldwide</span></div>
-</section>
+  </section>
 
-<nav aria-label="Page sections" class="section-nav">
-  <div class="section-nav-track" data-home-nav-track>
-    <a data-en="The problem" data-es="El problema" data-section-link="discrepancy" href="#discrepancy">The problem</a>
-    <a data-en="The Audit" data-es="La auditoría" data-section-link="audit" href="#audit">The Audit</a>
-    <a data-en="The Reset" data-es="The Reset" data-section-link="reset" href="#reset">The Reset</a>
-    <a data-en="About" data-es="Sobre EXIF" data-section-link="about" href="#about">About</a>
-    <a data-en="Contact" data-es="Contacto" data-section-link="contact" href="#contact">Contact</a>
-  </div>
-</nav>
-
-<section class="discrepancy" id="discrepancy">
-  <div class="discrepancy-heading reveal">
-    <p class="eyebrow" data-en="01 / The discrepancy" data-es="01 / La discrepancia">01 / The discrepancy</p>
-    <h2><span data-en="The property is distinctive." data-es="La propiedad es distinta.">The property is distinctive.</span><br/><em data-en="Its presentation may not be." data-es="Su presentación quizá no lo sea.">Its presentation may not be.</em></h2>
-    <p class="compare-intro" data-en="In person, the property speaks for itself. Online, it has to work harder." data-es="En persona, la propiedad habla por sí sola. En línea, tiene que esforzarse más.">In person, the property speaks for itself. Online, it has to work harder.</p>
-  </div>
-
-  <div class="property-compare reveal" data-property-compare>
-    <div class="compare-tabs" role="tablist" aria-label="Compare the property">
-      <button aria-selected="true" class="compare-tab is-active" data-compare-tab="person" role="tab" type="button"><span data-en="In person" data-es="En persona">In person</span></button>
-      <button aria-selected="false" class="compare-tab" data-compare-tab="screen" role="tab" type="button"><span data-en="On screen" data-es="En pantalla">On screen</span></button>
+  <section class="m2" aria-labelledby="m2t">
+    <p class="mk"><span class="num">02</span></p>
+    <h2 id="m2t" class="rv">The property stays the same. The conditions of viewing do not.</h2>
+    <div class="ch-tabs" role="tablist" aria-label="Where the property is viewed">
+      <button class="ch-tab" role="tab" id="tabW" aria-selected="true" aria-controls="stW" type="button">Website<span class="ct">01</span></button>
+      <button class="ch-tab" role="tab" id="tabO" aria-selected="false" aria-controls="stO" tabindex="-1" type="button">OTA<span class="ct">02</span></button>
+      <button class="ch-tab" role="tab" id="tabS" aria-selected="false" aria-controls="stS" tabindex="-1" type="button">Social<span class="ct">03</span></button>
     </div>
-    <div class="compare-stage">
-      <div aria-label="The property experienced in person" class="compare-image image-slot image-person" data-compare-image role="img"></div>
-      <div class="compare-copy" aria-live="polite">
-        <p data-compare-observation data-person-en="The late-afternoon light, considered materials and unhurried service give the stay its character." data-person-es="La luz de la tarde, los materiales cuidados y un servicio sin prisa le dan carácter a la estancia." data-screen-en="Online, the same property may be reduced to a pleasant image that resembles the alternatives." data-screen-es="En línea, la misma propiedad puede reducirse a una imagen agradable que se parece a las demás opciones.">The late-afternoon light, considered materials and unhurried service give the stay its character.</p>
-        <span data-compare-context data-person-en="These are the details guests remember after they leave." data-person-es="Estos son los detalles que el huésped recuerda después de irse." data-screen-en="This is the version guests compare before they book." data-screen-es="Esta es la versión que el huésped compara antes de reservar.">These are the details guests remember after they leave.</span>
-      </div>
+    <div class="ch-stage">
+      <div class="ch-state" id="stW" role="tabpanel" aria-labelledby="tabW"><div class="ch-visual rv rv-fig"><div class="cv-site"><img src="/website.jpg" alt="Property presented full width on its own website" width="1400" height="900" /></div></div><div class="ch-copy rv"><p class="st">Room to build a point of view.</p><p class="cm"><span>Narrative</span><span>Context</span><span>Sequence</span></p></div></div>
+      <div class="ch-state" id="stO" role="tabpanel" aria-labelledby="tabO"><div class="ch-visual"><div class="cv-grid"><div class="cv-cell c1"><div class="im"><img src="/website.jpg" alt="The property reduced to one framed image inside a listing grid" width="600" height="450" /></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c2" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div><div class="cv-cell c3" aria-hidden="true"><div class="ph"></div><div class="dims"><span>Price</span><span>Rating</span></div></div></div></div><div class="ch-copy"><p class="st">A handful of images inside a grid of alternatives.</p><p class="cm"><span>Less time</span><span>Less space</span><span>Direct comparison</span></p></div></div>
+      <div class="ch-state" id="stS" role="tabpanel" aria-labelledby="tabS"><div class="ch-visual"><div class="cv-reel"><figure class="p1"><img src="/website.jpg" alt="Detail of the property cropped for a social feed" width="500" height="700" /></figure><figure class="p2" aria-hidden="true"><img src="/website.jpg" alt="" width="500" height="700" /></figure><figure class="p3" aria-hidden="true"><img src="/website.jpg" alt="" width="500" height="700" /></figure></div></div><div class="ch-copy"><p class="st">Signals repeated until the place feels familiar.</p><p class="cm"><span>Repetition</span><span>Familiarity</span></p></div></div>
     </div>
-  </div>
+  </section>
 
-  <p class="discrepancy-conclusion reveal" data-en="Even if your property is distinctive in person, it is not always visible before their arrival." data-es="Aunque tu propiedad sea distinta en persona, no siempre resulta visible antes de la llegada.">Even if your property is distinctive in person, it is not always visible before their arrival.</p>
-</section>
+  <section class="m3" id="m3" aria-labelledby="m3t"><span class="thread" aria-hidden="true"></span><h2 id="m3t"><span class="w"><b>A&nbsp;</b></span><span class="w"><b>distinctive&nbsp;</b></span><span class="w"><b>place&nbsp;</b></span><span class="w"><b>can&nbsp;</b></span><span class="w"><b>still&nbsp;</b></span><span class="w"><b>become&nbsp;</b></span><span class="w"><b>an&nbsp;</b></span><span class="w"><b><em>ordinary</em>&nbsp;</b></span><span class="w"><b>choice.</b></span></h2></section>
 
-<section class="diagnosis-section" id="cause">
-  <div class="diagnosis-statement reveal">
-    <p class="eyebrow" data-en="The actual cause" data-es="La causa real">The actual cause</p>
-    <h2 data-en="The property lacks a clear visual direction." data-es="A la propiedad le falta una dirección visual clara.">The property lacks a clear visual direction.</h2>
-    <p data-en="Without one, photography, design and marketing can each work well while expressing the place inconsistently." data-es="Sin ella, la fotografía, el diseño y el marketing pueden funcionar por separado mientras expresan el lugar de forma inconsistente.">Without one, photography, design and marketing can each work well while expressing the place inconsistently.</p>
-  </div>
+  <section class="m4" aria-labelledby="m4t">
+    <div class="m4-head"><h2 id="m4t">Observations</h2><div class="side"><span class="k">A publication by EXIF</span><a class="k" href="/observations/">Archive →</a></div></div>
+    <article class="m4-entry"><a class="ob-cover rv" href="/observations/becoming-comparable/" aria-label="Observation 01, Becoming Comparable"><span class="top"><span>EXIF</span><span>Observations</span></span><span class="ttl">Becoming Comparable</span><span class="bt"><span>2026</span><span class="n">01</span></span></a><div class="m4-meta rv"><h3><a href="/observations/becoming-comparable/"><em>Becoming</em> Comparable</a></h3><p>A study in what happens when distinct places are reorganized around the same dimensions of choice.</p><a class="rd" href="/observations/becoming-comparable/">Read Observation 01</a></div></article>
+    <div class="m4-continuation" aria-hidden="true"><span>Ongoing series</span><i></i></div>
+  </section>
 
-  <div class="channel-reader reveal" data-channel-reader>
-    <div class="channel-tabs" role="tablist" aria-label="Channels guests see">
-      <button aria-selected="true" class="channel-tab is-active" data-channel-tab="website" role="tab" type="button">Website</button>
-      <button aria-selected="false" class="channel-tab" data-channel-tab="ota" role="tab" type="button">OTAs</button>
-      <button aria-selected="false" class="channel-tab" data-channel-tab="social" role="tab" type="button">Social</button>
-    </div>
-    <div class="channel-result">
-      <span class="micro-label" data-en="What guests see" data-es="Lo que ve el huésped">What guests see</span>
-      <p data-channel-copy data-website-en="The clearest expression of why the property is worth choosing." data-website-es="La expresión más clara de por qué vale la pena elegir la propiedad." data-ota-en="The few images that must distinguish it inside a comparison grid." data-ota-es="Las pocas imágenes que deben distinguirla dentro de una cuadrícula de comparación." data-social-en="The ongoing signals that shape familiarity and expectation." data-social-es="Las señales continuas que construyen familiaridad y expectativa.">The clearest expression of why the property is worth choosing.</p>
-    </div>
-  </div>
-  <p class="diagnosis-close reveal" data-en="EXIF defines the direction these channels should share." data-es="EXIF define la dirección que estos canales deben compartir.">EXIF defines the direction these channels should share.</p>
-</section>
+  <section class="m5" aria-labelledby="m5t"><div class="m5-grid"><div class="m5-axes rv"><p class="mk"><span class="num">05</span></p><p class="k">What EXIF examines</p><h2 id="m5t">What becomes visible, comparable and worth changing.</h2><ol class="ax"><li><span class="an">Character</span><p>What makes the place memorable?</p></li><li><span class="an">Visibility</span><p>What can guests perceive while choosing?</p></li><li><span class="an">Comparison</span><p>Where does distinction give way to price and rating?</p></li><li><span class="an">Channels</span><p>What shifts between website, OTA and social?</p></li><li><span class="an">Priority</span><p>What should change first?</p></li></ol></div><div class="m5-audit"><div class="m5-fig rv rv-fig"><img src="/reset.jpg" alt="Hospitality property exterior in daylight" width="1300" height="900" /></div><div class="m5-panel rv"><h3>The Atmosphere Audit.</h3><p class="ai">A structured review of how a property is currently perceived across the channels guests use to decide.</p><div class="m5-rows"><div><span>01</span><p>Preserve what already works.</p></div><div><span>02</span><p>Locate where distinction is lost.</p></div><div><span>03</span><p>See what guests will compare.</p></div><div><span>04</span><p>Decide what changes first.</p></div></div><a class="m5-cta" href="/atmosphere-audit/"><span>About the Atmosphere Audit</span><span aria-hidden="true">→</span></a></div><p class="m5-coda rv">Diagnosis first. Direction and production when needed.</p></div></div></section>
 
-<section class="service audit-section" id="audit">
-  <div class="service-index">02 / DIAGNOSE</div>
-  <div class="audit-intro reveal">
-    <div class="audit-copy">
-      <p class="eyebrow" data-en="The available solution" data-es="La solución disponible">The available solution</p>
-      <h2>The Atmosphere Audit</h2>
-      <p class="audit-truth" data-en="A property can look good online and still make a weak case for being chosen." data-es="Una propiedad puede verse bien en línea y aun así presentar un argumento débil para ser elegida.">A property can look good online and still make a weak case for being chosen.</p>
-      <p class="audit-summary-line" data-en="The Atmosphere Audit shows what is already working, where the property is losing clarity and what should change first." data-es="The Atmosphere Audit muestra qué ya funciona, dónde la propiedad pierde claridad y qué debería cambiar primero.">The Atmosphere Audit shows what is already working, where the property is losing clarity and what should change first.</p>
-      <a class="strong-cta" href="/atmosphere-audit/"><span data-en="Explore the Atmosphere Audit" data-es="Explorar The Atmosphere Audit">Explore the Atmosphere Audit</span><span aria-hidden="true">→</span></a>
-    </div>
-    </div>
-</section>
+  <section class="m6a" id="about" aria-labelledby="m6at"><p class="mk"><span class="num">06</span></p><div class="m6a-grid"><div class="rv"><h2 id="m6at">Hospitality came first.</h2><p>EXIF grew inside resorts across Mexico and the Caribbean, moving between photography, sales, guest experience and operations.</p><p>That experience became a practice focused on what a place communicates before the stay begins.</p></div><div class="m6a-fig rv rv-fig"><img src="/founder.jpg" alt="Reviewing photographs inside a property" width="1100" height="1300" /></div></div></section>
 
-<section class="reset-section" id="reset">
-  <div class="service-index">03 / COMING NEXT</div>
-  <div class="reset-placeholder reveal">
-    <p class="eyebrow" data-en="Next phase" data-es="Siguiente fase">Next phase</p>
-    <h2>The Visual Reset</h2>
-    <p data-en="For properties ready to realign how they are expressed across image, direction and presentation." data-es="Para propiedades listas para realinear cómo se expresan a través de la imagen, la dirección y la presentación.">For properties ready to realign how they are expressed across image, direction and presentation.</p>
-    <span class="coming-soon" data-en="Coming soon" data-es="Próximamente">Coming soon</span>
-  </div>
-</section>
-
-
-<section class="founder-section about-summary-section" id="about">
-  <div class="about-summary reveal">
-    <div class="about-summary-copy">
-      <p class="eyebrow" data-en="04 / About" data-es="04 / Sobre EXIF">04 / About</p>
-      <h2 data-en="Hospitality came first." data-es="La hospitalidad fue primero.">Hospitality came first.</h2>
-      <p data-en="EXIF grew from direct experience inside resorts across Mexico and the Caribbean. Working across photography, sales, guest experience and operations shaped a practical understanding of how properties are seen, chosen and experienced." data-es="EXIF surgió de la experiencia directa dentro de resorts en México y el Caribe. El trabajo en fotografía, ventas, experiencia del huésped y operación formó una comprensión práctica de cómo las propiedades son vistas, elegidas y vividas.">EXIF grew from direct experience inside resorts across Mexico and the Caribbean. Working across photography, sales, guest experience and operations shaped a practical understanding of how properties are seen, chosen and experienced.</p>
-      <p class="about-close" data-en="That is where our work begins." data-es="Ahí comienza nuestro trabajo.">That is where our work begins.</p>
-    </div>
-    <div aria-label="Behind the scenes hospitality work" class="about-summary-image image-slot image-founder" role="img"></div>
-  </div>
-</section>
-
-<section class="faq-section" id="faq">
-  <div class="faq-heading reveal"><p class="eyebrow" data-en="Before you reach out" data-es="Antes de escribirnos">Before you reach out</p><h2 data-en="Common questions." data-es="Preguntas frecuentes.">Common questions.</h2></div>
-  <div class="faq-list reveal">
-    <details><summary data-en="Is this just photography?" data-es="¿Esto es solo fotografía?">Is this just photography?</summary><p data-en="No. Photography may be part of the work, but EXIF begins by identifying what the property needs to communicate more clearly." data-es="No. La fotografía puede formar parte del trabajo, pero EXIF comienza identificando qué necesita comunicar la propiedad con mayor claridad.">No. Photography may be part of the work, but EXIF begins by identifying what the property needs to communicate more clearly.</p></details>
-    <details><summary data-en="Does the Audit stand on its own?" data-es="¿La auditoría funciona por sí sola?">Does the Audit stand on its own?</summary><p data-en="Yes. The Initial Report is designed to be useful even if no further work follows." data-es="Sí. The Initial Report está diseñado para ser útil incluso si no continúa ningún trabajo posterior.">Yes. The Initial Report is designed to be useful even if no further work follows.</p></details>
-    <details><summary data-en="How much time does it require from our team?" data-es="¿Cuánto tiempo requiere de nuestro equipo?">How much time does it require from our team?</summary><p data-en="Very little. The Audit is based primarily on existing public channels and materials." data-es="Muy poco. La auditoría se basa principalmente en canales y materiales públicos existentes.">Very little. The Audit is based primarily on existing public channels and materials.</p></details>
-  </div>
-</section>
-
-<section class="closing-section" id="contact">
-  <div class="contact-layout">
-    <div class="contact-intro reveal">
-      <p class="eyebrow" data-en="05 / Contact" data-es="05 / Contacto">05 / Contact</p>
-      <h2 data-en="Tell us about the property." data-es="Cuéntanos sobre la propiedad.">Tell us about the property.</h2>
-      <p data-en="Share the website and tell us what is happening at the property right now." data-es="Comparte el sitio web y cuéntanos qué está ocurriendo ahora mismo en la propiedad.">Share the website and tell us what is happening at the property right now.</p>
-      <p class="contact-direct"><a href="mailto:hello@exif.studio"><span data-en="Prefer email? hello@exif.studio" data-es="¿Prefieres escribir por correo? hello@exif.studio">Prefer email? hello@exif.studio</span></a></p>
-    </div>
-    <form action="https://formspree.io/f/xgojyjpq" class="contact-form reveal" data-contact-form method="post" novalidate>
-      <input name="_subject" type="hidden" value="New EXIF website inquiry"/>
-      <div aria-hidden="true" class="form-honeypot"><label for="_gotcha">Company</label><input autocomplete="off" id="_gotcha" name="_gotcha" tabindex="-1" type="text"/></div>
-      <div class="form-field"><label data-en="Name *" data-es="Nombre *" for="name">Name *</label><input autocomplete="name" id="name" name="name" required type="text"/></div>
-      <div class="form-field"><label data-en="Work email *" data-es="Correo de trabajo *" for="email">Work email *</label><input autocomplete="email" id="email" name="email" required type="email"/></div>
-      <div class="form-field"><label data-en="Property name *" data-es="Nombre de la propiedad *" for="property">Property name *</label><input autocomplete="organization" id="property" name="property" required type="text"/></div>
-      <div class="form-field"><label data-en="Property website *" data-es="Sitio web de la propiedad *" for="website">Property website *</label><input id="website" name="website" placeholder="https://" required type="url"/></div>
-      <div class="form-field form-field-full"><label data-en="What is happening at the property right now?" data-es="¿Qué está ocurriendo ahora mismo en la propiedad?" for="message">What is happening at the property right now?</label><textarea data-en-placeholder="For example: we are renovating, preparing for a new production, updating the website photography, repositioning the property or looking for an external perspective before making decisions." data-es-placeholder="Por ejemplo: estamos renovando, preparando una nueva producción, actualizando las fotografías del sitio web, reposicionando la propiedad o buscando una perspectiva externa antes de tomar decisiones." id="message" maxlength="2000" name="message" rows="6"></textarea></div>
-      <div class="form-actions form-field-full"><button class="button-light" data-en="Send property details" data-es="Enviar datos de la propiedad" data-submit-label type="submit">Send property details</button><p aria-live="polite" class="form-status" data-form-status role="status"></p></div>
-    </form>
-  </div>
-  <div class="closing-coordinate">EXIF / MX · CARIBBEAN / 2026</div><footer><span>EXIF.</span><span>hello@exif.studio</span><span data-en="Mexico · The Caribbean · Available worldwide" data-es="México · El Caribe · Disponibilidad mundial">Mexico · The Caribbean · Available worldwide</span></footer>
-</section>
+  <section class="m6b" id="contact" aria-labelledby="m6bt"><h2 id="m6bt" class="rv">Tell us about the place.</h2><div class="m6b-grid"><div class="m6b-intro rv"><p>Share the property website and what is happening right now: a shoot, a website update, a repositioning, a launch, or the need for an outside reading.</p><a class="mail" href="mailto:hello@exif.studio?subject=Property%20inquiry">hello@exif.studio</a></div><form action="https://formspree.io/f/xgojyjpq" method="post" class="cform rv" id="cform"><input type="hidden" name="_subject" value="New EXIF website inquiry" /><div class="hp" aria-hidden="true"><label for="_gotcha">Company</label><input id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" type="text" /></div><div class="ff"><label for="name">Name *</label><input id="name" name="name" autocomplete="name" required type="text" /></div><div class="ff"><label for="email">Work email *</label><input id="email" name="email" autocomplete="email" required type="email" /></div><div class="ff"><label for="property">Property name *</label><input id="property" name="property" autocomplete="organization" required type="text" /></div><div class="ff"><label for="website">Property website *</label><input id="website" name="website" placeholder="https://" required type="url" /></div><div class="ff fw"><label for="message">What is happening at the property right now?</label><textarea id="message" name="message" maxlength="2000"></textarea></div><div class="factions fw"><button class="fsubmit" type="submit" id="fsubmit">Send property details</button><p class="fstatus" id="fstatus" role="status" aria-live="polite"></p></div></form></div><footer class="footer"><span>EXIF.</span><nav aria-label="Footer"><a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="mailto:hello@exif.studio">hello@exif.studio</a></nav><span>Mexico · The Caribbean · Worldwide · 2026</span></footer></section>
 </main>
-<script src="/script.js?v=23"></script>
+<script>
+(function(){
+  'use strict';
+  var rm=document.documentElement.classList.contains('rm');
+  var menuBtn=document.getElementById('menuBtn'),menuClose=document.getElementById('menuClose'),menu=document.getElementById('menu'),lastFocus=null;
+  function openMenu(){lastFocus=document.activeElement;menuBtn.setAttribute('aria-expanded','true');menu.classList.add('open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';menuClose.focus()}
+  function closeMenu(){menuBtn.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';(lastFocus&&document.contains(lastFocus)?lastFocus:menuBtn).focus()}
+  menuBtn.addEventListener('click',function(){menuBtn.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()});menuClose.addEventListener('click',closeMenu);menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open'))closeMenu()});menu.addEventListener('keydown',function(e){if(e.key!=='Tab'||!menu.classList.contains('open'))return;var f=menu.querySelectorAll('a[href],button'),first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
+  var tabs=[].slice.call(document.querySelectorAll('.ch-tab')),states=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))}),current=0,switching=false;
+  function setTab(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(j===i));t.tabIndex=j===i?0:-1})}
+  function show(i){if(i===current||switching)return;switching=true;setTab(i);var from=states[current],to=states[i];current=i;if(rm){from.hidden=true;to.hidden=false;switching=false;return}from.classList.add('out');setTimeout(function(){from.hidden=true;from.classList.remove('out');to.classList.add('pre');to.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){to.classList.remove('pre');switching=false})})},340)}
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i)});t.addEventListener('keydown',function(e){var n=null;if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%tabs.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i-1+tabs.length)%tabs.length;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;if(n!==null){e.preventDefault();tabs[n].focus();show(n)}})});states.forEach(function(s,i){s.hidden=i!==0});setTab(0);
+  var m1=document.getElementById('m1'),fig=document.getElementById('heroFig'),frame=document.getElementById('heroFrame'),s1=document.getElementById('slot1'),s2=document.getElementById('slot2'),head=document.getElementById('heroTitle').parentElement,bar=document.getElementById('progressBar'),fx=!rm;
+  if(!fx)m1.classList.add('no-fx');
+  function clamp(v){return Math.max(0,Math.min(1,v))}function ease(p){return p*p*(3-2*p)}
+  var heroTop=0,heroLen=1;
+  function measureHero(){heroTop=m1.offsetTop;heroLen=Math.max(1,m1.offsetHeight-window.innerHeight);head.style.opacity='1';head.style.transform='none'}
+  function frameLoop(){
+    var doc=document.documentElement,
+        st=window.scrollY||doc.scrollTop||0,
+        sc=Math.max(1,doc.scrollHeight-window.innerHeight);
+    bar.style.transform='scaleX('+clamp(st/sc)+')';
+    if(fx){
+      var r=m1.getBoundingClientRect(),
+          travel=Math.max(1,Math.min(window.innerHeight*.72,m1.offsetHeight)),
+          p=clamp((-r.top+window.innerHeight*.08)/travel),
+          e=ease(p);
+      fig.style.transform='translate3d('+(-e*5.5)+'vw,'+(e*.5)+'vh,0) scale('+(1-.31*e)+')';
+      frame.style.opacity=clamp((p-.34)/.34);
+      var so=clamp((p-.42)/.34);
+      s1.style.opacity=so;s1.style.transform='translate3d('+(22-22*so)+'px,0,0)';
+      var so2=clamp((p-.54)/.34);
+      s2.style.opacity=so2;s2.style.transform='translate3d('+(22-22*so2)+'px,0,0)';
+    }
+    ticking=false;
+  }
+  var ticking=false;
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frameLoop)}}
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  addEventListener('load',onScroll,{once:true});
+  requestAnimationFrame(frameLoop);
+  var revs=document.querySelectorAll('.rv,.rv-fig,.m3');if(rm||!('IntersectionObserver' in window)){revs.forEach(function(el){el.classList.add('in')})}else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.16});revs.forEach(function(el){io.observe(el)})}
+  var form=document.getElementById('cform'),btn=document.getElementById('fsubmit'),status=document.getElementById('fstatus');form.addEventListener('submit',function(e){if(!window.fetch)return;e.preventDefault();if(!form.reportValidity())return;btn.disabled=true;status.textContent='Sending…';fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}}).then(function(res){if(res.ok){status.textContent='Received. EXIF will reply from hello@exif.studio.';form.reset()}else{status.textContent='The message could not be sent. Write to hello@exif.studio instead.'}}).catch(function(){status.textContent='The message could not be sent. Check the connection or write to hello@exif.studio.'}).finally(function(){btn.disabled=false})});
+})();
+</script>
 </body>
 </html>
