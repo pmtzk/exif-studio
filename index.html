@@ -16,7 +16,7 @@
   <meta name="twitter:description" content="A study of how hospitality properties are perceived and compared before guests arrive." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root{
       --paper:#F1EBDF;
@@ -25,8 +25,8 @@
       --meta:#6E6759;
       --line:rgba(13,42,34,.16);
       --line-inv:rgba(241,235,223,.24);
-      --serif:"Libre Caslon Display", Georgia, serif;
-      --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+      --serif:"Cormorant Garamond", Georgia, serif;
+      --sans:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
       --ease:cubic-bezier(.22,.61,.21,1);
       --pad:clamp(20px,4.5vw,64px);
     }
@@ -49,6 +49,9 @@
     .nav-desktop{display:none;gap:32px;align-items:center}
 
     .lang-switch{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--meta)}
+    .lang-switch button{padding:0;color:inherit;opacity:.42}
+    .lang-switch button[aria-pressed="true"]{opacity:1}
+    .lang-switch .dot{opacity:.72}
     .header.menu-open .lang-switch{color:rgba(241,235,223,.72)}
     .menu .lang-switch{color:rgba(241,235,223,.72)}
 
@@ -81,80 +84,58 @@
     .mk{display:flex;align-items:center;gap:14px;margin-bottom:clamp(22px,3.5vh,40px)}
     .mk::after{content:"";height:1px;background:var(--line);flex:0 0 44px}
 
-    .m1{position:relative;min-height:calc(100vh - 60px);padding:76px var(--pad) 48px}
-    .m1.no-fx{min-height:auto}
-    .m1-sticky{position:relative;min-height:calc(100vh - 124px);overflow:hidden;display:flex;flex-direction:column;padding:0;transform:translateZ(0);backface-visibility:hidden}
-    .m1.no-fx .m1-sticky{position:relative;min-height:auto;padding-bottom:0}
+    .m1{position:relative;padding:82px var(--pad) clamp(58px,9vh,104px)}
+    .m1-sticky{position:relative;display:flex;flex-direction:column;min-height:auto;overflow:visible}
     .m1-head{position:relative;z-index:3;max-width:1200px}
-    .m1-head h1{font-size:clamp(2.7rem,7.1vw,6.35rem);line-height:.99;max-width:15.5ch}
+    .m1-head h1{font-size:clamp(2.9rem,7.2vw,6.6rem);line-height:.96;max-width:15ch}
     .m1-head h1 em{font-style:italic}
-    .m1-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(16px,2.5vh,26px)}
-    .m1-sub p{max-width:44ch;font-size:clamp(.95rem,1.2vw,1.1rem);font-weight:300;line-height:1.5}
+    .m1-sub{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:clamp(18px,2.8vh,30px)}
+    .m1-sub p{max-width:44ch;font-size:clamp(.95rem,1.2vw,1.08rem);font-weight:300;line-height:1.5}
     .m1-cue{display:flex;flex-direction:column;align-items:center;gap:10px;flex:0 0 auto}
     .m1-cue span{font-size:.66rem;font-weight:500;letter-spacing:.18em;color:var(--meta)}
     .m1-cue i{display:block;width:1px;height:52px;background:var(--green);opacity:.45}
-    .m1-stage{position:relative;flex:1;margin-top:clamp(18px,3vh,34px)}
-    .m1-fig{position:absolute;inset:0;overflow:hidden;background:#c8c2b4;transform-origin:32% 86%;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden;box-shadow:0 16px 34px rgba(13,42,34,.10)}
-    .m1-fig img{width:100%;height:100%;object-fit:cover;transform:translateZ(0);backface-visibility:hidden}
-    .m1-frame{position:absolute;inset:0;border:1px solid var(--green);opacity:0;pointer-events:none}
-    .m1-slot{position:absolute;top:42%;height:42%;width:22%;background:rgba(241,235,223,.78);border:1px solid var(--line);opacity:0;transform:translateX(26px);will-change:transform,opacity;display:flex;flex-direction:column;justify-content:space-between;padding:12px}
-    .m1-slot::before{font-size:.56rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
-    .m1-slot::after{content:"";display:block;height:1px;width:58%;background:var(--line)}
-    .m1-slot.s1{left:53%}.m1-slot.s1::before{content:"OTA"}
-    .m1-slot.s2{left:77%}.m1-slot.s2::before{content:"Social"}
-    .m1.no-fx .m1-fig{position:relative;inset:auto;height:min(62svh,640px)}
-    .m1.no-fx .m1-slot,.m1.no-fx .m1-frame{display:none}
+    .m1-stage{position:relative;margin-top:clamp(42px,7vh,84px)}
+    .m1-fig{position:relative;overflow:hidden;background:#c8c2b4;box-shadow:0 18px 38px rgba(13,42,34,.10)}
+    .m1-fig img{width:100%;height:clamp(380px,64vh,740px);object-fit:cover;object-position:center 48%}
+    html.js:not(.rm) .m1-fig{clip-path:inset(0 0 18% 0);transition:clip-path 1s var(--ease)}
+    html.js:not(.rm) .m1-fig.in{clip-path:inset(0 0 0 0)}
+    html.js:not(.rm) .m1-fig img{transform:scale(1.025);transition:transform 1.15s var(--ease)}
+    html.js:not(.rm) .m1-fig.in img{transform:scale(1)}
+    .m1-frame,.m1-slot{display:none!important}
     @media(max-width:899px){
-      .m1{min-height:auto;padding:78px var(--pad) 40px}
-      .m1-sticky{min-height:calc(100svh - 118px);padding-top:0}
-      .m1-fig{transform-origin:38% 88%}
-      .m1-slot{top:48%;height:34%;width:24%;padding:9px}
-      .m1-slot.s1{left:49%}.m1-slot.s2{left:75%}
+      .m1{padding:78px var(--pad) 46px}
+      .m1-fig img{height:clamp(380px,58vh,620px)}
     }
 
-    .m2{padding:clamp(76px,13vh,138px) var(--pad) clamp(66px,10vh,112px);position:relative}
-    .m2 h2{font-size:clamp(1.9rem,4.4vw,3.9rem);line-height:1.02;max-width:24ch}
-    .ch-tabs{display:flex;gap:clamp(18px,3vw,40px);margin-top:clamp(26px,4vh,44px);border-bottom:1px solid var(--line)}
-    html:not(.js) .ch-tabs{display:none}
-    .ch-tab{padding:12px 2px 13px;margin-bottom:-1px;font-family:var(--serif);font-size:clamp(1.15rem,2vw,1.6rem);line-height:1;color:var(--meta);border-bottom:1px solid transparent;transition:color .25s ease}
-    .ch-tab[aria-selected="true"]{color:var(--green);border-bottom-color:var(--green)}
-    .ch-tab .ct{font-family:var(--sans);font-size:.62rem;font-weight:500;letter-spacing:.14em;vertical-align:super;margin-left:4px}
-    .ch-stage{position:relative;margin-top:clamp(26px,4.5vh,46px)}
-    .ch-state{display:grid;grid-template-columns:1fr;gap:24px}
-    html:not(.js) .ch-state + .ch-state{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
-    html.js .ch-state{position:relative}
-    html.js .ch-state[hidden]{display:none}
-    html.js .ch-state{opacity:1;transform:none;transition:opacity .34s var(--ease),transform .34s var(--ease)}
-    html.js .ch-state.out{opacity:0;transform:translateY(10px)}
-    html.js .ch-state.pre{opacity:0;transform:translateY(14px)}
-    .ch-visual{position:relative}
-    .ch-copy{display:flex;flex-direction:column;gap:16px;justify-content:flex-end}
-    .ch-copy .st{font-family:var(--serif);font-size:clamp(1.5rem,2.7vw,2.5rem);line-height:1.06;max-width:19ch}
-    .ch-copy .cm{display:flex;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);font-size:.66rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--meta)}
-    .cv-site{height:clamp(300px,56vh,560px);overflow:hidden;box-shadow:0 26px 60px rgba(13,42,34,.14)}
-    .cv-site img{width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:saturate(.78) contrast(.98)}
-    .cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .cv-listing{border:1px solid var(--line);background:rgba(241,235,223,.62);padding:7px;display:grid;gap:7px;min-width:0}
-    .cv-listing .listing-image{aspect-ratio:4/3;overflow:hidden;background:rgba(183,176,162,.22)}
-    .cv-listing .listing-image img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(.98)}
-    .cv-listing.primary{background:var(--paper)}
-    .cv-listing.primary .listing-image img{object-position:center 52%}
-    .cv-listing.a2 .listing-image img{object-position:center 44%}
-    .cv-listing.a3 .listing-image img{object-position:center 58%}
-    .cv-listing.a4 .listing-image img{object-position:center 48%}
-    .listing-data{display:flex;justify-content:space-between;gap:8px;padding-top:2px;font-size:.58rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--meta)}
-    .cv-reel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;align-items:start}
-    .cv-reel figure{margin:0;overflow:hidden;height:clamp(230px,42vh,430px);background:rgba(183,176,162,.24)}
-    .cv-reel figure:nth-child(2){transform:translateY(22px)}
-    .cv-reel figure:nth-child(3){transform:translateY(44px)}
-    .cv-reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.76) contrast(.98)}
-    .cv-reel .p1 img{object-position:10% 52%;transform:scale(1.34)}
-    .cv-reel .p2 img{object-position:50% 62%;transform:scale(1.48)}
-    .cv-reel .p3 img{object-position:92% 46%;transform:scale(1.34)}
-    .ch-state.visual-only{display:block}
-    .ch-state.visual-only .ch-visual{width:100%}
-    @media(min-width:900px){.ch-state{grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,64px);align-items:end}}
-    @media(max-width:520px){.cv-grid{grid-template-columns:1fr 1fr}.cv-grid .c3{display:none}.cv-reel{gap:8px}.cv-reel figure{height:180px}}
+    .m2{padding:clamp(84px,14vh,150px) var(--pad) clamp(84px,13vh,142px);position:relative}
+    .m2-head{display:flex;justify-content:space-between;gap:30px;align-items:flex-start}
+    .m2 h2{font-size:clamp(2rem,4.6vw,4rem);line-height:1.02;max-width:18ch}
+    .field{position:relative;min-height:clamp(420px,64vh,690px);margin-top:clamp(44px,7vh,78px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+    .field-shape{position:absolute;border:1px solid var(--green);background:transparent;transition:transform 1.2s var(--ease),width 1.2s var(--ease),height 1.2s var(--ease),left 1.2s var(--ease),top 1.2s var(--ease),opacity .7s ease}
+    .field-shape::before{content:"";position:absolute;left:10%;right:32%;bottom:14%;height:1px;background:var(--line)}
+    .field-shape.a{left:4%;top:12%;width:28%;height:33%}
+    .field-shape.b{left:48%;top:8%;width:42%;height:24%}
+    .field-shape.c{left:18%;top:58%;width:34%;height:27%}
+    .field-shape.d{left:64%;top:48%;width:23%;height:38%}
+    .field.is-aligned .field-shape{width:20%;height:31%;top:34%}
+    .field.is-aligned .field-shape.a{left:6%}
+    .field.is-aligned .field-shape.b{left:29%}
+    .field.is-aligned .field-shape.c{left:52%}
+    .field.is-aligned .field-shape.d{left:75%}
+    .field-caption{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:space-between;gap:20px;align-items:flex-end}
+    .field-caption p{font-family:var(--serif);font-size:clamp(1.45rem,2.8vw,2.3rem);line-height:1.05;max-width:24ch;opacity:0;transform:translateY(12px);transition:opacity .7s ease .55s,transform .7s var(--ease) .55s}
+    .field.is-aligned .field-caption p{opacity:1;transform:none}
+    .field-trigger{position:absolute;inset:0;z-index:2;background:transparent}
+    .field-trigger:focus-visible{outline:2px solid var(--green);outline-offset:-4px}
+    @media(max-width:720px){
+      .field{min-height:520px}
+      .field.is-aligned .field-shape{width:41%;height:25%}
+      .field.is-aligned .field-shape.a{left:5%;top:24%}
+      .field.is-aligned .field-shape.b{left:54%;top:24%}
+      .field.is-aligned .field-shape.c{left:5%;top:53%}
+      .field.is-aligned .field-shape.d{left:54%;top:53%}
+      .field-caption{bottom:18px}
+    }
 
     .m3{position:relative;background:var(--green);color:var(--paper);padding:clamp(90px,17vh,180px) var(--pad)}
     .m3 .thread{position:absolute;left:calc(var(--pad) + 3px);top:-46px;width:1px;height:92px;background:var(--green)}
@@ -165,6 +146,11 @@
     html:not(.js) .m3 .w b,.rm .m3 .w b{transform:none}
     .m3.in .w b{transform:translateY(0);transition:transform .7s var(--ease)}
     .m3.in .w:nth-child(2) b{transition-delay:.05s}.m3.in .w:nth-child(3) b{transition-delay:.1s}.m3.in .w:nth-child(4) b{transition-delay:.15s}.m3.in .w:nth-child(5) b{transition-delay:.2s}.m3.in .w:nth-child(6) b{transition-delay:.25s}.m3.in .w:nth-child(7) b{transition-delay:.3s}.m3.in .w:nth-child(8) b{transition-delay:.35s}.m3.in .w:nth-child(9) b{transition-delay:.4s}
+
+
+    .m4-entry.simple{grid-template-columns:1fr;justify-items:start}
+    .m4-entry.simple .ob-actions{display:flex;align-items:center;gap:20px}
+    .m4-entry.simple .rd{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--green);padding-bottom:4px}
 
     .m4{background:rgba(183,176,162,.28);padding:clamp(72px,12vh,128px) var(--pad)}
     .m4-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
@@ -255,7 +241,7 @@
 <header class="header">
   <a class="brand" href="/" aria-label="EXIF home">EXIF.</a>
   <nav class="nav-desktop" aria-label="Main">
-    <a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="#about">About</a><a href="#contact">Contact</a><span class="lang-switch" aria-label="Language"><span aria-current="page">EN</span><span>•</span><span>ES</span></span>
+    <a href="/observations/" data-i18n="observations">Observations</a><a href="/atmosphere-audit/" data-i18n="audit_nav">Atmosphere Audit</a><a href="#about" data-i18n="about_nav">About</a><a href="#contact" data-i18n="contact_nav">Contact</a><span class="lang-switch" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span class="dot" aria-hidden="true">•</span><button type="button" data-lang="es" aria-pressed="false">ES</button></span><span>•</span><span>ES</span></span>
   </nav>
   <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span class="b"></span></button>
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
@@ -263,66 +249,43 @@
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
   <div class="menu-top" aria-hidden="true"><span></span><span></span></div>
   <nav aria-label="Main, mobile"><ul class="menu-list">
-    <li><a href="/"><span>01</span>Home</a></li><li><a href="/observations/"><span>02</span>Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span>Atmosphere Audit</a></li><li><a href="#about"><span>04</span>About</a></li><li><a href="#contact"><span>05</span>Contact</a></li>
+    <li><a href="/"><span>01</span data-i18n="home_nav">Home</a></li><li><a href="/observations/"><span>02</span data-i18n="observations">Observations</a></li><li><a href="/atmosphere-audit/"><span>03</span data-i18n="audit_nav">Atmosphere Audit</a></li><li><a href="#about"><span>04</span data-i18n="about_nav">About</a></li><li><a href="#contact"><span>05</span data-i18n="contact_nav">Contact</a></li>
   </ul></nav>
-  <div class="menu-foot"><span>Mexico · The Caribbean · Worldwide</span><span class="lang-switch" aria-label="Language"><span aria-current="page">EN</span><span>•</span><span>ES</span></span><a href="mailto:hello@exif.studio">hello@exif.studio</a></div>
+  <div class="menu-foot"><span>Mexico · The Caribbean · Worldwide</span><span class="lang-switch" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><span class="dot" aria-hidden="true">•</span><button type="button" data-lang="es" aria-pressed="false">ES</button></span><span>•</span><span>ES</span></span><a href="mailto:hello@exif.studio">hello@exif.studio</a></div>
 </div>
 <main id="main">
   <section class="m1" id="m1" aria-label="Opening">
     <div class="m1-sticky">
-      <div class="m1-head"><h1 id="heroTitle">Guests choose a <em>representation</em> before they experience the place.</h1><div class="m1-sub"><p>EXIF studies the distance between the place that exists and the version guests compare.</p><div class="m1-cue" aria-hidden="true"><span>01</span><i></i></div></div></div>
-      <div class="m1-stage" id="heroStage"><div class="m1-fig" id="heroFig"><img src="/hero.jpg" alt="Hospitality interior in warm natural light" width="1600" height="1000" /><span class="m1-frame" id="heroFrame"></span></div><span class="m1-slot s1" id="slot1" aria-hidden="true"></span><span class="m1-slot s2" id="slot2" aria-hidden="true"></span></div>
+      <div class="m1-head">
+        <h1 id="heroTitle" data-i18n="hero_title">Guests choose a <em>representation</em> before they experience the place.</h1>
+        <div class="m1-sub">
+          <p data-i18n="hero_sub">EXIF studies the distance between the place that exists and the version guests compare.</p>
+          <div class="m1-cue" aria-hidden="true"><span>01</span><i></i></div>
+        </div>
+      </div>
+      <div class="m1-stage">
+        <div class="m1-fig rv-fig">
+          <img src="/hero.jpg" alt="Hospitality interior in warm natural light" width="1600" height="1000" />
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="m2" aria-labelledby="m2t">
-    <p class="mk"><span class="num">02</span></p>
-    <h2 id="m2t" class="rv">The property stays the same.</h2>
-    <div class="ch-tabs" role="tablist" aria-label="Where the property is viewed">
-      <button class="ch-tab" role="tab" id="tabW" aria-selected="true" aria-controls="stW" type="button">Website<span class="ct">01</span></button>
-      <button class="ch-tab" role="tab" id="tabO" aria-selected="false" aria-controls="stO" tabindex="-1" type="button">OTA<span class="ct">02</span></button>
-      <button class="ch-tab" role="tab" id="tabS" aria-selected="false" aria-controls="stS" tabindex="-1" type="button">Social<span class="ct">03</span></button>
+    <div class="m2-head">
+      <p class="mk"><span class="num">02</span></p>
+      <span class="k" data-i18n="field_hint">Tap to align</span>
     </div>
-    <div class="ch-stage">
-      <div class="ch-state visual-only" id="stW" role="tabpanel" aria-labelledby="tabW">
-        <div class="ch-visual rv rv-fig">
-          <div class="cv-site">
-            <img src="/website.jpg" alt="The property shown with room for context and sequence" width="1400" height="900" />
-          </div>
-        </div>
-      </div>
-
-      <div class="ch-state visual-only" id="stO" role="tabpanel" aria-labelledby="tabO">
-        <div class="ch-visual">
-          <div class="cv-grid" aria-label="Four properties shown at equal scale">
-            <article class="cv-listing primary">
-              <div class="listing-image"><img src="/website.jpg" alt="The property shown as one listing among alternatives" width="640" height="480" /></div>
-              <div class="listing-data"><span>$280</span><span>4.9</span></div>
-            </article>
-            <article class="cv-listing a2" aria-hidden="true">
-              <div class="listing-image"><img src="/ota.jpg" alt="" width="640" height="480" /></div>
-              <div class="listing-data"><span>$245</span><span>4.8</span></div>
-            </article>
-            <article class="cv-listing a3" aria-hidden="true">
-              <div class="listing-image"><img src="/social.jpg" alt="" width="640" height="480" /></div>
-              <div class="listing-data"><span>$310</span><span>4.9</span></div>
-            </article>
-            <article class="cv-listing a4" aria-hidden="true">
-              <div class="listing-image"><img src="/in-person.jpg" alt="" width="640" height="480" /></div>
-              <div class="listing-data"><span>$270</span><span>4.7</span></div>
-            </article>
-          </div>
-        </div>
-      </div>
-
-      <div class="ch-state visual-only" id="stS" role="tabpanel" aria-labelledby="tabS">
-        <div class="ch-visual">
-          <div class="cv-reel" aria-label="Three fragments cropped from the same property image">
-            <figure class="p1"><img src="/website.jpg" alt="First fragment of the property image" width="500" height="700" /></figure>
-            <figure class="p2"><img src="/website.jpg" alt="Second fragment of the same property image" width="500" height="700" /></figure>
-            <figure class="p3"><img src="/website.jpg" alt="Third fragment of the same property image" width="500" height="700" /></figure>
-          </div>
-        </div>
+    <h2 id="m2t" class="rv" data-i18n="field_title">Difference can disappear without anything actually changing.</h2>
+    <div class="field rv" id="field">
+      <button class="field-trigger" id="fieldTrigger" type="button" aria-label="Align the composition"></button>
+      <span class="field-shape a" aria-hidden="true"></span>
+      <span class="field-shape b" aria-hidden="true"></span>
+      <span class="field-shape c" aria-hidden="true"></span>
+      <span class="field-shape d" aria-hidden="true"></span>
+      <div class="field-caption">
+        <p data-i18n="field_caption">The system changed. The place did not.</p>
+        <span class="k" aria-hidden="true">01—04</span>
       </div>
     </div>
   </section>
@@ -330,16 +293,27 @@
   <section class="m3" id="m3" aria-labelledby="m3t"><span class="thread" aria-hidden="true"></span><h2 id="m3t"><span class="w"><b>A&nbsp;</b></span><span class="w"><b>distinctive&nbsp;</b></span><span class="w"><b>place&nbsp;</b></span><span class="w"><b>can&nbsp;</b></span><span class="w"><b>still&nbsp;</b></span><span class="w"><b>become&nbsp;</b></span><span class="w"><b>an&nbsp;</b></span><span class="w"><b><em>ordinary</em>&nbsp;</b></span><span class="w"><b>choice.</b></span></h2></section>
 
   <section class="m4" aria-labelledby="m4t">
-    <div class="m4-head"><h2 id="m4t">Observations</h2><div class="side"><span class="k">A publication by EXIF</span><a class="k" href="/observations/">Archive →</a></div></div>
-    <article class="m4-entry"><a class="ob-cover rv" href="/observations/becoming-comparable/" aria-label="Observation 01, Becoming Comparable"><span class="top"><span>EXIF</span><span>Observations</span></span><span class="ttl">Becoming Comparable</span><span class="bt"><span>2026</span><span class="n">01</span></span></a><div class="m4-meta rv"><h3><a href="/observations/becoming-comparable/"><em>Becoming</em> Comparable</a></h3><p>A study in what happens when distinct places are reorganized around the same dimensions of choice.</p><a class="rd" href="/observations/becoming-comparable/">Read Observation 01</a></div></article>
-    <div class="m4-continuation" aria-hidden="true"><span>Ongoing series</span><i></i></div>
+    <div class="m4-head">
+      <h2 id="m4t" data-i18n="observations" data-i18n="observations">Observations</h2>
+      <a class="k" href="/observations/" data-i18n="archive">Archive →</a>
+    </div>
+    <article class="m4-entry simple">
+      <a class="ob-cover rv" href="/observations/becoming-comparable/" aria-label="Observation 01, Becoming Comparable">
+        <span class="top"><span>EXIF</span><span data-i18n="observations" data-i18n="observations">Observations</span></span>
+        <span class="ttl" data-i18n="obs_title">Becoming Comparable</span>
+        <span class="bt"><span>2026</span><span class="n">01</span></span>
+      </a>
+      <div class="ob-actions">
+        <a class="rd" href="/observations/becoming-comparable/" data-i18n="read_obs">Read Observation 01</a>
+      </div>
+    </article>
   </section>
 
-  <section class="m5" aria-labelledby="m5t"><div class="m5-grid"><div class="m5-axes rv"><p class="mk"><span class="num">05</span></p><p class="k">What EXIF examines</p><h2 id="m5t">What becomes visible, comparable and worth changing.</h2><ol class="ax"><li><span class="an">Character</span><p>What makes the place memorable?</p></li><li><span class="an">Visibility</span><p>What can guests perceive while choosing?</p></li><li><span class="an">Comparison</span><p>Where does distinction give way to price and rating?</p></li><li><span class="an">Channels</span><p>What shifts between website, OTA and social?</p></li><li><span class="an">Priority</span><p>What should change first?</p></li></ol></div><div class="m5-audit"><div class="m5-fig rv rv-fig"><img src="/reset.jpg" alt="Two guests walking through the property landscape" width="1300" height="900" /></div><div class="m5-panel rv"><h3>The Atmosphere Audit.</h3><p class="ai">A structured review of how a property is currently perceived across the channels guests use to decide.</p><div class="m5-rows"><div><span>01</span><p>Preserve what already works.</p></div><div><span>02</span><p>Locate where distinction is lost.</p></div><div><span>03</span><p>See what guests will compare.</p></div><div><span>04</span><p>Decide what changes first.</p></div></div><a class="m5-cta" href="/atmosphere-audit/"><span>About the Atmosphere Audit</span><span aria-hidden="true">→</span></a></div><p class="m5-coda rv">Diagnosis first. Direction and production when needed.</p></div></div></section>
+  <section class="m5" aria-labelledby="m5t"><div class="m5-grid"><div class="m5-axes rv"><p class="mk"><span class="num">05</span></p><p class="k" data-i18n="what_exif">What EXIF examines</p><h2 id="m5t" data-i18n="audit_question">What should remain perceptible?</h2><ol class="ax"><li><span class="an">Character</span><p>What makes the place memorable?</p></li><li><span class="an">Visibility</span><p>What can guests perceive while choosing?</p></li><li><span class="an">Comparison</span><p>Where does distinction give way?</p></li><li><span class="an">Channels</span><p>What changes across channels?</p></li><li><span class="an">Priority</span><p>What should change first?</p></li></ol></div><div class="m5-audit"><div class="m5-fig rv rv-fig"><img src="/reset.jpg" alt="Two guests walking through the property landscape" width="1300" height="900" /></div><div class="m5-panel rv"><h3 data-i18n="audit_title">The Atmosphere Audit.</h3><p class="ai" data-i18n="audit_intro">An external reading before expensive decisions.</p><a class="m5-cta" href="/atmosphere-audit/"><span data-i18n="audit_link">About the Atmosphere Audit</span><span aria-hidden="true">→</span></a></div><p class="m5-coda rv" data-i18n="diagnosis_first">Diagnosis first.</p></div></div></section>
 
-  <section class="m6a" id="about" aria-labelledby="m6at"><p class="mk"><span class="num">06</span></p><div class="m6a-grid"><div class="rv"><h2 id="m6at">Hospitality came first.</h2><p>EXIF grew inside resorts across Mexico and the Caribbean, moving between photography, sales, guest experience and operations.</p><p>That experience became a practice focused on what a place communicates before the stay begins.</p></div><div class="m6a-fig rv rv-fig"><img src="/founder.jpg" alt="Reviewing photographs inside a property" width="1100" height="1300" /></div></div></section>
+  <section class="m6a" id="about" aria-labelledby="m6at"><p class="mk"><span class="num">06</span></p><div class="m6a-grid"><div class="rv"><h2 id="m6at" data-i18n="about_title">Hospitality came first.</h2><p><span data-i18n="about_p1">EXIF grew inside resorts across Mexico and the Caribbean, moving between photography, sales, guest experience and operations.</span></p><p><span data-i18n="about_p2">That experience became a practice focused on what a place communicates before the stay begins.</span></p></div><div class="m6a-fig rv rv-fig"><img src="/reset.jpg" alt="Two guests walking through the property landscape" width="1100" height="1300" /></div></div></section>
 
-  <section class="m6b" id="contact" aria-labelledby="m6bt"><h2 id="m6bt" class="rv">Tell us about the place.</h2><div class="m6b-grid"><div class="m6b-intro rv"><p>Share the property website and what is happening right now: a shoot, a website update, a repositioning, a launch, or the need for an outside reading.</p><a class="mail" href="mailto:hello@exif.studio?subject=Property%20inquiry">hello@exif.studio</a></div><form action="https://formspree.io/f/xgojyjpq" method="post" class="cform rv" id="cform"><input type="hidden" name="_subject" value="New EXIF website inquiry" /><div class="hp" aria-hidden="true"><label for="_gotcha">Company</label><input id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" type="text" /></div><div class="ff"><label for="name">Name *</label><input id="name" name="name" autocomplete="name" required type="text" /></div><div class="ff"><label for="email">Work email *</label><input id="email" name="email" autocomplete="email" required type="email" /></div><div class="ff"><label for="property">Property name *</label><input id="property" name="property" autocomplete="organization" required type="text" /></div><div class="ff"><label for="website">Property website *</label><input id="website" name="website" placeholder="https://" required type="url" /></div><div class="ff fw"><label for="message">What is happening at the property right now?</label><textarea id="message" name="message" maxlength="2000"></textarea></div><div class="factions fw"><button class="fsubmit" type="submit" id="fsubmit">Send property details</button><p class="fstatus" id="fstatus" role="status" aria-live="polite"></p></div></form></div><footer class="footer"><span>EXIF.</span><nav aria-label="Footer"><a href="/observations/">Observations</a><a href="/atmosphere-audit/">Atmosphere Audit</a><a href="mailto:hello@exif.studio">hello@exif.studio</a></nav><span>Mexico · The Caribbean · Worldwide · 2026</span></footer></section>
+  <section class="m6b" id="contact" aria-labelledby="m6bt"><h2 id="m6bt" class="rv" data-i18n="contact_title">Tell us about the place.</h2><div class="m6b-grid"><div class="m6b-intro rv"><p><span data-i18n="contact_intro">Share the property website and what is happening right now: a shoot, a website update, a repositioning, a launch, or the need for an outside reading.</span></p><a class="mail" href="mailto:hello@exif.studio?subject=Property%20inquiry">hello@exif.studio</a></div><form action="https://formspree.io/f/xgojyjpq" method="post" class="cform rv" id="cform"><input type="hidden" name="_subject" value="New EXIF website inquiry" /><div class="hp" aria-hidden="true"><label for="_gotcha">Company</label><input id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" type="text" /></div><div class="ff"><label for="name" data-i18n="name">Name *</label><input id="name" name="name" autocomplete="name" required type="text" /></div><div class="ff"><label for="email" data-i18n="work_email">Work email *</label><input id="email" name="email" autocomplete="email" required type="email" /></div><div class="ff"><label for="property" data-i18n="property_name">Property name *</label><input id="property" name="property" autocomplete="organization" required type="text" /></div><div class="ff"><label for="website" data-i18n="property_website">Property website *</label><input id="website" name="website" placeholder="https://" required type="url" /></div><div class="ff fw"><label for="message" data-i18n="what_is_happening_at_the_property_right_now">What is happening at the property right now?</label><textarea id="message" name="message" maxlength="2000"></textarea></div><div class="factions fw"><button class="fsubmit" type="submit" id="fsubmit" data-i18n="send_property_details">Send property details</button><p class="fstatus" id="fstatus" role="status" aria-live="polite"></p></div></form></div><footer class="footer"><span>EXIF.</span><nav aria-label="Footer"><a href="/observations/" data-i18n="observations">Observations</a><a href="/atmosphere-audit/" data-i18n="audit_nav">Atmosphere Audit</a><a href="mailto:hello@exif.studio">hello@exif.studio</a></nav><span>Mexico · The Caribbean · Worldwide · 2026</span></footer></section>
 </main>
 <script>
 (function(){
@@ -349,49 +323,119 @@
   function openMenu(){lastFocus=document.activeElement;menuBtn.setAttribute('aria-expanded','true');menuBtn.setAttribute('aria-label','Close menu');menu.classList.add('open');header.classList.add('menu-open');menu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';menuBtn.focus()}
   function closeMenu(){menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Open menu');menu.classList.remove('open');header.classList.remove('menu-open');menu.setAttribute('aria-hidden','true');document.body.style.overflow='';menuBtn.focus()}
   menuBtn.addEventListener('click',function(){menuBtn.getAttribute('aria-expanded')==='true'?closeMenu():openMenu()});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open'))closeMenu()});menu.addEventListener('keydown',function(e){if(e.key!=='Tab'||!menu.classList.contains('open'))return;var links=[].slice.call(menu.querySelectorAll('a[href]')),first=menuBtn,last=links[links.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
-  var tabs=[].slice.call(document.querySelectorAll('.ch-tab')),states=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'))}),current=0,switching=false;
-  function setTab(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',String(j===i));t.tabIndex=j===i?0:-1})}
-  function show(i){if(i===current||switching)return;switching=true;setTab(i);var from=states[current],to=states[i];current=i;if(rm){from.hidden=true;to.hidden=false;switching=false;return}from.classList.add('out');setTimeout(function(){from.hidden=true;from.classList.remove('out');to.classList.add('pre');to.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){to.classList.remove('pre');switching=false})})},340)}
-  tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i)});t.addEventListener('keydown',function(e){var n=null;if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%tabs.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i-1+tabs.length)%tabs.length;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;if(n!==null){e.preventDefault();tabs[n].focus();show(n)}})});states.forEach(function(s,i){s.hidden=i!==0});setTab(0);
-  var m1=document.getElementById('m1'),fig=document.getElementById('heroFig'),frame=document.getElementById('heroFrame'),s1=document.getElementById('slot1'),s2=document.getElementById('slot2'),head=document.getElementById('heroTitle').parentElement,bar=document.getElementById('progressBar'),fx=!rm;
-  if(!fx)m1.classList.add('no-fx');
-  function clamp(v){return Math.max(0,Math.min(1,v))}function ease(p){return p*p*(3-2*p)}
-  var heroTop=0,heroLen=1;
-  function measureHero(){heroTop=m1.offsetTop;heroLen=Math.max(1,m1.offsetHeight-window.innerHeight);head.style.opacity='1';head.style.transform='none'}
+  var bar=document.getElementById('progressBar'),ticking=false;
+  function clamp(v){return Math.max(0,Math.min(1,v))}
   function frameLoop(){
-    var root=document.scrollingElement||document.documentElement,
-        st=root.scrollTop||window.pageYOffset||0,
-        viewport=window.visualViewport?window.visualViewport.height:window.innerHeight,
-        sc=Math.max(1,root.scrollHeight-viewport),
-        progress=clamp(st/sc);
-    bar.style.width=(progress*100).toFixed(3)+'%';
-    if(fx){
-      var r=m1.getBoundingClientRect(),
-          travel=Math.max(1,Math.min(window.innerHeight*.72,m1.offsetHeight)),
-          p=clamp((-r.top+window.innerHeight*.08)/travel),
-          e=ease(p);
-      fig.style.transform='translate3d('+(-e*5.5)+'vw,'+(e*.5)+'vh,0) scale('+(1-.31*e)+')';
-      frame.style.opacity=clamp((p-.34)/.34);
-      var so=clamp((p-.42)/.34);
-      s1.style.opacity=so;s1.style.transform='translate3d('+(22-22*so)+'px,0,0)';
-      var so2=clamp((p-.54)/.34);
-      s2.style.opacity=so2;s2.style.transform='translate3d('+(22-22*so2)+'px,0,0)';
-    }
+    var root=document.scrollingElement||document.documentElement;
+    var st=root.scrollTop||window.pageYOffset||0;
+    var sc=Math.max(1,root.scrollHeight-window.innerHeight);
+    bar.style.width=(clamp(st/sc)*100).toFixed(3)+'%';
     ticking=false;
   }
-  var ticking=false;
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frameLoop)}}
   addEventListener('scroll',onScroll,{passive:true});
   addEventListener('touchmove',onScroll,{passive:true});
   addEventListener('resize',onScroll,{passive:true});
   addEventListener('orientationchange',onScroll,{passive:true});
   addEventListener('pageshow',onScroll,{passive:true});
-  if(window.visualViewport){window.visualViewport.addEventListener('resize',onScroll,{passive:true});window.visualViewport.addEventListener('scroll',onScroll,{passive:true});}
-  addEventListener('load',onScroll,{once:true});
   requestAnimationFrame(frameLoop);
-  setTimeout(onScroll,60);
-  setTimeout(onScroll,350);
+
+  var field=document.getElementById('field');
+  var fieldTrigger=document.getElementById('fieldTrigger');
+  function toggleField(){field.classList.toggle('is-aligned')}
+  fieldTrigger.addEventListener('click',toggleField);
+  fieldTrigger.addEventListener('mouseenter',function(){field.classList.add('is-aligned')});
+
   var revs=document.querySelectorAll('.rv,.rv-fig,.m3');if(rm||!('IntersectionObserver' in window)){revs.forEach(function(el){el.classList.add('in')})}else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.16});revs.forEach(function(el){io.observe(el)})}
+
+  var translations={
+    en:{
+      hero_title:'Guests choose a <em>representation</em> before they experience the place.',
+      hero_sub:'EXIF studies the distance between the place that exists and the version guests compare.',
+      field_hint:'Tap to align',
+      field_title:'Difference can disappear without anything actually changing.',
+      field_caption:'The system changed. The place did not.',
+      observations:'Observations',
+      archive:'Archive →',
+      obs_title:'Becoming Comparable',
+      read_obs:'Read Observation 01',
+      what_exif:'What EXIF examines',
+      audit_question:'What should remain perceptible?',
+      audit_title:'The Atmosphere Audit.',
+      audit_intro:'An external reading before expensive decisions.',
+      audit_link:'About the Atmosphere Audit',
+      diagnosis_first:'Diagnosis first.',
+      about_title:'Hospitality came first.',
+      about_p1:'EXIF grew inside resorts across Mexico and the Caribbean, moving between photography, sales, guest experience and operations.',
+      about_p2:'That experience became a practice focused on what a place communicates before the stay begins.',
+      contact_title:'Tell us about the place.',
+      contact_intro:'Share the property website and what is happening right now: a shoot, a website update, a repositioning, a launch, or the need for an outside reading.',
+      observations_nav:'Observations',
+      audit_nav:'Atmosphere Audit',
+      about_nav:'About',
+      contact_nav:'Contact',
+      home_nav:'Home',
+      name:'Name *',
+      work_email:'Work email *',
+      property_name:'Property name *',
+      property_website:'Property website *',
+      what_is_happening_at_the_property_right_now:'What is happening at the property right now?',
+      send_property_details:'Send property details'
+    },
+    es:{
+      hero_title:'Antes de llegar, las personas eligen una <em>versión</em> del lugar.',
+      hero_sub:'EXIF observa la distancia entre el lugar que existe y el que termina entrando en comparación.',
+      field_hint:'Toca para alinear',
+      field_title:'La diferencia puede desaparecer sin que el lugar cambie.',
+      field_caption:'Cambió el sistema. El lugar no.',
+      observations:'Observations',
+      archive:'Archivo →',
+      obs_title:'Becoming Comparable',
+      read_obs:'Leer Observation 01',
+      what_exif:'Lo que EXIF examina',
+      audit_question:'¿Qué merece seguir siendo perceptible?',
+      audit_title:'The Atmosphere Audit.',
+      audit_intro:'Una lectura externa antes de tomar decisiones costosas.',
+      audit_link:'Conocer el Atmosphere Audit',
+      diagnosis_first:'Primero, el diagnóstico.',
+      about_title:'Primero vino la hospitalidad.',
+      about_p1:'EXIF nació dentro de resorts en México y el Caribe, entre fotografía, ventas, experiencia del huésped y operación.',
+      about_p2:'Esa experiencia se convirtió en una práctica centrada en lo que un lugar logra comunicar antes de que empiece la estancia.',
+      contact_title:'Háblanos del lugar.',
+      contact_intro:'Comparte el sitio de la propiedad y cuéntanos qué está pasando ahora: un nuevo shoot, una actualización del sitio, un reposicionamiento, un lanzamiento o la necesidad de una mirada externa.',
+      observations_nav:'Observations',
+      audit_nav:'Atmosphere Audit',
+      about_nav:'Acerca de',
+      contact_nav:'Contacto',
+      home_nav:'Inicio',
+      name:'Nombre *',
+      work_email:'Correo de trabajo *',
+      property_name:'Nombre de la propiedad *',
+      property_website:'Sitio de la propiedad *',
+      what_is_happening_at_the_property_right_now:'¿Qué está pasando ahora en la propiedad?',
+      send_property_details:'Enviar información'
+    }
+  };
+  function setLanguage(lang){
+    var dict=translations[lang]||translations.en;
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key=el.getAttribute('data-i18n');
+      if(dict[key]!==undefined)el.innerHTML=dict[key];
+    });
+    document.querySelectorAll('[data-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed',String(btn.getAttribute('data-lang')===lang));
+    });
+    try{localStorage.setItem('exif-lang',lang)}catch(e){}
+    document.title=lang==='es'?'EXIF. Antes de llegar, ya existe una versión del lugar.':'EXIF. Guests choose a representation before they experience the place.';
+  }
+  document.querySelectorAll('[data-lang]').forEach(function(btn){
+    btn.addEventListener('click',function(){setLanguage(btn.getAttribute('data-lang'))});
+  });
+  var initialLang='en';
+  try{initialLang=localStorage.getItem('exif-lang')||((navigator.language||'').toLowerCase().startsWith('es')?'es':'en')}catch(e){}
+  setLanguage(initialLang);
+
   var form=document.getElementById('cform'),btn=document.getElementById('fsubmit'),status=document.getElementById('fstatus');form.addEventListener('submit',function(e){if(!window.fetch)return;e.preventDefault();if(!form.reportValidity())return;btn.disabled=true;status.textContent='Sending…';fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}}).then(function(res){if(res.ok){status.textContent='Received. EXIF will reply from hello@exif.studio.';form.reset()}else{status.textContent='The message could not be sent. Write to hello@exif.studio instead.'}}).catch(function(){status.textContent='The message could not be sent. Check the connection or write to hello@exif.studio.'}).finally(function(){btn.disabled=false})});
 })();
 </script>
