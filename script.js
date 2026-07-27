@@ -5,6 +5,7 @@
   const toggle = document.querySelector('[data-menu-toggle]');
   const menu = document.querySelector('[data-site-menu]');
   const theme = document.querySelector('#theme-color');
+  const progress = document.querySelector('[data-scroll-progress]');
   const menuLinks = [...document.querySelectorAll('[data-menu-link]')];
   const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
   let previousFocus = null;
@@ -41,6 +42,25 @@
     if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
     else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
   });
+
+
+  function updateProgress(){
+    if(!progress) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+  }
+  let progressFrame = 0;
+  function requestProgressUpdate(){
+    if(progressFrame) return;
+    progressFrame = requestAnimationFrame(() => {
+      progressFrame = 0;
+      updateProgress();
+    });
+  }
+  updateProgress();
+  addEventListener('scroll', requestProgressUpdate, {passive:true});
+  addEventListener('resize', requestProgressUpdate, {passive:true});
 
   const themed = [...document.querySelectorAll('[data-header-theme]')];
   const observer = new IntersectionObserver(entries => {
