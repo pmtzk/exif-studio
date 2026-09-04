@@ -11,9 +11,11 @@
   let scrollY = 0;
 
   function menuFocusable(){ return [...menu.querySelectorAll(focusableSelector)].filter(el => !el.hasAttribute('hidden')); }
+  const menuLabel = document.querySelector('[data-menu-label]');
   function setMenu(open){
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (menuLabel) menuLabel.textContent = open ? 'Close' : 'Menu';
     menu.setAttribute('aria-hidden', String(!open));
     menu.classList.toggle('is-open', open);
     header.classList.toggle('menu-active', open);
@@ -68,4 +70,22 @@
       status.innerHTML = 'The form could not send. Email <a href="mailto:hello@exif.studio">hello@exif.studio</a>.';
     } finally { button.disabled = false; }
   });
+
+  const notes = [...document.querySelectorAll('[data-note]')];
+  const markers = [...document.querySelectorAll('[data-marker]')];
+  notes.forEach(note => {
+    const marker = markers.find(m => m.dataset.marker === note.dataset.note);
+    if(!marker) return;
+    const activate = () => marker.classList.add('is-active');
+    const deactivate = () => marker.classList.remove('is-active');
+    note.addEventListener('mouseenter', activate);
+    note.addEventListener('mouseleave', deactivate);
+    note.addEventListener('focusin', activate);
+    note.addEventListener('focusout', deactivate);
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reveal-ready');
+    requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('reveal-in')));
+  }
 })();

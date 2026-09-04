@@ -23,7 +23,7 @@
   <header class="site-header" data-header>
     <a class="wordmark" href="/" aria-label="EXIF home">EXIF.</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
-      <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+      <span class="menu-toggle-label" data-menu-label>Menu</span>
     </button>
   </header>
 
@@ -40,7 +40,7 @@
         <p>A place, made unmistakable.</p>
         <div class="menu-links">
           <a href="https://www.instagram.com/byexifstudio/" target="_blank" rel="noreferrer">Instagram</a>
-          <span>LinkedIn / forthcoming</span>
+          <a href="https://www.linkedin.com/company/exif-studio" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="mailto:hello@exif.studio">hello@exif.studio</a>
         </div>
       </div>
@@ -76,26 +76,26 @@
       <div class="read-body">
         <figure class="read-frame">
           <img src="/assets/images/shore.jpeg" alt="A shaded waterfront lounge with fringed canopies, a catamaran moored beyond the dock, and daybeds in the foreground" width="1024" height="1365" loading="lazy">
-          <span class="marker marker-1" aria-hidden="true">1</span>
-          <span class="marker marker-2" aria-hidden="true">2</span>
-          <span class="marker marker-3" aria-hidden="true">3</span>
-          <span class="marker marker-4" aria-hidden="true">4</span>
+          <span class="marker marker-1" data-marker="1" aria-hidden="true">1</span>
+          <span class="marker marker-2" data-marker="2" aria-hidden="true">2</span>
+          <span class="marker marker-3" data-marker="3" aria-hidden="true">3</span>
+          <span class="marker marker-4" data-marker="4" aria-hidden="true">4</span>
         </figure>
 
         <ol class="read-notes">
-          <li>
+          <li data-note="1">
             <h3>Shade is the product.</h3>
             <p>The canopy is not background. Woven, fringed, made by hand: this is the texture the rate is actually paying for, and it should lead rather than sit above the frame.</p>
           </li>
-          <li>
+          <li data-note="2">
             <h3>The boat reads as access.</h3>
             <p>Moored where the guest can see it, it becomes something included. Cropped out, the property loses a reason to be chosen over the one down the beach.</p>
           </li>
-          <li>
+          <li data-note="3">
             <h3>A place to stand inside the image.</h3>
             <p>The daybed in the foreground lets the viewer occupy the scene. Without it the property is observed rather than entered.</p>
           </li>
-          <li class="note-absence">
+          <li class="note-absence" data-note="4">
             <h3>What is missing.</h3>
             <p>The only people are distant. Nothing here shows service happening, so warmth and staffing stay theoretical. This is the frame the property still needs.</p>
           </li>
@@ -128,7 +128,9 @@
     </section>
 
     <figure class="pause" data-header-theme="cream">
-      <img src="/assets/images/detail.jpeg" alt="A coatimundi drinking from a coconut in a vivid red window" width="1024" height="1536" loading="lazy">
+      <div class="pause-frame">
+        <img src="/assets/images/detail.jpeg" alt="A coatimundi drinking from a coconut inside a pale blue window frame set into a red wall" width="1024" height="1536" loading="lazy">
+      </div>
       <figcaption>The detail a guest repeats to someone else.</figcaption>
     </figure>
 
@@ -157,8 +159,8 @@
       <h2 id="correspondence-title">Dear EXIF,</h2>
       <form class="letter-form" action="https://formspree.io/f/xzzgqbrw" method="post" data-contact-form>
         <div class="field field-message">
-          <label for="message">What is happening at the property?</label>
-          <textarea id="message" name="message" rows="6" required autocomplete="off"></textarea>
+          <label for="message">This is happening at my property</label>
+          <textarea id="message" name="message" rows="6" required autocomplete="off" placeholder="Tell EXIF what's unresolved, what changed, or what you're planning."></textarea>
         </div>
         <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
         <div class="field"><label for="property">Property</label><input id="property" name="property" type="text" required autocomplete="organization"></div>
@@ -178,7 +180,7 @@
     <p>A place, made unmistakable.</p>
     <div class="footer-links">
       <a href="https://www.instagram.com/byexifstudio/" target="_blank" rel="noreferrer">Instagram</a>
-      <span>LinkedIn / forthcoming</span>
+      <a href="https://www.linkedin.com/company/exif-studio" target="_blank" rel="noreferrer">LinkedIn</a>
       <a href="mailto:hello@exif.studio">Email</a>
     </div>
   </footer>
