@@ -57,11 +57,17 @@ a { color: inherit; }
 .section-label, .practice-number, figcaption { font-size: .68rem; line-height: 1.2; letter-spacing: .12em; text-transform: uppercase; }
 .section-label { margin: 0 0 2rem; }
 h1, h2, h3, p { margin-top: 0; }
-h1, h2, h3, .kicker { font-family: var(--display); font-weight: 400; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; }
 
 .premise { min-height: 100vh; padding: clamp(8rem, 16vh, 11rem) var(--pad) clamp(4rem, 9vw, 8rem); display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(18rem, .62fr); gap: clamp(3rem, 8vw, 9rem); align-items: end; }
 .premise-copy { align-self: center; max-width: 56rem; }
-.kicker { margin-bottom: clamp(2rem, 6vh, 5rem); font-size: clamp(1.45rem, 2.6vw, 2.8rem); }
+.kicker {
+  max-width: 18ch;
+  margin-bottom: clamp(2rem, 6vh, 5rem);
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 1.8vw, 1.85rem);
+  line-height: 1.05;
+}
 h1 { max-width: 13ch; margin-bottom: 2rem; font-size: clamp(3.25rem, 7vw, 7.5rem); line-height: .91; letter-spacing: -.035em; }
 .premise-support { max-width: 37rem; font-size: clamp(.9rem, 1.2vw, 1.08rem); line-height: 1.55; }
 .premise-plate img { aspect-ratio: 2/3; object-fit: cover; }
@@ -115,7 +121,7 @@ h1 { max-width: 13ch; margin-bottom: 2rem; font-size: clamp(3.25rem, 7vw, 7.5rem
 
 .site-footer { min-height: 62vh; padding: var(--pad); display: grid; grid-template-columns: 1fr 1fr; align-content: space-between; gap: 3rem; }
 .signal { width: clamp(4rem, 9vw, 8rem); grid-column: 1 / -1; }
-.site-footer p { align-self: end; margin: 0; font: clamp(2rem, 4vw, 4.5rem)/1 var(--display); }
+.site-footer p { align-self: end; margin: 0; font: italic clamp(2rem, 4vw, 4.5rem)/1 var(--serif); }
 .footer-links { align-self: end; display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 1.25rem; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
 
 @media (max-width: 760px) {
