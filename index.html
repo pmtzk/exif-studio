@@ -15,7 +15,7 @@
   <meta property="og:image" content="https://exif.studio/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=1">
+  <link rel="stylesheet" href="/styles.css?v=3">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,10 +30,11 @@
   <div class="site-menu" id="site-menu" aria-hidden="true" data-site-menu>
     <div class="menu-shell">
       <nav class="menu-nav" aria-label="Site navigation">
-        <a href="#comparison" data-menu-link><span>01</span>Before arrival</a>
-        <a href="#practice" data-menu-link><span>02</span>Practice</a>
-        <a href="#work" data-menu-link><span>03</span>Selected work</a>
-        <a href="#dear-exif" data-menu-link><span>04</span>Dear EXIF</a>
+        <a href="#comparison" data-menu-link>Before arrival</a>
+        <a href="#read" data-menu-link>A read</a>
+        <a href="#practice" data-menu-link>Practice</a>
+        <a href="#work" data-menu-link>Selected work</a>
+        <a href="#dear-exif" data-menu-link>Dear EXIF</a>
       </nav>
       <div class="menu-footer">
         <p>A place, made unmistakable.</p>
@@ -49,102 +50,111 @@
   <main id="main">
     <section class="premise section-cream" data-header-theme="cream" aria-labelledby="premise-title">
       <div class="premise-copy">
-        <p class="section-label">EXIF / 2026</p>
         <p class="kicker">A place, made unmistakable.</p>
         <h1 id="premise-title">Before a guest experiences a place, they experience its representation.</h1>
-        <p class="premise-support">EXIF works with independent hospitality properties to define what should become recognizable before arrival—and produces the photography and film through which it is seen.</p>
+        <p class="premise-support">EXIF works with independent hospitality properties to define what should become recognizable before arrival&#8212;and produces the photography and film through which it is seen.</p>
       </div>
-      <figure class="premise-plate image-frame">
+      <figure class="premise-plate">
         <img src="/assets/images/threshold.jpeg" alt="A lake and mountains seen through a stone opening" width="1024" height="1536" fetchpriority="high">
-        <figcaption><span>Plate 01</span><span>A threshold</span></figcaption>
       </figure>
     </section>
 
     <section class="comparison section-green" id="comparison" data-header-theme="green" aria-labelledby="comparison-title">
-      <div class="comparison-copy">
-        <p class="section-label">Before arrival</p>
-        <h2 id="comparison-title">A guest is not admiring the property. They are comparing it.</h2>
+      <h2 id="comparison-title">A guest is not admiring the property. They are comparing it.</h2>
+      <div class="comparison-body">
         <p>By the time someone reaches the booking page, the place is one of six tabs. The question is no longer whether it is beautiful. Every option is beautiful.</p>
+        <p class="comparison-line">What makes this the one worth choosing.</p>
       </div>
+    </section>
 
-      <div class="tab-row" role="img" aria-label="Six hospitality properties reduced to near-identical thumbnails in a comparison view, one of them distinct">
-        <span class="tab"><img src="/assets/images/shore.jpeg" alt="" loading="lazy"></span>
-        <span class="tab"><img src="/assets/images/terrace.jpeg" alt="" loading="lazy"></span>
-        <span class="tab"><img src="/assets/images/water.jpeg" alt="" loading="lazy"></span>
-        <span class="tab is-chosen"><img src="/assets/images/detail.jpeg" alt="" loading="lazy"></span>
-        <span class="tab"><img src="/assets/images/night.jpeg" alt="" loading="lazy"></span>
-        <span class="tab"><img src="/assets/images/shadows.jpeg" alt="" loading="lazy"></span>
+    <section class="read section-cream" id="read" data-header-theme="cream" aria-labelledby="read-title">
+      <header class="read-heading">
+        <h2 id="read-title">A read.</h2>
+        <p>Every property is already saying something, and most of it was never decided. Here is one photograph, read the way a booking decision reads it.</p>
+      </header>
+
+      <div class="read-body">
+        <figure class="read-frame">
+          <img src="/assets/images/shore.jpeg" alt="A shaded waterfront lounge with fringed canopies, a catamaran moored beyond the dock, and daybeds in the foreground" width="1024" height="1365" loading="lazy">
+          <span class="marker marker-1" aria-hidden="true">1</span>
+          <span class="marker marker-2" aria-hidden="true">2</span>
+          <span class="marker marker-3" aria-hidden="true">3</span>
+          <span class="marker marker-4" aria-hidden="true">4</span>
+        </figure>
+
+        <ol class="read-notes">
+          <li>
+            <h3>Shade is the product.</h3>
+            <p>The canopy is not background. Woven, fringed, made by hand: this is the texture the rate is actually paying for, and it should lead rather than sit above the frame.</p>
+          </li>
+          <li>
+            <h3>The boat reads as access.</h3>
+            <p>Moored where the guest can see it, it becomes something included. Cropped out, the property loses a reason to be chosen over the one down the beach.</p>
+          </li>
+          <li>
+            <h3>A place to stand inside the image.</h3>
+            <p>The daybed in the foreground lets the viewer occupy the scene. Without it the property is observed rather than entered.</p>
+          </li>
+          <li class="note-absence">
+            <h3>What is missing.</h3>
+            <p>The only people are distant. Nothing here shows service happening, so warmth and staffing stay theoretical. This is the frame the property still needs.</p>
+          </li>
+        </ol>
       </div>
-
-      <p class="comparison-line">What makes this the one worth choosing.</p>
-
-      <figure class="detail-plate image-frame dark-caption">
-        <img src="/assets/images/detail.jpeg" alt="A coatimundi drinking from a coconut in a vivid red window" width="1024" height="1536" loading="lazy">
-        <figcaption><span>Plate 02</span><span>The detail remains</span></figcaption>
-      </figure>
     </section>
 
     <section class="practice section-green" id="practice" data-header-theme="green" aria-labelledby="practice-title">
       <header class="practice-heading">
-        <p class="section-label">Practice</p>
         <h2 id="practice-title">Read. Define. Produce.</h2>
       </header>
 
       <div class="practice-grid">
-        <article class="practice-item production-item">
-          <p class="practice-number">01</p>
+        <article class="practice-item">
+          <p class="practice-number">Practice / 01</p>
           <h3>Visual Direction &amp; Production</h3>
           <p class="practice-question">What should become recognizable before arrival?</p>
           <p>EXIF reads the property, defines what should lead and produces a deliberate body of photography and film for the channels where the place will be encountered.</p>
-          <a class="text-link light" href="#work">View selected work</a>
+          <a class="text-link" href="#dear-exif">Start a conversation</a>
         </article>
 
-        <article class="practice-item audit-item">
-          <p class="practice-number">02</p>
+        <article class="practice-item">
+          <p class="practice-number">Practice / 02</p>
           <h3>Atmosphere Audit</h3>
           <p class="practice-question">What does the property already communicate?</p>
           <p>A focused study of what survives translation, what remains indistinct and what should change before commissioning something new.</p>
-          <a class="text-link light" href="/atmosphere-audit/">View the Audit</a>
+          <a class="text-link" href="/atmosphere-audit/">View the Audit</a>
         </article>
       </div>
-
-      <figure class="practice-image image-frame dark-caption">
-        <img src="/assets/images/shore.jpeg" alt="A shaded waterfront lounge looking toward a catamaran" width="1024" height="1536" loading="lazy">
-        <figcaption><span>Plate 03</span><span>From the property, outward</span></figcaption>
-      </figure>
     </section>
+
+    <figure class="pause" data-header-theme="cream">
+      <img src="/assets/images/detail.jpeg" alt="A coatimundi drinking from a coconut in a vivid red window" width="1024" height="1536" loading="lazy">
+      <figcaption>The detail a guest repeats to someone else.</figcaption>
+    </figure>
 
     <section class="work section-cream" id="work" data-header-theme="cream" aria-labelledby="work-title">
       <header class="work-heading">
-        <p class="section-label">Selected work</p>
         <h2 id="work-title">Images made to be compared, and to survive it.</h2>
       </header>
 
       <div class="work-grid">
-        <figure class="work-terrace image-frame">
-          <img src="/assets/images/terrace.jpeg" alt="A restaurant terrace beside a planted rock wall" width="1024" height="1536" loading="lazy">
-          <figcaption><span>Space</span><span>In use</span></figcaption>
+        <figure class="work-terrace">
+          <img src="/assets/images/terrace.jpeg" alt="A restaurant terrace beside a planted rock wall" width="1024" height="1280" loading="lazy">
         </figure>
-        <figure class="work-shadows image-frame">
+        <figure class="work-shadows">
           <img src="/assets/images/shadows.jpeg" alt="Sun loungers patterned by palm shadows" width="1024" height="1536" loading="lazy">
-          <figcaption><span>Light</span><span>A certain hour</span></figcaption>
         </figure>
-        <figure class="work-water image-frame">
-          <img src="/assets/images/water.jpeg" alt="Golden evening light reflected on moving water" width="1024" height="1536" loading="lazy">
-          <figcaption><span>Surface</span><span>After light</span></figcaption>
+        <figure class="work-water">
+          <img src="/assets/images/water.jpeg" alt="Golden evening light reflected on moving water" width="1024" height="683" loading="lazy">
         </figure>
-        <figure class="work-night image-frame">
-          <img src="/assets/images/night.jpeg" alt="An illuminated resort walkway at night" width="1024" height="1536" loading="lazy">
-          <figcaption><span>Night</span><span>The property changes</span></figcaption>
+        <figure class="work-night">
+          <img src="/assets/images/night.jpeg" alt="An illuminated resort walkway at night" width="1024" height="1280" loading="lazy">
         </figure>
       </div>
     </section>
 
     <section class="correspondence section-cream" id="dear-exif" data-header-theme="cream" aria-labelledby="correspondence-title">
-      <div class="letter-heading">
-        <p class="section-label">Correspondence</p>
-        <h2 id="correspondence-title">Dear EXIF,</h2>
-      </div>
+      <h2 id="correspondence-title">Dear EXIF,</h2>
       <form class="letter-form" action="https://formspree.io/f/xzzgqbrw" method="post" data-contact-form>
         <div class="field field-message">
           <label for="message">What is happening at the property?</label>
@@ -172,6 +182,6 @@
       <a href="mailto:hello@exif.studio">Email</a>
     </div>
   </footer>
-  <script src="/script.js?v=1" defer></script>
+  <script src="/script.js?v=3" defer></script>
 </body>
 </html>
