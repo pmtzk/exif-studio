@@ -136,14 +136,35 @@ p { margin: 0 0 1.1em; max-width: 62ch; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.4em;
+  width: 38px;
+  height: 38px;
+  padding: 8px 6px;
 }
 .nav-toggle span {
   display: block;
-  width: 24px;
+  width: 26px;
   height: 1.5px;
   background: var(--ink);
   margin: 5px 0;
+  transform-origin: center;
+  transition-property: transform, width, opacity;
+  transition-timing-function: cubic-bezier(.65, 0, .18, 1);
+}
+.nav-toggle span:nth-child(1) { transition-duration: 280ms; }
+.nav-toggle span:nth-child(2) { width: 17px; margin-left: 7px; transition-duration: 150ms; }
+.nav-toggle span:nth-child(3) { width: 22px; margin-left: 2px; transition-duration: 340ms; }
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  width: 25px;
+  transform: translateY(6.5px) rotate(42deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(8px) scaleX(0.25);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  width: 25px;
+  transform: translate(-1px, -6.5px) rotate(-47deg);
 }
 
 /* ---------- Buttons ---------- */
@@ -437,4 +458,9 @@ p { margin: 0 0 1.1em; max-width: 62ch; }
   }
   .main-nav a { font-size: 1rem; }
   body.nav-open { overflow: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle span,
+  .main-nav { transition-duration: 0.01ms !important; }
 }
