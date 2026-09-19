@@ -1,0 +1,77 @@
+/* 190926 — hero + loader refinement */
+
+/* On the live hero, SIGNAL becomes the quiet top-left identity marker. */
+@media (max-width:859px){
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{
+    position:relative!important;
+    display:flex!important;
+    align-items:center!important;
+    width:auto!important;
+    min-width:0!important;
+    height:28px!important;
+    text-decoration:none!important;
+  }
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{
+    display:none!important;
+  }
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{
+    content:'SIGNAL';
+    display:block;
+    color:#f0e8dd;
+    font-family:var(--font-sans);
+    font-size:8px;
+    line-height:1;
+    font-weight:500;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+
+  /* Preserve the large editorial rhythm while guaranteeing the long final word fits. */
+  .exif-hero-copy{
+    left:28px!important;
+    right:24px!important;
+    bottom:max(5.3vh,40px)!important;
+  }
+  .exif-hero-copy h1{
+    width:100%!important;
+    max-width:none!important;
+    font-size:clamp(3.15rem,13vw,5.8rem)!important;
+    line-height:.80!important;
+    letter-spacing:-.055em!important;
+  }
+  .exif-hero-copy .line:nth-child(2){
+    padding-left:7.5vw!important;
+  }
+  .exif-hero-copy .line:last-child{
+    padding-right:0!important;
+  }
+  .exif-hero-copy .line:last-child .word{
+    font-size:clamp(2.62rem,10.65vw,4.8rem)!important;
+    letter-spacing:-.065em!important;
+    white-space:nowrap!important;
+  }
+
+  /* The loader window is a deliberate held frame before it becomes the hero. */
+  .exif-loader-stage.is-window{
+    width:min(44vw,220px)!important;
+    height:min(31vw,155px)!important;
+  }
+  .exif-loader-stage{
+    transform:translateZ(0);
+    transform-origin:center center;
+    transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important;
+  }
+  .exif-loader-stage.is-full{
+    width:100vw!important;
+    height:100svh!important;
+  }
+  .exif-loader-stage.is-full img.is-active{
+    transform:scale(1)!important;
+  }
+}
+
+@media (min-width:860px){
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative;text-decoration:none}
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:none!important}
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{content:'SIGNAL';color:#f0e8dd;font-family:var(--font-sans);font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+}
