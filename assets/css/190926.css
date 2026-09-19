@@ -1,6 +1,22 @@
 /* 190926 — hero + loader refinement */
 
-/* On the live hero, SIGNAL becomes the quiet top-left identity marker. */
+/* Hero identity: keep the EXIF Studio logo in the header. */
+body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{content:none!important;display:none!important}
+body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;filter:brightness(0) invert(1)!important;opacity:.96!important}
+
+/* Replace the lower-left SIGNAL word with the supplied signal mark. */
+.exif-hero-meta>span:first-child{
+  display:block!important;
+  width:clamp(48px,7vw,78px)!important;
+  height:clamp(6px,.9vw,10px)!important;
+  font-size:0!important;
+  line-height:0!important;
+  background-image:url('../img/signal-light.png')!important;
+  background-repeat:no-repeat!important;
+  background-position:left center!important;
+  background-size:contain!important;
+}
+
 @media (max-width:859px){
   body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{
     position:relative!important;
@@ -12,18 +28,9 @@
     text-decoration:none!important;
   }
   body.exif-hero-live:not(.nav-open) .site-header .brand-logo{
-    display:none!important;
-  }
-  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{
-    content:'SIGNAL';
-    display:block;
-    color:#f0e8dd;
-    font-family:var(--font-sans);
-    font-size:8px;
-    line-height:1;
-    font-weight:500;
-    letter-spacing:.18em;
-    text-transform:uppercase;
+    display:block!important;
+    width:72px!important;
+    height:auto!important;
   }
 
   /* Preserve the large editorial rhythm while guaranteeing the long final word fits. */
@@ -39,39 +46,27 @@
     line-height:.80!important;
     letter-spacing:-.055em!important;
   }
-  .exif-hero-copy .line:nth-child(2){
-    padding-left:7.5vw!important;
-  }
-  .exif-hero-copy .line:last-child{
-    padding-right:0!important;
-  }
+  .exif-hero-copy .line:nth-child(2){padding-left:7.5vw!important}
+  .exif-hero-copy .line:last-child{padding-right:0!important}
   .exif-hero-copy .line:last-child .word{
     font-size:clamp(2.62rem,10.65vw,4.8rem)!important;
     letter-spacing:-.065em!important;
     white-space:nowrap!important;
   }
+  .exif-hero-meta>span:first-child{width:54px!important;height:7px!important}
 
   /* The loader window is a deliberate held frame before it becomes the hero. */
-  .exif-loader-stage.is-window{
-    width:min(44vw,220px)!important;
-    height:min(31vw,155px)!important;
-  }
+  .exif-loader-stage.is-window{width:min(44vw,220px)!important;height:min(31vw,155px)!important}
   .exif-loader-stage{
     transform:translateZ(0);
     transform-origin:center center;
     transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important;
   }
-  .exif-loader-stage.is-full{
-    width:100vw!important;
-    height:100svh!important;
-  }
-  .exif-loader-stage.is-full img.is-active{
-    transform:scale(1)!important;
-  }
+  .exif-loader-stage.is-full{width:100vw!important;height:100svh!important}
+  .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
 @media (min-width:860px){
   body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative;text-decoration:none}
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:none!important}
-  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{content:'SIGNAL';color:#f0e8dd;font-family:var(--font-sans);font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important}
 }
