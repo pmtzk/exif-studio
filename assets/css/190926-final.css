@@ -15,84 +15,39 @@
 
 /* MOBILE IS INTENTIONALLY UNTOUCHED BELOW THIS POINT. */
 @media (min-width:860px){
-  /* The desktop hero is exactly one visible viewport. */
+  :root{
+    --hero-media-w:clamp(390px,min(39vw,54dvh),610px);
+    --hero-media-h:clamp(520px,72dvh,760px);
+    --hero-media-x:50vw;
+    --hero-media-y:50dvh;
+    --hero-type-size:clamp(5.6rem,min(10.8vw,14.6dvh),11.6rem);
+  }
   #what-exif-does.exif-cinematic-hero{
-    height:100dvh!important;
-    min-height:100dvh!important;
-    max-height:100dvh!important;
-    overflow:hidden!important;
+    position:relative!important;height:100dvh!important;min-height:100dvh!important;max-height:100dvh!important;overflow:hidden!important;
   }
-
-  /* Portrait is visually centered and lifted into the available canvas. */
   .exif-hero-bg,.exif-hero-shade{
-    inset:auto!important;
-    left:50%!important;
-    top:48.5%!important;
-    width:min(43vw,650px)!important;
-    height:min(76dvh,820px)!important;
-    transform:translate(-50%,-50%)!important;
+    inset:auto!important;left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important;transform:translate(-50%,-50%)!important;transform-origin:50% 50%!important;
   }
-
-  /* Larger type; all three lines occupy the photograph zone. */
-  .exif-hero-copy{
-    left:6vw!important;
-    right:5.2vw!important;
-    bottom:clamp(1.35rem,2.5dvh,2.6rem)!important;
+  .exif-hero-copy{left:5.5vw!important;right:4.5vw!important;bottom:clamp(1rem,2dvh,2rem)!important}
+  .exif-hero-copy h1{width:100%!important;max-width:none!important;font-size:var(--hero-type-size)!important;line-height:.72!important;letter-spacing:-.06em!important}
+  .exif-hero-copy .line:nth-child(1){padding-left:16vw!important;margin:0!important}
+  .exif-hero-copy .line:nth-child(2){padding-left:27vw!important;margin-top:.01em!important}
+  .exif-hero-copy .line:last-child{padding-left:11vw!important;margin-top:.01em!important}
+  .exif-hero-copy .line:last-child .word{font-size:.82em!important;white-space:nowrap!important}
+  .exif-hero-meta{margin-top:clamp(.4rem,.7dvh,.75rem)!important}
+  .exif-loader{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;display:block!important;padding:0!important;margin:0!important;overflow:hidden!important}
+  .exif-loader-stage,.exif-loader-stage.is-window,.exif-loader-stage.is-full{
+    position:fixed!important;inset:auto!important;left:50vw!important;top:50dvh!important;margin:0!important;transform:translate(-50%,-50%)!important;transform-origin:50% 50%!important;
   }
-  .exif-hero-copy h1{
-    font-size:clamp(6.4rem,min(10.7vw,16.2dvh),11.8rem)!important;
-    line-height:.735!important;
-    letter-spacing:-.06em!important;
-  }
-  .exif-hero-copy .line:nth-child(1){padding-left:15vw!important}
-  .exif-hero-copy .line:nth-child(2){padding-left:28vw!important;margin-top:.005em!important}
-  .exif-hero-copy .line:last-child{padding-left:13vw!important;margin-top:.005em!important}
-  .exif-hero-copy .line:last-child .word{font-size:.78em!important}
-  .exif-hero-meta{margin-top:clamp(.45rem,.8dvh,.8rem)!important}
-
-  /* Desktop loader: stage itself owns the viewport center. No parent/grid offsets. */
-  .exif-loader{
-    position:fixed!important;
-    inset:0!important;
-    width:100vw!important;
-    height:100dvh!important;
-    display:block!important;
-    padding:0!important;
-    margin:0!important;
-    overflow:hidden!important;
-  }
-  .exif-loader-stage,
-  .exif-loader-stage.is-window,
-  .exif-loader-stage.is-full{
-    position:fixed!important;
-    left:50vw!important;
-    top:50dvh!important;
-    right:auto!important;
-    bottom:auto!important;
-    margin:0!important;
-    transform:translate(-50%,-50%)!important;
-    transform-origin:50% 50%!important;
-  }
-
-  /* Final loader expansion goes directly to the REAL hero portrait size. */
-  .exif-loader-stage.is-full{
-    width:min(43vw,650px)!important;
-    height:min(76dvh,820px)!important;
-  }
+  .exif-loader-stage.is-full{width:var(--hero-media-w)!important;height:var(--hero-media-h)!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
-/* Short desktop/tablet landscape: preserve the same composition inside one screen. */
-@media (min-width:860px) and (max-height:760px){
-  .exif-hero-bg,.exif-hero-shade,.exif-loader-stage.is-full{
-    width:min(39vw,590px)!important;
-    height:min(70dvh,650px)!important;
-  }
-  .exif-hero-bg,.exif-hero-shade{top:48%!important}
-  .exif-hero-copy{bottom:1.2dvh!important}
-  .exif-hero-copy h1{font-size:clamp(5.2rem,min(9.3vw,14.2dvh),9.6rem)!important}
-  .exif-hero-copy .line:nth-child(1){padding-left:16vw!important}
-  .exif-hero-copy .line:nth-child(2){padding-left:29vw!important}
-  .exif-hero-copy .line:last-child{padding-left:14vw!important}
-  .exif-hero-meta{margin-top:.35rem!important}
+@media (min-width:860px) and (max-height:800px){
+  :root{--hero-media-w:clamp(340px,min(36vw,50dvh),540px);--hero-media-h:clamp(430px,66dvh,610px);--hero-type-size:clamp(4.8rem,min(9.6vw,13dvh),9.2rem)}
+  .exif-hero-copy{bottom:.7rem!important}
+  .exif-hero-copy .line:nth-child(1){padding-left:17vw!important}
+  .exif-hero-copy .line:nth-child(2){padding-left:28vw!important}
+  .exif-hero-copy .line:last-child{padding-left:12vw!important}
+  .exif-hero-meta{margin-top:.3rem!important}
 }
