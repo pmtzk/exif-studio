@@ -12,38 +12,32 @@ body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:23px!
 body.nav-open .site-header,body.nav-open .site-header.is-scrolled{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important}
 @media (min-width:860px){body.nav-open header.site-header .nav-toggle,body.nav-open header.site-header .nav-toggle[aria-expanded="true"]{position:fixed!important;top:calc(var(--desktop-header-h,76px)/2)!important;right:5.2vw!important;width:46px!important;height:46px!important;margin:0!important;padding:0!important;transform:translateY(-50%)!important;z-index:12002!important;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}body.nav-open header.site-header .nav-toggle span{display:block!important;visibility:visible!important;position:absolute!important;height:1.5px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}body.nav-open header.site-header .nav-toggle span:nth-child(1){width:25px!important;top:22px!important;left:10px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important}body.nav-open header.site-header .nav-toggle span:nth-child(2){opacity:0!important}body.nav-open header.site-header .nav-toggle span:nth-child(3){width:21px!important;top:22px!important;left:18px!important;right:auto!important;opacity:1!important;transform:rotate(-48deg)!important}}
 
-/* Mobile: no visible rail over the hero. After the hero releases, a very thin 42px cream rail
-   gives the navigation its own quiet coordinate system. */
+/* Mobile only. The navigation rail is a stable cream surface from first paint onward. */
 @media (max-width:859px){
   .site-header,.site-header.is-scrolled,body.exif-hero-live .site-header,body:not(.exif-hero-live) .site-header{height:42px!important;min-height:42px!important;background:var(--cream)!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background-color .32s ease!important}
   .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap,body:not(.exif-hero-live) .site-header .wrap{height:42px!important;min-height:42px!important;padding:0 max(18px,var(--gutter))!important;align-items:center!important}
   .site-header .wrap>a:first-child{width:64px!important;height:18px!important;flex:0 0 64px!important}
-  .site-header .wrap>a:first-child::before{-webkit-mask-size:contain!important;mask-size:contain!important}
+  .site-header .wrap>a:first-child::before{-webkit-mask-size:contain!important;mask-size:contain!important;background:var(--ink)!important}
   header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle,body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{position:relative!important;top:auto!important;right:auto!important;width:30px!important;height:30px!important;padding:0!important;transform:none!important;flex:0 0 30px!important}
-  body:not(.nav-open) header.site-header .nav-toggle span{height:1.25px!important;transition:background-color .32s ease!important}
+  body:not(.nav-open) header.site-header .nav-toggle span{height:1.25px!important;background:var(--ink)!important;transition:background-color .32s ease!important}
   body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:18px!important;top:8px!important;right:1px!important}
   body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:10px!important;top:14px!important;right:6px!important}
   body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:15px!important;top:20px!important;right:1px!important}
 
-  /* First paint, loader and live hero all belong to the cinematic state. This closes the tiny
-     initialization window before the mobile controller has attached exif-hero-live. */
-  body:not(.exif-mobile-legacy):not(.nav-open) .site-header,
-  body.exif-intro-running:not(.nav-open) .site-header,
-  body.exif-hero-live:not(.nav-open) .site-header{background:transparent!important}
-  body:not(.exif-mobile-legacy):not(.nav-open) .site-header .wrap>a:first-child::before,
-  body.exif-intro-running:not(.nav-open) .site-header .wrap>a:first-child::before,
-  body.exif-hero-live:not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--cream)!important}
-  body:not(.exif-mobile-legacy):not(.nav-open) .site-header .nav-toggle span,
-  body.exif-intro-running:not(.nav-open) .site-header .nav-toggle span,
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{background:var(--cream)!important}
+  /* The legacy mobile hero injects later CSS. These selectors intentionally outrank it so the
+     42px rail cannot disappear or turn transparent while the hero is live. */
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header,
+  html body.exif-mobile-legacy:not(.nav-open) header.site-header{position:sticky!important;top:0!important;height:42px!important;min-height:42px!important;padding-top:0!important;background:var(--cream)!important;opacity:1!important;pointer-events:none!important}
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .wrap,
+  html body.exif-mobile-legacy:not(.nav-open) header.site-header .wrap{height:42px!important;min-height:42px!important;padding:0 max(18px,var(--gutter))!important}
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .wrap>a:first-child::before,
+  html body.exif-mobile-legacy:not(.nav-open) header.site-header .wrap>a:first-child::before{background:var(--ink)!important}
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .nav-toggle span,
+  html body.exif-mobile-legacy:not(.nav-open) header.site-header .nav-toggle span{background:var(--ink)!important}
 
-  /* Past the hero the thin rail is cream and both controls default to ink. */
-  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header{background:var(--cream)!important}
-  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--ink)!important}
-  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header .nav-toggle span{background:var(--ink)!important}
-
-  /* Drawer owns its close control. Keep it above the overlay and restore the asymmetric X. */
+  /* Drawer owns the close control; the persistent logo stays hidden behind it. */
   body.nav-open .site-header,body.nav-open .site-header.is-scrolled{height:42px!important;min-height:42px!important;background:transparent!important;pointer-events:none!important}
+  body.nav-open .site-header .wrap>a:first-child{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
   body.nav-open header.site-header .nav-toggle,body.nav-open header.site-header .nav-toggle[aria-expanded="true"]{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:21px!important;right:max(18px,var(--gutter))!important;width:34px!important;height:34px!important;margin:0!important;padding:0!important;transform:none!important;z-index:12002!important;background:transparent!important;border:0!important}
   body.nav-open header.site-header .nav-toggle span{display:block!important;visibility:visible!important;position:absolute!important;height:1.25px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}
   body.nav-open header.site-header .nav-toggle span:nth-child(1){width:22px!important;top:16px!important;left:5px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important}
