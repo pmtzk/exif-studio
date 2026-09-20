@@ -1,6 +1,6 @@
 /* EXIF — canonical desktop hero + intro loader.
-   Desktop only (>=860px). Navigation and mobile are intentionally untouched.
-   JS owns states/timing; this file owns all hero/loader presentation. */
+   Desktop only (>=860px). Approved navigation is intentionally untouched.
+   JS owns states/timing; this file owns hero/loader presentation. */
 
 @media (min-width:860px){
   :root{
@@ -14,18 +14,7 @@
   }
 
   body.exif-intro-running{overflow:hidden}
-  .site-header{transition:opacity .8s ease,background .35s ease,border-color .35s ease}
   body.exif-intro-running .site-header{opacity:0;pointer-events:none}
-
-  /* Existing header only receives hero-state presentation; drawer/nav layout is untouched. */
-  body.exif-hero-live .site-header{
-    position:absolute!important;top:0!important;left:0!important;right:0!important;width:100%!important;
-    z-index:30!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important;
-    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-  }
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{filter:brightness(0) invert(1);opacity:.96}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{background:var(--hero-cream)!important}
-  body.exif-hero-live:not(.nav-open) .site-header .main-nav:not(.open){display:none!important}
 
   #what-exif-does.exif-cinematic-hero{
     position:relative!important;padding:0!important;margin:0!important;
