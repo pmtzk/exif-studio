@@ -1,96 +1,42 @@
-/* EXIF — canonical desktop hero + intro loader.
-   Desktop only (>=860px). Approved navigation is intentionally untouched.
-   JS owns states/timing; this file owns hero/loader presentation. */
-
+/* EXIF — canonical desktop hero + intro loader. Desktop only. */
 @media (min-width:860px){
   :root{
     --hero-media-w:clamp(430px,min(42vw,67dvh),680px);
     --hero-media-h:clamp(540px,76dvh,800px);
-    --hero-media-x:50%;
-    --hero-media-y:47%;
+    --hero-media-x:50%;--hero-media-y:47%;
     --hero-type-size:clamp(5.7rem,min(11.1vw,15.2dvh),12rem);
-    --hero-cream:#f0e8dd;
-    --hero-ink:#22402f;
+    --hero-cream:#f0e8dd;--hero-ink:#22402f;
   }
-
   body.exif-intro-running{overflow:hidden}
   body.exif-intro-running .site-header{opacity:0;pointer-events:none}
+  #what-exif-does.exif-cinematic-hero{position:relative!important;padding:0!important;margin:0!important;height:100dvh!important;min-height:100dvh!important;max-height:100dvh!important;overflow:hidden!important;background:var(--hero-cream)!important}
+  #what-exif-does.exif-cinematic-hero>.wrap{position:relative!important;display:block!important;width:100%!important;max-width:none!important;height:100%!important;padding:0!important;margin:0!important}
+  #what-exif-does.exif-cinematic-hero .hero-intro,#what-exif-does.exif-cinematic-hero .hero-interface{display:none!important}
 
-  #what-exif-does.exif-cinematic-hero{
-    position:relative!important;padding:0!important;margin:0!important;
-    height:100dvh!important;min-height:100dvh!important;max-height:100dvh!important;
-    overflow:hidden!important;background:var(--hero-cream)!important;
-  }
-  #what-exif-does.exif-cinematic-hero>.wrap{
-    position:relative!important;display:block!important;width:100%!important;max-width:none!important;
-    height:100%!important;padding:0!important;margin:0!important;
-  }
-  #what-exif-does.exif-cinematic-hero .hero-intro,
-  #what-exif-does.exif-cinematic-hero .hero-interface{display:none!important}
-
-  /* ONE final rectangle. Both layers are fixed to the same visual viewport,
-     so the loader can hand off without switching coordinate systems. */
-  .exif-hero-bg,.exif-hero-shade{
-    position:fixed!important;inset:auto!important;
-    left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;
-    width:var(--hero-media-w)!important;height:var(--hero-media-h)!important;
-    transform:translate(-50%,-50%)!important;transform-origin:center!important;
-  }
+  /* Final hero geometry is section-relative again. The loader image is physically
+     adopted into this slot after its expansion completes. */
+  .exif-hero-bg,.exif-hero-shade{position:absolute!important;inset:auto!important;left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important;transform:translate(-50%,-50%)!important;transform-origin:center!important}
   .exif-hero-bg{display:block!important;object-fit:cover!important;object-position:center center!important}
-  .exif-hero-shade{
-    background:linear-gradient(180deg,rgba(5,14,10,.025),rgba(5,14,10,.03) 52%,rgba(5,14,10,.18))!important;
-    pointer-events:none!important;
-  }
+  .exif-hero-shade{background:linear-gradient(180deg,rgba(5,14,10,.025),rgba(5,14,10,.03) 52%,rgba(5,14,10,.18))!important;pointer-events:none!important}
+  .exif-hero-bg-live{transition:none!important;will-change:auto!important}
 
   .exif-hero-copy{position:absolute!important;inset:0!important;z-index:4!important;color:var(--hero-ink)!important;pointer-events:none!important}
   .exif-hero-copy h1{position:absolute!important;left:5.25vw!important;right:3.5vw!important;top:43dvh!important;width:auto!important;max-width:none!important;margin:0!important;color:var(--hero-ink)!important;font-family:var(--font-serif)!important;font-size:var(--hero-type-size)!important;font-weight:400!important;line-height:.72!important;letter-spacing:-.06em!important;text-transform:uppercase!important}
   .exif-hero-copy .line{display:block!important;overflow:visible!important;padding:0!important}
-  .exif-hero-copy .line:nth-child(1){padding-left:12vw!important}
-  .exif-hero-copy .line:nth-child(2){padding-left:24vw!important;margin-top:.01em!important}
-  .exif-hero-copy .line:last-child{padding-left:7vw!important;margin-top:.01em!important;font-style:italic!important;letter-spacing:-.065em!important}
-  .exif-hero-copy .line:last-child .word{font-size:.80em!important;white-space:nowrap!important}
-  .exif-hero-copy .word{display:block;opacity:0;transform:translateY(38px);filter:blur(3px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.16,1,.3,1),filter 1.2s ease}
-  .exif-hero-copy.is-visible .word{opacity:1;transform:none;filter:blur(0)}
-  .exif-hero-copy.is-visible .line:nth-child(2) .word{transition-delay:.12s}
-  .exif-hero-copy.is-visible .line:nth-child(3) .word{transition-delay:.24s}
+  .exif-hero-copy .line:nth-child(1){padding-left:12vw!important}.exif-hero-copy .line:nth-child(2){padding-left:24vw!important;margin-top:.01em!important}.exif-hero-copy .line:last-child{padding-left:7vw!important;margin-top:.01em!important;font-style:italic!important;letter-spacing:-.065em!important}.exif-hero-copy .line:last-child .word{font-size:.80em!important;white-space:nowrap!important}
+  .exif-hero-copy .word{display:block;opacity:0;transform:translateY(38px);filter:blur(3px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.16,1,.3,1),filter 1.2s ease}.exif-hero-copy.is-visible .word{opacity:1;transform:none;filter:blur(0)}.exif-hero-copy.is-visible .line:nth-child(2) .word{transition-delay:.12s}.exif-hero-copy.is-visible .line:nth-child(3) .word{transition-delay:.24s}
+  .exif-hero-title-green{position:absolute!important;z-index:1!important}.exif-hero-title-cream{position:absolute!important;z-index:2!important;color:var(--hero-cream)!important;pointer-events:none!important;will-change:clip-path!important}.exif-hero-title-cream .word{color:var(--hero-cream)!important;opacity:1!important;transform:none!important;filter:none!important;transition:none!important}.exif-hero-copy:not(.is-visible) .exif-hero-title-cream{opacity:0!important}.exif-hero-copy.is-visible .exif-hero-title-cream{opacity:1!important;transition:opacity .01s linear .18s!important}
+  .exif-hero-meta{position:absolute!important;left:5.5vw!important;right:4.5vw!important;bottom:clamp(1rem,2.2dvh,2rem)!important;display:flex!important;justify-content:space-between!important;align-items:center!important;margin:0!important;font:500 9px/1.25 'Jost',sans-serif!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:var(--hero-ink)!important;opacity:0;transform:translateY(8px);transition:opacity 1s ease .72s,transform 1s ease .72s}.exif-hero-copy.is-visible .exif-hero-meta{opacity:.82;transform:none}.exif-hero-meta>span:first-child{display:block!important;width:70px!important;height:10px!important;font-size:0!important;line-height:0!important;background:url('../img/signal-dark.png') left center/contain no-repeat!important}
 
-  .exif-hero-title-green{position:absolute!important;z-index:1!important}
-  .exif-hero-title-cream{position:absolute!important;z-index:2!important;color:var(--hero-cream)!important;pointer-events:none!important;will-change:clip-path!important}
-  .exif-hero-title-cream .word{color:var(--hero-cream)!important;opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
-  .exif-hero-copy:not(.is-visible) .exif-hero-title-cream{opacity:0!important}
-  .exif-hero-copy.is-visible .exif-hero-title-cream{opacity:1!important;transition:opacity .01s linear .18s!important}
-
-  .exif-hero-meta{position:absolute!important;left:5.5vw!important;right:4.5vw!important;bottom:clamp(1rem,2.2dvh,2rem)!important;display:flex!important;justify-content:space-between!important;align-items:center!important;margin:0!important;font:500 9px/1.25 'Jost',sans-serif!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:var(--hero-ink)!important;opacity:0;transform:translateY(8px);transition:opacity 1s ease .72s,transform 1s ease .72s}
-  .exif-hero-copy.is-visible .exif-hero-meta{opacity:.82;transform:none}
-  .exif-hero-meta>span:first-child{display:block!important;width:70px!important;height:10px!important;font-size:0!important;line-height:0!important;background:url('../img/signal-dark.png') left center/contain no-repeat!important}
-
-  .exif-loader{position:fixed!important;inset:0!important;z-index:9998!important;background:var(--hero-cream)!important;width:100%!important;height:100dvh!important;overflow:hidden!important;opacity:1;transition:opacity .72s cubic-bezier(.22,.61,.36,1)}
-  .exif-loader.is-gone{opacity:0;pointer-events:none}
+  .exif-loader{position:fixed!important;inset:0!important;z-index:9998!important;background:var(--hero-cream)!important;width:100%!important;height:100dvh!important;overflow:hidden!important;opacity:1}
   .exif-loader-stage{position:fixed!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:12px;height:12px;margin:0!important;background:#1c362a;overflow:hidden;transform:translate(-50%,-50%)!important;transform-origin:center!important;will-change:left,top,width,height;transition:left 1.05s cubic-bezier(.76,0,.24,1),top 1.05s cubic-bezier(.76,0,.24,1),width 1.05s cubic-bezier(.76,0,.24,1),height 1.05s cubic-bezier(.76,0,.24,1)}
   .exif-loader-stage.is-window{width:min(42vw,220px);height:min(30vw,150px)}
   .exif-loader-stage.is-hero{left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important}
-  .exif-loader-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:0;transform:scale(1.035)}
-  .exif-loader-stage img.is-active{opacity:1;transform:scale(1);transition:opacity .08s linear,transform .38s ease-out}
-  .exif-loader-count{position:fixed;left:50%;bottom:7dvh;transform:translateX(-50%);font:500 9px/1 'Jost',sans-serif;letter-spacing:.16em;color:#1c362a;opacity:0;transition:opacity .3s ease}
-  .exif-loader.is-sequencing .exif-loader-count{opacity:.48}
+  .exif-loader-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;opacity:0;transform:none!important}
+  .exif-loader-stage img.is-active{opacity:1;transform:none!important;transition:opacity .08s linear!important}
+  .exif-loader-stage img.is-final-frame{transform:none!important;transition:none!important}
+  .exif-loader-count{position:fixed;left:50%;bottom:7dvh;transform:translateX(-50%);font:500 9px/1 'Jost',sans-serif;letter-spacing:.16em;color:#1c362a;opacity:0;transition:opacity .3s ease}.exif-loader.is-sequencing .exif-loader-count{opacity:.48}
 }
-
-@media (min-width:860px) and (max-height:800px){
-  :root{--hero-media-w:clamp(400px,min(40vw,65dvh),590px);--hero-media-h:clamp(470px,72dvh,620px);--hero-media-y:46%;--hero-type-size:clamp(4.9rem,min(10vw,13.4dvh),9.4rem)}
-  .exif-hero-copy h1{top:40dvh!important;line-height:.70!important}
-  .exif-hero-copy .line:nth-child(1){padding-left:13vw!important}
-  .exif-hero-copy .line:nth-child(2){padding-left:25vw!important}
-  .exif-hero-copy .line:last-child{padding-left:8vw!important}
-  .exif-hero-meta{bottom:.8rem!important}
-}
-
-@media (min-width:860px) and (max-height:680px){
-  :root{--hero-media-h:68dvh;--hero-media-w:min(38vw,62dvh);--hero-type-size:clamp(4.35rem,min(9vw,12.1dvh),8rem)}
-  .exif-hero-copy h1{top:38dvh!important}
-}
-
-@media (min-width:860px) and (prefers-reduced-motion:reduce){
-  .exif-loader{display:none!important}
-  .exif-hero-copy .word{opacity:1!important;transform:none!important;filter:none!important}
-  .exif-hero-meta{opacity:.82!important;transform:none!important}
-}
+@media (min-width:860px) and (max-height:800px){:root{--hero-media-w:clamp(400px,min(40vw,65dvh),590px);--hero-media-h:clamp(470px,72dvh,620px);--hero-media-y:46%;--hero-type-size:clamp(4.9rem,min(10vw,13.4dvh),9.4rem)}.exif-hero-copy h1{top:40dvh!important;line-height:.70!important}.exif-hero-copy .line:nth-child(1){padding-left:13vw!important}.exif-hero-copy .line:nth-child(2){padding-left:25vw!important}.exif-hero-copy .line:last-child{padding-left:8vw!important}.exif-hero-meta{bottom:.8rem!important}}
+@media (min-width:860px) and (max-height:680px){:root{--hero-media-h:68dvh;--hero-media-w:min(38vw,62dvh);--hero-type-size:clamp(4.35rem,min(9vw,12.1dvh),8rem)}.exif-hero-copy h1{top:38dvh!important}}
+@media (min-width:860px) and (prefers-reduced-motion:reduce){.exif-loader{display:none!important}.exif-hero-copy .word{opacity:1!important;transform:none!important;filter:none!important}.exif-hero-meta{opacity:.82!important;transform:none!important}}
