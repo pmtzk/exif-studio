@@ -25,24 +25,23 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
   #what-exif-does.exif-cinematic-hero{background:var(--cream)!important;overflow:hidden!important}
   #what-exif-does.exif-cinematic-hero>.wrap{display:block!important}
 
-  /* One shared geometry for loader and final photograph: mathematically centered. */
   .exif-hero-bg,.exif-hero-shade{inset:auto!important;left:50%!important;top:50%!important;width:min(43vw,650px)!important;height:min(78vh,900px)!important;transform:translate(-50%,-50%)!important}
   .exif-hero-bg{object-fit:cover!important;object-position:center center!important}
   .exif-hero-shade{background:linear-gradient(180deg,rgba(5,14,10,.025),rgba(5,14,10,.03) 52%,rgba(5,14,10,.18))!important;pointer-events:none!important}
 
-  /* Header lives above the cream field and keeps the same editorial gutters as the hero. */
-  body.exif-hero-live:not(.nav-open) .site-header .wrap{max-width:none!important;width:100%!important;padding-left:6vw!important;padding-right:5.2vw!important;padding-top:1.5rem!important;padding-bottom:1rem!important}
+  /* Header: one optical baseline for logo + hamburger, with deliberate breathing room. */
+  body.exif-hero-live:not(.nav-open) .site-header{overflow:visible!important}
+  body.exif-hero-live:not(.nav-open) .site-header .wrap{max-width:none!important;width:100%!important;padding-left:6vw!important;padding-right:5.2vw!important;padding-top:clamp(2.7rem,4.2vh,3.6rem)!important;padding-bottom:0!important;min-height:0!important;overflow:visible!important}
   body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative!important;display:flex!important;align-items:center!important;width:auto!important;height:auto!important;text-decoration:none!important}
   body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;width:92px!important;height:auto!important;max-height:none!important;object-fit:contain!important;filter:none!important;opacity:.96!important}
 
-  /* Desktop hamburger: fixed to the visual top-right so no nav display rule can swallow it. */
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:clamp(1.55rem,3.2vh,2.35rem)!important;right:5.2vw!important;width:46px!important;height:46px!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;z-index:999!important;transform:none!important}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1.5px!important;background:var(--ink)!important;margin:0!important;transform:none!important;transform-origin:center!important}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(1){width:23px!important;top:13px!important;right:7px!important;left:auto!important}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(2){width:14px!important;top:22px!important;right:13px!important;left:auto!important}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(3){width:19px!important;top:31px!important;right:7px!important;left:auto!important}
+  /* Hamburger stays visible on cream. Extra specificity beats the legacy JS-injected cream rule. */
+  body.exif-hero-live:not(.nav-open) header.site-header .wrap .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:clamp(2.45rem,4.05vh,3.35rem)!important;right:5.2vw!important;width:46px!important;height:46px!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;z-index:9999!important;transform:none!important}
+  body.exif-hero-live:not(.nav-open) header.site-header .wrap .nav-toggle span{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1.5px!important;background:var(--ink)!important;margin:0!important;transform:none!important;transform-origin:center!important}
+  body.exif-hero-live:not(.nav-open) header.site-header .wrap .nav-toggle span:nth-child(1){width:23px!important;top:13px!important;right:7px!important;left:auto!important}
+  body.exif-hero-live:not(.nav-open) header.site-header .wrap .nav-toggle span:nth-child(2){width:14px!important;top:22px!important;right:13px!important;left:auto!important}
+  body.exif-hero-live:not(.nav-open) header.site-header .wrap .nav-toggle span:nth-child(3){width:19px!important;top:31px!important;right:7px!important;left:auto!important}
 
-  /* Editorial headline: enough scale to cross the photograph, enough room to breathe. */
   .exif-hero-copy{left:6vw!important;right:5.2vw!important;bottom:clamp(3.6rem,6.6vh,6.2rem)!important;color:var(--ink)!important;z-index:4!important}
   .exif-hero-copy h1{width:100%!important;max-width:none!important;color:var(--ink)!important;font-size:clamp(5.8rem,10.25vw,11rem)!important;line-height:.79!important;letter-spacing:-.058em!important}
   .exif-hero-copy .line{overflow:visible!important;padding-bottom:.025em!important}
@@ -63,16 +62,16 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
   .exif-hero-meta{margin-top:1.65rem!important;color:var(--ink)!important;opacity:1!important;align-items:center!important}
   .exif-hero-meta>span:first-child{background-image:url('../img/signal-dark.png')!important;width:70px!important;height:10px!important}
 
-  /* Loader's last frame occupies the exact same centered rectangle as the hero image. */
-  .exif-loader{display:flex!important;align-items:center!important;justify-content:center!important}
-  .exif-loader-stage{position:relative!important;left:auto!important;top:auto!important;margin:0!important;transform:none!important;transform-origin:center center!important;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
-  .exif-loader-stage.is-full{width:min(43vw,650px)!important;height:min(78vh,900px)!important}
+  /* Loader: one centering model for every stage. Only width/height animate. */
+  .exif-loader{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;display:grid!important;place-items:center!important;padding:0!important;margin:0!important;overflow:hidden!important}
+  .exif-loader-stage{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;margin:0!important;transform:none!important;transform-origin:center center!important;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
+  .exif-loader-stage.is-full{width:min(43vw,650px)!important;height:min(78dvh,900px)!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
 @media (min-width:860px) and (max-height:760px){
   .exif-hero-bg,.exif-hero-shade{height:72vh!important;width:min(39vw,590px)!important}
-  .exif-loader-stage.is-full{height:72vh!important;width:min(39vw,590px)!important}
+  .exif-loader-stage.is-full{height:72dvh!important;width:min(39vw,590px)!important}
   .exif-hero-copy{bottom:3rem!important}
   .exif-hero-copy h1{font-size:clamp(4.9rem,8.8vw,8rem)!important;line-height:.8!important}
 }
