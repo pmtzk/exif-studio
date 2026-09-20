@@ -6,6 +6,7 @@ function initEditorialPainpoint(){
   section.dataset.editorialReady='true';
 
   var many=section.querySelector('.choice-many');
+  var scrubEls=Array.prototype.slice.call(section.querySelectorAll('.choice-hook p,.choice-hook h2,.choice-context p,.choice-scale .lead,.choice-scale h3'));
   var decision=section.querySelector('.choice-decision');
   var decisionMain=decision&&decision.querySelector('strong');
   var decisionOther=decision&&decision.querySelector('em');
@@ -14,15 +15,27 @@ function initEditorialPainpoint(){
   var ticking=false;
   function clamp01(v){return Math.max(0,Math.min(1,v));}
   function smoothstep(v){v=clamp01(v);return v*v*(3-2*v);}
+  function scrubElement(el,index,reduced){
+    if(!el||reduced)return;
+    var er=el.getBoundingClientRect();
+    var start=window.innerHeight*(.96-Math.min(index,4)*.008);
+    var end=window.innerHeight*.54;
+    var ep=smoothstep((start-er.top)/(start-end));
+    var maxBlur=window.innerWidth<860?3.2:4.8;
+    var maxY=window.innerWidth<860?13:20;
+    el.style.setProperty('--scrub-opacity',(.28+.72*ep).toFixed(3));
+    el.style.setProperty('--scrub-blur',((1-ep)*maxBlur).toFixed(2)+'px');
+    el.style.setProperty('--scrub-y',((1-ep)*maxY).toFixed(2)+'px');
+  }
   function updateMotion(){
     ticking=false;
     var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var r=section.getBoundingClientRect();
     var span=Math.max(1,r.height+window.innerHeight);
     var p=clamp01((window.innerHeight-r.top)/span);
+    scrubEls.forEach(function(el,index){scrubElement(el,index,reduced);});
     if(many&&!reduced){var travel=window.innerWidth<860?10:Math.min(70,window.innerWidth*.04);many.style.setProperty('--choice-shift',((p-.5)*travel).toFixed(2)+'px');}
 
-    /* Decision moment: fully scroll-scrubbed. No trigger, no autonomous transition. */
     if(decision&&decisionMain&&decisionOther&&!reduced){
       var dr=decision.getBoundingClientRect();
       var start=window.innerHeight*.94;
@@ -34,8 +47,6 @@ function initEditorialPainpoint(){
       decisionMain.style.setProperty('--decision-opacity',op.toFixed(3));
       decisionMain.style.setProperty('--decision-blur',blur.toFixed(2)+'px');
       decisionMain.style.setProperty('--decision-y',y.toFixed(2)+'px');
-
-      /* 'or another one' resolves slightly later, but remains tied 1:1 to scroll. */
       var ep=smoothstep((dp-.34)/.66);
       decisionOther.style.setProperty('--other-opacity',ep.toFixed(3));
       decisionOther.style.setProperty('--other-blur',((1-ep)*(window.innerWidth<860?4:6)).toFixed(2)+'px');
