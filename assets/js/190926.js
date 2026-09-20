@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
 
+  /* Mobile uses the approved 180902-refine controller. Desktop remains on the current architecture. */
+  if (window.innerWidth < 860) {
+    var legacy = document.createElement('script');
+    legacy.src = 'assets/js/180902-mobile-legacy.js';
+    legacy.defer = true;
+    document.body.appendChild(legacy);
+    return;
+  }
+
   var initialized = false;
   var resizeFrame = 0;
   var lastWidth = window.innerWidth;
@@ -37,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
     copy.insertBefore(cream, original.nextSibling);
 
     function syncMask() {
-      if (window.innerWidth < 860) { cream.style.clipPath = ''; return; }
       var photo = hero.querySelector('.exif-hero-bg');
       if (!photo) return;
       var r = cream.getBoundingClientRect();
