@@ -4,31 +4,40 @@ document.addEventListener('DOMContentLoaded',function(){
   if(!section)return;
 
   var many=section.querySelector('.choice-many');
+  var decision=section.querySelector('.choice-decision');
+  var workImage=section.querySelector('.choice-work-entry img');
+  var header=document.querySelector('.site-header');
   var ticking=false;
   function updateMotion(){
     ticking=false;
-    if(!many||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var r=section.getBoundingClientRect();
     var span=Math.max(1,r.height+window.innerHeight);
     var p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/span));
-    var travel=window.innerWidth<860?24:Math.min(150,window.innerWidth*.085);
-    many.style.setProperty('--choice-shift',((p-.5)*travel).toFixed(2)+'px');
+    if(many&&!reduced){var travel=window.innerWidth<860?10:Math.min(70,window.innerWidth*.04);many.style.setProperty('--choice-shift',((p-.5)*travel).toFixed(2)+'px');}
+    if(workImage&&!reduced){var ir=workImage.getBoundingClientRect();var ip=Math.max(0,Math.min(1,(window.innerHeight-ir.top)/(window.innerHeight+ir.height)));workImage.style.setProperty('--choice-image-scale',(1.075-ip*.055).toFixed(4));workImage.style.setProperty('--choice-image-y',((.5-ip)*28).toFixed(2)+'px');}
+    if(header&&langButton){var cx=langButton.getBoundingClientRect().left+langButton.offsetWidth/2;var cy=langButton.getBoundingClientRect().top+langButton.offsetHeight/2;var el=document.elementFromPoint(cx,cy);var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}
   }
   function requestMotion(){if(!ticking){ticking=true;requestAnimationFrame(updateMotion)}}
   window.addEventListener('scroll',requestMotion,{passive:true});
   window.addEventListener('resize',requestMotion,{passive:true});
   updateMotion();
 
+  if(decision){if('IntersectionObserver'in window){var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){decision.classList.add('is-live');observer.unobserve(decision);}});},{threshold:.38});observer.observe(decision);}else{decision.classList.add('is-live');}}
+
   var copy={
     en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property.',other:'or another one.'},
-    es:{hook:'Alguien elige dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'Tu propiedad es una opción',many:'entre muchas.',property:'Tu propiedad.',other:'u otra.'}
+    es:{hook:'Alguien está eligiendo dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'La tuya es una opción',many:'entre muchas.',property:'Tu propiedad.',other:'u otra.'}
   };
   function setLanguage(lang){
     if(!copy[lang])lang='en';
     section.querySelectorAll('[data-copy]').forEach(function(el){var key=el.getAttribute('data-copy');if(copy[lang][key])el.textContent=copy[lang][key]});
     document.documentElement.lang=lang;
-    if(langButton){langButton.textContent=lang==='en'?'ES':'ENG';langButton.setAttribute('aria-label',lang==='en'?'Ver esta sección en español':'View this section in English');langButton.dataset.lang=lang;}
+    try{localStorage.setItem('exif-language',lang);}catch(e){}
+    if(langButton){langButton.textContent=lang==='en'?'ES':'ENG';langButton.setAttribute('aria-label',lang==='en'?'Cambiar a español':'Switch to English');langButton.dataset.lang=lang;langButton.setAttribute('aria-pressed',lang==='es'?'true':'false');}
+    requestMotion();
   }
-  if(langButton){langButton.addEventListener('click',function(){setLanguage(langButton.dataset.lang==='es'?'en':'es')});}
-  setLanguage('en');
+  if(langButton){langButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setLanguage(langButton.dataset.lang==='es'?'en':'es')});}
+  var initial='en';try{initial=localStorage.getItem('exif-language')||'en';}catch(e){}
+  setLanguage(initial);
 });
