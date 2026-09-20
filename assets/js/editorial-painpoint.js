@@ -1,7 +1,9 @@
-document.addEventListener('DOMContentLoaded',function(){
+(function(){
+function initEditorialPainpoint(){
   var section=document.querySelector('.editorial-choice');
   var langButton=document.querySelector('.lang-toggle');
-  if(!section)return;
+  if(!section||section.dataset.editorialReady==='true')return;
+  section.dataset.editorialReady='true';
 
   var many=section.querySelector('.choice-many');
   var decision=section.querySelector('.choice-decision');
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/span));
     if(many&&!reduced){var travel=window.innerWidth<860?10:Math.min(70,window.innerWidth*.04);many.style.setProperty('--choice-shift',((p-.5)*travel).toFixed(2)+'px');}
     if(workImage&&!reduced){var ir=workImage.getBoundingClientRect();var ip=Math.max(0,Math.min(1,(window.innerHeight-ir.top)/(window.innerHeight+ir.height)));workImage.style.setProperty('--choice-image-scale',(1.075-ip*.055).toFixed(4));workImage.style.setProperty('--choice-image-y',((.5-ip)*28).toFixed(2)+'px');}
-    if(header&&langButton){var cx=langButton.getBoundingClientRect().left+langButton.offsetWidth/2;var cy=langButton.getBoundingClientRect().top+langButton.offsetHeight/2;var el=document.elementFromPoint(cx,cy);var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}
+    if(header&&langButton){var b=langButton.getBoundingClientRect();var cx=b.left+b.width/2;var cy=b.top+b.height/2;langButton.style.pointerEvents='none';var el=document.elementFromPoint(cx,cy);langButton.style.pointerEvents='auto';var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}
   }
   function requestMotion(){if(!ticking){ticking=true;requestAnimationFrame(updateMotion)}}
   window.addEventListener('scroll',requestMotion,{passive:true});
@@ -37,7 +39,12 @@ document.addEventListener('DOMContentLoaded',function(){
     if(langButton){langButton.textContent=lang==='en'?'ES':'ENG';langButton.setAttribute('aria-label',lang==='en'?'Cambiar a español':'Switch to English');langButton.dataset.lang=lang;langButton.setAttribute('aria-pressed',lang==='es'?'true':'false');}
     requestMotion();
   }
-  if(langButton){langButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setLanguage(langButton.dataset.lang==='es'?'en':'es')});}
+  if(langButton){langButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var current=langButton.dataset.lang||document.documentElement.lang||'en';setLanguage(current==='es'?'en':'es');});}
   var initial='en';try{initial=localStorage.getItem('exif-language')||'en';}catch(e){}
   setLanguage(initial);
-});
+}
+
+/* This file is injected after DOMContentLoaded by 190926.js, so initialize immediately when the DOM is already ready. */
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initEditorialPainpoint,{once:true});
+else initEditorialPainpoint();
+})();
