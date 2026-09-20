@@ -1,6 +1,6 @@
 // Desktop split-colour hero: deterministic overlap mask.
-// Two sibling H1s share identical CSS. The cream copy is clipped to the exact
-// intersection between the title box and the canonical hero photograph.
+// Two sibling H1s share identical geometry. The cream copy is clipped to the
+// live intersection between the title and the canonical hero photograph.
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var initialized = false;
   var raf = 0;
+  var trackingRaf = 0;
 
   function setup() {
     if (initialized) return true;
@@ -30,41 +31,51 @@ document.addEventListener('DOMContentLoaded', function () {
     cream.style.visibility = 'hidden';
     copy.insertBefore(cream, original.nextSibling);
 
+    function paintMaskNow() {
+      var photo = hero.querySelector('.exif-hero-bg');
+      if (!photo) return;
+      var t = original.getBoundingClientRect();
+      var p = photo.getBoundingClientRect();
+      var x1 = Math.max(t.left, p.left), y1 = Math.max(t.top, p.top);
+      var x2 = Math.min(t.right, p.right), y2 = Math.min(t.bottom, p.bottom);
+
+      if (x2 <= x1 || y2 <= y1 || t.width <= 0 || t.height <= 0) {
+        cream.style.clipPath = 'inset(100% 100% 100% 100%)';
+        cream.style.webkitClipPath = 'inset(100% 100% 100% 100%)';
+        cream.style.visibility = '';
+        return;
+      }
+
+      var left = ((x1 - t.left) / t.width) * 100;
+      var right = ((x2 - t.left) / t.width) * 100;
+      var top = ((y1 - t.top) / t.height) * 100;
+      var bottom = ((y2 - t.top) / t.height) * 100;
+      var polygon = 'polygon(' + left + '% ' + top + '%, ' + right + '% ' + top + '%, ' + right + '% ' + bottom + '%, ' + left + '% ' + bottom + '%)';
+      cream.style.clipPath = polygon;
+      cream.style.webkitClipPath = polygon;
+      cream.style.visibility = '';
+    }
+
     function paintMask() {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(function () {
-        var photo = hero.querySelector('.exif-hero-bg');
-        if (!photo) return;
-        var t = original.getBoundingClientRect();
-        var p = photo.getBoundingClientRect();
-
-        var x1 = Math.max(t.left, p.left);
-        var y1 = Math.max(t.top, p.top);
-        var x2 = Math.min(t.right, p.right);
-        var y2 = Math.min(t.bottom, p.bottom);
-
-        if (x2 <= x1 || y2 <= y1 || t.width <= 0 || t.height <= 0) {
-          cream.style.clipPath = 'inset(100% 100% 100% 100%)';
-          cream.style.webkitClipPath = 'inset(100% 100% 100% 100%)';
-          cream.style.visibility = '';
-          return;
-        }
-
-        // Percent coordinates are relative to the H1 itself. This avoids fixed
-        // descendants, nested coordinate systems and viewport-unit rounding.
-        var left = ((x1 - t.left) / t.width) * 100;
-        var right = ((x2 - t.left) / t.width) * 100;
-        var top = ((y1 - t.top) / t.height) * 100;
-        var bottom = ((y2 - t.top) / t.height) * 100;
-        var polygon = 'polygon(' + left + '% ' + top + '%, ' + right + '% ' + top + '%, ' + right + '% ' + bottom + '%, ' + left + '% ' + bottom + '%)';
-        cream.style.clipPath = polygon;
-        cream.style.webkitClipPath = polygon;
-        cream.style.visibility = '';
-      });
+      raf = requestAnimationFrame(paintMaskNow);
     }
 
     function readyPaint() {
       requestAnimationFrame(function () { requestAnimationFrame(paintMask); });
+    }
+
+    /* During the 1.35s scale reveal getBoundingClientRect() changes every
+       frame. ResizeObserver does not fire for transforms, so track only for
+       the duration of that intentional animation, then stop. */
+    function trackScaleReveal() {
+      cancelAnimationFrame(trackingRaf);
+      var start = performance.now();
+      function frame(now) {
+        paintMaskNow();
+        if (now - start < 1500) trackingRaf = requestAnimationFrame(frame);
+      }
+      trackingRaf = requestAnimationFrame(frame);
     }
 
     var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready.catch(function(){}) : Promise.resolve();
@@ -79,10 +90,14 @@ document.addEventListener('DOMContentLoaded', function () {
       ro.observe(hero);
       ro.observe(original);
     }
-
-    // Font loading can finish after document.fonts.ready in some Safari cache
-    // paths; loadingdone gives us one final geometry pass without polling.
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', readyPaint);
+
+    /* 180902 adds is-visible after the loader handoff. Observe that exact state
+       change so the mask follows the title while it grows. */
+    var mo = new MutationObserver(function () {
+      if (copy.classList.contains('is-visible')) trackScaleReveal();
+    });
+    mo.observe(copy, { attributes: true, attributeFilter: ['class'] });
 
     readyPaint();
     initialized = true;
