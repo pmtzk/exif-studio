@@ -22,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     signal.addEventListener('click', function () {
       var target = signal.getAttribute('data-panel');
       signals.forEach(function (item) { item.classList.remove('active'); });
-      panels.forEach(function (panel) {
-        panel.classList.toggle('active', panel.getAttribute('data-content') === target);
-      });
+      panels.forEach(function (panel) { panel.classList.toggle('active', panel.getAttribute('data-content') === target); });
       signal.classList.add('active');
     });
   });
@@ -37,11 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* HERO ONLY — JS owns DOM/state/timing. Desktop CSS owns desktop geometry.
-     The scoped block below preserves the previously approved mobile presentation unchanged. */
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
 
+  /* Approved mobile presentation stays scoped and unchanged. */
   var mobileStyle = document.createElement('style');
   mobileStyle.textContent = `
     @media(max-width:859px){
@@ -88,14 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var finalImage = 'https://raw.githubusercontent.com/pmtzk/exif-studio/dfad59a8809948b4537c4e8be36be13348dd0235/assets/img/exif-fullbleed.jpg';
   var frames = [
-    'assets/img/work-chair-detail.jpg',
-    'assets/img/work-window-reflection.jpg',
-    'assets/img/work-human-moment.jpg',
-    'assets/img/work-open-air-space.jpg',
-    'assets/img/work-restaurant-atmosphere.jpg',
-    'assets/img/hero-couch-doorway.jpg',
-    'assets/img/work-exterior-view.jpg',
-    finalImage
+    'assets/img/work-chair-detail.jpg', 'assets/img/work-window-reflection.jpg',
+    'assets/img/work-human-moment.jpg', 'assets/img/work-open-air-space.jpg',
+    'assets/img/work-restaurant-atmosphere.jpg', 'assets/img/hero-couch-doorway.jpg',
+    'assets/img/work-exterior-view.jpg', finalImage
   ];
 
   hero.classList.add('exif-cinematic-hero');
@@ -104,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     '<div class="exif-hero-shade" aria-hidden="true"></div>' +
     '<div class="exif-hero-copy"><h1><span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span></h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>'
   );
+
+  var heroBg = hero.querySelector('.exif-hero-bg');
 
   function setHeroHeaderState() {
     if (window.scrollY < Math.max(80, hero.offsetHeight - 90)) document.body.classList.add('exif-hero-live');
@@ -149,15 +144,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
       loader.classList.remove('is-sequencing');
       setTimeout(function () {
+        var finalFrame = imgs[imgs.length - 1];
+        finalFrame.classList.add('is-final-frame');
         stage.classList.add('is-hero');
-        setTimeout(function () {
-          document.body.classList.add('exif-hero-live');
-          loader.classList.add('is-gone');
-          document.body.classList.remove('exif-intro-running');
-          setTimeout(function () { hero.querySelector('.exif-hero-copy').classList.add('is-visible'); }, 300);
-          setTimeout(function () { loader.remove(); }, 900);
+
+        var onExpanded = function (event) {
+          if (event.target !== stage || event.propertyName !== 'width') return;
+          stage.removeEventListener('transitionend', onExpanded);
+
+          if (window.innerWidth >= 860) {
+            /* The exact image node seen in the loader becomes the hero image.
+               No crossfade and no duplicate photograph exist during handoff. */
+            var rect = stage.getBoundingClientRect();
+            finalFrame.classList.remove('is-active', 'is-final-frame');
+            finalFrame.classList.add('exif-hero-bg', 'exif-hero-bg-live');
+            finalFrame.alt = 'Hospitality property at sunset';
+            finalFrame.style.left = rect.left + 'px';
+            finalFrame.style.top = rect.top + 'px';
+            finalFrame.style.width = rect.width + 'px';
+            finalFrame.style.height = rect.height + 'px';
+            finalFrame.style.transform = 'none';
+            document.body.appendChild(finalFrame);
+
+            heroBg.style.visibility = 'hidden';
+            loader.remove();
+            document.body.classList.remove('exif-intro-running');
+            document.body.classList.add('exif-hero-live');
+
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                finalFrame.style.left = '';
+                finalFrame.style.top = '';
+                finalFrame.style.width = '';
+                finalFrame.style.height = '';
+                finalFrame.style.transform = '';
+                hero.querySelector('.wrap').insertBefore(finalFrame, hero.querySelector('.exif-hero-shade'));
+                heroBg.remove();
+                heroBg = finalFrame;
+                hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));
+                setTimeout(function () { hero.querySelector('.exif-hero-copy').classList.add('is-visible'); }, 120);
+              });
+            });
+          } else {
+            document.body.classList.add('exif-hero-live');
+            loader.classList.add('is-gone');
+            document.body.classList.remove('exif-intro-running');
+            setTimeout(function () { hero.querySelector('.exif-hero-copy').classList.add('is-visible'); }, 300);
+            setTimeout(function () { loader.remove(); }, 900);
+          }
+
           window.addEventListener('scroll', setHeroHeaderState, { passive: true });
-        }, 1050);
+        };
+        stage.addEventListener('transitionend', onExpanded);
       }, 360);
     }
     flash();
