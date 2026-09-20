@@ -2,34 +2,45 @@
 .site-header,.site-header.is-scrolled,body.exif-hero-live .site-header,body:not(.exif-hero-live) .site-header{position:sticky!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:var(--desktop-header-h,76px)!important;min-height:var(--desktop-header-h,76px)!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;z-index:9000!important;pointer-events:none!important}
 .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap{box-sizing:border-box!important;width:100%!important;max-width:none!important;height:var(--desktop-header-h,76px)!important;min-height:var(--desktop-header-h,76px)!important;margin:0!important;padding:0 5.2vw 0 6vw!important;display:flex!important;align-items:center!important;justify-content:space-between!important;overflow:visible!important;pointer-events:none!important}
 .site-header .wrap>a:first-child{width:92px!important;height:24px!important;display:block!important;position:relative!important;z-index:9002!important;pointer-events:auto!important}
-.site-header .wrap>a:first-child::before{content:""!important;position:absolute!important;inset:0!important;display:block!important;background:var(--ink)!important;-webkit-mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;transition:background-color .18s ease!important;pointer-events:none!important}
+.site-header .wrap>a:first-child::before{content:""!important;position:absolute!important;inset:0!important;display:block!important;background:var(--ink)!important;-webkit-mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;transition:background-color .28s ease!important;pointer-events:none!important}
 .site-header .brand-logo{width:92px!important;height:auto!important;max-height:24px!important;object-fit:contain!important;visibility:hidden!important;opacity:0!important}
 @media (min-width:860px){body:not(.nav-open) .site-header .main-nav,body:not(.nav-open) .site-header .main-nav:not(.open){display:none!important;visibility:hidden!important;pointer-events:none!important}}
 header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle,body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:calc(var(--desktop-header-h,76px)/2)!important;right:5.2vw!important;width:46px!important;height:46px!important;margin:0!important;padding:0!important;transform:translateY(-50%)!important;z-index:10002!important;background:transparent!important;border:0!important}
-body:not(.nav-open) header.site-header .nav-toggle span{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1.5px!important;margin:0!important;transform:none!important;transform-origin:center!important;background:var(--ink)!important}
+body:not(.nav-open) header.site-header .nav-toggle span{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1.5px!important;margin:0!important;transform:none!important;transform-origin:center!important;background:var(--ink)!important;transition:background-color .28s ease!important}
 body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:23px!important;top:13px!important;right:7px!important;left:auto!important}body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:14px!important;top:22px!important;right:13px!important;left:auto!important}body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:19px!important;top:31px!important;right:7px!important;left:auto!important}
 .site-header.nav-logo-on-light:not(:has(.main-nav.open)) .wrap>a:first-child::before{background:var(--ink)!important}.site-header.nav-logo-on-dark:not(:has(.main-nav.open)) .wrap>a:first-child::before{background:var(--cream)!important}.site-header.nav-toggle-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}.site-header.nav-toggle-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
 body.nav-open .site-header,body.nav-open .site-header.is-scrolled{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important}
 @media (min-width:860px){body.nav-open header.site-header .nav-toggle,body.nav-open header.site-header .nav-toggle[aria-expanded="true"]{position:fixed!important;top:calc(var(--desktop-header-h,76px)/2)!important;right:5.2vw!important;width:46px!important;height:46px!important;margin:0!important;padding:0!important;transform:translateY(-50%)!important;z-index:12002!important;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}body.nav-open header.site-header .nav-toggle span{display:block!important;visibility:visible!important;position:absolute!important;height:1.5px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}body.nav-open header.site-header .nav-toggle span:nth-child(1){width:25px!important;top:22px!important;left:10px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important}body.nav-open header.site-header .nav-toggle span:nth-child(2){opacity:0!important}body.nav-open header.site-header .nav-toggle span:nth-child(3){width:21px!important;top:22px!important;left:18px!important;right:auto!important;opacity:1!important;transform:rotate(-48deg)!important}}
 
-/* Mobile: hero keeps its existing composition. Once the hero releases, the chrome becomes a
-   compact 60px navigation rail. It occupies real vertical space on text sections, while visual
-   sections can still pass beneath it and trigger the contextual cream/green treatment. */
+/* Mobile: no visible rail over the hero. After the hero releases, a very thin 42px cream rail
+   gives the navigation its own quiet coordinate system. */
 @media (max-width:859px){
-  .site-header,.site-header.is-scrolled,body.exif-hero-live .site-header,body:not(.exif-hero-live) .site-header{height:60px!important;min-height:60px!important;background:var(--cream)!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background-color .18s ease!important}
-  .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap,body:not(.exif-hero-live) .site-header .wrap{height:60px!important;min-height:60px!important;padding:0 max(20px,var(--gutter))!important;align-items:center!important}
-  .site-header .wrap>a:first-child{width:76px!important;height:22px!important;flex:0 0 76px!important}
+  .site-header,.site-header.is-scrolled,body.exif-hero-live .site-header,body:not(.exif-hero-live) .site-header{height:42px!important;min-height:42px!important;background:var(--cream)!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transition:background-color .32s ease!important}
+  .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap,body:not(.exif-hero-live) .site-header .wrap{height:42px!important;min-height:42px!important;padding:0 max(18px,var(--gutter))!important;align-items:center!important}
+  .site-header .wrap>a:first-child{width:64px!important;height:18px!important;flex:0 0 64px!important}
   .site-header .wrap>a:first-child::before{-webkit-mask-size:contain!important;mask-size:contain!important}
-  header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle,body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{position:relative!important;top:auto!important;right:auto!important;width:34px!important;height:34px!important;padding:0!important;transform:none!important;flex:0 0 34px!important}
-  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:20px!important;top:9px!important;right:2px!important}
-  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:12px!important;top:16px!important;right:7px!important}
-  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:17px!important;top:23px!important;right:2px!important}
-  /* During the cinematic hero the rail visually disappears; existing hero geometry remains intact. */
+  header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle,body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{position:relative!important;top:auto!important;right:auto!important;width:30px!important;height:30px!important;padding:0!important;transform:none!important;flex:0 0 30px!important}
+  body:not(.nav-open) header.site-header .nav-toggle span{height:1.25px!important;transition:background-color .32s ease!important}
+  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:18px!important;top:8px!important;right:1px!important}
+  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:10px!important;top:14px!important;right:6px!important}
+  body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:15px!important;top:20px!important;right:1px!important}
+
+  /* Hero state is deliberately cream regardless of the contextual sampler. The controls begin
+     as part of the cinematic image and transition to ink only when exif-hero-live is released. */
   body.exif-hero-live:not(.nav-open) .site-header{background:transparent!important}
-  /* After hero, cream is the default quiet field. Dark/image sections may explicitly let the
-     contextual system tint both controls cream while the rail itself becomes transparent. */
-  body:not(.exif-hero-live) .site-header.nav-logo-on-dark,
-  body:not(.exif-hero-live) .site-header.nav-toggle-on-dark{background:transparent!important}
-  /* Open drawer retains the existing mobile drawer/X implementation. */
-  body.nav-open .site-header{background:transparent!important;height:60px!important;min-height:60px!important}
+  body.exif-hero-live:not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--cream)!important}
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{background:var(--cream)!important}
+
+  /* Past the hero the thin rail is cream and both controls default to ink. */
+  body:not(.exif-hero-live):not(.nav-open) .site-header{background:var(--cream)!important}
+  body:not(.exif-hero-live):not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--ink)!important}
+  body:not(.exif-hero-live):not(.nav-open) .site-header .nav-toggle span{background:var(--ink)!important}
+
+  /* Drawer owns its close control. Keep it above the overlay and restore the asymmetric X. */
+  body.nav-open .site-header,body.nav-open .site-header.is-scrolled{height:42px!important;min-height:42px!important;background:transparent!important;pointer-events:none!important}
+  body.nav-open header.site-header .nav-toggle,body.nav-open header.site-header .nav-toggle[aria-expanded="true"]{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;top:21px!important;right:max(18px,var(--gutter))!important;width:34px!important;height:34px!important;margin:0!important;padding:0!important;transform:none!important;z-index:12002!important;background:transparent!important;border:0!important}
+  body.nav-open header.site-header .nav-toggle span{display:block!important;visibility:visible!important;position:absolute!important;height:1.25px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}
+  body.nav-open header.site-header .nav-toggle span:nth-child(1){width:22px!important;top:16px!important;left:5px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important}
+  body.nav-open header.site-header .nav-toggle span:nth-child(2){opacity:0!important}
+  body.nav-open header.site-header .nav-toggle span:nth-child(3){width:18px!important;top:16px!important;left:12px!important;right:auto!important;opacity:1!important;transform:rotate(-48deg)!important}
 }
