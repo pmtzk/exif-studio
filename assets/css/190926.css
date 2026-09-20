@@ -23,6 +23,7 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
   .exif-loader-stage{transform:translateZ(0);transform-origin:center center;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
   .exif-loader-stage.is-full{width:100vw!important;height:100svh!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
+  .exif-hero-title-cream{display:none!important}
 }
 
 /* Desktop: portrait image as an editorial object on cream. */
@@ -30,7 +31,6 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
   #what-exif-does.exif-cinematic-hero{background:var(--cream)!important;overflow:hidden!important}
   #what-exif-does.exif-cinematic-hero>.wrap{display:block!important}
 
-  /* Keep the original portrait reading visible instead of turning it into a landscape crop. */
   .exif-hero-bg{
     inset:auto!important;left:50%!important;top:50%!important;
     width:min(43vw,650px)!important;height:min(78vh,900px)!important;
@@ -44,27 +44,44 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
     pointer-events:none!important;
   }
 
-  /* Restore real logo proportions: width only, intrinsic height. */
   body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative!important;display:flex!important;align-items:center!important;width:auto!important;height:auto!important;text-decoration:none!important}
   body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;width:92px!important;height:auto!important;max-height:none!important;object-fit:contain!important;filter:none!important;opacity:.96!important}
 
-  /* Restore the asymmetric hamburger on desktop. */
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle{display:block!important;position:relative!important;width:46px!important;height:46px!important;padding:0!important;border:0!important;background:transparent!important;z-index:40!important}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{display:block!important;position:absolute!important;height:1px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}
+  /* Force the real existing nav control back into the desktop header. */
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle{
+    display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+    position:relative!important;width:46px!important;height:46px!important;padding:0!important;margin:0!important;
+    border:0!important;background:transparent!important;z-index:40!important;transform:none!important;
+  }
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{
+    display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1px!important;
+    background:var(--ink)!important;margin:0!important;transform:none!important;transform-origin:center!important;
+  }
   body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(1){width:21px!important;top:14px!important;left:9px!important}
   body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(2){width:14px!important;top:22px!important;left:17px!important}
   body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(3){width:17px!important;top:30px!important;left:9px!important}
 
-  /* Oversized cover line deliberately crosses the image boundary. Green is the desktop field color. */
   .exif-hero-copy{left:6vw!important;right:4vw!important;bottom:clamp(3.3rem,6vh,5.5rem)!important;color:var(--ink)!important;z-index:4!important}
   .exif-hero-copy h1{width:100%!important;max-width:none!important;color:var(--ink)!important;font-size:clamp(6.6rem,11.8vw,12.8rem)!important;line-height:.72!important;letter-spacing:-.065em!important}
   .exif-hero-copy .line:nth-child(2){padding-left:18vw!important}
   .exif-hero-copy .line:last-child{padding-left:4vw!important}
   .exif-hero-copy .line:last-child .word{font-size:.82em!important;white-space:nowrap!important}
+
+  /* Exact duplicate of the headline, clipped by JS to the live photo rectangle. */
+  .exif-hero-title-green{position:relative!important;z-index:1!important}
+  .exif-hero-title-cream{
+    position:absolute!important;left:0!important;right:0!important;top:0!important;margin:0!important;
+    z-index:2!important;color:var(--cream)!important;pointer-events:none!important;will-change:clip-path!important;
+  }
+  .exif-hero-title-cream .word{
+    color:var(--cream)!important;opacity:1!important;transform:none!important;filter:none!important;transition:none!important;
+  }
+  .exif-hero-copy:not(.is-visible) .exif-hero-title-cream{opacity:0!important}
+  .exif-hero-copy.is-visible .exif-hero-title-cream{opacity:1!important;transition:opacity .01s linear .26s!important}
+
   .exif-hero-meta{margin-top:1.25rem!important;color:var(--ink)!important;opacity:1!important}
   .exif-hero-meta>span:first-child{background-image:url('../img/signal-dark.png')!important;width:70px!important;height:10px!important}
 
-  /* Loader lands in the same portrait geometry. */
   .exif-loader-stage{transform-origin:center center!important;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
   .exif-loader-stage.is-full{width:min(43vw,650px)!important;height:min(78vh,900px)!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
