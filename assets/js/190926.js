@@ -48,3 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   if(!setup()){var attempts=0,timer=setInterval(function(){attempts+=1;if(setup()||attempts>=80)clearInterval(timer);},25);}
 });
+
+/* Editorial painpoint experiment. Mounted after all checkpoint code so hero/drawer markup stays untouched. */
+document.addEventListener('DOMContentLoaded',function(){
+  if(!document.querySelector('link[href="assets/css/editorial-painpoint.css"]')){var css=document.createElement('link');css.rel='stylesheet';css.href='assets/css/editorial-painpoint.css';document.head.appendChild(css);}
+  var headerWrap=document.querySelector('.site-header .wrap');
+  if(headerWrap&&!headerWrap.querySelector('.lang-toggle')){var lang=document.createElement('button');lang.type='button';lang.className='lang-toggle';lang.textContent='ES';lang.setAttribute('aria-label','Ver esta sección en español');var logo=headerWrap.querySelector('a');if(logo&&logo.nextSibling)headerWrap.insertBefore(lang,logo.nextSibling);else headerWrap.appendChild(lang);}
+  var gap=document.querySelector('#gap');
+  if(gap){gap.outerHTML='<section class="editorial-choice" id="gap"><div class="wrap"><div class="choice-hook"><p data-copy="hook">Someone is choosing where to stay.</p><h2 data-copy="question">Why your property?</h2></div><div class="choice-context"><div class="choice-spacer" aria-hidden="true"></div><div><p data-copy="seconds">They have seconds to find a reason.</p><p data-copy="compare">Before they choose, they compare.</p></div></div><div class="choice-scale"><p class="lead" data-copy="while">And while they decide,</p><h3><span class="choice-line" data-copy="option">Yours is one option</span><span class="choice-line choice-many" data-copy="many">among many.</span></h3></div><div class="choice-decision"><strong data-copy="property">Your property.</strong><em data-copy="other">or another one.</em></div><figure class="choice-work-entry"><img src="assets/img/work-exterior-view.jpg" alt="Hillside property at sunset" loading="lazy"></figure></div></section>';}
+  var script=document.createElement('script');script.src='assets/js/editorial-painpoint.js';script.defer=true;document.body.appendChild(script);
+});
