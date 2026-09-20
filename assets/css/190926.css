@@ -32,8 +32,6 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
     width:72px!important;
     height:auto!important;
   }
-
-  /* Preserve the large editorial rhythm while guaranteeing the long final word fits. */
   .exif-hero-copy{
     left:28px!important;
     right:24px!important;
@@ -54,8 +52,6 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
     white-space:nowrap!important;
   }
   .exif-hero-meta>span:first-child{width:54px!important;height:7px!important}
-
-  /* The loader window is a deliberate held frame before it becomes the hero. */
   .exif-loader-stage.is-window{width:min(44vw,220px)!important;height:min(31vw,155px)!important}
   .exif-loader-stage{
     transform:translateZ(0);
@@ -66,7 +62,83 @@ body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!import
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
+/* Desktop is art-directed independently: the photograph remains an editorial object on cream. */
 @media (min-width:860px){
   body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative;text-decoration:none}
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important}
+
+  #what-exif-does.exif-cinematic-hero{
+    background:var(--cream)!important;
+  }
+  #what-exif-does.exif-cinematic-hero>.wrap{
+    display:grid!important;
+    place-items:center!important;
+  }
+  .exif-hero-bg{
+    inset:auto!important;
+    width:min(76vw,1240px)!important;
+    height:min(72vh,820px)!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-48%)!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  .exif-hero-shade{
+    inset:auto!important;
+    width:min(76vw,1240px)!important;
+    height:min(72vh,820px)!important;
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-48%)!important;
+    background:linear-gradient(180deg,rgba(5,14,10,.04) 0%,rgba(5,14,10,.01) 46%,rgba(5,14,10,.24) 100%)!important;
+    pointer-events:none!important;
+  }
+
+  /* Header lives on the cream field, not over the photograph. */
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{
+    width:78px!important;
+    filter:none!important;
+    opacity:.94!important;
+  }
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{
+    background:var(--ink)!important;
+  }
+
+  /* Keep the statement attached to the image, with enough scale to read as a cover line. */
+  .exif-hero-copy{
+    left:calc(12vw + 2.2rem)!important;
+    right:calc(12vw + 2.2rem)!important;
+    bottom:clamp(4.6rem,8.5vh,7.2rem)!important;
+    color:var(--cream)!important;
+  }
+  .exif-hero-copy h1{
+    width:100%!important;
+    max-width:9.8ch!important;
+    font-size:clamp(4.4rem,7.7vw,8.5rem)!important;
+    line-height:.79!important;
+  }
+  .exif-hero-copy .line:nth-child(2){padding-left:clamp(2.5rem,8vw,8rem)!important}
+  .exif-hero-copy .line:last-child .word{
+    font-size:.86em!important;
+    white-space:nowrap!important;
+  }
+  .exif-hero-meta{margin-top:1rem!important}
+
+  /* Loader resolves into the exact desktop hero frame instead of stretching the portrait source full-screen. */
+  .exif-loader-stage{
+    transform-origin:center center!important;
+    transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important;
+  }
+  .exif-loader-stage.is-full{
+    width:min(76vw,1240px)!important;
+    height:min(72vh,820px)!important;
+  }
+  .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
+}
+
+@media (min-width:860px) and (max-height:760px){
+  .exif-hero-bg,.exif-hero-shade{height:68vh!important}
+  .exif-loader-stage.is-full{height:68vh!important}
+  .exif-hero-copy{bottom:3.6rem!important}
+  .exif-hero-copy h1{font-size:clamp(3.7rem,7vw,6.7rem)!important}
 }
