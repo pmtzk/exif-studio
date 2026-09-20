@@ -4,6 +4,10 @@
    svh keeps the composition identical before and after that event. */
 @import url('./hero-desktop.css');
 
+/* Canonical persistent navigation chrome. Kept last in the homepage CSS chain so
+   nav-context.js has one visual authority for logo/trigger context on every viewport. */
+@import url('./nav-context.css');
+
 @media (min-width:860px){
   :root{
     --hero-media-w:clamp(430px,min(42vw,67svh),680px)!important;
