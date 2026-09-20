@@ -26,13 +26,24 @@ document.addEventListener('DOMContentLoaded', function () {
   var stage=loader.querySelector('.exif-loader-stage');var imgs=frames.map(function(src){var img=document.createElement('img');img.src=src;img.alt='';stage.appendChild(img);return img;});frames.forEach(function(src){var preload=new Image();preload.src=src;});
 
   function finishDesktopHandoff(){
-    loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');heroBg.style.visibility='';hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});
+    heroBg.style.visibility='';
+    loader.style.transition='opacity 150ms linear';
+    loader.style.opacity='0';
+    setTimeout(function(){loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},155);
   }
   function expandDesktopOnce(){
-    var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect();
+    var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect(),finalFrame=imgs[imgs.length-1];
     stage.classList.remove('is-window','is-hero');
-    stage.style.setProperty('transition','none','important');stage.style.setProperty('position','fixed','important');stage.style.setProperty('transform','none','important');stage.style.setProperty('margin','0','important');stage.style.setProperty('left',from.left+'px','important');stage.style.setProperty('top',from.top+'px','important');stage.style.setProperty('width',from.width+'px','important');stage.style.setProperty('height',from.height+'px','important');
-    var animation=stage.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px'}],{duration:1050,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'});
+    stage.style.setProperty('transition','none','important');stage.style.setProperty('position','fixed','important');stage.style.setProperty('transform','none','important');stage.style.setProperty('margin','0','important');stage.style.setProperty('left',from.left+'px','important');stage.style.setProperty('top',from.top+'px','important');stage.style.setProperty('width',from.width+'px','important');stage.style.setProperty('height',from.height+'px','important');stage.style.setProperty('will-change','transform','important');
+    /* Keep the photograph at its FINAL hero size from frame one. The small loader is
+       only a clipping window. Opening the window reveals more of the same stationary
+       image, which removes the visual zoom/jump. */
+    finalFrame.style.setProperty('position','fixed','important');finalFrame.style.setProperty('left',to.left+'px','important');finalFrame.style.setProperty('top',to.top+'px','important');finalFrame.style.setProperty('width',to.width+'px','important');finalFrame.style.setProperty('height',to.height+'px','important');finalFrame.style.setProperty('max-width','none','important');finalFrame.style.setProperty('object-fit','cover','important');finalFrame.style.setProperty('object-position','center center','important');finalFrame.style.setProperty('transform','none','important');finalFrame.style.setProperty('transition','none','important');
+    /* Because overflow:hidden clips descendants in stage coordinates, offset the fixed-
+       size image so its pixels line up with the canonical hero throughout the reveal. */
+    finalFrame.style.setProperty('left',(to.left-from.left)+'px','important');finalFrame.style.setProperty('top',(to.top-from.top)+'px','important');
+    var dx=to.left-from.left,dy=to.top-from.top,sx=to.width/from.width,sy=to.height/from.height;
+    var animation=stage.animate([{transform:'translate3d(0,0,0) scale(1,1)'},{transform:'translate3d('+dx+'px,'+dy+'px,0) scale('+sx+','+sy+')'}],{duration:1280,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'});
     animation.finished.then(finishDesktopHandoff).catch(finishDesktopHandoff);
   }
 
