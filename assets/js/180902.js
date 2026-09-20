@@ -24,11 +24,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.body.classList.add('exif-intro-running');var loader=document.createElement('div');loader.className='exif-loader';loader.setAttribute('aria-hidden','true');loader.innerHTML='<div class="exif-loader-stage"></div>';document.body.appendChild(loader);
   var stage=loader.querySelector('.exif-loader-stage');var imgs=frames.map(function(src){var img=document.createElement('img');img.src=src;img.alt='';stage.appendChild(img);return img;});frames.forEach(function(src){var preload=new Image();preload.src=src;});
+
+  function finishDesktopHandoff(){
+    loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');heroBg.style.visibility='';hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});
+  }
+  function expandDesktopOnce(){
+    var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect();
+    stage.classList.remove('is-window','is-hero');
+    stage.style.setProperty('transition','none','important');stage.style.setProperty('position','fixed','important');stage.style.setProperty('transform','none','important');stage.style.setProperty('margin','0','important');stage.style.setProperty('left',from.left+'px','important');stage.style.setProperty('top',from.top+'px','important');stage.style.setProperty('width',from.width+'px','important');stage.style.setProperty('height',from.height+'px','important');
+    var animation=stage.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px'}],{duration:1050,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'});
+    animation.finished.then(finishDesktopHandoff).catch(finishDesktopHandoff);
+  }
+
   setTimeout(function(){stage.classList.add('is-window');},420);
   setTimeout(function(){var i=0;function flash(){imgs.forEach(function(img){img.classList.remove('is-active');});imgs[i].classList.add('is-active');i+=1;if(i<imgs.length){setTimeout(flash,125);return;}
-    /* The final frame is already active and visually settled here. Expand that exact
-       frame immediately. There is no second delay and no second transform state. */
-    var finalFrame=imgs[imgs.length-1];finalFrame.classList.add('is-final-frame');requestAnimationFrame(function(){stage.classList.add('is-hero');});
-    var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;stage.removeEventListener('transitionend',onExpanded);if(window.innerWidth>=860){loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');heroBg.style.visibility='';hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});}else{document.body.classList.add('exif-hero-live');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);}window.addEventListener('scroll',setHeroHeaderState,{passive:true});};stage.addEventListener('transitionend',onExpanded);
+    var finalFrame=imgs[imgs.length-1];finalFrame.classList.add('is-final-frame');
+    if(window.innerWidth>=860){requestAnimationFrame(function(){requestAnimationFrame(expandDesktopOnce);});return;}
+    requestAnimationFrame(function(){stage.classList.add('is-hero');});
+    var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;stage.removeEventListener('transitionend',onExpanded);document.body.classList.add('exif-hero-live');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);window.addEventListener('scroll',setHeroHeaderState,{passive:true});};stage.addEventListener('transitionend',onExpanded);
   }flash();},1050);
 });
