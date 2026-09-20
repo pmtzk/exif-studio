@@ -1,5 +1,6 @@
 /* EXIF persistent homepage chrome.
-   Owns header geometry/contrast only. Hero and drawer composition remain untouched. */
+   This file owns ONLY the closed header chrome and close-button geometry.
+   Hero, loader and drawer composition stay owned by their existing files. */
 .site-header,
 .site-header.is-scrolled,
 body.exif-hero-live .site-header,
@@ -20,23 +21,44 @@ body:not(.exif-hero-live) .site-header{
   margin:0!important;padding:0 5.2vw 0 6vw!important;
   display:flex!important;align-items:center!important;justify-content:space-between!important;overflow:visible!important;
 }
-.site-header .wrap>a:first-child{height:24px!important;display:flex!important;align-items:center!important;position:relative!important;z-index:9002!important}
-.site-header .brand-logo{width:92px!important;height:auto!important;max-height:24px!important;object-fit:contain!important;transition:filter .22s ease,opacity .22s ease!important}
+.site-header .wrap>a:first-child{
+  width:92px!important;height:24px!important;display:block!important;position:relative!important;z-index:9002!important;
+}
+/* Render the logo as an alpha mask so its colour is exact. Filters on the green PNG
+   cannot produce the brand cream reliably. The original image remains the accessible content. */
+.site-header .wrap>a:first-child::before{
+  content:""!important;position:absolute!important;inset:0!important;display:block!important;
+  background:var(--ink)!important;
+  -webkit-mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;
+  mask:url('../img/exif-logo-trim.png') left center/contain no-repeat!important;
+  transition:background-color .22s ease!important;pointer-events:none!important;
+}
+.site-header .brand-logo{width:92px!important;height:auto!important;max-height:24px!important;object-fit:contain!important;opacity:0!important}
 
-/* Closed button: one coordinate system across the whole homepage. */
+/* The closed drawer must NEVER fall back to styles.css' desktop flex navigation.
+   This was the source of APPROACHAPPROACH / SELECTED WORKSELECTED WORK on scroll. */
+@media (min-width:860px){
+  body:not(.nav-open) .site-header .main-nav,
+  body:not(.nav-open) .site-header .main-nav:not(.open),
+  body:not(.nav-open).exif-hero-live .site-header .main-nav,
+  body:not(.nav-open):not(.exif-hero-live) .site-header .main-nav{display:none!important;visibility:hidden!important;pointer-events:none!important}
+}
+
+/* One coordinate system for the trigger throughout the homepage. */
 header.site-header .nav-toggle,
-body.exif-hero-live header.site-header .wrap .nav-toggle{
+body.exif-hero-live header.site-header .wrap .nav-toggle,
+body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{
   position:fixed!important;top:calc(var(--desktop-header-h,76px)/2)!important;right:5.2vw!important;
   width:46px!important;height:46px!important;margin:0!important;padding:0!important;
   transform:translateY(-50%)!important;z-index:10002!important;
 }
-.site-header.nav-on-dark:not(:has(.main-nav.open)) .brand-logo{filter:brightness(0) invert(1)!important;opacity:.96!important}
-.site-header.nav-on-light:not(:has(.main-nav.open)) .brand-logo{filter:none!important;opacity:.96!important}
-.site-header.nav-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
-.site-header.nav-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}
 
-/* Open state: restore the original asymmetric X explicitly. The previous generic
-   nav-toggle rule carried the closed translate into this state and overrode it. */
+/* Context theme is sampled independently underneath logo and trigger. */
+.site-header.nav-logo-on-light:not(:has(.main-nav.open)) .wrap>a:first-child::before{background:var(--ink)!important}
+.site-header.nav-logo-on-dark:not(:has(.main-nav.open)) .wrap>a:first-child::before{background:var(--cream)!important}
+.site-header.nav-toggle-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}
+.site-header.nav-toggle-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
+
 body.nav-open .site-header,body.nav-open .site-header.is-scrolled{
   background:transparent!important;border:0!important;box-shadow:none!important;
   backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
@@ -44,30 +66,22 @@ body.nav-open .site-header,body.nav-open .site-header.is-scrolled{
 @media (min-width:860px){
   body.nav-open header.site-header .nav-toggle,
   body.nav-open header.site-header .nav-toggle[aria-expanded="true"]{
-    position:fixed!important;
-    top:calc(var(--desktop-header-h,76px)/2)!important;
-    right:5.2vw!important;
+    position:fixed!important;top:calc(var(--desktop-header-h,76px)/2)!important;right:5.2vw!important;
     width:46px!important;height:46px!important;margin:0!important;padding:0!important;
-    transform:translateY(-50%)!important;
-    z-index:12002!important;
+    transform:translateY(-50%)!important;z-index:12002!important;
     display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
   }
   body.nav-open header.site-header .nav-toggle span,
   body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span{
-    display:block!important;visibility:visible!important;position:absolute!important;
-    height:1.5px!important;background:var(--ink)!important;margin:0!important;
-    transform-origin:center!important;
+    display:block!important;visibility:visible!important;position:absolute!important;height:1.5px!important;
+    background:var(--ink)!important;margin:0!important;transform-origin:center!important;
   }
   body.nav-open header.site-header .nav-toggle span:nth-child(1),
-  body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span:nth-child(1){
-    width:25px!important;top:22px!important;left:10px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important;
-  }
+  body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span:nth-child(1){width:25px!important;top:22px!important;left:10px!important;right:auto!important;opacity:1!important;transform:rotate(42deg)!important}
   body.nav-open header.site-header .nav-toggle span:nth-child(2),
   body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0!important}
   body.nav-open header.site-header .nav-toggle span:nth-child(3),
-  body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span:nth-child(3){
-    width:21px!important;top:22px!important;left:18px!important;right:auto!important;opacity:1!important;transform:rotate(-48deg)!important;
-  }
+  body.nav-open header.site-header .nav-toggle[aria-expanded="true"] span:nth-child(3){width:21px!important;top:22px!important;left:18px!important;right:auto!important;opacity:1!important;transform:rotate(-48deg)!important}
 }
 
 @media (max-width:859px){
@@ -78,9 +92,10 @@ body.nav-open .site-header,body.nav-open .site-header.is-scrolled{
   .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap{
     height:auto!important;min-height:0!important;padding-left:var(--gutter)!important;padding-right:var(--gutter)!important;
   }
-  header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle{
-    position:relative!important;top:auto!important;right:auto!important;width:38px!important;height:38px!important;
-    padding:8px 6px!important;transform:none!important;
+  .site-header .wrap>a:first-child{width:72px!important;height:28px!important}
+  .site-header .wrap>a:first-child::before{-webkit-mask-size:contain!important;mask-size:contain!important}
+  header.site-header .nav-toggle,body.exif-hero-live header.site-header .wrap .nav-toggle,body:not(.exif-hero-live) header.site-header .wrap .nav-toggle{
+    position:relative!important;top:auto!important;right:auto!important;width:38px!important;height:38px!important;padding:8px 6px!important;transform:none!important;
   }
-  /* Do not override aria-expanded stroke transforms on mobile; mobile-fix owns the X. */
+  /* mobile-fix owns the asymmetric X transforms. */
 }
