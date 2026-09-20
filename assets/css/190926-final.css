@@ -91,6 +91,33 @@
   }
 }
 
+/* Mobile hero owns the closed-header tone. main.js also runs a generic background sampler;
+   on first paint it samples before the cinematic hero is constructed and marks the header
+   as light. These selectors deliberately outrank that transient nav-on-light/nav-on-dark state. */
+@media (max-width:859px){
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .wrap>a:first-child::before,
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header.nav-on-light .wrap>a:first-child::before,
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header.nav-on-dark .wrap>a:first-child::before{
+    background:#f0e8dd!important;
+  }
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .nav-toggle span,
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header.nav-on-light .nav-toggle span,
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header.nav-on-dark .nav-toggle span{
+    background:#f0e8dd!important;
+  }
+  html body.exif-mobile-legacy.exif-hero-live:not(.nav-open) header.site-header .brand-logo{
+    visibility:hidden!important;
+    opacity:0!important;
+  }
+  /* The drawer has its own top identity (Signal). The persistent homepage logo should not
+     remain floating above the overlay; only the asymmetric close control survives. */
+  html body.nav-open header.site-header .wrap>a:first-child{
+    display:none!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+  }
+}
+
 /* Deliberately no max-height composition breakpoints on desktop.
    Those breakpoints were able to switch after Chrome republished viewport
    geometry, producing the exact large-before / small-after state change. */
