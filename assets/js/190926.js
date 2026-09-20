@@ -1,10 +1,10 @@
-// Desktop split-colour hero: deterministic overlap + scroll motion.
+// Desktop split-colour hero: deterministic overlap + smoothly interpolated scroll motion.
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
   if (window.innerWidth < 860) { var legacy=document.createElement('script');legacy.src='assets/js/180902-mobile-legacy.js';legacy.defer=true;document.body.appendChild(legacy);return; }
 
-  var initialized=false,raf=0,scrollRaf=0;
+  var initialized=false,raf=0,motionRaf=0;
   function setup(){
     if(initialized)return true;
     var copy=hero.querySelector('.exif-hero-copy');
@@ -24,30 +24,34 @@ document.addEventListener('DOMContentLoaded', function () {
     function paintMask(){cancelAnimationFrame(raf);raf=requestAnimationFrame(paintMaskNow)}
     function readyPaint(){requestAnimationFrame(function(){requestAnimationFrame(paintMask)})}
 
-    /* Stable first-load state. Resize only recomputes geometry; it never changes
-       the intended visual state. Scroll is the sole motion input. */
-    function applyScrollState(){
-      scrollRaf=0;
-      var range=Math.max(1,hero.offsetHeight*.72);
-      var progress=Math.max(0,Math.min(1,window.scrollY/range));
-      var eased=1-Math.pow(1-progress,3);
-      var scale=1-(eased*.18);
-      var y=-(eased*42);
-      copy.style.setProperty('--hero-scroll-scale',scale.toFixed(4));
+    var current=0,target=0,lastTime=performance.now();
+    function readTarget(){var range=Math.max(1,hero.offsetHeight*.72);target=Math.max(0,Math.min(1,window.scrollY/range))}
+    function renderMotion(now){
+      motionRaf=0;
+      var dt=Math.min(40,Math.max(0,now-lastTime));lastTime=now;
+      /* time-based exponential interpolation: same feel at 60/120Hz */
+      var alpha=1-Math.exp(-dt/105);
+      current+=(target-current)*alpha;
+      if(Math.abs(target-current)<0.00035)current=target;
+      var eased=1-Math.pow(1-current,3);
+      var scale=1-(eased*.18),y=-(eased*42);
+      copy.style.setProperty('--hero-scroll-scale',scale.toFixed(5));
       copy.style.setProperty('--hero-scroll-y',y.toFixed(2)+'px');
       paintMaskNow();
+      if(current!==target)motionRaf=requestAnimationFrame(renderMotion);
     }
-    function onScroll(){if(!scrollRaf)scrollRaf=requestAnimationFrame(applyScrollState)}
+    function requestMotion(){readTarget();if(!motionRaf){lastTime=performance.now();motionRaf=requestAnimationFrame(renderMotion)}}
+    function snapMotion(){readTarget();current=target;var eased=1-Math.pow(1-current,3);copy.style.setProperty('--hero-scroll-scale',(1-eased*.18).toFixed(5));copy.style.setProperty('--hero-scroll-y',(-(eased*42)).toFixed(2)+'px');paintMaskNow()}
 
     var fontsReady=document.fonts&&document.fonts.ready?document.fonts.ready.catch(function(){}):Promise.resolve();
-    fontsReady.then(function(){applyScrollState();readyPaint()});
-    hero.addEventListener('exif:hero-image-ready',function(){applyScrollState();readyPaint()});
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',readyPaint,{passive:true});
-    window.addEventListener('orientationchange',readyPaint,{passive:true});
+    fontsReady.then(function(){snapMotion();readyPaint()});
+    hero.addEventListener('exif:hero-image-ready',function(){snapMotion();readyPaint()});
+    window.addEventListener('scroll',requestMotion,{passive:true});
+    window.addEventListener('resize',function(){readTarget();readyPaint()},{passive:true});
+    window.addEventListener('orientationchange',function(){readTarget();readyPaint()},{passive:true});
     if('ResizeObserver'in window){var ro=new ResizeObserver(readyPaint);ro.observe(hero);ro.observe(original)}
     if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener('loadingdone',readyPaint);
-    applyScrollState();readyPaint();initialized=true;return true;
+    snapMotion();readyPaint();initialized=true;return true;
   }
   if(!setup()){var attempts=0,timer=setInterval(function(){attempts+=1;if(setup()||attempts>=40)clearInterval(timer)},25)}
 });
