@@ -1,15 +1,19 @@
 .editorial-choice{padding-bottom:0!important}
-.editorial-choice .choice-decision{position:relative;margin-bottom:0;padding-bottom:clamp(110px,14svh,190px)}
-.editorial-choice .choice-decision:after{content:"";position:absolute;z-index:-1;left:50%;bottom:-1px;width:100vw;height:clamp(90px,13svh,170px);transform:translateX(-50%);background:linear-gradient(to bottom,transparent 0%,color-mix(in srgb,var(--ink) 18%,transparent) 42%,var(--ink) 100%);pointer-events:none}
-.motion-gallery{position:relative;background:var(--ink);overflow:hidden;min-height:78svh;display:flex;align-items:flex-start;color:var(--cream);margin-top:0}
+.editorial-choice .choice-decision{position:relative;margin-bottom:0;padding-bottom:clamp(92px,11svh,145px)}
+.editorial-choice .choice-decision:after{content:"";position:absolute;z-index:-1;left:50%;bottom:-1px;width:100vw;height:clamp(80px,11svh,140px);transform:translateX(-50%);background:linear-gradient(to bottom,transparent 0%,color-mix(in srgb,var(--ink) 14%,transparent) 38%,var(--ink) 100%);pointer-events:none}
+.motion-gallery{position:relative;background:var(--ink);overflow:hidden;min-height:58svh;display:flex;align-items:center;color:var(--cream);margin-top:0}
 .motion-gallery:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--ink);transform:translateY(-1px)}
-.motion-gallery-viewport{width:100%;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;padding:clamp(22px,4svh,54px) 0 10svh}
+.motion-gallery-viewport{width:100%;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;padding:clamp(18px,2.8svh,34px) 0 clamp(24px,4svh,48px)}
 .motion-gallery.is-dragging .motion-gallery-viewport{cursor:grabbing}
-.motion-gallery-track{display:flex;align-items:center;gap:clamp(18px,2.3vw,38px);width:max-content;padding:0;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}
+.motion-gallery-track{display:flex;align-items:center;gap:clamp(20px,2.5vw,40px);width:max-content;padding:0;will-change:transform;transform:translate3d(0,0,0);backface-visibility:hidden}
 .motion-gallery-item{margin:0;flex:none;overflow:hidden;background:rgba(255,255,255,.04);transform:translateZ(0)}
-.motion-gallery-item img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
-.motion-gallery-item.landscape{width:clamp(390px,42vw,680px);height:clamp(280px,54svh,560px)}
-.motion-gallery-item.portrait{width:clamp(260px,27vw,430px);height:clamp(390px,66svh,680px)}
-.motion-gallery-item.wide{width:clamp(460px,50vw,800px);height:clamp(260px,48svh,500px)}
-@media(max-width:859px){.editorial-choice .choice-decision{padding-bottom:105px}.editorial-choice .choice-decision:after{height:110px}.motion-gallery{min-height:68svh}.motion-gallery-viewport{padding:18px 0 7svh}.motion-gallery-track{gap:14px}.motion-gallery-item.landscape{width:78vw;height:48svh}.motion-gallery-item.portrait{width:58vw;height:58svh}.motion-gallery-item.wide{width:84vw;height:44svh}}
+.motion-gallery-item img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;transform:translateZ(0);backface-visibility:hidden}
+.motion-gallery-item.landscape{width:clamp(390px,39vw,640px);height:clamp(245px,40svh,430px)}
+.motion-gallery-item.portrait{width:clamp(245px,24vw,390px);height:clamp(310px,46svh,500px)}
+.motion-gallery-item.wide{width:clamp(450px,46vw,750px);height:clamp(235px,36svh,390px)}
+/* The gallery is an interlude inside the approach transition: keep the next section on the same green field. */
+.motion-gallery + .diagnosis-moment{position:relative;background:var(--ink);color:var(--cream);margin-top:0;padding-top:clamp(48px,7svh,92px)}
+.motion-gallery + .diagnosis-moment .eyebrow,.motion-gallery + .diagnosis-moment .diagnosis-header>p{color:var(--cream)}
+.motion-gallery + .diagnosis-moment .diagnosis-header h2{color:var(--cream)}
+@media(max-width:859px){.editorial-choice .choice-decision{padding-bottom:88px}.editorial-choice .choice-decision:after{height:96px}.motion-gallery{min-height:52svh}.motion-gallery-viewport{padding:14px 0 28px}.motion-gallery-track{gap:14px}.motion-gallery-item.landscape{width:74vw;height:38svh}.motion-gallery-item.portrait{width:54vw;height:43svh}.motion-gallery-item.wide{width:80vw;height:35svh}.motion-gallery + .diagnosis-moment{padding-top:48px}}
 @media(prefers-reduced-motion:reduce){.motion-gallery-viewport{overflow-x:auto}.motion-gallery-track{transform:none!important}}
