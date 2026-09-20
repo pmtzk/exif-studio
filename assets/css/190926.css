@@ -1,144 +1,78 @@
 /* 190926 — hero + loader refinement */
 
-/* Hero identity: keep the EXIF Studio logo in the header. */
 body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child::after{content:none!important;display:none!important}
-body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;filter:brightness(0) invert(1)!important;opacity:.96!important}
+body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;opacity:.96!important}
 
-/* Replace the lower-left SIGNAL word with the supplied signal mark. */
+/* Official supplied SIGNAL mark. */
 .exif-hero-meta>span:first-child{
-  display:block!important;
-  width:clamp(48px,7vw,78px)!important;
-  height:clamp(6px,.9vw,10px)!important;
-  font-size:0!important;
-  line-height:0!important;
-  background-image:url('../img/signal-light.png')!important;
-  background-repeat:no-repeat!important;
-  background-position:left center!important;
-  background-size:contain!important;
+  display:block!important;width:clamp(48px,7vw,78px)!important;height:clamp(6px,.9vw,10px)!important;
+  font-size:0!important;line-height:0!important;background-image:url('../img/signal-light.png')!important;
+  background-repeat:no-repeat!important;background-position:left center!important;background-size:contain!important;
 }
 
 @media (max-width:859px){
-  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{
-    position:relative!important;
-    display:flex!important;
-    align-items:center!important;
-    width:auto!important;
-    min-width:0!important;
-    height:28px!important;
-    text-decoration:none!important;
-  }
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{
-    display:block!important;
-    width:72px!important;
-    height:auto!important;
-  }
-  .exif-hero-copy{
-    left:28px!important;
-    right:24px!important;
-    bottom:max(5.3vh,40px)!important;
-  }
-  .exif-hero-copy h1{
-    width:100%!important;
-    max-width:none!important;
-    font-size:clamp(3.15rem,13vw,5.8rem)!important;
-    line-height:.80!important;
-    letter-spacing:-.055em!important;
-  }
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative!important;display:flex!important;align-items:center!important;width:auto!important;min-width:0!important;height:28px!important;text-decoration:none!important}
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;width:72px!important;height:auto!important;filter:brightness(0) invert(1)!important}
+  .exif-hero-copy{left:28px!important;right:24px!important;bottom:max(5.3vh,40px)!important}
+  .exif-hero-copy h1{width:100%!important;max-width:none!important;font-size:clamp(3.15rem,13vw,5.8rem)!important;line-height:.80!important;letter-spacing:-.055em!important}
   .exif-hero-copy .line:nth-child(2){padding-left:7.5vw!important}
   .exif-hero-copy .line:last-child{padding-right:0!important}
-  .exif-hero-copy .line:last-child .word{
-    font-size:clamp(2.62rem,10.65vw,4.8rem)!important;
-    letter-spacing:-.065em!important;
-    white-space:nowrap!important;
-  }
+  .exif-hero-copy .line:last-child .word{font-size:clamp(2.62rem,10.65vw,4.8rem)!important;letter-spacing:-.065em!important;white-space:nowrap!important}
   .exif-hero-meta>span:first-child{width:54px!important;height:7px!important}
   .exif-loader-stage.is-window{width:min(44vw,220px)!important;height:min(31vw,155px)!important}
-  .exif-loader-stage{
-    transform:translateZ(0);
-    transform-origin:center center;
-    transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important;
-  }
+  .exif-loader-stage{transform:translateZ(0);transform-origin:center center;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
   .exif-loader-stage.is-full{width:100vw!important;height:100svh!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
-/* Desktop is art-directed independently: the photograph remains an editorial object on cream. */
+/* Desktop: portrait image as an editorial object on cream. */
 @media (min-width:860px){
-  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative;text-decoration:none}
+  #what-exif-does.exif-cinematic-hero{background:var(--cream)!important;overflow:hidden!important}
+  #what-exif-does.exif-cinematic-hero>.wrap{display:block!important}
 
-  #what-exif-does.exif-cinematic-hero{
-    background:var(--cream)!important;
-  }
-  #what-exif-does.exif-cinematic-hero>.wrap{
-    display:grid!important;
-    place-items:center!important;
-  }
+  /* Keep the original portrait reading visible instead of turning it into a landscape crop. */
   .exif-hero-bg{
-    inset:auto!important;
-    width:min(76vw,1240px)!important;
-    height:min(72vh,820px)!important;
-    left:50%!important;
-    top:50%!important;
-    transform:translate(-50%,-48%)!important;
-    object-fit:cover!important;
-    object-position:center center!important;
+    inset:auto!important;left:50%!important;top:50%!important;
+    width:min(43vw,650px)!important;height:min(78vh,900px)!important;
+    transform:translate(-50%,-47%)!important;object-fit:cover!important;object-position:center center!important;
   }
   .exif-hero-shade{
-    inset:auto!important;
-    width:min(76vw,1240px)!important;
-    height:min(72vh,820px)!important;
-    left:50%!important;
-    top:50%!important;
-    transform:translate(-50%,-48%)!important;
-    background:linear-gradient(180deg,rgba(5,14,10,.04) 0%,rgba(5,14,10,.01) 46%,rgba(5,14,10,.24) 100%)!important;
+    inset:auto!important;left:50%!important;top:50%!important;
+    width:min(43vw,650px)!important;height:min(78vh,900px)!important;
+    transform:translate(-50%,-47%)!important;
+    background:linear-gradient(180deg,rgba(5,14,10,.025),rgba(5,14,10,.03) 52%,rgba(5,14,10,.18))!important;
     pointer-events:none!important;
   }
 
-  /* Header lives on the cream field, not over the photograph. */
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{
-    width:78px!important;
-    filter:none!important;
-    opacity:.94!important;
-  }
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{
-    background:var(--ink)!important;
-  }
+  /* Restore real logo proportions: width only, intrinsic height. */
+  body.exif-hero-live:not(.nav-open) .site-header .wrap > a:first-child{position:relative!important;display:flex!important;align-items:center!important;width:auto!important;height:auto!important;text-decoration:none!important}
+  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{display:block!important;width:92px!important;height:auto!important;max-height:none!important;object-fit:contain!important;filter:none!important;opacity:.96!important}
 
-  /* Keep the statement attached to the image, with enough scale to read as a cover line. */
-  .exif-hero-copy{
-    left:calc(12vw + 2.2rem)!important;
-    right:calc(12vw + 2.2rem)!important;
-    bottom:clamp(4.6rem,8.5vh,7.2rem)!important;
-    color:var(--cream)!important;
-  }
-  .exif-hero-copy h1{
-    width:100%!important;
-    max-width:9.8ch!important;
-    font-size:clamp(4.4rem,7.7vw,8.5rem)!important;
-    line-height:.79!important;
-  }
-  .exif-hero-copy .line:nth-child(2){padding-left:clamp(2.5rem,8vw,8rem)!important}
-  .exif-hero-copy .line:last-child .word{
-    font-size:.86em!important;
-    white-space:nowrap!important;
-  }
-  .exif-hero-meta{margin-top:1rem!important}
+  /* Restore the asymmetric hamburger on desktop. */
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle{display:block!important;position:relative!important;width:46px!important;height:46px!important;padding:0!important;border:0!important;background:transparent!important;z-index:40!important}
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{display:block!important;position:absolute!important;height:1px!important;background:var(--ink)!important;margin:0!important;transform-origin:center!important}
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(1){width:21px!important;top:14px!important;left:9px!important}
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(2){width:14px!important;top:22px!important;left:17px!important}
+  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span:nth-child(3){width:17px!important;top:30px!important;left:9px!important}
 
-  /* Loader resolves into the exact desktop hero frame instead of stretching the portrait source full-screen. */
-  .exif-loader-stage{
-    transform-origin:center center!important;
-    transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important;
-  }
-  .exif-loader-stage.is-full{
-    width:min(76vw,1240px)!important;
-    height:min(72vh,820px)!important;
-  }
+  /* Oversized cover line deliberately crosses the image boundary. Green is the desktop field color. */
+  .exif-hero-copy{left:6vw!important;right:4vw!important;bottom:clamp(3.3rem,6vh,5.5rem)!important;color:var(--ink)!important;z-index:4!important}
+  .exif-hero-copy h1{width:100%!important;max-width:none!important;color:var(--ink)!important;font-size:clamp(6.6rem,11.8vw,12.8rem)!important;line-height:.72!important;letter-spacing:-.065em!important}
+  .exif-hero-copy .line:nth-child(2){padding-left:18vw!important}
+  .exif-hero-copy .line:last-child{padding-left:4vw!important}
+  .exif-hero-copy .line:last-child .word{font-size:.82em!important;white-space:nowrap!important}
+  .exif-hero-meta{margin-top:1.25rem!important;color:var(--ink)!important;opacity:1!important}
+  .exif-hero-meta>span:first-child{background-image:url('../img/signal-dark.png')!important;width:70px!important;height:10px!important}
+
+  /* Loader lands in the same portrait geometry. */
+  .exif-loader-stage{transform-origin:center center!important;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
+  .exif-loader-stage.is-full{width:min(43vw,650px)!important;height:min(78vh,900px)!important}
   .exif-loader-stage.is-full img.is-active{transform:scale(1)!important}
 }
 
 @media (min-width:860px) and (max-height:760px){
-  .exif-hero-bg,.exif-hero-shade{height:68vh!important}
-  .exif-loader-stage.is-full{height:68vh!important}
-  .exif-hero-copy{bottom:3.6rem!important}
-  .exif-hero-copy h1{font-size:clamp(3.7rem,7vw,6.7rem)!important}
+  .exif-hero-bg,.exif-hero-shade{height:72vh!important;width:min(39vw,590px)!important}
+  .exif-loader-stage.is-full{height:72vh!important;width:min(39vw,590px)!important}
+  .exif-hero-copy{bottom:2.6rem!important}
+  .exif-hero-copy h1{font-size:clamp(5.3rem,10.2vw,9rem)!important}
 }
