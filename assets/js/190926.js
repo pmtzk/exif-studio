@@ -1,6 +1,5 @@
 // 190926 — stable desktop hero text mask.
-// The mask is prepared only after the hero image and fonts have settled, then
-// recalculated only when the viewport actually changes size.
+// Mask geometry comes from the same CSS rectangle used by the loader and hero.
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
@@ -46,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
+      // Read the final rendered hero rectangle. Loader and hero now share the
+      // same fixed viewport coordinate system, so this rectangle is canonical.
       var r = cream.getBoundingClientRect();
       var p = photo.getBoundingClientRect();
       var top = Math.max(0, p.top - r.top);
@@ -55,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
       cream.style.clipPath = 'inset(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
     }
 
-    // Hide the clone until its first final measurement has been applied.
     cream.style.visibility = 'hidden';
 
     Promise.all([waitForFonts(), waitForImage(photo)]).then(function () {
@@ -83,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (!setupHeroMask()) {
-    // 180902.js creates the cinematic hero during the same DOMContentLoaded turn.
-    // Retry briefly until that DOM exists, then stop permanently.
     var tries = 0;
     var timer = window.setInterval(function () {
       tries += 1;
