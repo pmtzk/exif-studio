@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
 
-  /* Approved mobile presentation stays scoped and unchanged. */
   var mobileStyle = document.createElement('style');
   mobileStyle.textContent = `
     @media(max-width:859px){
@@ -99,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
   );
 
   var heroBg = hero.querySelector('.exif-hero-bg');
-
   function setHeroHeaderState() {
     if (window.scrollY < Math.max(80, hero.offsetHeight - 90)) document.body.classList.add('exif-hero-live');
     else document.body.classList.remove('exif-hero-live');
@@ -121,68 +119,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var stage = loader.querySelector('.exif-loader-stage');
   var imgs = frames.map(function (src) {
-    var img = document.createElement('img');
-    img.src = src;
-    img.alt = '';
-    stage.appendChild(img);
-    return img;
+    var img = document.createElement('img'); img.src = src; img.alt = ''; stage.appendChild(img); return img;
   });
   frames.forEach(function (src) { var preload = new Image(); preload.src = src; });
 
-  setTimeout(function () {
-    stage.classList.add('is-window');
-    loader.classList.add('is-sequencing');
-  }, 420);
-
+  setTimeout(function () { stage.classList.add('is-window'); loader.classList.add('is-sequencing'); }, 420);
   setTimeout(function () {
     var i = 0;
     function flash() {
       imgs.forEach(function (img) { img.classList.remove('is-active'); });
-      imgs[i].classList.add('is-active');
-      i += 1;
+      imgs[i].classList.add('is-active'); i += 1;
       if (i < imgs.length) { setTimeout(flash, 125); return; }
-
       loader.classList.remove('is-sequencing');
       setTimeout(function () {
         var finalFrame = imgs[imgs.length - 1];
         finalFrame.classList.add('is-final-frame');
         stage.classList.add('is-hero');
-
         var onExpanded = function (event) {
           if (event.target !== stage || event.propertyName !== 'width') return;
           stage.removeEventListener('transitionend', onExpanded);
 
           if (window.innerWidth >= 860) {
-            /* The exact image node seen in the loader becomes the hero image.
-               No crossfade and no duplicate photograph exist during handoff. */
-            var rect = stage.getBoundingClientRect();
-            finalFrame.classList.remove('is-active', 'is-final-frame');
-            finalFrame.classList.add('exif-hero-bg', 'exif-hero-bg-live');
-            finalFrame.alt = 'Hospitality property at sunset';
-            finalFrame.style.left = rect.left + 'px';
-            finalFrame.style.top = rect.top + 'px';
-            finalFrame.style.width = rect.width + 'px';
-            finalFrame.style.height = rect.height + 'px';
-            finalFrame.style.transform = 'none';
-            document.body.appendChild(finalFrame);
-
-            heroBg.style.visibility = 'hidden';
+            /* IMPORTANT: keep the hero's canonical image in the hero from the start.
+               The loader is only an overlay. Moving the loader image through body and
+               then back into the hero caused Chrome/iPad to publish a second layout
+               after tab visibility/resize and made minimize/restore appear to fix it. */
             loader.remove();
             document.body.classList.remove('exif-intro-running');
             document.body.classList.add('exif-hero-live');
-
+            heroBg.style.visibility = '';
+            hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));
             requestAnimationFrame(function () {
               requestAnimationFrame(function () {
-                finalFrame.style.left = '';
-                finalFrame.style.top = '';
-                finalFrame.style.width = '';
-                finalFrame.style.height = '';
-                finalFrame.style.transform = '';
-                hero.querySelector('.wrap').insertBefore(finalFrame, hero.querySelector('.exif-hero-shade'));
-                heroBg.remove();
-                heroBg = finalFrame;
-                hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));
-                setTimeout(function () { hero.querySelector('.exif-hero-copy').classList.add('is-visible'); }, 120);
+                hero.querySelector('.exif-hero-copy').classList.add('is-visible');
               });
             });
           } else {
@@ -192,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () { hero.querySelector('.exif-hero-copy').classList.add('is-visible'); }, 300);
             setTimeout(function () { loader.remove(); }, 900);
           }
-
           window.addEventListener('scroll', setHeroHeaderState, { passive: true });
         };
         stage.addEventListener('transitionend', onExpanded);
