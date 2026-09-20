@@ -7,25 +7,48 @@ function initEditorialPainpoint(){
 
   var many=section.querySelector('.choice-many');
   var decision=section.querySelector('.choice-decision');
+  var decisionMain=decision&&decision.querySelector('strong');
+  var decisionOther=decision&&decision.querySelector('em');
   var workImage=section.querySelector('.choice-work-entry img');
   var header=document.querySelector('.site-header');
   var ticking=false;
+  function clamp01(v){return Math.max(0,Math.min(1,v));}
+  function smoothstep(v){v=clamp01(v);return v*v*(3-2*v);}
   function updateMotion(){
     ticking=false;
     var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var r=section.getBoundingClientRect();
     var span=Math.max(1,r.height+window.innerHeight);
-    var p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/span));
+    var p=clamp01((window.innerHeight-r.top)/span);
     if(many&&!reduced){var travel=window.innerWidth<860?10:Math.min(70,window.innerWidth*.04);many.style.setProperty('--choice-shift',((p-.5)*travel).toFixed(2)+'px');}
-    if(workImage&&!reduced){var ir=workImage.getBoundingClientRect();var ip=Math.max(0,Math.min(1,(window.innerHeight-ir.top)/(window.innerHeight+ir.height)));workImage.style.setProperty('--choice-image-scale',(1.075-ip*.055).toFixed(4));workImage.style.setProperty('--choice-image-y',((.5-ip)*28).toFixed(2)+'px');}
+
+    /* Decision moment: fully scroll-scrubbed. No trigger, no autonomous transition. */
+    if(decision&&decisionMain&&decisionOther&&!reduced){
+      var dr=decision.getBoundingClientRect();
+      var start=window.innerHeight*.94;
+      var end=window.innerHeight*.30;
+      var dp=smoothstep((start-dr.top)/(start-end));
+      var op=.18+.82*dp;
+      var blur=(1-dp)*(window.innerWidth<860?5.5:8);
+      var y=(1-dp)*(window.innerWidth<860?18:30);
+      decisionMain.style.setProperty('--decision-opacity',op.toFixed(3));
+      decisionMain.style.setProperty('--decision-blur',blur.toFixed(2)+'px');
+      decisionMain.style.setProperty('--decision-y',y.toFixed(2)+'px');
+
+      /* 'or another one' resolves slightly later, but remains tied 1:1 to scroll. */
+      var ep=smoothstep((dp-.34)/.66);
+      decisionOther.style.setProperty('--other-opacity',ep.toFixed(3));
+      decisionOther.style.setProperty('--other-blur',((1-ep)*(window.innerWidth<860?4:6)).toFixed(2)+'px');
+      decisionOther.style.setProperty('--other-y',((1-ep)*(window.innerWidth<860?12:20)).toFixed(2)+'px');
+    }
+
+    if(workImage&&!reduced){var ir=workImage.getBoundingClientRect();var ip=clamp01((window.innerHeight-ir.top)/(window.innerHeight+ir.height));workImage.style.setProperty('--choice-image-scale',(1.075-ip*.055).toFixed(4));workImage.style.setProperty('--choice-image-y',((.5-ip)*28).toFixed(2)+'px');}
     if(header&&langButton){var b=langButton.getBoundingClientRect();var cx=b.left+b.width/2;var cy=b.top+b.height/2;langButton.style.pointerEvents='none';var el=document.elementFromPoint(cx,cy);langButton.style.pointerEvents='auto';var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}
   }
   function requestMotion(){if(!ticking){ticking=true;requestAnimationFrame(updateMotion)}}
   window.addEventListener('scroll',requestMotion,{passive:true});
   window.addEventListener('resize',requestMotion,{passive:true});
   updateMotion();
-
-  if(decision){if('IntersectionObserver'in window){var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){decision.classList.add('is-live');observer.unobserve(decision);}});},{threshold:.38});observer.observe(decision);}else{decision.classList.add('is-live');}}
 
   var copy={
     en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property',other:'or another one?'},
