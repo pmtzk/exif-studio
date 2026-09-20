@@ -26,26 +26,27 @@ document.addEventListener('DOMContentLoaded', function () {
   var stage=loader.querySelector('.exif-loader-stage');var imgs=frames.map(function(src){var img=document.createElement('img');img.src=src;img.alt='';stage.appendChild(img);return img;});frames.forEach(function(src){var preload=new Image();preload.src=src;});
 
   function finishDesktopHandoff(layer){
+    /* The old cream loader backdrop sat between the transition layer and the real hero.
+       Fading the layer therefore exposed cream for a frame: photo -> white -> photo.
+       Make the backdrop transparent first, while the transition layer is still fully
+       opaque. The real hero is then already underneath identical pixels. */
     heroBg.style.visibility='';
-    layer.style.transition='opacity 140ms linear';layer.style.opacity='0';
-    setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},145);
+    loader.style.setProperty('transition','none','important');
+    loader.style.setProperty('background','transparent','important');
+    stage.style.visibility='hidden';
+    requestAnimationFrame(function(){
+      layer.style.transition='opacity 120ms linear';
+      layer.style.opacity='0';
+      setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},125);
+    });
   }
-  function coverGeometry(boxW,boxH,imgW,imgH,posX,posY){
-    var scale=Math.max(boxW/imgW,boxH/imgH),w=imgW*scale,h=imgH*scale;
-    return {w:w,h:h,x:(boxW-w)*posX,y:(boxH-h)*posY};
-  }
+  function coverGeometry(boxW,boxH,imgW,imgH,posX,posY){var scale=Math.max(boxW/imgW,boxH/imgH),w=imgW*scale,h=imgH*scale;return {w:w,h:h,x:(boxW-w)*posX,y:(boxH-h)*posY};}
   function expandDesktopOnce(){
     var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect(),finalFrame=imgs[imgs.length-1];
     var iw=finalFrame.naturalWidth||heroBg.naturalWidth||1,ih=finalFrame.naturalHeight||heroBg.naturalHeight||1;
-    /* Loader crop is centered. Desktop hero CSS uses center/center. Calculate both
-       cover rectangles once so object-fit never gets a chance to recrop mid-flight. */
     var source=coverGeometry(from.width,from.height,iw,ih,.5,.5),dest=coverGeometry(to.width,to.height,iw,ih,.5,.5);
-    var layer=document.createElement('div');layer.setAttribute('aria-hidden','true');
-    layer.style.cssText='position:fixed;z-index:9999;overflow:hidden;pointer-events:none;left:'+from.left+'px;top:'+from.top+'px;width:'+from.width+'px;height:'+from.height+'px;will-change:left,top,width,height;contain:layout paint;';
-    var img=document.createElement('img');img.src=finalFrame.currentSrc||finalFrame.src;img.alt='';
-    img.style.cssText='position:absolute;max-width:none;opacity:1;will-change:left,top,width,height;';
-    img.style.left=source.x+'px';img.style.top=source.y+'px';img.style.width=source.w+'px';img.style.height=source.h+'px';layer.appendChild(img);document.body.appendChild(layer);
-    stage.style.visibility='hidden';
+    var layer=document.createElement('div');layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;z-index:9999;overflow:hidden;pointer-events:none;left:'+from.left+'px;top:'+from.top+'px;width:'+from.width+'px;height:'+from.height+'px;will-change:left,top,width,height;contain:layout paint;';
+    var img=document.createElement('img');img.src=finalFrame.currentSrc||finalFrame.src;img.alt='';img.style.cssText='position:absolute;max-width:none;opacity:1;will-change:left,top,width,height;';img.style.left=source.x+'px';img.style.top=source.y+'px';img.style.width=source.w+'px';img.style.height=source.h+'px';layer.appendChild(img);document.body.appendChild(layer);stage.style.visibility='hidden';
     var timing={duration:1320,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'};
     var frameAnim=layer.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px'}],timing);
     var imageAnim=img.animate([{left:source.x+'px',top:source.y+'px',width:source.w+'px',height:source.h+'px'},{left:dest.x+'px',top:dest.y+'px',width:dest.w+'px',height:dest.h+'px'}],timing);
