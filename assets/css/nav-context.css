@@ -1,21 +1,114 @@
-/* Context-aware closed header chrome. Drawer and hero are intentionally untouched. */
-.site-header:not(:has(.main-nav.open)){
-  position:fixed!important;
-  top:0!important;left:0!important;right:0!important;
+/* EXIF persistent homepage chrome.
+   This file owns ONLY header chrome geometry/contrast.
+   It deliberately does not alter hero or drawer composition. */
+.site-header,
+.site-header.is-scrolled,
+body.exif-hero-live .site-header,
+body:not(.exif-hero-live) .site-header{
+  position:sticky!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
   width:100%!important;
+  height:var(--desktop-header-h,76px)!important;
+  min-height:var(--desktop-header-h,76px)!important;
+  background:transparent!important;
+  border:0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  z-index:9000!important;
+}
+
+.site-header .wrap,
+.site-header.is-scrolled .wrap,
+body.exif-hero-live .site-header .wrap{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  height:var(--desktop-header-h,76px)!important;
+  min-height:var(--desktop-header-h,76px)!important;
+  margin:0!important;
+  padding:0 5.2vw 0 6vw!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  overflow:visible!important;
+}
+
+.site-header .wrap>a:first-child{
+  height:24px!important;
+  display:flex!important;
+  align-items:center!important;
+  position:relative!important;
+  z-index:9002!important;
+}
+.site-header .brand-logo{
+  width:92px!important;
+  height:auto!important;
+  max-height:24px!important;
+  object-fit:contain!important;
+  transition:filter .22s ease,opacity .22s ease!important;
+}
+
+/* One button, one coordinate system. Opening the drawer changes the strokes only. */
+header.site-header .nav-toggle,
+body.exif-hero-live header.site-header .wrap .nav-toggle,
+header.site-header .nav-toggle[aria-expanded="true"]{
+  position:fixed!important;
+  top:calc(var(--desktop-header-h,76px)/2)!important;
+  right:5.2vw!important;
+  width:46px!important;
+  height:46px!important;
+  margin:0!important;
+  padding:0!important;
+  transform:translateY(-50%)!important;
+  z-index:10002!important;
+}
+
+/* Closed chrome follows the surface underneath. Geometry never changes. */
+.site-header.nav-on-dark:not(:has(.main-nav.open)) .brand-logo{filter:brightness(0) invert(1)!important;opacity:.96!important}
+.site-header.nav-on-light:not(:has(.main-nav.open)) .brand-logo{filter:none!important;opacity:.96!important}
+.site-header.nav-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
+.site-header.nav-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}
+
+/* The drawer already owns its palette. Keep the exact same button coordinates there. */
+body.nav-open .site-header,
+body.nav-open .site-header.is-scrolled{
   background:transparent!important;
   border:0!important;
   box-shadow:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
-  pointer-events:none;
 }
-.site-header:not(:has(.main-nav.open)) .wrap{pointer-events:none}
-.site-header:not(:has(.main-nav.open)) .wrap>a:first-child,
-.site-header:not(:has(.main-nav.open)) .nav-toggle{pointer-events:auto}
-.site-header:not(:has(.main-nav.open)) .brand-logo,
-.site-header:not(:has(.main-nav.open)) .nav-toggle{transition:filter .22s ease,opacity .22s ease!important}
-.site-header.nav-on-dark:not(:has(.main-nav.open)) .brand-logo{filter:brightness(0) invert(1)!important;opacity:.96!important}
-.site-header.nav-on-light:not(:has(.main-nav.open)) .brand-logo{filter:none!important;opacity:.96!important}
-.site-header.nav-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
-.site-header.nav-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}
+
+@media (max-width:859px){
+  /* Preserve the checkpoint's mobile geometry. Only neutralize scroll-state chrome. */
+  .site-header,.site-header.is-scrolled,body.exif-hero-live .site-header,body:not(.exif-hero-live) .site-header{
+    height:auto!important;
+    min-height:0!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .site-header .wrap,.site-header.is-scrolled .wrap,body.exif-hero-live .site-header .wrap{
+    height:auto!important;
+    min-height:0!important;
+    padding-left:var(--gutter)!important;
+    padding-right:var(--gutter)!important;
+  }
+  header.site-header .nav-toggle,
+  body.exif-hero-live header.site-header .wrap .nav-toggle,
+  header.site-header .nav-toggle[aria-expanded="true"]{
+    position:relative!important;
+    top:auto!important;
+    right:auto!important;
+    width:38px!important;
+    height:38px!important;
+    padding:8px 6px!important;
+    transform:none!important;
+  }
+}
