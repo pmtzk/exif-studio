@@ -28,8 +28,8 @@ function initEditorialPainpoint(){
   if(decision){if('IntersectionObserver'in window){var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){decision.classList.add('is-live');observer.unobserve(decision);}});},{threshold:.38});observer.observe(decision);}else{decision.classList.add('is-live');}}
 
   var copy={
-    en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property,',other:'or another one?'},
-    es:{hook:'Alguien está eligiendo dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'La tuya es una opción',many:'entre muchas.',property:'Tu propiedad,',other:'¿u otra?'}
+    en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property',other:'or another one?'},
+    es:{hook:'Alguien está eligiendo dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'La tuya es una opción',many:'entre muchas.',property:'Tu propiedad',other:'¿u otra?'}
   };
   function setLanguage(lang){
     if(!copy[lang])lang='en';
