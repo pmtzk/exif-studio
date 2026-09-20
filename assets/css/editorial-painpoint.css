@@ -14,8 +14,8 @@
 .choice-scale h3 .choice-line{display:block;max-width:100%}
 .choice-scale h3 .choice-many{transform:translateX(var(--choice-shift,0px));will-change:transform}
 .choice-decision{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:10svh 5vw 6svh}
-.choice-decision strong{display:block;max-width:100%;font-family:var(--font-serif);font-size:clamp(5.4rem,11.5vw,12.8rem);font-weight:400;line-height:.74;letter-spacing:-.06em;text-transform:uppercase}
-.choice-decision em{align-self:flex-end;margin-top:3.5rem;margin-right:7vw;font-family:var(--font-serif);font-size:clamp(2rem,4vw,4.6rem);font-weight:400;line-height:1;font-style:italic}
+.choice-decision strong{display:block;max-width:100%;font-family:var(--font-serif);font-size:clamp(5.4rem,11.5vw,12.8rem);font-weight:400;line-height:.74;letter-spacing:-.06em;text-transform:uppercase;opacity:var(--decision-opacity,1);filter:blur(var(--decision-blur,0px));transform:translate3d(0,var(--decision-y,0px),0);will-change:filter,opacity,transform}
+.choice-decision em{align-self:flex-end;margin-top:3.5rem;margin-right:7vw;font-family:var(--font-serif);font-size:clamp(2rem,4vw,4.6rem);font-weight:400;line-height:1;font-style:italic;opacity:var(--other-opacity,1);filter:blur(var(--other-blur,0px));transform:translate3d(0,var(--other-y,0px),0);will-change:filter,opacity,transform}
 .choice-work-entry{width:min(84vw,1180px);margin:-8svh auto 0;position:relative;z-index:2;overflow:hidden}
 .choice-work-entry img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;transform:scale(var(--choice-image-scale,1.06)) translateY(var(--choice-image-y,18px));will-change:transform}
 
@@ -49,4 +49,4 @@
  .choice-work-entry{width:100%;margin:-3svh 0 0}
  .choice-work-entry img{aspect-ratio:4/5}
 }
-@media (prefers-reduced-motion:reduce){.choice-scale h3 .choice-many,.choice-work-entry img{transform:none!important}}
+@media (prefers-reduced-motion:reduce){.choice-scale h3 .choice-many,.choice-decision strong,.choice-decision em,.choice-work-entry img{transform:none!important;filter:none!important;opacity:1!important}}
