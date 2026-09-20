@@ -25,16 +25,22 @@ body.nav-open .site-header,body.nav-open .site-header.is-scrolled{background:tra
   body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:10px!important;top:14px!important;right:6px!important}
   body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:15px!important;top:20px!important;right:1px!important}
 
-  /* Hero state is deliberately cream regardless of the contextual sampler. The controls begin
-     as part of the cinematic image and transition to ink only when exif-hero-live is released. */
+  /* First paint, loader and live hero all belong to the cinematic state. This closes the tiny
+     initialization window before the mobile controller has attached exif-hero-live. */
+  body:not(.exif-mobile-legacy):not(.nav-open) .site-header,
+  body.exif-intro-running:not(.nav-open) .site-header,
   body.exif-hero-live:not(.nav-open) .site-header{background:transparent!important}
+  body:not(.exif-mobile-legacy):not(.nav-open) .site-header .wrap>a:first-child::before,
+  body.exif-intro-running:not(.nav-open) .site-header .wrap>a:first-child::before,
   body.exif-hero-live:not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--cream)!important}
+  body:not(.exif-mobile-legacy):not(.nav-open) .site-header .nav-toggle span,
+  body.exif-intro-running:not(.nav-open) .site-header .nav-toggle span,
   body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{background:var(--cream)!important}
 
   /* Past the hero the thin rail is cream and both controls default to ink. */
-  body:not(.exif-hero-live):not(.nav-open) .site-header{background:var(--cream)!important}
-  body:not(.exif-hero-live):not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--ink)!important}
-  body:not(.exif-hero-live):not(.nav-open) .site-header .nav-toggle span{background:var(--ink)!important}
+  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header{background:var(--cream)!important}
+  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header .wrap>a:first-child::before{background:var(--ink)!important}
+  body.exif-mobile-legacy:not(.exif-hero-live):not(.exif-intro-running):not(.nav-open) .site-header .nav-toggle span{background:var(--ink)!important}
 
   /* Drawer owns its close control. Keep it above the overlay and restore the asymmetric X. */
   body.nav-open .site-header,body.nav-open .site-header.is-scrolled{height:42px!important;min-height:42px!important;background:transparent!important;pointer-events:none!important}
