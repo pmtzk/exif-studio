@@ -1,19 +1,19 @@
 /* Final hero-only polish. Drawer/navigation intentionally untouched. */
 
-/* Use the exact user-supplied Signal artwork, cropped only to its transparent bounds. */
+/* Signal supplied by Katia: same seven-mark geometry, transparent background. */
 .exif-hero-meta>span:first-child{
   display:block!important;
   width:clamp(58px,7vw,82px)!important;
   height:clamp(8px,.9vw,11px)!important;
   font-size:0!important;
   line-height:0!important;
-  background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAABkCAYAAAC3Rj4dAAA...')!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 100'%3E%3Cg fill='%2322402f'%3E%3Cpath fill-rule='evenodd' d='M25 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50Zm0 17a8 8 0 1 1 0 16 8 8 0 0 1 0-16Z'/%3E%3Cpath fill-rule='evenodd' d='M136.5 18a32.5 32.5 0 1 0 0 65 32.5 32.5 0 0 0 0-65Zm0 16.5a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z'/%3E%3Ccircle cx='260' cy='50' r='36'/%3E%3Ccircle cx='400' cy='50' r='50'/%3E%3Ccircle cx='541' cy='50' r='36'/%3E%3Cpath fill-rule='evenodd' d='M663.5 18a32.5 32.5 0 1 0 0 65 32.5 32.5 0 0 0 0-65Zm0 16.5a16 16 0 1 1 0 32 16 16 0 0 1 0-32Z'/%3E%3Cpath fill-rule='evenodd' d='M775 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50Zm0 17a8 8 0 1 1 0 16 8 8 0 0 1 0-16Z'/%3E%3C/g%3E%3C/svg%3E")!important;
   background-repeat:no-repeat!important;
   background-position:left center!important;
   background-size:contain!important;
 }
 
-/* iPad/Safari: center against the visible viewport, not the expanding layout viewport. */
+/* Center the loader against Safari's visible viewport. */
 .exif-loader{
   position:fixed!important;
   inset:0!important;
@@ -27,19 +27,20 @@
   margin:0!important;
 }
 .exif-loader-stage{
+  position:relative!important;
   flex:0 0 auto!important;
-  margin:0!important;
   inset:auto!important;
   left:auto!important;
   right:auto!important;
   top:auto!important;
   bottom:auto!important;
+  margin:0!important;
   transform:none!important;
   transform-origin:center center!important;
 }
 
 @media (min-width:860px){
-  /* Keep the complete desktop hero composition inside one visible screen. */
+  /* One-screen desktop composition. */
   #what-exif-does.exif-cinematic-hero{
     height:100svh!important;
     min-height:100svh!important;
@@ -58,20 +59,10 @@
     font-size:clamp(5.2rem,8.85vw,9.6rem)!important;
     line-height:.78!important;
   }
-  .exif-hero-copy .line:nth-child(2){
-    padding-left:20.5vw!important;
-    margin-top:.015em!important;
-  }
-  .exif-hero-copy .line:last-child{
-    padding-left:5vw!important;
-    margin-top:.015em!important;
-  }
-  .exif-hero-copy .line:last-child .word{
-    font-size:.79em!important;
-  }
-  .exif-hero-meta{
-    margin-top:clamp(.75rem,1.4svh,1.2rem)!important;
-  }
+  .exif-hero-copy .line:nth-child(2){padding-left:20.5vw!important;margin-top:.015em!important}
+  .exif-hero-copy .line:last-child{padding-left:5vw!important;margin-top:.015em!important}
+  .exif-hero-copy .line:last-child .word{font-size:.79em!important}
+  .exif-hero-meta{margin-top:clamp(.75rem,1.4svh,1.2rem)!important}
   .exif-loader-stage.is-full{
     width:min(41vw,620px)!important;
     height:min(72svh,820px)!important;
