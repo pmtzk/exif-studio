@@ -1,0 +1,21 @@
+/* Context-aware closed header chrome. Drawer and hero are intentionally untouched. */
+.site-header:not(:has(.main-nav.open)){
+  position:fixed!important;
+  top:0!important;left:0!important;right:0!important;
+  width:100%!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  pointer-events:none;
+}
+.site-header:not(:has(.main-nav.open)) .wrap{pointer-events:none}
+.site-header:not(:has(.main-nav.open)) .wrap>a:first-child,
+.site-header:not(:has(.main-nav.open)) .nav-toggle{pointer-events:auto}
+.site-header:not(:has(.main-nav.open)) .brand-logo,
+.site-header:not(:has(.main-nav.open)) .nav-toggle{transition:filter .22s ease,opacity .22s ease!important}
+.site-header.nav-on-dark:not(:has(.main-nav.open)) .brand-logo{filter:brightness(0) invert(1)!important;opacity:.96!important}
+.site-header.nav-on-light:not(:has(.main-nav.open)) .brand-logo{filter:none!important;opacity:.96!important}
+.site-header.nav-on-dark:not(:has(.main-nav.open)) .nav-toggle span{background:var(--cream)!important}
+.site-header.nav-on-light:not(:has(.main-nav.open)) .nav-toggle span{background:var(--ink)!important}
