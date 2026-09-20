@@ -1,12 +1,35 @@
-// 190926 — desktop hero text mask: cream only where headline crosses the portrait.
+// 190926 — stable desktop hero text mask.
+// The mask is prepared only after the hero image and fonts have settled, then
+// recalculated only when the viewport actually changes size.
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
 
+  var initialized = false;
+  var resizeFrame = 0;
+  var lastWidth = window.innerWidth;
+  var lastHeight = window.innerHeight;
+
+  function waitForImage(img) {
+    if (!img || (img.complete && img.naturalWidth > 0)) return Promise.resolve();
+    return new Promise(function (resolve) {
+      var done = function () { resolve(); };
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    });
+  }
+
+  function waitForFonts() {
+    if (!document.fonts || !document.fonts.ready) return Promise.resolve();
+    return document.fonts.ready.catch(function () {});
+  }
+
   function setupHeroMask() {
+    if (initialized) return true;
+
     var copy = hero.querySelector('.exif-hero-copy');
     var photo = hero.querySelector('.exif-hero-bg');
-    if (!copy || !photo || copy.querySelector('.exif-hero-title-cream')) return false;
+    if (!copy || !photo) return false;
 
     var original = copy.querySelector('h1');
     if (!original) return false;
@@ -22,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cream.style.clipPath = '';
         return;
       }
+
       var r = cream.getBoundingClientRect();
       var p = photo.getBoundingClientRect();
       var top = Math.max(0, p.top - r.top);
@@ -31,24 +55,40 @@ document.addEventListener('DOMContentLoaded', function () {
       cream.style.clipPath = 'inset(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)';
     }
 
-    syncMask();
-    window.addEventListener('resize', syncMask, { passive: true });
-    if ('ResizeObserver' in window) {
-      var ro = new ResizeObserver(syncMask);
-      ro.observe(hero);
-      ro.observe(photo);
-      ro.observe(copy);
-    }
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncMask);
-    photo.addEventListener('load', syncMask, { once: true });
+    // Hide the clone until its first final measurement has been applied.
+    cream.style.visibility = 'hidden';
+
+    Promise.all([waitForFonts(), waitForImage(photo)]).then(function () {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          syncMask();
+          cream.style.visibility = '';
+          hero.classList.add('exif-mask-ready');
+        });
+      });
+    });
+
+    window.addEventListener('resize', function () {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      if (width === lastWidth && height === lastHeight) return;
+      lastWidth = width;
+      lastHeight = height;
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(syncMask);
+    }, { passive: true });
+
+    initialized = true;
     return true;
   }
 
   if (!setupHeroMask()) {
+    // 180902.js creates the cinematic hero during the same DOMContentLoaded turn.
+    // Retry briefly until that DOM exists, then stop permanently.
     var tries = 0;
     var timer = window.setInterval(function () {
       tries += 1;
-      if (setupHeroMask() || tries > 80) window.clearInterval(timer);
-    }, 50);
+      if (setupHeroMask() || tries >= 20) window.clearInterval(timer);
+    }, 25);
   }
 });
