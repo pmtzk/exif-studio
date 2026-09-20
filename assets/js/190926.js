@@ -1,5 +1,5 @@
 // 190926 — stable desktop hero text mask.
-// Mask geometry comes from the same CSS rectangle used by the loader and hero.
+// The mask follows whichever image node is currently the canonical hero image.
 document.addEventListener('DOMContentLoaded', function () {
   var hero = document.querySelector('#what-exif-does');
   if (!hero) return;
@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
       img.addEventListener('error', done, { once: true });
     });
   }
-
   function waitForFonts() {
     if (!document.fonts || !document.fonts.ready) return Promise.resolve();
     return document.fonts.ready.catch(function () {});
@@ -25,11 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setupHeroMask() {
     if (initialized) return true;
-
     var copy = hero.querySelector('.exif-hero-copy');
-    var photo = hero.querySelector('.exif-hero-bg');
-    if (!copy || !photo) return false;
-
+    var initialPhoto = hero.querySelector('.exif-hero-bg');
+    if (!copy || !initialPhoto) return false;
     var original = copy.querySelector('h1');
     if (!original) return false;
 
@@ -40,13 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
     copy.insertBefore(cream, original.nextSibling);
 
     function syncMask() {
-      if (window.innerWidth < 860) {
-        cream.style.clipPath = '';
-        return;
-      }
-
-      // Read the final rendered hero rectangle. Loader and hero now share the
-      // same fixed viewport coordinate system, so this rectangle is canonical.
+      if (window.innerWidth < 860) { cream.style.clipPath = ''; return; }
+      var photo = hero.querySelector('.exif-hero-bg');
+      if (!photo) return;
       var r = cream.getBoundingClientRect();
       var p = photo.getBoundingClientRect();
       var top = Math.max(0, p.top - r.top);
@@ -57,23 +50,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     cream.style.visibility = 'hidden';
+    Promise.all([waitForFonts(), waitForImage(initialPhoto)]).then(function () {
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        syncMask(); cream.style.visibility = ''; hero.classList.add('exif-mask-ready');
+      }); });
+    });
 
-    Promise.all([waitForFonts(), waitForImage(photo)]).then(function () {
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          syncMask();
-          cream.style.visibility = '';
-          hero.classList.add('exif-mask-ready');
-        });
-      });
+    hero.addEventListener('exif:hero-image-ready', function () {
+      requestAnimationFrame(syncMask);
     });
 
     window.addEventListener('resize', function () {
-      var width = window.innerWidth;
-      var height = window.innerHeight;
+      var width = window.innerWidth, height = window.innerHeight;
       if (width === lastWidth && height === lastHeight) return;
-      lastWidth = width;
-      lastHeight = height;
+      lastWidth = width; lastHeight = height;
       cancelAnimationFrame(resizeFrame);
       resizeFrame = requestAnimationFrame(syncMask);
     }, { passive: true });
