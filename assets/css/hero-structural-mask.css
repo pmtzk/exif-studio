@@ -1,0 +1,4 @@
+@media (min-width:860px){
+  .exif-hero-cream-window{position:absolute!important;left:calc(var(--hero-media-x) - (var(--hero-media-w) / 2))!important;top:calc(var(--hero-media-y) - (var(--hero-media-h) / 2))!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important;overflow:hidden!important;z-index:2!important;pointer-events:none!important;contain:paint!important}
+  .exif-hero-cream-window .exif-hero-title-cream{position:absolute!important;left:calc(5.25vw - (var(--hero-media-x) - (var(--hero-media-w) / 2)))!important;right:auto!important;top:calc(43svh - (var(--hero-media-y) - (var(--hero-media-h) / 2)))!important;width:91.25vw!important;max-width:none!important;margin:0!important;clip-path:none!important;-webkit-clip-path:none!important;will-change:scale,translate!important}
+}
