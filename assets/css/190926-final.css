@@ -2,7 +2,6 @@
 
 /* Canonical desktop hero/loader geometry. */
 @import url('./hero-desktop.css');
-@import url('./hero-structural-mask.css');
 
 /* Canonical persistent navigation chrome. */
 @import url('./nav-context.css');
@@ -12,9 +11,10 @@
   #what-exif-does.exif-cinematic-hero{height:100svh!important;min-height:100svh!important;max-height:100svh!important}
   .exif-loader{height:100svh!important}
   .exif-loader-stage.is-hero,.exif-hero-bg,.exif-hero-shade{left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important}
+  .exif-loader-stage img{opacity:0!important;transition:none!important}.exif-loader-stage img.is-active,.exif-loader-stage img.is-final-frame{opacity:1!important;transition:none!important;filter:none!important}
   .exif-hero-copy{--hero-scroll-scale:1;--hero-scroll-y:0px}
   .exif-hero-title-green,.exif-hero-title-cream{position:absolute!important;left:5.25vw!important;right:3.5vw!important;top:43svh!important;width:auto!important;max-width:none!important;margin:0!important;font-family:var(--font-serif)!important;font-size:var(--hero-type-size)!important;font-weight:400!important;line-height:.72!important;letter-spacing:-.06em!important;text-transform:uppercase!important;transform-origin:50% 50%!important;scale:var(--hero-scroll-scale,1)!important;translate:0 var(--hero-scroll-y,0px)!important;transition:none!important}
-  .exif-hero-title-green{z-index:1!important;color:var(--hero-ink)!important}.exif-hero-title-cream{z-index:2!important;color:var(--hero-cream)!important;pointer-events:none!important;will-change:scale,translate!important}.exif-hero-title-cream .word{color:var(--hero-cream)!important}
+  .exif-hero-title-green{z-index:1!important;color:var(--hero-ink)!important}.exif-hero-title-cream{z-index:2!important;color:var(--hero-cream)!important;pointer-events:none!important;will-change:clip-path,scale,translate!important}.exif-hero-title-cream .word{color:var(--hero-cream)!important}
   .exif-hero-title-green .word,.exif-hero-title-cream .word{display:block!important;opacity:0!important;transform:translateY(38px)!important;filter:blur(3px)!important;transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.16,1,.3,1),filter 1.2s ease!important}
   .exif-hero-copy.is-visible .exif-hero-title-green .word,.exif-hero-copy.is-visible .exif-hero-title-cream .word{opacity:1!important;transform:none!important;filter:blur(0)!important}
   .exif-hero-copy.is-visible :is(.exif-hero-title-green,.exif-hero-title-cream) .line:nth-child(2) .word{transition-delay:.12s!important}.exif-hero-copy.is-visible :is(.exif-hero-title-green,.exif-hero-title-cream) .line:nth-child(3) .word{transition-delay:.24s!important}
@@ -29,15 +29,11 @@
   html body:not(.nav-open) header.site-header .wrap>a:first-child::before{display:block!important;visibility:visible!important;opacity:1!important;background:#1c362a!important}
   html body:not(.nav-open) header.site-header .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;top:auto!important;right:auto!important;width:28px!important;height:28px!important;margin:0!important;padding:0!important;transform:none!important;pointer-events:auto!important}
   html body:not(.nav-open) header.site-header .nav-toggle span{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;height:1.25px!important;background:#1c362a!important;transform:none!important}
-  html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:18px!important;top:7px!important;right:0!important;left:auto!important}
-  html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:10px!important;top:13px!important;right:5px!important;left:auto!important}
-  html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:15px!important;top:19px!important;right:0!important;left:auto!important}
+  html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(1){width:18px!important;top:7px!important;right:0!important;left:auto!important}html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(2){width:10px!important;top:13px!important;right:5px!important;left:auto!important}html body:not(.nav-open) header.site-header .nav-toggle span:nth-child(3){width:15px!important;top:19px!important;right:0!important;left:auto!important}
   html body.exif-hero-live:not(.nav-open) header.site-header,html body.exif-intro-running:not(.nav-open) header.site-header{position:absolute!important;background:transparent!important}
   html body.exif-hero-live:not(.nav-open) header.site-header .wrap>a:first-child::before,html body.exif-intro-running:not(.nav-open) header.site-header .wrap>a:first-child::before{background:#f0e8dd!important}
   html body.exif-hero-live:not(.nav-open) header.site-header .nav-toggle span,html body.exif-intro-running:not(.nav-open) header.site-header .nav-toggle span{background:#f0e8dd!important}
-  html body.nav-open header.site-header .wrap>a:first-child{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
-  html body.nav-open header.site-header{background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none!important}
-  html body.nav-open header.site-header .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;z-index:12002!important}
+  html body.nav-open header.site-header .wrap>a:first-child{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}html body.nav-open header.site-header{background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none!important}html body.nav-open header.site-header .nav-toggle{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;z-index:12002!important}
 }
 
 @media (min-width:860px) and (prefers-reduced-motion:reduce){.exif-hero-copy :is(.exif-hero-title-green,.exif-hero-title-cream){scale:1!important;translate:0 0!important}}
