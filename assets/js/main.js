@@ -3,7 +3,6 @@
   var seen=false;
   try{seen=sessionStorage.getItem('exif-intro-seen')==='1';sessionStorage.setItem('exif-intro-seen','1');}catch(e){}
   if(seen)document.body.classList.add('exif-returning');
-  ['assets/css/nav-composition.css','assets/css/180902-mobile-fix.css','assets/css/180902-nav-cta.css','assets/css/nav-context.css'].forEach(function(href){if(document.querySelector('link[href="'+href+'"]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);});
 }());
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -22,9 +21,6 @@ document.addEventListener('DOMContentLoaded',function(){
   function buildRollingLabels(){if(!nav)return;nav.querySelectorAll('.nav-menu-list a').forEach(function(link){var label=(link.dataset.rollLabel||link.textContent).trim();link.dataset.rollLabel=label;link.innerHTML='<span class="nav-roll-mask"><span class="nav-roll-track"><span class="nav-roll-copy">'+label+'</span><span class="nav-roll-copy" aria-hidden="true">'+label+'</span></span></span>';});}
   buildRollingLabels();
 
-  /* Closed-header contrast sampler. It never changes header geometry and it does not
-     participate while the drawer is open. We sample the actual painted element under
-     the logo/toggle and switch only the chrome colour. */
   var navToneRaf=0;
   function paintedDark(el){
     while(el&&el!==document.documentElement){
