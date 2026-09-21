@@ -1,3 +1,5 @@
+@import url('./approach-cards.css');
+
 /* Canonical desktop hero/loader geometry.
    IMPORTANT: desktop composition uses the SMALL/STABLE viewport, never dvh.
    Chrome on iPad can republish the dynamic viewport after tab/app restoration;
