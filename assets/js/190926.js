@@ -1,10 +1,58 @@
-// Desktop split-colour hero: deterministic first frame + scroll-owned motion.
+// Desktop split-colour hero: deterministic init, no polling race.
 document.addEventListener('DOMContentLoaded', function () {
   var hero=document.querySelector('#what-exif-does');
   if(!hero)return;
   if(window.innerWidth<860){var legacy=document.createElement('script');legacy.src='assets/js/180902-mobile-legacy.js';legacy.defer=true;document.body.appendChild(legacy);return;}
-  var initialized=false,maskRaf=0,motionRaf=0;
-  function setup(){if(initialized)return true;var copy=hero.querySelector('.exif-hero-copy');var original=copy&&copy.querySelector('h1:not(.exif-hero-title-cream)');if(!copy||!original)return false;original.classList.add('exif-hero-title-green');var cream=original.cloneNode(true);cream.classList.remove('exif-hero-title-green');cream.classList.add('exif-hero-title-cream');cream.setAttribute('aria-hidden','true');cream.style.visibility='hidden';copy.insertBefore(cream,original.nextSibling);function canonicalPhoto(){return hero.querySelector('.exif-hero-bg');}function paintMaskNow(){var photo=canonicalPhoto();if(!photo)return;var t=original.getBoundingClientRect(),p=photo.getBoundingClientRect(),x1=Math.max(t.left,p.left),y1=Math.max(t.top,p.top),x2=Math.min(t.right,p.right),y2=Math.min(t.bottom,p.bottom);if(x2<=x1||y2<=y1||t.width<=0||t.height<=0){cream.style.clipPath='inset(100% 100% 100% 100%)';return;}var l=((x1-t.left)/t.width)*100,r=((x2-t.left)/t.width)*100,top=((y1-t.top)/t.height)*100,b=((y2-t.top)/t.height)*100;cream.style.clipPath='polygon('+l+'% '+top+'%, '+r+'% '+top+'%, '+r+'% '+b+'%, '+l+'% '+b+'%)';cream.style.webkitClipPath=cream.style.clipPath;}var current=0,target=0,lastTime=performance.now();function readTarget(){target=Math.max(0,Math.min(1,window.scrollY/Math.max(1,hero.getBoundingClientRect().height*.72)));}function writeMotion(v){var e=1-Math.pow(1-v,3);copy.style.setProperty('--hero-scroll-scale',(1-e*.18).toFixed(5));copy.style.setProperty('--hero-scroll-y',(-(e*42)).toFixed(2)+'px');paintMaskNow();}function render(now){motionRaf=0;var dt=Math.min(40,now-lastTime);lastTime=now;current+=(target-current)*(1-Math.exp(-dt/105));if(Math.abs(target-current)<.00035)current=target;writeMotion(current);if(current!==target)motionRaf=requestAnimationFrame(render);}function requestMotion(){readTarget();if(!motionRaf){lastTime=performance.now();motionRaf=requestAnimationFrame(render);}}current=0;target=0;writeMotion(0);Promise.resolve(document.fonts&&document.fonts.ready).catch(function(){}).then(function(){return canonicalPhoto()&&canonicalPhoto().decode?canonicalPhoto().decode().catch(function(){}):null;}).then(function(){requestAnimationFrame(function(){requestAnimationFrame(function(){paintMaskNow();cream.style.visibility='';hero.classList.add('exif-geometry-ready');});});});window.addEventListener('scroll',requestMotion,{passive:true});window.addEventListener('resize',paintMaskNow,{passive:true});if('ResizeObserver'in window){var ro=new ResizeObserver(paintMaskNow);ro.observe(hero);ro.observe(original);if(canonicalPhoto())ro.observe(canonicalPhoto());}initialized=true;return true;}if(!setup()){var attempts=0,timer=setInterval(function(){attempts++;if(setup()||attempts>=80)clearInterval(timer);},25);}
+
+  var motionRaf=0,observer=null;
+  function initSplitColour(){
+    var copy=hero.querySelector('.exif-hero-copy');
+    var original=copy&&copy.querySelector('h1:not(.exif-hero-title-cream)');
+    var photo=hero.querySelector('.exif-hero-bg');
+    if(!copy||!original||!photo)return false;
+    if(copy.dataset.splitColourReady==='true')return true;
+    copy.dataset.splitColourReady='true';
+    original.classList.add('exif-hero-title-green');
+    var cream=original.cloneNode(true);
+    cream.classList.remove('exif-hero-title-green');
+    cream.classList.add('exif-hero-title-cream');
+    cream.setAttribute('aria-hidden','true');
+    copy.insertBefore(cream,original.nextSibling);
+
+    function paintMask(){
+      var t=original.getBoundingClientRect(),p=photo.getBoundingClientRect();
+      if(!t.width||!t.height||!p.width||!p.height){cream.style.clipPath='inset(100%)';return;}
+      var x1=Math.max(t.left,p.left),y1=Math.max(t.top,p.top),x2=Math.min(t.right,p.right),y2=Math.min(t.bottom,p.bottom);
+      if(x2<=x1||y2<=y1){cream.style.clipPath='inset(100%)';return;}
+      var l=(x1-t.left)/t.width*100,r=(x2-t.left)/t.width*100,top=(y1-t.top)/t.height*100,b=(y2-t.top)/t.height*100;
+      cream.style.clipPath='polygon('+l+'% '+top+'%, '+r+'% '+top+'%, '+r+'% '+b+'%, '+l+'% '+b+'%)';
+      cream.style.webkitClipPath=cream.style.clipPath;
+    }
+    var current=0,target=0,lastTime=performance.now();
+    function readTarget(){target=Math.max(0,Math.min(1,window.scrollY/Math.max(1,hero.getBoundingClientRect().height*.72)));}
+    function writeMotion(v){var e=1-Math.pow(1-v,3);copy.style.setProperty('--hero-scroll-scale',(1-e*.18).toFixed(5));copy.style.setProperty('--hero-scroll-y',(-(e*42)).toFixed(2)+'px');paintMask();}
+    function render(now){motionRaf=0;var dt=Math.min(40,now-lastTime);lastTime=now;current+=(target-current)*(1-Math.exp(-dt/105));if(Math.abs(target-current)<.00035)current=target;writeMotion(current);if(current!==target)motionRaf=requestAnimationFrame(render);}
+    function requestMotion(){readTarget();if(!motionRaf){lastTime=performance.now();motionRaf=requestAnimationFrame(render);}}
+    current=0;target=0;writeMotion(0);
+    // Geometry can improve when fonts/image settle, but the headline is never hidden while waiting.
+    var geometryReady=function(){requestAnimationFrame(function(){requestAnimationFrame(function(){paintMask();hero.classList.add('exif-geometry-ready');});});};
+    geometryReady();
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(geometryReady).catch(function(){});
+    if(photo.decode)photo.decode().then(geometryReady).catch(function(){geometryReady();});
+    window.addEventListener('scroll',requestMotion,{passive:true});
+    window.addEventListener('resize',geometryReady,{passive:true});
+    if('ResizeObserver'in window){var ro=new ResizeObserver(geometryReady);ro.observe(hero);ro.observe(original);ro.observe(photo);}
+    return true;
+  }
+
+  // 180902 builds the cinematic hero synchronously during the same DOMContentLoaded dispatch.
+  // A MutationObserver owns the handoff when this listener runs first; there is no timer window to miss.
+  if(!initSplitColour()){
+    observer=new MutationObserver(function(){if(initSplitColour()){observer.disconnect();observer=null;}});
+    observer.observe(hero,{childList:true,subtree:true});
+  }
+  // Final same-turn check covers listener ordering without arbitrary retries.
+  queueMicrotask(function(){if(initSplitColour()&&observer){observer.disconnect();observer=null;}});
 });
 
 document.addEventListener('DOMContentLoaded',function(){
