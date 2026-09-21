@@ -1,18 +1,10 @@
-@import url('./approach-cards.css');
-
-/* Canonical desktop hero/loader geometry. */
-@import url('./hero-desktop.css');
-
-/* Canonical persistent navigation chrome. */
-@import url('./nav-context.css');
+/* Final homepage overrides. Dependencies are loaded explicitly by index.html. */
 
 /* Approach card copy hierarchy kept in the canonical stylesheet so CDN/import
    caching cannot hide typography changes. Card titles remain untouched. */
 @media (min-width:860px){
   .exif-approach .approach-card .approach-card-copy strong{font-family:var(--sans)!important;font-size:clamp(20px,1.45vw,23px)!important;font-weight:500!important;font-style:italic!important;line-height:1.22!important;margin-bottom:12px!important}
   .exif-approach .approach-card .approach-card-copy p{font-family:var(--sans)!important;font-size:clamp(18px,1.25vw,20px)!important;font-weight:400!important;line-height:1.48!important;max-width:38ch!important}
-  /* The card itself is now the reveal mask. Copy is composed at its final width
-     from frame one, so opening the card cannot visibly re-wrap the text. */
   .exif-approach .approach-card-copy{position:absolute!important;left:clamp(22px,1.9vw,30px)!important;bottom:clamp(22px,1.9vw,30px)!important;width:clamp(330px,28vw,430px)!important;max-width:none!important;margin:0!important;box-sizing:border-box!important}
   .exif-approach .approach-card-copy strong,.exif-approach .approach-card-copy p{width:100%!important}
 }
