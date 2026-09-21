@@ -1,0 +1,85 @@
+// EXIF V1 — global navigation, bilingual copy, correspondence and page transitions.
+(function(){
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var returning=false;
+  try{returning=sessionStorage.getItem('exif-intro-seen')==='1';sessionStorage.setItem('exif-intro-seen','1');}catch(e){}
+  if(returning)document.body.classList.add('exif-returning');
+
+  function getLang(){try{return localStorage.getItem('exif-language')||'en';}catch(e){return'en'}}
+  function saveLang(lang){try{localStorage.setItem('exif-language',lang);}catch(e){}}
+  function replaceCopy(lang){
+    if(lang!=='es')lang='en';
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en][data-es]').forEach(function(el){el.textContent=lang==='es'?el.dataset.es:el.dataset.en;});
+    document.querySelectorAll('[data-placeholder-en][data-placeholder-es]').forEach(function(el){el.placeholder=lang==='es'?el.dataset.placeholderEs:el.dataset.placeholderEn;});
+    document.querySelectorAll('.lang-toggle').forEach(function(btn){btn.dataset.lang=lang;btn.textContent=lang==='en'?'ES':'EN';btn.setAttribute('aria-label',lang==='en'?'Cambiar a español':'Switch to English');btn.setAttribute('aria-pressed',lang==='es'?'true':'false');});
+    var page=document.body.dataset.page||'home';
+    if(page==='home'){
+      document.title=lang==='es'?'EXIF Studio — Dirección visual para hospitalidad independiente':'EXIF Studio — Visual Direction for Independent Hospitality';
+      setMeta('description',lang==='es'?'Dirección visual para hoteles, villas y propiedades independientes. EXIF identifica qué distingue a un lugar y lo hace reconocible antes de llegar.':'Visual direction for independent hotels, villas and hospitality properties. EXIF identifies what makes a place distinct and helps make it recognizable before arrival.');
+      setPropertyMeta('og:title',lang==='es'?'EXIF — Un lugar, inconfundible.':'EXIF — A place, made unmistakable.');
+      setPropertyMeta('og:description',lang==='es'?'Dirección visual para hacer visible lo que distingue a una propiedad antes de llegar.':'Visual direction for independent hospitality. Making visible what distinguishes a place before arrival.');
+    }else if(page==='studio'){
+      document.title=lang==='es'?'Studio — EXIF':'Studio — EXIF';
+      setMeta('description',lang==='es'?'EXIF es un estudio independiente de dirección visual para hospitalidad, fundado por Katia Pérez y con base en México.':'EXIF is an independent visual direction studio for hospitality, founded by Katia Pérez and based in Mexico.');
+      setPropertyMeta('og:title',lang==='es'?'Una carta de nuestra fundadora — EXIF':'A letter from our founder — EXIF');
+    }
+    window.dispatchEvent(new CustomEvent('exif:languagechange',{detail:{lang:lang}}));
+  }
+  function setMeta(name,value){var m=document.querySelector('meta[name="'+name+'"]');if(m)m.content=value;}
+  function setPropertyMeta(name,value){var m=document.querySelector('meta[property="'+name+'"]');if(m)m.content=value;}
+
+  function buildNav(){
+    var nav=document.querySelector('.main-nav');if(!nav)return;
+    nav.innerHTML='<div class="v1-nav-inner"><div class="v1-nav-primary"><a class="v1-nav-link" href="index.html" data-transition data-route="home"><span class="v1-nav-num">01</span><span class="v1-nav-title">HOME</span><span class="v1-nav-preview" data-en="A PLACE, MADE UNMISTAKABLE." data-es="UN LUGAR, INCONFUNDIBLE.">A PLACE, MADE UNMISTAKABLE.</span></a><a class="v1-nav-link" href="studio.html" data-transition data-route="studio"><span class="v1-nav-num">02</span><span class="v1-nav-title">STUDIO</span><span class="v1-nav-preview" data-en="DEAR HOTELIER," data-es="DEAR HOTELIER,">DEAR HOTELIER,</span></a></div><div class="v1-nav-side"><a class="v1-nav-dear" href="index.html#dear-exif" data-dear-route><strong>DEAR EXIF,</strong><small><span data-en="WRITE TO US." data-es="ESCRÍBENOS.">WRITE TO US.</span><span>→</span></small></a></div><div class="v1-nav-meta"><div class="v1-nav-social"><a href="https://instagram.com/byexifstudio" target="_blank" rel="noopener">INSTAGRAM</a><a href="https://linkedin.com/company/exif-studio" target="_blank" rel="noopener">LINKEDIN</a></div><div class="v1-nav-place"><span data-en="BASED IN MEXICO / WHERE THE PLACE TAKES US." data-es="CON BASE EN MÉXICO / DONDE EL LUGAR NOS LLEVE.">BASED IN MEXICO / WHERE THE PLACE TAKES US.</span></div></div></div>';
+  }
+
+  function initNav(){
+    var toggle=document.querySelector('.nav-toggle'),nav=document.querySelector('.main-nav');if(!toggle||!nav)return;
+    var lockedY=0;
+    function lock(){lockedY=window.scrollY||0;document.body.style.position='fixed';document.body.style.top='-'+lockedY+'px';document.body.style.width='100%';}
+    function unlock(){document.body.style.position='';document.body.style.top='';document.body.style.width='';window.scrollTo(0,lockedY);}
+    function open(){document.body.classList.add('nav-open');nav.classList.add('open');toggle.setAttribute('aria-expanded','true');lock();}
+    function close(){if(!document.body.classList.contains('nav-open'))return;document.body.classList.remove('nav-open');nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');unlock();}
+    toggle.setAttribute('aria-expanded','false');toggle.addEventListener('click',function(){document.body.classList.contains('nav-open')?close():open();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+    nav.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;if(a.hasAttribute('data-dear-route')){e.preventDefault();close();goDear();}});
+    window.exifCloseNav=close;
+  }
+
+  function goDear(){
+    var home=location.pathname==='/'||location.pathname.endsWith('/index.html');
+    if(home){var t=document.querySelector('#dear-exif');if(t)t.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});setTimeout(function(){var input=document.querySelector('#property-url');if(input)input.focus({preventScroll:true});},reduced?0:700);return;}
+    transitionTo('index.html#dear-exif');
+  }
+
+  function transitionTo(href){
+    if(!href)return;try{sessionStorage.setItem('exif-transition','1');}catch(e){}
+    if(reduced){location.href=href;return;}document.documentElement.classList.add('exif-transition-out');setTimeout(function(){location.href=href;},500);
+  }
+  function initTransitions(){
+    document.addEventListener('click',function(e){var a=e.target.closest('a[data-transition]');if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==='_blank')return;var href=a.getAttribute('href');if(!href)return;if(href.charAt(0)==='#')return;e.preventDefault();if(window.exifCloseNav)window.exifCloseNav();transitionTo(href);});
+    var arrival=false;try{arrival=sessionStorage.getItem('exif-transition')==='1';if(arrival)sessionStorage.removeItem('exif-transition');}catch(e){}
+    if(arrival||document.documentElement.classList.contains('exif-transition-arrival')){requestAnimationFrame(function(){document.documentElement.classList.add('exif-transition-reveal');document.documentElement.classList.remove('exif-transition-arrival');setTimeout(function(){document.documentElement.classList.remove('exif-transition-reveal');},650);});}
+    if(location.hash==='#dear-exif'){setTimeout(function(){var t=document.querySelector('#dear-exif');if(t)t.scrollIntoView({behavior:'auto',block:'start'});var input=document.querySelector('#property-url');if(input)input.focus({preventScroll:true});},80);}
+  }
+
+  function initDear(){
+    var shell=document.querySelector('.dear-letter-shell');if(!shell)return;
+    var form=shell.querySelector('form'),continueBtn=shell.querySelector('.dear-continue'),status=shell.querySelector('.dear-status'),textarea=shell.querySelector('.dear-textarea');
+    var fields={property:shell.querySelector('[name="property_link"]'),message:shell.querySelector('[name="message"]'),name:shell.querySelector('[name="name"]'),email:shell.querySelector('[name="email"]')};
+    function saveDraft(){var d={};Object.keys(fields).forEach(function(k){if(fields[k])d[k]=fields[k].value;});try{sessionStorage.setItem('exif-dear-draft',JSON.stringify(d));}catch(e){}}
+    function loadDraft(){try{var raw=sessionStorage.getItem('exif-dear-draft');if(!raw)return;var d=JSON.parse(raw);Object.keys(fields).forEach(function(k){if(fields[k]&&d[k])fields[k].value=d[k];});if((d.message||d.name||d.email))shell.classList.add('is-expanded');}catch(e){}}
+    function grow(){if(!textarea)return;textarea.style.height='auto';textarea.style.height=Math.max(84,textarea.scrollHeight)+'px';}
+    Object.keys(fields).forEach(function(k){if(fields[k])fields[k].addEventListener('input',saveDraft);});if(textarea)textarea.addEventListener('input',grow);loadDraft();grow();
+    if(continueBtn)continueBtn.addEventListener('click',function(){shell.classList.add('is-expanded');setTimeout(function(){if(textarea)textarea.focus();},350);});
+    if(form)form.addEventListener('submit',function(e){e.preventDefault();var btn=form.querySelector('.dear-send');if(btn){btn.disabled=true;btn.dataset.old=btn.textContent;btn.textContent=getLang()==='es'?'ENVIANDO…':'SENDING…';}if(status)status.textContent='';fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('send');shell.classList.add('is-sent');try{sessionStorage.removeItem('exif-dear-draft');}catch(e){};}).catch(function(){if(status)status.textContent=getLang()==='es'?'No pudimos enviar la carta. Escríbenos a hello@exif.studio.':'We could not send the letter. Email hello@exif.studio instead.';}).finally(function(){if(btn){btn.disabled=false;btn.textContent=btn.dataset.old||'SEND LETTER';}});});
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    buildNav();
+    document.querySelectorAll('.lang-toggle').forEach(function(btn){btn.addEventListener('click',function(e){e.preventDefault();var next=getLang()==='es'?'en':'es';saveLang(next);replaceCopy(next);});});
+    replaceCopy(getLang());initNav();initTransitions();initDear();
+    var year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+  });
+  window.exifApplyLanguage=replaceCopy;
+})();
