@@ -6,9 +6,12 @@
 /* Canonical persistent navigation chrome. */
 @import url('./nav-context.css');
 
-/* Approach card body copy lives here as a final canonical override so changes are
-   visible even when a nested @import is held by the browser/CDN cache. Titles untouched. */
-@media (min-width:860px){.exif-approach .approach-card .approach-card-copy p{font-family:var(--sans)!important;font-size:clamp(25.5px,1.875vw,30px)!important;font-weight:400!important;line-height:1.38!important;max-width:30ch!important}}
+/* Approach card copy hierarchy kept in the canonical stylesheet so CDN/import
+   caching cannot hide typography changes. Card titles remain untouched. */
+@media (min-width:860px){
+  .exif-approach .approach-card .approach-card-copy strong{font-family:var(--sans)!important;font-size:clamp(20px,1.45vw,23px)!important;font-weight:500!important;font-style:italic!important;line-height:1.22!important;margin-bottom:12px!important}
+  .exif-approach .approach-card .approach-card-copy p{font-family:var(--sans)!important;font-size:clamp(18px,1.25vw,20px)!important;font-weight:400!important;line-height:1.48!important;max-width:38ch!important}
+}
 
 @media (min-width:860px){
   :root{--hero-media-w:clamp(430px,min(42vw,67svh),680px)!important;--hero-media-h:clamp(540px,76svh,800px)!important;--hero-media-x:50%!important;--hero-media-y:42svh!important;--hero-type-size:clamp(5.7rem,min(11.1vw,15.2svh),12rem)!important;--desktop-header-h:76px!important}
@@ -16,9 +19,6 @@
   .exif-loader{height:100svh!important}
   .exif-loader-stage.is-hero,.exif-hero-bg,.exif-hero-shade{left:var(--hero-media-x)!important;top:var(--hero-media-y)!important;width:var(--hero-media-w)!important;height:var(--hero-media-h)!important}
   .exif-loader-stage img{opacity:0!important;transition:none!important}.exif-loader-stage img.is-active,.exif-loader-stage img.is-final-frame{opacity:1!important;transition:none!important;filter:none!important}
-
-  /* One coordinate system for both paint layers. The cream clone inherits the exact
-     h1 layout from hero-desktop.css; only colour + clip-path differ. */
   .exif-hero-copy{--hero-scroll-scale:1;--hero-scroll-y:0px}
   .exif-hero-copy>h1.exif-hero-title-green,.exif-hero-copy>h1.exif-hero-title-cream{left:5.25vw!important;right:3.5vw!important;top:43svh!important;width:auto!important;max-width:none!important;margin:0!important;font-family:var(--font-serif)!important;font-size:var(--hero-type-size)!important;font-weight:400!important;line-height:.72!important;letter-spacing:-.06em!important;text-transform:uppercase!important;transform-origin:50% 50%!important;scale:var(--hero-scroll-scale,1)!important;translate:0 var(--hero-scroll-y,0px)!important;transition:none!important}
   .exif-hero-copy>h1.exif-hero-title-green{z-index:1!important;color:var(--hero-ink)!important}.exif-hero-copy>h1.exif-hero-title-cream{z-index:2!important;color:var(--hero-cream)!important;pointer-events:none!important;will-change:clip-path,scale,translate!important}.exif-hero-copy>h1.exif-hero-title-cream .word{color:var(--hero-cream)!important}
