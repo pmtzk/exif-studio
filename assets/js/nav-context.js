@@ -1,23 +1,8 @@
 /* EXIF context-aware header chrome + viewport drawer mount. */
 (function(){
-  /* Load the drawer foundation once, then detach the built nav from the sticky header.
-     site-v1 keeps ownership of content, toggle state and routes; this file owns placement. */
-  var drawerStyle=document.createElement('link');
-  drawerStyle.rel='stylesheet';
-  drawerStyle.href='assets/css/drawer-foundation.css';
-  document.head.appendChild(drawerStyle);
-
-  function mountDrawer(){
-    var nav=document.querySelector('.main-nav');
-    if(!nav)return;
-    nav.classList.remove('main-nav');
-    nav.classList.add('exif-drawer');
-    document.body.insertBefore(nav,document.body.firstChild);
-  }
-
-  function init(){
-    mountDrawer();
-    var header=document.querySelector('.site-header'),logoHit=header&&header.querySelector('.wrap>a:first-child'),toggle=header&&header.querySelector('.nav-toggle');if(!header||!logoHit||!toggle)return;var raf=0;
+  var drawerStyle=document.createElement('link');drawerStyle.rel='stylesheet';drawerStyle.href='assets/css/drawer-foundation.css';document.head.appendChild(drawerStyle);
+  function mountDrawer(){var nav=document.querySelector('.main-nav');if(!nav)return;nav.classList.remove('main-nav');nav.classList.add('exif-drawer');var backdrop=document.createElement('div');backdrop.className='exif-drawer-backdrop';backdrop.setAttribute('aria-hidden','true');document.body.insertBefore(backdrop,document.body.firstChild);document.body.insertBefore(nav,backdrop.nextSibling);backdrop.addEventListener('click',function(){if(window.exifCloseNav)window.exifCloseNav();});}
+  function init(){mountDrawer();var header=document.querySelector('.site-header'),logoHit=header&&header.querySelector('.wrap>a:first-child'),toggle=header&&header.querySelector('.nav-toggle');if(!header||!logoHit||!toggle)return;var raf=0;
     function transparent(c){if(!c||c==='transparent')return true;var m=c.match(/rgba?\([^)]*(?:[, /])\s*([\d.]+)\s*\)$/);return !!(m&&+m[1]===0)}
     function lum(c){var m=c&&c.match(/rgba?\(\s*(\d+)[, ]+(\d+)[, ]+(\d+)/);return m?.2126*(+m[1])+.7152*(+m[2])+.0722*(+m[3]):null}
     function ignored(node){return !!(node.closest&&node.closest('.exif-hero-copy,.exif-hero-meta,.interface-bar,.interface-footer,.image-tag,.work-ui,.frame-bar,.frame-footer'))}
