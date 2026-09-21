@@ -16,48 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }@media(max-width:859px) and (prefers-reduced-motion:reduce){.exif-loader{display:none}.exif-hero-copy .word{opacity:1;transform:none;filter:none}.exif-hero-meta{opacity:.82;transform:none}}
   `;document.head.appendChild(mobileStyle);
 
-  var finalImage='https://raw.githubusercontent.com/pmtzk/exif-studio/dfad59a8809948b4537c4e8be36be13348dd0235/assets/img/exif-fullbleed.jpg';
+  var finalImage='assets/img/exif-fullbleed.jpg';
   var frames=['assets/img/work-chair-detail.jpg','assets/img/work-window-reflection.jpg','assets/img/work-human-moment.jpg','assets/img/work-open-air-space.jpg','assets/img/work-restaurant-atmosphere.jpg','assets/img/hero-couch-doorway.jpg','assets/img/work-exterior-view.jpg',finalImage];
-  hero.classList.add('exif-cinematic-hero');hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1><span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span></h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>');
+  hero.classList.add('exif-cinematic-hero');hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1><span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span></h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>');
   var heroBg=hero.querySelector('.exif-hero-bg');function setHeroHeaderState(){if(window.scrollY<Math.max(80,hero.offsetHeight-90))document.body.classList.add('exif-hero-live');else document.body.classList.remove('exif-hero-live');}
   if(reduced){document.body.classList.add('exif-hero-live');hero.querySelector('.exif-hero-copy').classList.add('is-visible');window.addEventListener('scroll',setHeroHeaderState,{passive:true});return;}
 
   document.body.classList.add('exif-intro-running');var loader=document.createElement('div');loader.className='exif-loader';loader.setAttribute('aria-hidden','true');loader.innerHTML='<div class="exif-loader-stage"></div>';document.body.appendChild(loader);
-  var stage=loader.querySelector('.exif-loader-stage');var imgs=frames.map(function(src){var img=document.createElement('img');img.src=src;img.alt='';stage.appendChild(img);return img;});frames.forEach(function(src){var preload=new Image();preload.src=src;});
+  var stage=loader.querySelector('.exif-loader-stage');var imgs=frames.map(function(src,index){var img=document.createElement('img');img.src=src;img.alt='';img.decoding='async';if(index===frames.length-1)img.fetchPriority='high';stage.appendChild(img);return img;});
 
   function finishDesktopHandoff(layer){
-    /* The old cream loader backdrop sat between the transition layer and the real hero.
-       Fading the layer therefore exposed cream for a frame: photo -> white -> photo.
-       Make the backdrop transparent first, while the transition layer is still fully
-       opaque. The real hero is then already underneath identical pixels. */
-    heroBg.style.visibility='';
-    loader.style.setProperty('transition','none','important');
-    loader.style.setProperty('background','transparent','important');
-    stage.style.visibility='hidden';
-    requestAnimationFrame(function(){
-      layer.style.transition='opacity 120ms linear';
-      layer.style.opacity='0';
-      setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},125);
-    });
+    heroBg.style.visibility='';loader.style.setProperty('transition','none','important');loader.style.setProperty('background','transparent','important');stage.style.visibility='hidden';
+    requestAnimationFrame(function(){layer.style.transition='opacity 120ms linear';layer.style.opacity='0';setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},125);});
   }
   function coverGeometry(boxW,boxH,imgW,imgH,posX,posY){var scale=Math.max(boxW/imgW,boxH/imgH),w=imgW*scale,h=imgH*scale;return {w:w,h:h,x:(boxW-w)*posX,y:(boxH-h)*posY};}
-  function expandDesktopOnce(){
-    var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect(),finalFrame=imgs[imgs.length-1];
-    var iw=finalFrame.naturalWidth||heroBg.naturalWidth||1,ih=finalFrame.naturalHeight||heroBg.naturalHeight||1;
-    var source=coverGeometry(from.width,from.height,iw,ih,.5,.5),dest=coverGeometry(to.width,to.height,iw,ih,.5,.5);
-    var layer=document.createElement('div');layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;z-index:9999;overflow:hidden;pointer-events:none;left:'+from.left+'px;top:'+from.top+'px;width:'+from.width+'px;height:'+from.height+'px;will-change:left,top,width,height;contain:layout paint;';
-    var img=document.createElement('img');img.src=finalFrame.currentSrc||finalFrame.src;img.alt='';img.style.cssText='position:absolute;max-width:none;opacity:1;will-change:left,top,width,height;';img.style.left=source.x+'px';img.style.top=source.y+'px';img.style.width=source.w+'px';img.style.height=source.h+'px';layer.appendChild(img);document.body.appendChild(layer);stage.style.visibility='hidden';
-    var timing={duration:1320,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'};
-    var frameAnim=layer.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px'}],timing);
-    var imageAnim=img.animate([{left:source.x+'px',top:source.y+'px',width:source.w+'px',height:source.h+'px'},{left:dest.x+'px',top:dest.y+'px',width:dest.w+'px',height:dest.h+'px'}],timing);
-    Promise.all([frameAnim.finished,imageAnim.finished]).then(function(){finishDesktopHandoff(layer);}).catch(function(){finishDesktopHandoff(layer);});
-  }
+  function expandDesktopOnce(){var from=stage.getBoundingClientRect(),to=heroBg.getBoundingClientRect(),finalFrame=imgs[imgs.length-1];var iw=finalFrame.naturalWidth||heroBg.naturalWidth||1,ih=finalFrame.naturalHeight||heroBg.naturalHeight||1;var source=coverGeometry(from.width,from.height,iw,ih,.5,.5),dest=coverGeometry(to.width,to.height,iw,ih,.5,.5);var layer=document.createElement('div');layer.setAttribute('aria-hidden','true');layer.style.cssText='position:fixed;z-index:9999;overflow:hidden;pointer-events:none;left:'+from.left+'px;top:'+from.top+'px;width:'+from.width+'px;height:'+from.height+'px;will-change:left,top,width,height;contain:layout paint;';var img=document.createElement('img');img.src=finalFrame.currentSrc||finalFrame.src;img.alt='';img.style.cssText='position:absolute;max-width:none;opacity:1;will-change:left,top,width,height;';img.style.left=source.x+'px';img.style.top=source.y+'px';img.style.width=source.w+'px';img.style.height=source.h+'px';layer.appendChild(img);document.body.appendChild(layer);stage.style.visibility='hidden';var timing={duration:1320,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'};var frameAnim=layer.animate([{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'},{left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px'}],timing);var imageAnim=img.animate([{left:source.x+'px',top:source.y+'px',width:source.w+'px',height:source.h+'px'},{left:dest.x+'px',top:dest.y+'px',width:dest.w+'px',height:dest.h+'px'}],timing);Promise.all([frameAnim.finished,imageAnim.finished]).then(function(){finishDesktopHandoff(layer);}).catch(function(){finishDesktopHandoff(layer);});}
 
   setTimeout(function(){stage.classList.add('is-window');},420);
-  setTimeout(function(){var i=0;function flash(){imgs.forEach(function(img){img.classList.remove('is-active');});imgs[i].classList.add('is-active');i+=1;if(i<imgs.length){setTimeout(flash,125);return;}
-    var finalFrame=imgs[imgs.length-1];finalFrame.classList.add('is-final-frame');
-    if(window.innerWidth>=860){requestAnimationFrame(function(){requestAnimationFrame(expandDesktopOnce);});return;}
-    requestAnimationFrame(function(){stage.classList.add('is-hero');});
-    var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;stage.removeEventListener('transitionend',onExpanded);document.body.classList.add('exif-hero-live');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);window.addEventListener('scroll',setHeroHeaderState,{passive:true});};stage.addEventListener('transitionend',onExpanded);
-  }flash();},1050);
+  setTimeout(function(){var i=0;function flash(){imgs.forEach(function(img){img.classList.remove('is-active');});imgs[i].classList.add('is-active');i+=1;if(i<imgs.length){setTimeout(flash,125);return;}var finalFrame=imgs[imgs.length-1];finalFrame.classList.add('is-final-frame');if(window.innerWidth>=860){requestAnimationFrame(function(){requestAnimationFrame(expandDesktopOnce);});return;}requestAnimationFrame(function(){stage.classList.add('is-hero');});var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;stage.removeEventListener('transitionend',onExpanded);document.body.classList.add('exif-hero-live');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);window.addEventListener('scroll',setHeroHeaderState,{passive:true});};stage.addEventListener('transitionend',onExpanded);}flash();},1050);
 });
