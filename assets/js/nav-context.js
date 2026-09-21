@@ -1,6 +1,5 @@
 /* EXIF context-aware header chrome + viewport drawer mount. */
 (function(){
-  var drawerStyle=document.createElement('link');drawerStyle.rel='stylesheet';drawerStyle.href='assets/css/drawer-foundation.css';document.head.appendChild(drawerStyle);
   function mountDrawer(){var nav=document.querySelector('.main-nav');if(!nav)return;nav.classList.remove('main-nav');nav.classList.add('exif-drawer');var backdrop=document.createElement('div');backdrop.className='exif-drawer-backdrop';backdrop.setAttribute('aria-hidden','true');document.body.insertBefore(backdrop,document.body.firstChild);document.body.insertBefore(nav,backdrop.nextSibling);backdrop.addEventListener('click',function(){if(window.exifCloseNav)window.exifCloseNav();});}
   function init(){mountDrawer();var header=document.querySelector('.site-header'),logoHit=header&&header.querySelector('.wrap>a:first-child'),toggle=header&&header.querySelector('.nav-toggle');if(!header||!logoHit||!toggle)return;var raf=0;
     function transparent(c){if(!c||c==='transparent')return true;var m=c.match(/rgba?\([^)]*(?:[, /])\s*([\d.]+)\s*\)$/);return !!(m&&+m[1]===0)}
