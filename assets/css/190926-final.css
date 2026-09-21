@@ -6,6 +6,10 @@
 /* Canonical persistent navigation chrome. */
 @import url('./nav-context.css');
 
+/* Approach card body copy lives here as a final canonical override so changes are
+   visible even when a nested @import is held by the browser/CDN cache. Titles untouched. */
+@media (min-width:860px){.exif-approach .approach-card .approach-card-copy p{font-family:var(--sans)!important;font-size:clamp(25.5px,1.875vw,30px)!important;font-weight:400!important;line-height:1.38!important;max-width:30ch!important}}
+
 @media (min-width:860px){
   :root{--hero-media-w:clamp(430px,min(42vw,67svh),680px)!important;--hero-media-h:clamp(540px,76svh,800px)!important;--hero-media-x:50%!important;--hero-media-y:42svh!important;--hero-type-size:clamp(5.7rem,min(11.1vw,15.2svh),12rem)!important;--desktop-header-h:76px!important}
   #what-exif-does.exif-cinematic-hero{height:100svh!important;min-height:100svh!important;max-height:100svh!important}
