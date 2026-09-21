@@ -17,8 +17,8 @@ function init(){
   function wake(){if(!raf){lastT=performance.now();raf=requestAnimationFrame(frame)}}
   function setImpulse(v){if(Math.abs(v)<.001)return;direction=v>0?1:-1;inputTarget=clamp(v*INPUT_SCALE,-1.15,1.15);inputActive=true;wake()}
   function releaseInput(){if(!inputActive)return;inputActive=false;inputTarget=0;wake()}
-  function step(dir){direction=dir;inputActive=false;buttonBoost=dir*.064;wake()}
-  chapter.addEventListener('click',function(e){var b=e.target.closest('[data-gallery-step]');if(!b)return;e.preventDefault();e.stopPropagation();step(b.getAttribute('data-gallery-step')==='prev'?-1:1)});
+  function step(dir){direction=dir;inputActive=false;inputTarget=0;inputVelocity=0;velocity=SPEED*dir;buttonBoost=dir*.18;wake()}
+  var controls=chapter.querySelector('.motion-gallery-controls');if(controls){function controlStep(e){var b=e.target.closest('[data-gallery-step]');if(!b)return;e.preventDefault();e.stopPropagation();step(b.getAttribute('data-gallery-step')==='prev'?-1:1)}controls.addEventListener('click',controlStep);controls.addEventListener('pointerup',function(e){if(e.pointerType==='touch'||e.pointerType==='pen')controlStep(e)},{passive:false})}
   function startPointer(id,kind,x,y){pointerId=id;pointerKind=kind||'mouse';axis=null;startX=lastX=x;startY=y;lastPointerT=performance.now()}
   function movePointer(id,x,y,prevent){if(id!==pointerId)return;var tx=x-startX,ty=y-startY,ax=Math.abs(tx),ay=Math.abs(ty);if(!axis&&(ax>3||ay>3)){if(ax>ay*1.08){axis='x';viewport.classList.add('is-horizontal-drag')}else if(ay>ax*1.45){axis='y'}}if(axis!=='x')return;if(prevent)prevent();var now=performance.now(),dt=Math.max(8,now-lastPointerT),dx=x-lastX;setImpulse(clamp((-dx/dt),-1.35,1.35));lastX=x;lastPointerT=now}
   function finishPointer(id){if(pointerId===null||id!==pointerId)return;var horizontal=axis==='x';viewport.classList.remove('is-horizontal-drag');pointerId=null;pointerKind='';axis=null;if(horizontal)releaseInput();wake()}
