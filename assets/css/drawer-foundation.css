@@ -1,13 +1,12 @@
 /* EXIF drawer — viewport-level sheet. */
-.exif-drawer-backdrop{position:fixed;inset:0;z-index:11990;visibility:hidden;pointer-events:none;background:transparent;transition:visibility 0s linear .9s}
+.exif-drawer-backdrop{position:fixed;inset:0;z-index:11990;visibility:hidden;pointer-events:none;background:transparent;transition:visibility 0s linear 1.35s}
 body.nav-open .exif-drawer-backdrop{visibility:visible;pointer-events:auto;transition-delay:0s}
 
-/* Pure Gaussian blur curtain.
-   Important: no mask/opacity/filter/clip-path on the blur surface. Those create
-   backdrop-root/compositing behavior that changes the visual result. */
-.exif-optical-glass{position:fixed;left:0;right:0;top:80dvh;bottom:0;display:block;pointer-events:none;background:transparent;-webkit-backdrop-filter:blur(32px);backdrop-filter:blur(32px);transform:translate3d(0,100%,0);transition:transform .95s cubic-bezier(.22,1,.36,1);will-change:transform}
+/* Pure Gaussian blur curtain. Keep the blur surface visually untouched;
+   soften only its vertical travel so the Gaussian field rises/falls naturally. */
+.exif-optical-glass{position:fixed;left:0;right:0;top:80dvh;bottom:0;display:block;pointer-events:none;background:transparent;-webkit-backdrop-filter:blur(32px);backdrop-filter:blur(32px);transform:translate3d(0,115%,0);transition:transform 1.28s cubic-bezier(.16,1,.3,1);will-change:transform}
 body.nav-open .exif-optical-glass{transform:translate3d(0,0,0)}
-body:not(.nav-open) .exif-optical-glass{transition-duration:.78s}
+body:not(.nav-open) .exif-optical-glass{transition-duration:1.18s;transition-timing-function:cubic-bezier(.32,0,.18,1)}
 
 body.nav-open .site-header{z-index:12020!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:transparent!important;border-color:transparent!important}
 body.nav-open .site-header .nav-toggle,body.nav-open .site-header .lang-toggle{position:relative;z-index:12030!important}
