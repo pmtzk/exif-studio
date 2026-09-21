@@ -3,12 +3,10 @@
   body.exif-intro-running{overflow:hidden}
   .site-header{transition:opacity .8s ease,background .35s ease,border-color .35s ease}
   body.exif-intro-running .site-header{opacity:0;pointer-events:none}
-  body.exif-hero-live .site-header{position:absolute!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:30!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;height:auto!important;padding-top:env(safe-area-inset-top)}
-  body.exif-hero-live:not(.nav-open) .site-header .brand-logo{filter:brightness(0) invert(1);opacity:.96}
-  body.exif-hero-live:not(.nav-open) .site-header .nav-toggle span{background:#f0e8dd!important}
+  /* nav-context.css owns all mobile navbar geometry and contextual colors. The hero
+     may make the header surface transparent, but must never reposition individual controls. */
+  body.exif-hero-live .site-header{background:transparent!important;border-color:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
   body.exif-hero-live:not(.nav-open) .site-header .main-nav:not(.open){display:none!important}
-  body.exif-hero-live .site-header .wrap{padding-left:28px!important;padding-right:28px!important;min-height:88px!important}
-  body.exif-hero-live .site-header .brand-logo{width:72px!important;height:auto!important}
   .exif-loader{position:fixed;inset:0;z-index:9998;background:#f0e8dd;display:grid;place-items:center;overflow:hidden;opacity:1;transition:opacity .8s cubic-bezier(.22,.61,.36,1)}
   .exif-loader.is-gone{opacity:0;pointer-events:none}
   .exif-loader-stage{position:relative;width:12px;height:12px;background:#1c362a;overflow:hidden;will-change:width,height;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
