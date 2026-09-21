@@ -8,14 +8,22 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero=document.querySelector('#what-exif-does');if(!hero)return;
   var finalImage='assets/img/exif-fullbleed.jpg';
   var frames=['assets/img/loader-frame-01.webp','assets/img/exif-gallery-03-terrace-hammock.webp','assets/img/loader-frame-02.webp','assets/img/exif-gallery-06-restaurant-reflection.webp','assets/img/exif-gallery-09-sunset-ocean.webp','assets/img/exif-gallery-11-guests-walking.webp',finalImage];
+  function currentLang(){try{return localStorage.getItem('exif-language')==='es'?'es':'en'}catch(e){return'en'}}
+  function heroTitle(lang){return lang==='es'?'<span class="line"><span class="word">UN LUGAR,</span></span><span class="line"><span class="word">INCONFUNDIBLE.</span></span>':'<span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span>'}
 
   hero.classList.add('exif-cinematic-hero');
-  hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1><span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span></h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>');
+  hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1>'+heroTitle(currentLang())+'</h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>');
 
   var heroBg=hero.querySelector('.exif-hero-bg');
   function setHeroHeaderState(){if(window.scrollY<Math.max(80,hero.offsetHeight-90))document.body.classList.add('exif-hero-live');else document.body.classList.remove('exif-hero-live');}
+  function applyHeroLanguage(lang){
+    var markup=heroTitle(lang),green=hero.querySelector('.exif-hero-title-green'),cream=hero.querySelector('.exif-hero-title-cream'),plain=hero.querySelector('.exif-hero-copy h1:not(.exif-hero-title-green):not(.exif-hero-title-cream)');
+    if(green)green.innerHTML=markup;if(cream)cream.innerHTML=markup;if(plain)plain.innerHTML=markup;
+    var meta=hero.querySelectorAll('.exif-hero-meta span');if(meta[0])meta[0].textContent=lang==='es'?'SEÑAL':'SIGNAL';if(meta[1])meta[1].textContent=lang==='es'?'MÉXICO + CARIBE':'MEXICO + CARIBBEAN';
+  }
+  window.addEventListener('exif:languagechange',function(e){applyHeroLanguage(e.detail&&e.detail.lang==='es'?'es':'en');});
 
-  if(reduced){document.body.classList.add('exif-hero-live');hero.querySelector('.exif-hero-copy').classList.add('is-visible');window.addEventListener('scroll',setHeroHeaderState,{passive:true});return;}
+  if(reduced||document.body.classList.contains('exif-returning')){document.body.classList.add('exif-hero-live');var copy=hero.querySelector('.exif-hero-copy');if(copy)copy.classList.add('is-visible');window.addEventListener('scroll',setHeroHeaderState,{passive:true});return;}
 
   document.body.classList.add('exif-intro-running');
   var loader=document.createElement('div');loader.className='exif-loader';loader.setAttribute('aria-hidden','true');loader.innerHTML='<div class="exif-loader-stage"></div>';document.body.appendChild(loader);
