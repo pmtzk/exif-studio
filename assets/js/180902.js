@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var hero=document.querySelector('#what-exif-does');if(!hero)return;
   var finalImage='assets/img/exif-fullbleed.jpg';
-  var frames=['assets/img/loader-frame-01.webp','assets/img/exif-gallery-02-orchid-dining.webp','assets/img/exif-gallery-03-terrace-hammock.webp','assets/img/loader-frame-02.webp','assets/img/exif-gallery-06-restaurant-reflection.webp','assets/img/exif-gallery-09-sunset-ocean.webp','assets/img/exif-gallery-11-guests-walking.webp',finalImage];
+  var frames=['assets/img/loader-frame-01.webp','assets/img/exif-gallery-03-terrace-hammock.webp','assets/img/loader-frame-02.webp','assets/img/exif-gallery-06-restaurant-reflection.webp','assets/img/exif-gallery-09-sunset-ocean.webp','assets/img/exif-gallery-11-guests-walking.webp',finalImage];
 
   hero.classList.add('exif-cinematic-hero');
   hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1><span class="line"><span class="word">A PLACE,</span></span><span class="line"><span class="word">MADE</span></span><span class="line"><span class="word">UNMISTAKABLE.</span></span></h1><div class="exif-hero-meta"><span>SIGNAL</span><span>MEXICO + CARIBBEAN</span></div></div>');
