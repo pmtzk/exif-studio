@@ -28,19 +28,19 @@ function initEditorialPainpoint(){
   }
   function frame(now){
     raf=0;var dt=Math.min(40,now-last);last=now;
-    /* Time-based exponential interpolation: silky on trackpads, wheels and touch, independent of frame rate. */
     var alpha=1-Math.exp(-dt/105),moving=false;
     keys.forEach(function(k){var d=target[k]-current[k];if(Math.abs(d)>.002){current[k]+=d*alpha;moving=true;}else current[k]=target[k];});apply();if(moving)raf=requestAnimationFrame(frame);
   }
   function ensureRAF(){if(!raf){last=performance.now();raf=requestAnimationFrame(frame);}}
-  function updateLangSurface(){if(header&&langButton){var b=langButton.getBoundingClientRect(),cx=b.left+b.width/2,cy=b.top+b.height/2;langButton.style.pointerEvents='none';var el=document.elementFromPoint(cx,cy);langButton.style.pointerEvents='auto';var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}}
+  function updateLangSurface(){if(header&&langButton){var b=langButton.getBoundingClientRect(),cx=b.left+b.width/2,cy=b.top+b.height/2;langButton.style.pointerEvents='none';var el=document.elementFromPoint(cx,cy);langButton.style.pointerEvents='auto';var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero,.dear-home,.studio-letter');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}}
   function onViewportChange(){setTargets();updateLangSurface();}
   keys.forEach(function(k){current[k]=target[k]=0;});current.decisionOpacity=target.decisionOpacity=1;current.otherOpacity=target.otherOpacity=1;current.imageScale=target.imageScale=1.075;
   setTargets();keys.forEach(function(k){current[k]=target[k];});apply();
   window.addEventListener('scroll',onViewportChange,{passive:true});window.addEventListener('resize',onViewportChange,{passive:true});
   var copy={en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property',other:'or another one?'},es:{hook:'Alguien está eligiendo dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'La tuya es una opción',many:'entre muchas.',property:'Tu propiedad',other:'¿u otra?'}};
-  function setLanguage(lang){if(!copy[lang])lang='en';section.querySelectorAll('[data-copy]').forEach(function(el){var key=el.getAttribute('data-copy');if(copy[lang][key])el.textContent=copy[lang][key]});document.documentElement.lang=lang;try{localStorage.setItem('exif-language',lang);}catch(e){}if(langButton){langButton.textContent=lang==='en'?'ES':'ENG';langButton.setAttribute('aria-label',lang==='en'?'Cambiar a español':'Switch to English');langButton.dataset.lang=lang;langButton.setAttribute('aria-pressed',lang==='es'?'true':'false');}onViewportChange();}
-  if(langButton)langButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setLanguage((langButton.dataset.lang||'en')==='es'?'en':'es');});var initial='en';try{initial=localStorage.getItem('exif-language')||'en';}catch(e){}setLanguage(initial);
+  function setLanguage(lang){if(!copy[lang])lang='en';section.querySelectorAll('[data-copy]').forEach(function(el){var key=el.getAttribute('data-copy');if(copy[lang][key])el.textContent=copy[lang][key]});onViewportChange();}
+  window.addEventListener('exif:languagechange',function(e){setLanguage(e.detail&&e.detail.lang==='es'?'es':'en');});
+  var initial='en';try{initial=localStorage.getItem('exif-language')||'en';}catch(e){}setLanguage(initial);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initEditorialPainpoint,{once:true});else initEditorialPainpoint();
 })();
