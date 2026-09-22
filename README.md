@@ -5,7 +5,7 @@ Static HTML/CSS/JS deployed from the repository root. There is no build step and
 ## Pages
 
 - `index.html` — homepage
-- `visual-direction-production.html` — production/service page
+- `studio.html` — studio/founder page
 - `dear-exif.html` — inquiry form
 
 ## Shared runtime
@@ -15,10 +15,10 @@ Static HTML/CSS/JS deployed from the repository root. There is no build step and
 - `assets/css/180902-mobile-fix.css` — mobile navigation corrections
 - `assets/css/180902-nav-cta.css` — drawer CTA styling
 - `assets/css/nav-context.css` — persistent header/nav chrome
-- `assets/js/main.js` — drawer behavior, form submission and footer year
+- `assets/js/site-v1.js` — drawer behavior, form submission and footer year
 - `assets/js/nav-context.js` — the single site-wide header contrast sampler
 
-Navigation styles and scripts are linked explicitly from each HTML page. `main.js` no longer injects stylesheets or runs a second contrast sampler.
+Navigation styles and scripts are linked explicitly from each HTML page. `site-v1.js` owns the shared site behavior without injecting stylesheets.
 
 ## Homepage runtime
 
@@ -39,7 +39,7 @@ CSS is loaded explicitly in cascade order from `index.html`:
 
 Homepage JavaScript is explicit and ordered at the end of `index.html`:
 
-1. `main.js`
+1. `site-v1.js`
 2. `nav-context.js`
 3. `180902.js` — reveal observer + cinematic hero/loader
 4. `190926.js` — desktop split-colour hero + gallery markup
@@ -54,13 +54,11 @@ The current editorial gap markup now lives directly in `index.html`. The obsolet
 ## Assets currently in use
 
 - `assets/img/exif-logo-trim.png` — header logo/mask source
-- `assets/img/exif-logo-light-v2.png` — footer logo
 - `assets/img/signal-dark.png` / `signal-light.png` — signal marks
 - `assets/img/exif-fullbleed.jpg` — final desktop hero image
 - `assets/img/work-*.jpg` — cinematic loader sequence
 - `assets/img/hero-couch-doorway.jpg` — loader/fallback hero frame
 - `assets/img/exif-gallery-*.jpeg` — motion gallery
-- `assets/img/production-poolside-v2.jpg` — production section
 - `assets/fonts/TanWhistling-Regular.woff2`
 
 ## Removed during cleanup
@@ -92,7 +90,7 @@ The largest remaining performance opportunity is image optimization. Several JPE
 
 ## Form
 
-`dear-exif.html` currently posts to the configured Formspree endpoint in the form action. `main.js` submits it asynchronously and reports success/error inline.
+The Dear EXIF form on the homepage posts to the configured Formspree endpoint. `site-v1.js` submits it asynchronously and reports success/error inline; `dear-exif.html` redirects legacy visits to that section.
 
 ## Deployment
 
@@ -102,3 +100,5 @@ Cloudflare Pages can deploy the repository root directly:
 - Build output directory: `/`
 
 Keep checkpoint branches intact before large visual or runtime changes.
+
+Cloudflare Pages reads `_redirects`; legacy visits to the removed Visual Direction & Production page resolve permanently to the homepage.
