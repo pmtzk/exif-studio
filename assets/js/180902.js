@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.addEventListener('exif:languagechange',function(e){applyHeroLanguage(e.detail&&e.detail.lang==='es'?'es':'en');});
 
-  if(reduced||document.body.classList.contains('exif-returning')){document.body.classList.add('exif-hero-live');var copy=hero.querySelector('.exif-hero-copy');if(copy)copy.classList.add('is-visible');window.addEventListener('scroll',setHeroHeaderState,{passive:true});return;}
+  if(reduced||document.body.classList.contains('exif-returning')){document.body.classList.add('exif-hero-live','exif-header-ready');var copy=hero.querySelector('.exif-hero-copy');if(copy)copy.classList.add('is-visible');window.addEventListener('scroll',setHeroHeaderState,{passive:true});return;}
 
   document.body.classList.add('exif-intro-running');
   var loader=document.createElement('div');loader.className='exif-loader';loader.setAttribute('aria-hidden','true');loader.innerHTML='<div class="exif-loader-stage"></div>';document.body.appendChild(loader);
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function finishDesktopHandoff(layer){
     heroBg.style.visibility='';loader.style.setProperty('transition','none','important');loader.style.setProperty('background','transparent','important');stage.style.visibility='hidden';
-    requestAnimationFrame(function(){layer.style.transition='opacity 120ms linear';layer.style.opacity='0';setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},125);});
+    requestAnimationFrame(function(){layer.style.transition='opacity 120ms linear';layer.style.opacity='0';setTimeout(function(){layer.remove();loader.remove();document.body.classList.remove('exif-intro-running');document.body.classList.add('exif-hero-live','exif-header-ready');hero.dispatchEvent(new CustomEvent('exif:hero-image-ready'));requestAnimationFrame(function(){requestAnimationFrame(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');});});window.addEventListener('scroll',setHeroHeaderState,{passive:true});},125);});
   }
 
   function coverGeometry(boxW,boxH,imgW,imgH,posX,posY){var scale=Math.max(boxW/imgW,boxH/imgH),w=imgW*scale,h=imgH*scale;return{w:w,h:h,x:(boxW-w)*posX,y:(boxH-h)*posY};}
@@ -59,8 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var finalFrame=imgs[imgs.length-1];finalFrame.classList.add('is-final-frame');
       if(window.innerWidth>=860){requestAnimationFrame(function(){requestAnimationFrame(expandDesktopOnce);});return;}
       requestAnimationFrame(function(){stage.classList.add('is-hero');});
-      var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;stage.removeEventListener('transitionend',onExpanded);document.body.classList.add('exif-hero-live');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);window.addEventListener('scroll',setHeroHeaderState,{passive:true});};
+      var mobileHandoffDone=false,mobileHandoffTimer=0;
+      var completeMobileHandoff=function(){if(mobileHandoffDone)return;mobileHandoffDone=true;clearTimeout(mobileHandoffTimer);stage.removeEventListener('transitionend',onExpanded);document.body.classList.add('exif-hero-live','exif-header-ready');loader.classList.add('is-gone');document.body.classList.remove('exif-intro-running');setTimeout(function(){hero.querySelector('.exif-hero-copy').classList.add('is-visible');},300);setTimeout(function(){loader.remove();},900);window.addEventListener('scroll',setHeroHeaderState,{passive:true});};
+      var onExpanded=function(event){if(event.target!==stage||event.propertyName!=='width')return;completeMobileHandoff();};
       stage.addEventListener('transitionend',onExpanded);
+      mobileHandoffTimer=setTimeout(completeMobileHandoff,1700);
     }
     flash();
   },1050);
