@@ -1,8 +1,0 @@
-/* Dear EXIF — cream correspondence surface */
-.dear-home{background:var(--v1-cream)!important;color:var(--v1-ink)!important}
-.dear-input-line,.dear-textarea{color:var(--v1-ink)!important;border-bottom-color:rgba(23,55,46,.38)!important}
-.dear-input-line::placeholder,.dear-textarea::placeholder{color:rgba(23,55,46,.42)!important}
-.dear-input-line:focus,.dear-textarea:focus{border-bottom-color:var(--v1-ink)!important}
-.dear-continue,.dear-send{color:var(--v1-ink)!important}
-.founder-route{color:var(--v1-ink)!important;border-top-color:rgba(23,55,46,.25)!important}
-.dear-status{color:var(--v1-ink)!important}
