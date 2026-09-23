@@ -58,3 +58,18 @@ document.addEventListener('DOMContentLoaded',function(){
   var galleryMarkup=makeItems(false)+makeItems(true)+makeItems(true);
   oldWork.outerHTML='<section class="gallery-chapter" id="selected-work" aria-label="Photography"><div class="gallery-green-rise" aria-hidden="true"></div><div class="gallery-signal-stage" aria-hidden="true"><div class="gallery-signal"><span class="signal-dot signal-dot-ring-sm"></span><span class="signal-dot signal-dot-ring-md"></span><span class="signal-dot signal-dot-solid-md"></span><span class="signal-dot signal-dot-solid-lg"></span><span class="signal-dot signal-dot-solid-md"></span><span class="signal-dot signal-dot-ring-md"></span><span class="signal-dot signal-dot-ring-sm"></span></div></div><div class="motion-gallery-controls" aria-label="Gallery navigation"><button type="button" data-gallery-step="prev" aria-label="Previous images">←</button><button type="button" data-gallery-step="next" aria-label="Next images">→</button></div><div class="motion-gallery"><div class="motion-gallery-viewport"><div class="motion-gallery-track">'+galleryMarkup+'</div></div></div></section>';
 });
+
+document.addEventListener('DOMContentLoaded',function(){
+  var input=document.querySelector('#property-url');
+  if(!input)return;
+  var prefix='https://';
+  function normalize(){
+    var rest=(input.value||'').replace(/^https?:\/\//i,'');
+    input.value=prefix+rest;
+  }
+  if(!input.value||input.value==='https://')input.value=prefix;else normalize();
+  input.addEventListener('focus',function(){if(input.value.length<prefix.length)input.value=prefix;requestAnimationFrame(function(){if(input.selectionStart<prefix.length)input.setSelectionRange(prefix.length,prefix.length);});});
+  input.addEventListener('keydown',function(e){var start=input.selectionStart||0,end=input.selectionEnd||0;if((e.key==='Backspace'&&start<=prefix.length&&end<=prefix.length)||(e.key==='Delete'&&start<prefix.length)){e.preventDefault();input.setSelectionRange(prefix.length,prefix.length);}});
+  input.addEventListener('input',function(){if(input.value.indexOf(prefix)!==0){var pos=Math.max(prefix.length,input.selectionStart||prefix.length);normalize();input.setSelectionRange(pos,pos);}});
+  input.addEventListener('click',function(){if((input.selectionStart||0)<prefix.length)input.setSelectionRange(prefix.length,prefix.length);});
+});
