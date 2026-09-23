@@ -1,0 +1,71 @@
+/* Mobile resilience for Observe / Decide / Create cards.
+   Keeps title and copy in separate layout zones across short/tall and narrow/wide phones. */
+@media (max-width:859px){
+  .approach-deck{
+    height:clamp(500px,72svh,620px);
+    min-height:500px;
+  }
+
+  .approach-card-inner{
+    padding:clamp(18px,5vw,26px);
+  }
+
+  /* Expanded card: reserve a title zone above the body copy. */
+  .exif-approach:not(.is-assembled) .approach-card.is-scroll-active .approach-card-title,
+  .exif-approach.is-assembled .approach-card.is-active .approach-card-title{
+    top:clamp(30px,7.5svh,58px);
+    left:50%;
+    translate:-50% 0;
+    transform:none;
+    width:max-content;
+    max-width:calc(100% - 88px);
+    text-align:center;
+    font-size:clamp(29px,8.2vw,36px);
+    line-height:.95;
+  }
+
+  .exif-approach:not(.is-assembled) .approach-card.is-scroll-active .approach-card-copy,
+  .exif-approach.is-assembled .approach-card.is-active .approach-card-copy{
+    width:100%;
+    max-width:none;
+    margin-top:clamp(108px,18svh,150px);
+    margin-bottom:clamp(22px,4svh,34px);
+  }
+
+  .approach-card-copy strong{
+    font-size:clamp(17px,4.8vw,20px);
+    line-height:1.25;
+    max-width:24ch;
+  }
+
+  .approach-card-copy p{
+    font-size:clamp(16px,4.55vw,19px);
+    line-height:1.42;
+    max-width:31ch;
+  }
+}
+
+/* Very short phones need a denser expanded state. */
+@media (max-width:859px) and (max-height:700px){
+  .approach-deck{height:500px}
+  .exif-approach:not(.is-assembled) .approach-card.is-scroll-active .approach-card-title,
+  .exif-approach.is-assembled .approach-card.is-active .approach-card-title{
+    top:24px;
+    font-size:28px;
+  }
+  .exif-approach:not(.is-assembled) .approach-card.is-scroll-active .approach-card-copy,
+  .exif-approach.is-assembled .approach-card.is-active .approach-card-copy{
+    margin-top:92px;
+    margin-bottom:18px;
+  }
+  .approach-card-copy strong{font-size:16px}
+  .approach-card-copy p{font-size:15px;line-height:1.36}
+}
+
+/* Narrow Android-sized viewports: prevent copy from colliding with the arrow. */
+@media (max-width:380px){
+  .approach-card-inner{padding-left:20px;padding-right:20px}
+  .approach-card-copy{padding-right:18px}
+  .approach-card-copy strong{font-size:16px}
+  .approach-card-copy p{font-size:15px;line-height:1.38}
+}
