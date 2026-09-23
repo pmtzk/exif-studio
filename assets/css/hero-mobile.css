@@ -1,0 +1,40 @@
+/* Mobile cinematic hero and loader. Extracted from the hero runtime so CSS loads declaratively. */
+@media(max-width:859px){
+  body.exif-intro-running{overflow:hidden}
+  .site-header{transition:opacity .8s ease,background .35s ease,border-color .35s ease}
+  body.exif-intro-running .site-header{opacity:0;pointer-events:none}
+  /* nav-context.css owns all mobile navbar geometry and contextual colors. The hero
+     may make the header surface transparent, but must never reposition individual controls. */
+  body.exif-hero-live .site-header{background:transparent!important;border-color:transparent!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  body.exif-hero-live:not(.nav-open) .site-header .main-nav:not(.open){display:none!important}
+  .exif-loader{position:fixed;inset:0;z-index:9998;background:#f0e8dd;display:grid;place-items:center;overflow:hidden;opacity:1;transition:opacity .8s cubic-bezier(.22,.61,.36,1)}
+  .exif-loader.is-gone{opacity:0;pointer-events:none}
+  .exif-loader-stage{position:relative;width:12px;height:12px;background:#1c362a;overflow:hidden;will-change:width,height;transition:width 1.32s cubic-bezier(.76,0,.24,1),height 1.32s cubic-bezier(.76,0,.24,1)!important}
+  .exif-loader-stage.is-window{width:min(44vw,220px)!important;height:min(31vw,155px)!important}
+  .exif-loader-stage.is-hero{width:100vw!important;height:100svh!important}
+  .exif-loader-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0!important;transform:none!important;transition:none!important}
+  .exif-loader-stage img.is-active,.exif-loader-stage img.is-final-frame{opacity:1!important;transform:none!important;transition:none!important}
+  #what-exif-does.exif-cinematic-hero{position:relative!important;padding:0!important;margin:0!important;height:100svh!important;min-height:100svh!important;overflow:hidden!important;background:#1c362a}
+  #what-exif-does.exif-cinematic-hero>.wrap{position:relative;width:100%!important;max-width:none!important;height:100%!important;padding:0!important;margin:0!important}
+  #what-exif-does.exif-cinematic-hero .hero-intro,#what-exif-does.exif-cinematic-hero .hero-interface{display:none!important}
+  .exif-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:54% center;display:block}
+  .exif-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,14,10,.10) 0%,rgba(5,14,10,.015) 42%,rgba(5,14,10,.27) 100%)}
+  .exif-hero-copy{position:absolute;left:28px!important;right:24px!important;bottom:max(5.3vh,40px)!important;z-index:2;color:#f0e8dd}
+  .exif-hero-copy h1{margin:0;color:#f0e8dd;font-family:var(--font-serif);width:100%!important;max-width:none!important;font-size:clamp(3.15rem,13vw,5.8rem)!important;font-weight:400;line-height:.80!important;letter-spacing:-.055em!important;text-transform:uppercase}
+  .exif-hero-copy .line{display:block;overflow:hidden;padding-bottom:.07em}
+  .exif-hero-copy .line:nth-child(2){padding-left:7.5vw!important}
+  .exif-hero-copy .line:last-child{font-style:italic;letter-spacing:-.065em;padding-right:0!important}
+  .exif-hero-copy .line:last-child .word{font-size:clamp(2.62rem,10.65vw,4.8rem)!important;letter-spacing:-.065em!important;white-space:nowrap!important}
+  .exif-hero-copy .word{display:block;opacity:0;transform:translateY(38px);filter:blur(3px);transition:opacity 1.35s ease,transform 1.35s cubic-bezier(.16,1,.3,1),filter 1.35s ease}
+  .exif-hero-copy.is-visible .word{opacity:1;transform:none;filter:blur(0)}
+  .exif-hero-copy.is-visible .line:nth-child(2) .word{transition-delay:.13s}
+  .exif-hero-copy.is-visible .line:nth-child(3) .word{transition-delay:.26s}
+  .exif-hero-meta{display:flex;justify-content:space-between;align-items:end;margin-top:1.35rem;font:500 7px/1.25 'Jost',sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity 1s ease .85s,transform 1s ease .85s}
+  .exif-hero-copy.is-visible .exif-hero-meta{opacity:.82;transform:none}
+  .exif-hero-title-cream{display:none!important}
+}
+@media(max-width:859px) and (prefers-reduced-motion:reduce){
+  .exif-loader{display:none}
+  .exif-hero-copy .word{opacity:1;transform:none;filter:none}
+  .exif-hero-meta{opacity:.82;transform:none}
+}

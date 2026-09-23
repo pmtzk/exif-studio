@@ -1,51 +1,104 @@
 # EXIF Studio — website
 
-Plain HTML/CSS/JS. No build step, no dependencies to install. Ready to push to GitHub and deploy on Cloudflare Pages.
+Static HTML/CSS/JS deployed from the repository root. There is no build step and no package dependency.
 
-## File structure
+## Pages
 
-```
-index.html                          Home
-visual-direction-production.html    Service page
-dear-exif.html                      Guided inquiry form
-assets/css/styles.css               All styles, brand tokens at the top
-assets/js/main.js                   Mobile nav + form submission
-assets/img/exif-logo.png            Logo (from IMG_1995.png)
-assets/img/signal-dark.png          Brand dot divider, dark green
-assets/img/signal-light.png         Same graphic, recolored cream (for dark sections)
-assets/img/favicon-16/32/48/180/512.png + favicon.ico
-assets/fonts/TanWhistling-Regular.woff2
-```
+- `index.html` — homepage
+- `studio.html` — studio/founder page
+- `dear-exif.html` — inquiry form
 
-## Three things to do before this goes live
+## Shared runtime
 
-### 1. Formspree (Dear EXIF form)
-The form on `dear-exif.html` posts to Formspree so submissions land in your inbox.
-1. Create a free account at formspree.io and add a new form.
-2. Copy the endpoint it gives you, something like `https://formspree.io/f/abcdwxyz`.
-3. Open `dear-exif.html`, find `YOUR_FORM_ID` in the `<form action=...>` line, and swap it in.
-4. Confirm your email with Formspree the first time a real submission comes through, or it won't deliver.
+- `assets/css/styles.css` — global tokens, typography, layout primitives, forms and footer
+- `assets/css/nav-composition.css` — drawer composition
+- `assets/css/180902-mobile-fix.css` — mobile navigation corrections
+- `assets/css/180902-nav-cta.css` — drawer CTA styling
+- `assets/css/nav-context.css` — persistent header/nav chrome
+- `assets/js/site-v1.js` — drawer behavior, form submission and footer year
+- `assets/js/nav-context.js` — the single site-wide header contrast sampler
 
-### 2. The Seasons (Adobe Fonts)
-Tan Whistling is self-hosted and already wired up. The Seasons is licensed through Adobe Fonts, which doesn't allow self-hosting the font files, so it has to load from Adobe's CDN.
-1. Go to fonts.adobe.com, create a new web project, add **The Seasons** in Regular, Bold and Italic.
-2. Add `exif.studio` and `www.exif.studio` as domains on that kit.
-3. Adobe gives you a `<link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">` tag. Paste it into the `<head>` of all three HTML files, in place of the commented-out placeholder line that already marks where it goes.
-4. Until that's done, the site falls back to a similar serif (Cormorant Garamond via system/Google fallback) so nothing looks broken in the meantime.
+Navigation styles and scripts are linked explicitly from each HTML page. `site-v1.js` owns the shared site behavior without injecting stylesheets.
 
-### 3. Real images
-Every photo on the site is a placeholder block labelled with what should go there and its rough aspect ratio (the dashed outline and grey label). Replace them with actual `<img>` tags as photography becomes available:
-- Hero image (16:9)
-- About portrait (4:5)
-- Selected Work grid (6 tiles shown, 4:5 each — designed for 15–25 once you have a full edit)
-- Visual Direction & Production stills (4:5)
+## Homepage runtime
 
-## Deploying to GitHub + Cloudflare Pages
-1. Create a new GitHub repo (e.g. `exif-studio-website`) and push this whole folder as its root.
-2. In Cloudflare Pages, connect the repo. Build command: none. Build output directory: `/` (the repo root).
-3. Add `exif.studio` as a custom domain in the Pages project settings, and point it at Cloudflare per their instructions (you're already using Cloudflare, so this is usually automatic if the domain's nameservers are already pointed there).
+CSS is loaded explicitly in cascade order from `index.html`:
 
-## Notes
-- Atmosphere Audit is intentionally left out of the navigation and sitemap for now, as agreed. Its existing page at `/atmosphere-audit` isn't affected by this build and doesn't need to be touched.
-- Brand colors are CSS variables at the top of `assets/css/styles.css` (`--ink`, `--forest`, `--sage`, `--cream`, `--ink-deep`), pulled directly from the EXIF Coolors palette. Easy to retune in one place if needed.
-- Copy follows your no-em-dash / no-filler-adjective rules throughout, except the one signature line on the homepage that's specified as the brand's core statement.
+1. `styles.css`
+2. `180902.css`
+3. `190926.css`
+4. `approach-cards.css`
+5. `hero-desktop.css`
+6. `190926-final.css`
+7. shared navigation CSS
+8. `editorial-painpoint.css`
+9. `motion-gallery.css`
+10. `hero-mobile.css`
+
+`hero-mobile.css` contains the mobile hero/loader rules that previously lived inside a JavaScript-generated `<style>` block.
+
+Homepage JavaScript is explicit and ordered at the end of `index.html`:
+
+1. `site-v1.js`
+2. `nav-context.js`
+3. `180902.js` — reveal observer + cinematic hero/loader
+4. `190926.js` — desktop split-colour hero + gallery markup
+5. `editorial-painpoint.js`
+6. `motion-gallery.js`
+7. `approach-cards.js`
+
+No homepage module injects another stylesheet or script at runtime.
+
+The current editorial gap markup now lives directly in `index.html`. The obsolete diagnosis/reading section and legacy Selected Work markup were removed from initial HTML; `#selected-work` is now a small mount point that becomes the motion gallery on DOM ready.
+
+## Assets currently in use
+
+- `assets/img/exif-logo-trim.png` — header logo/mask source
+- `assets/img/signal-dark.png` / `signal-light.png` — signal marks
+- `assets/img/exif-fullbleed.jpg` — final desktop hero image
+- `assets/img/work-*.jpg` — cinematic loader sequence
+- `assets/img/hero-couch-doorway.jpg` — loader/fallback hero frame
+- `assets/img/exif-gallery-*.jpeg` — motion gallery
+- `assets/fonts/TanWhistling-Regular.woff2`
+
+## Removed during cleanup
+
+The following files had no active runtime reference and were removed:
+
+- `assets/js/180902-mobile-legacy.js`
+- `assets/css/hero-structural-mask.css`
+- `assets/img/production-poolside.jpg`
+- `assets/img/exif-logo.png`
+- `assets/img/exif-logo-light.png`
+- `assets/img/favicon-16.png`
+- `assets/img/favicon-512.png`
+- `assets/img/favicon.ico`
+
+## Performance state
+
+The hero/loader assets still load at startup because they are part of the opening sequence. The hidden gallery warm-up was removed. Gallery images now use native lazy loading and no gallery image receives high fetch priority. The gallery animation remains idle while the section is offscreen and wakes before entry through an IntersectionObserver root margin.
+
+The largest remaining performance opportunity is image optimization. Several JPEGs are hundreds of KB and some gallery files are close to 1 MB. Converting them to appropriately sized WebP/AVIF derivatives will produce a larger byte reduction than further JavaScript cleanup.
+
+## Manual decisions / follow-ups
+
+1. `first-look.html` is referenced by the homepage and drawer but is not present in this repository. Create the page or point those links to the intended destination.
+2. The drawer includes `index.html#audit`, but the current homepage does not contain an element with `id="audit"`. Decide which section should own that destination.
+3. If The Seasons should be served through Adobe Fonts, add the licensed Adobe kit link to all page heads. The current CSS has serif fallbacks.
+4. Optimize photographic assets manually or through an image pipeline. Preserve originals outside the deployed asset folder if you want archival masters.
+5. The remaining dated CSS files (`180902.css`, `190926.css` and the navigation passes) are intentionally still separate because their cascade defines the approved visual state. They can be renamed/merged later after visual regression testing; combining them blindly is high-risk and offers little byte savings compared with image optimization.
+
+## Form
+
+The Dear EXIF form on the homepage posts to the configured Formspree endpoint. `site-v1.js` submits it asynchronously and reports success/error inline; `dear-exif.html` redirects legacy visits to that section.
+
+## Deployment
+
+Cloudflare Pages can deploy the repository root directly:
+
+- Build command: none
+- Build output directory: `/`
+
+Keep checkpoint branches intact before large visual or runtime changes.
+
+Cloudflare Pages reads `_redirects`; legacy visits to the removed Visual Direction & Production page resolve permanently to the homepage.

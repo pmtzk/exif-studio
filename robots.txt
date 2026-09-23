@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://exif.studio/sitemap.xml
