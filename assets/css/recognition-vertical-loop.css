@@ -10,18 +10,19 @@
   gap:0;
 }
 
-/* Each span is one identical, sufficiently long marquee group.
-   Moving exactly half the two-copy track makes the reset invisible. */
+/* Each vertical copy contains twice the text length of a horizontal copy.
+   Horizontal rails travel one copy in 34s, so 68s preserves the same
+   apparent px/sec around all four edges. */
 .recognition-section .capability-left .capability-run span,
 .recognition-section .capability-right .capability-run span{
   padding-right:1.8em;
 }
 
 .recognition-section .capability-right .capability-run{
-  animation:recognition-cap-right 30s linear infinite;
+  animation:recognition-cap-right 68s linear infinite;
 }
 .recognition-section .capability-left .capability-run{
-  animation:recognition-cap-left 30s linear infinite;
+  animation:recognition-cap-left 68s linear infinite;
 }
 
 @keyframes recognition-cap-right{
