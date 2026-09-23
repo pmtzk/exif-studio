@@ -1,0 +1,34 @@
+/* Recognition frame: seamless vertical marquee.
+   Top/bottom rails and visual styling stay untouched. */
+.recognition-section .capability-left .capability-run::before,
+.recognition-section .capability-right .capability-run::before{
+  content:none;
+}
+
+.recognition-section .capability-left .capability-run,
+.recognition-section .capability-right .capability-run{
+  gap:0;
+}
+
+/* Each span is one identical, sufficiently long marquee group.
+   Moving exactly half the two-copy track makes the reset invisible. */
+.recognition-section .capability-left .capability-run span,
+.recognition-section .capability-right .capability-run span{
+  padding-right:1.8em;
+}
+
+.recognition-section .capability-right .capability-run{
+  animation:recognition-cap-right 30s linear infinite;
+}
+.recognition-section .capability-left .capability-run{
+  animation:recognition-cap-left 30s linear infinite;
+}
+
+@keyframes recognition-cap-right{
+  from{transform:translate(-50%,-50%) rotate(90deg) translateX(-25%)}
+  to{transform:translate(-50%,-50%) rotate(90deg) translateX(25%)}
+}
+@keyframes recognition-cap-left{
+  from{transform:translate(-50%,-50%) rotate(-90deg) translateX(-25%)}
+  to{transform:translate(-50%,-50%) rotate(-90deg) translateX(25%)}
+}
