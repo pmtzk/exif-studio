@@ -1,0 +1,12 @@
+{
+  "name": "EXIF Studio",
+  "short_name": "EXIF",
+  "description": "Visual direction for independent hospitality. Making visible what distinguishes a place before arrival.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0e8dd",
+  "theme_color": "#09251f",
+  "icons": [
+    {"src":"/assets/img/favicon-180.png","sizes":"180x180","type":"image/png"}
+  ]
+}
