@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function render(now){motionRaf=0;var dt=Math.min(40,now-lastTime);lastTime=now;current+=(target-current)*(1-Math.exp(-dt/105));if(Math.abs(target-current)<.00035)current=target;writeMotion(current);if(current!==target)motionRaf=requestAnimationFrame(render);}
     function requestMotion(){readTarget();if(!motionRaf){lastTime=performance.now();motionRaf=requestAnimationFrame(render);}}
     writeMotion(0);requestAnimationFrame(function(){requestAnimationFrame(paintMask);});
-    window.addEventListener('scroll',requestMotion,{passive:true});window.addEventListener('resize',requestMask,{passive:true});
+    window.addEventListener('scroll',requestMotion,{passive:true});window.addEventListener('resize',function(){requestMask();requestMotion();},{passive:true});
+    window.addEventListener('exif:languagechange',requestMask);
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(requestMask).catch(function(){});
     if(photo.decode)photo.decode().then(requestMask).catch(requestMask);else photo.addEventListener('load',requestMask,{once:true});
     return true;
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(document.querySelector('.gallery-chapter'))return;
   var oldWork=document.querySelector('#selected-work');if(!oldWork)return;
   var galleryItems=[['landscape','exif-gallery-01-lounge.webp','Hospitality lounge'],['portrait','exif-gallery-02-orchid-dining.webp','Orchid dining detail'],['landscape','exif-gallery-03-terrace-hammock.webp','Terrace and hammock'],['portrait','exif-gallery-04-restaurant-interior.webp','Restaurant interior'],['portrait','exif-gallery-05-basketball-court.webp','Basketball court'],['portrait','exif-gallery-06-restaurant-reflection.webp','Restaurant reflection'],['portrait','exif-gallery-07-table-tennis.webp','Table tennis'],['landscape','exif-gallery-08-pool-loungers.webp','Pool loungers'],['portrait','exif-gallery-09-sunset-ocean.webp','Sunset over the ocean'],['portrait','exif-gallery-10-beach-golden-hour.webp','Beach at golden hour'],['portrait','exif-gallery-11-guests-walking.webp','Guests walking through tropical gardens'],['portrait','exif-gallery-12-pool-ocean-view.webp','Pool and ocean view'],['portrait','exif-gallery-13-tropical-leaves.webp','Tropical leaves']];
-  function makeItems(hidden){return galleryItems.map(function(item,index){var sizeClass='gallery-slot-'+((index%13)+1),landscape=item[0]==='landscape',w=landscape?1536:1024,h=landscape?1024:1536,loading=hidden?'lazy':'eager',priority=!hidden&&index<5?' fetchpriority="high"':'';return '<figure class="motion-gallery-item '+item[0]+' '+sizeClass+'"'+(hidden?' aria-hidden="true"':'')+'><img src="/assets/img/'+item[1]+'" alt="'+(hidden?'':item[2])+'" width="'+w+'" height="'+h+'" loading="'+loading+'" decoding="async"'+priority+'></figure>';}).join('')}
+  function makeItems(hidden){return galleryItems.map(function(item,index){var sizeClass='gallery-slot-'+((index%13)+1),landscape=item[0]==='landscape',w=landscape?1536:1024,h=landscape?1024:1536,loading='lazy',priority='';return '<figure class="motion-gallery-item '+item[0]+' '+sizeClass+'"'+(hidden?' aria-hidden="true"':'')+'><img src="/assets/img/'+item[1]+'" alt="'+(hidden?'':item[2])+'" width="'+w+'" height="'+h+'" loading="'+loading+'" decoding="async"'+priority+'></figure>';}).join('')}
   var galleryMarkup=makeItems(false)+makeItems(true)+makeItems(true);
   oldWork.outerHTML='<section class="gallery-chapter" id="selected-work" aria-label="Photography"><div class="gallery-green-rise" aria-hidden="true"></div><div class="gallery-signal-stage" aria-hidden="true"><div class="gallery-signal"><span class="signal-dot signal-dot-ring-sm"></span><span class="signal-dot signal-dot-ring-md"></span><span class="signal-dot signal-dot-solid-md"></span><span class="signal-dot signal-dot-solid-lg"></span><span class="signal-dot signal-dot-solid-md"></span><span class="signal-dot signal-dot-ring-md"></span><span class="signal-dot signal-dot-ring-sm"></span></div></div><div class="motion-gallery-controls" aria-label="Gallery navigation"><button type="button" data-gallery-step="prev" aria-label="Previous images">←</button><button type="button" data-gallery-step="next" aria-label="Next images">→</button></div><div class="motion-gallery"><div class="motion-gallery-viewport"><div class="motion-gallery-track">'+galleryMarkup+'</div></div></div></section>';
 });
@@ -62,14 +63,13 @@ document.addEventListener('DOMContentLoaded',function(){
 document.addEventListener('DOMContentLoaded',function(){
   var input=document.querySelector('#property-url');
   if(!input)return;
-  var prefix='https://';
-  function normalize(){
-    var rest=(input.value||'').replace(/^https?:\/\//i,'');
-    input.value=prefix+rest;
-  }
-  if(!input.value||input.value==='https://')input.value=prefix;else normalize();
-  input.addEventListener('focus',function(){if(input.value.length<prefix.length)input.value=prefix;requestAnimationFrame(function(){if(input.selectionStart<prefix.length)input.setSelectionRange(prefix.length,prefix.length);});});
-  input.addEventListener('keydown',function(e){var start=input.selectionStart||0,end=input.selectionEnd||0;if((e.key==='Backspace'&&start<=prefix.length&&end<=prefix.length)||(e.key==='Delete'&&start<prefix.length)){e.preventDefault();input.setSelectionRange(prefix.length,prefix.length);}});
-  input.addEventListener('input',function(){if(input.value.indexOf(prefix)!==0){var pos=Math.max(prefix.length,input.selectionStart||prefix.length);normalize();input.setSelectionRange(pos,pos);}});
-  input.addEventListener('click',function(){if((input.selectionStart||0)<prefix.length)input.setSelectionRange(prefix.length,prefix.length);});
+  // URL inputs do not support selectionStart/setSelectionRange.
+  // Normalize only after editing, keeping an explicit HTTP(S) scheme intact.
+  input.addEventListener('blur',function(){
+    var value=input.value.trim();
+    if(value&&!/^[a-z][a-z\d+.-]*:/i.test(value))value='https://'+value;
+    if(value===input.value)return;
+    input.value=value;
+    input.dispatchEvent(new Event('input',{bubbles:true}));
+  });
 });

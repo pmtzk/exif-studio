@@ -56,9 +56,9 @@ The current editorial gap markup now lives directly in `index.html`. The obsolet
 - `assets/img/exif-logo-trim.png` — header logo/mask source
 - `assets/img/signal-dark.png` / `signal-light.png` — signal marks
 - `assets/img/exif-fullbleed.jpg` — final desktop hero image
-- `assets/img/work-*.jpg` — cinematic loader sequence
+- `assets/img/loader-frame-*.webp` plus selected gallery WebP images — cinematic loader sequence
 - `assets/img/hero-couch-doorway.jpg` — loader/fallback hero frame
-- `assets/img/exif-gallery-*.jpeg` — motion gallery
+- `assets/img/exif-gallery-*.webp` — motion gallery
 - `assets/fonts/TanWhistling-Regular.woff2`
 
 ## Removed during cleanup
@@ -71,7 +71,6 @@ The following files had no active runtime reference and were removed:
 - `assets/img/exif-logo.png`
 - `assets/img/exif-logo-light.png`
 - `assets/img/favicon-16.png`
-- `assets/img/favicon-512.png`
 - `assets/img/favicon.ico`
 
 ## Performance state
@@ -82,11 +81,23 @@ The largest remaining performance opportunity is image optimization. Several JPE
 
 ## Manual decisions / follow-ups
 
-1. `first-look.html` is referenced by the homepage and drawer but is not present in this repository. Create the page or point those links to the intended destination.
-2. The drawer includes `index.html#audit`, but the current homepage does not contain an element with `id="audit"`. Decide which section should own that destination.
-3. If The Seasons should be served through Adobe Fonts, add the licensed Adobe kit link to all page heads. The current CSS has serif fallbacks.
-4. Optimize photographic assets manually or through an image pipeline. Preserve originals outside the deployed asset folder if you want archival masters.
-5. The remaining dated CSS files (`180902.css`, `190926.css` and the navigation passes) are intentionally still separate because their cascade defines the approved visual state. They can be renamed/merged later after visual regression testing; combining them blindly is high-risk and offers little byte savings compared with image optimization.
+1. If The Seasons should be served through Adobe Fonts, add the licensed Adobe kit link to all page heads. The current CSS has serif fallbacks.
+2. Optimize remaining JPEG assets through an image pipeline. Keep archival masters outside the deployed asset folder.
+3. The dated CSS files remain separate because their cascade defines the approved visual state. Rename or merge them only after visual regression testing.
+4. Several active rules refer to an undefined `--sans` token, and zero-padded gallery-slot selectors do not match the generated class names. These visual corrections require preview comparison; see the audit.
+5. The legacy First Look and `#audit` links are no longer present in the current navigation. Do not recreate removed pages from stale documentation.
+
+## Review and tests
+
+The September 30 review is documented in [CODE-AUDIT-2026-09-30.md](CODE-AUDIT-2026-09-30.md).
+
+Run the dependency-free regression suite with Node 18 or newer:
+
+```sh
+node tests/runtime-regressions.cjs
+```
+
+Tests simulate browser APIs and mock Formspree; they do not send letters. The review branch has a GitHub Actions workflow for Node syntax checks and regression tests. Browser layout, real keyboard/touch behavior, image decoding and real Formspree delivery still require manual verification.
 
 ## Form
 
