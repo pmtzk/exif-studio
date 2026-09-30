@@ -1,10 +1,9 @@
 (function(){
 function initEditorialPainpoint(){
   var section=document.querySelector('.editorial-choice');
-  var langButton=document.querySelector('.lang-toggle');
   if(!section||section.dataset.editorialReady==='true')return;
   section.dataset.editorialReady='true';
-  var hookSmall=section.querySelector('.choice-hook p'),hookTitle=section.querySelector('.choice-hook h2'),contextLines=section.querySelectorAll('.choice-context p'),lead=section.querySelector('.choice-scale .lead'),option=section.querySelector('.choice-option'),many=section.querySelector('.choice-many'),decision=section.querySelector('.choice-decision'),decisionMain=decision&&decision.querySelector('strong'),decisionOther=decision&&decision.querySelector('em'),workImage=section.querySelector('.choice-work-entry img'),header=document.querySelector('.site-header');
+  var hookSmall=section.querySelector('.choice-hook p'),hookTitle=section.querySelector('.choice-hook h2'),contextLines=section.querySelectorAll('.choice-context p'),lead=section.querySelector('.choice-scale .lead'),option=section.querySelector('.choice-option'),many=section.querySelector('.choice-many'),decision=section.querySelector('.choice-decision'),decisionMain=decision&&decision.querySelector('strong'),decisionOther=decision&&decision.querySelector('em'),workImage=section.querySelector('.choice-work-entry img');
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var current={},target={},raf=0,last=performance.now();
   var keys=['hookSmallX','hookTitleX','contextAX','contextBX','leadY','optionX','manyX','decisionOpacity','decisionBlur','decisionY','otherOpacity','otherBlur','otherY','imageScale','imageY'];
@@ -32,15 +31,14 @@ function initEditorialPainpoint(){
     keys.forEach(function(k){var d=target[k]-current[k];if(Math.abs(d)>.002){current[k]+=d*alpha;moving=true;}else current[k]=target[k];});apply();if(moving)raf=requestAnimationFrame(frame);
   }
   function ensureRAF(){if(!raf){last=performance.now();raf=requestAnimationFrame(frame);}}
-  function updateLangSurface(){if(header&&langButton){var b=langButton.getBoundingClientRect(),cx=b.left+b.width/2,cy=b.top+b.height/2;langButton.style.pointerEvents='none';var el=document.elementFromPoint(cx,cy);langButton.style.pointerEvents='auto';var dark=el&&el.closest&&el.closest('.bg-deep,.site-footer,.dear-strip,.exif-cinematic-hero,.dear-home,.studio-letter');header.classList.toggle('nav-lang-on-dark',!!dark);header.classList.toggle('nav-lang-on-light',!dark);}}
-  function onViewportChange(){setTargets();updateLangSurface();}
+  function onViewportChange(){setTargets();}
   keys.forEach(function(k){current[k]=target[k]=0;});current.decisionOpacity=target.decisionOpacity=1;current.otherOpacity=target.otherOpacity=1;current.imageScale=target.imageScale=1.075;
   setTargets();keys.forEach(function(k){current[k]=target[k];});apply();
   window.addEventListener('scroll',onViewportChange,{passive:true});window.addEventListener('resize',onViewportChange,{passive:true});
   var copy={en:{hook:'Someone is choosing where to stay.',question:'Why your property?',seconds:'They have seconds to find a reason.',compare:'Before they choose, they compare.',while:'And while they decide,',option:'Yours is one option',many:'among many.',property:'Your property',other:'or another one?'},es:{hook:'Alguien está eligiendo dónde quedarse.',question:'¿Por qué tu propiedad?',seconds:'Tiene segundos para encontrar una razón.',compare:'Antes de elegir, compara.',while:'Y mientras decide,',option:'La tuya es una opción',many:'entre muchas.',property:'Tu propiedad',other:'¿u otra?'}};
   function setLanguage(lang){if(!copy[lang])lang='en';section.querySelectorAll('[data-copy]').forEach(function(el){var key=el.getAttribute('data-copy');if(copy[lang][key])el.textContent=copy[lang][key]});onViewportChange();}
   window.addEventListener('exif:languagechange',function(e){setLanguage(e.detail&&e.detail.lang==='es'?'es':'en');});
-  var initial='en';try{initial=localStorage.getItem('exif-language')||'en';}catch(e){}setLanguage(initial);
+  setLanguage(document.documentElement.lang);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initEditorialPainpoint,{once:true});else initEditorialPainpoint();
 })();

@@ -1,0 +1,22 @@
+name: Runtime regressions
+on:
+  push:
+    branches: [fix/code-audit-2026-09-30]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          for script in assets/js/*.js tests/*.cjs; do
+            node --check "$script"
+          done
+      - name: Run simulated browser regression tests
+        run: node tests/runtime-regressions.cjs
