@@ -13,14 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
   function locationMeta(lang){return lang==='es'?'CON BASE EN MÉXICO /<br>TRABAJANDO DONDE EL LUGAR NOS LLEVE.':'BASED IN MEXICO /<br>WORKING WHERE THE PLACE TAKES US.';}
 
   hero.classList.add('exif-cinematic-hero');
-  hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1>'+heroTitle(currentLang())+'</h1><div class="exif-hero-meta"><span>SIGNAL</span><span>'+locationMeta(currentLang())+'</span></div></div>');
+  hero.querySelector('.wrap').insertAdjacentHTML('beforeend','<img class="exif-hero-bg" src="'+finalImage+'" alt="Hospitality property at sunset" data-alt-en="Hospitality property at sunset" data-alt-es="Propiedad de hospitalidad al atardecer" fetchpriority="high" decoding="async"><div class="exif-hero-shade" aria-hidden="true"></div><div class="exif-hero-copy"><h1>'+heroTitle(currentLang())+'</h1><div class="exif-hero-meta"><span>SIGNAL</span><span>'+locationMeta(currentLang())+'</span></div></div>');
 
   var heroBg=hero.querySelector('.exif-hero-bg');
+  heroBg.addEventListener('error',function(){heroBg.src='assets/img/hero-couch-doorway.jpg';},{once:true});
   function setHeroHeaderState(){if(window.scrollY<Math.max(80,hero.offsetHeight-90))document.body.classList.add('exif-hero-live');else document.body.classList.remove('exif-hero-live');}
   function applyHeroLanguage(lang){
     var markup=heroTitle(lang),green=hero.querySelector('.exif-hero-title-green'),cream=hero.querySelector('.exif-hero-title-cream'),plain=hero.querySelector('.exif-hero-copy h1:not(.exif-hero-title-green):not(.exif-hero-title-cream)');
     if(green)green.innerHTML=markup;if(cream)cream.innerHTML=markup;if(plain)plain.innerHTML=markup;
-    var meta=hero.querySelectorAll('.exif-hero-meta span');if(meta[0])meta[0].textContent=lang==='es'?'SEÑAL':'SIGNAL';if(meta[1])meta[1].innerHTML=locationMeta(lang);
+    var meta=hero.querySelectorAll('.exif-hero-meta span');if(meta[0])meta[0].textContent=lang==='es'?'SEÑAL':'SIGNAL';if(meta[1])meta[1].innerHTML=locationMeta(lang);if(heroBg)heroBg.alt=lang==='es'?'Propiedad de hospitalidad al atardecer':'Hospitality property at sunset';
   }
   window.addEventListener('exif:languagechange',function(e){applyHeroLanguage(e.detail&&e.detail.lang==='es'?'es':'en');});
 
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.add('exif-intro-running');
   var loader=document.createElement('div');loader.className='exif-loader';loader.setAttribute('aria-hidden','true');loader.innerHTML='<div class="exif-loader-stage"></div>';document.body.appendChild(loader);
   var stage=loader.querySelector('.exif-loader-stage');
-  var imgs=frames.map(function(src,index){var img=document.createElement('img');img.src=src;img.alt='';img.decoding='sync';if(index===frames.length-1)img.fetchPriority='high';stage.appendChild(img);return img;});
+  var imgs=frames.map(function(src,index){var img=document.createElement('img');img.src=src;img.alt='';img.decoding='sync';if(index===frames.length-1)img.fetchPriority='high';img.addEventListener('error',function(){img.src='assets/img/hero-couch-doorway.jpg';},{once:true});stage.appendChild(img);return img;});
 
   function finishDesktopHandoff(layer){
     heroBg.style.visibility='';loader.style.setProperty('transition','none','important');loader.style.setProperty('background','transparent','important');stage.style.visibility='hidden';
