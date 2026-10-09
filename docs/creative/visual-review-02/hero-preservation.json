@@ -1,0 +1,59 @@
+{
+  "method": "Lossless Chromium screenshot comparison; read-only pixel analysis, no photographic edits. Original typography, image and header outside the CTA field remain unchanged.",
+  "checks": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "language": "en",
+      "protected_first_viewport_pixel_identical": true,
+      "mockup_height": 980,
+      "cta_strip_height": 136
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "language": "es",
+      "protected_first_viewport_pixel_identical": true,
+      "mockup_height": 980,
+      "cta_strip_height": 136
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "language": "en",
+      "protected_first_viewport_pixel_identical": true,
+      "mockup_height": 936,
+      "cta_strip_height": 136
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "language": "es",
+      "protected_first_viewport_pixel_identical": true,
+      "mockup_height": 936,
+      "cta_strip_height": 136
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "language": "en",
+      "changed_pixels_bounding_box": [
+        86,
+        313,
+        260,
+        404
+      ],
+      "change_confined_to_inert_caption_cta_in_original_cream_margin": true
+    }
+  ]
+}

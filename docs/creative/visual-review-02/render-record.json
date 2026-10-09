@@ -1,0 +1,478 @@
+{
+  "browser": "151.0.7922.173",
+  "purpose": "Static documentation-only artboards, no interactive implementation",
+  "artboards": [
+    {
+      "name": "hero-mobile-board",
+      "viewport": {
+        "w": 1080,
+        "h": 1260
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/hero-mobile-es.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1260,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "gallery-sources",
+      "viewport": {
+        "w": 1440,
+        "h": 1700
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-gallery-01-lounge.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-02-orchid-dining.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-04-restaurant-interior.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-05-basketball-court.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-06-restaurant-reflection.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-07-table-tennis.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-08-pool-loungers.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-09-sunset-ocean.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-10-beach-golden-hour.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-11-guests-walking.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-12-pool-ocean-view.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-13-tropical-leaves.webp",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1738,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "gallery-edit",
+      "viewport": {
+        "w": 1440,
+        "h": 1200
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-gallery-06-restaurant-reflection.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-02-orchid-dining.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-01-lounge.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-11-guests-walking.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-07-table-tennis.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-08-pool-loungers.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-10-beach-golden-hour.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-13-tropical-leaves.webp",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1211,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "approach",
+      "viewport": {
+        "w": 1440,
+        "h": 1120
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-logo-light-v2.png",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1164,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "what-we-do",
+      "viewport": {
+        "w": 1440,
+        "h": 1200
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-logo-trim.png",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1307,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "approach-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "documentHeight": 1817,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "what-we-do-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "documentHeight": 1936,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "storyboard-a",
+      "viewport": {
+        "w": 1440,
+        "h": 1350
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "images/hero-desktop-en.jpg",
+          "loaded": true
+        },
+        {
+          "src": "images/bridge-short-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-06-restaurant-reflection.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-02-orchid-dining.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-01-lounge.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-desktop.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1350,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "storyboard-b",
+      "viewport": {
+        "w": 1440,
+        "h": 1350
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "images/hero-desktop-en.jpg",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-06-restaurant-reflection.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-02-orchid-dining.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-01-lounge.webp",
+          "loaded": true
+        },
+        {
+          "src": "assets/exif-gallery-03-terrace-hammock.webp",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-desktop.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1350,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "approach-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "documentHeight": 1817,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "what-we-do-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "documentHeight": 1936,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "bridge-comparison",
+      "viewport": {
+        "w": 1440,
+        "h": 1500
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/original-comparison-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/bridge-short-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-mobile.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 1500,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "homepage-a-desktop",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-desktop-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/bridge-short-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-desktop.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 3875,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "homepage-b-desktop",
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-desktop-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-desktop.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-desktop.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 3315,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "homepage-a-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/bridge-short-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-mobile.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 4170,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "homepage-b-mobile",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "errors": [],
+      "images": [
+        {
+          "src": "images/hero-mobile-en.png",
+          "loaded": true
+        },
+        {
+          "src": "images/gallery-edit-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/cards-mobile.png",
+          "loaded": true
+        },
+        {
+          "src": "images/dear-mobile.png",
+          "loaded": true
+        }
+      ],
+      "documentHeight": 3690,
+      "horizontalOverflow": false
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+{
+  "files": [
+    {
+      "path": "EXIF-VISUAL-DIRECTION-REVIEW-02.pdf",
+      "bytes": 2684126,
+      "sha256": "07ce7e41f31ed60ea3b31f1998b8bf08231a26b8f90454b6881f32a0ebb2a4c2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6202,
+      "sha256": "5a3164f3438aeafc3bc0241286af76122f05845a1e1ae1d6d763015777e2e3aa"
+    },
+    {
+      "path": "approach.html",
+      "bytes": 2081,
+      "sha256": "0deaea326880b172dfde1ed1dbc872eff62821e0ca9b98c0acefedbf4201cfa6"
+    },
+    {
+      "path": "artboards.css",
+      "bytes": 10138,
+      "sha256": "1bd68d75ceb97d0336cabb536e179111d2fdffd2f72b3fddb69b6a15031e1153"
+    },
+    {
+      "path": "assets/exif-fullbleed.jpg",
+      "bytes": 243726,
+      "sha256": "94363ade542e5613459aab45c44cb0c865fd78209a58acf7d58c6529f10ffe3f"
+    },
+    {
+      "path": "assets/exif-gallery-01-lounge.webp",
+      "bytes": 81848,
+      "sha256": "0d8dda2bcac77be535449b0b901aa41535bbd547518788c88392eae169c3b06f"
+    },
+    {
+      "path": "assets/exif-gallery-02-orchid-dining.webp",
+      "bytes": 64244,
+      "sha256": "6731c0c6d81b0d70d37ccb328ca824d4e8b3a40471d344a6e6609f4079b47f05"
+    },
+    {
+      "path": "assets/exif-gallery-03-terrace-hammock.webp",
+      "bytes": 136594,
+      "sha256": "2d4e2549242ad0b782680054ad1706d8b60bbe6537c502f13117aa39f6a77b9e"
+    },
+    {
+      "path": "assets/exif-gallery-04-restaurant-interior.webp",
+      "bytes": 143458,
+      "sha256": "140fc1c5f8f6350db273531ba987a94826f79251ba4d047f0425d20bbefecb2e"
+    },
+    {
+      "path": "assets/exif-gallery-05-basketball-court.webp",
+      "bytes": 159568,
+      "sha256": "abc4e1274b6af19d43b6c51ecc63734eabeabc52bb75f827e67808062b675e8e"
+    },
+    {
+      "path": "assets/exif-gallery-06-restaurant-reflection.webp",
+      "bytes": 109416,
+      "sha256": "703b92bf720bffebf77325a92aec31bbd2e976cd6803a31df382ba2e298ce929"
+    },
+    {
+      "path": "assets/exif-gallery-07-table-tennis.webp",
+      "bytes": 129426,
+      "sha256": "d35b8052018ac2823d0867068d69f085d9efc57d7488fe603b29a2a444c6eaa8"
+    },
+    {
+      "path": "assets/exif-gallery-08-pool-loungers.webp",
+      "bytes": 404182,
+      "sha256": "c0f9c98ac10c76f9450d0bb1404771cbae82f2b38e8878e0435aca52efbd472c"
+    },
+    {
+      "path": "assets/exif-gallery-09-sunset-ocean.webp",
+      "bytes": 118802,
+      "sha256": "46865509901a9261831296143c30e4c592003274761b56a770b15a26524d6144"
+    },
+    {
+      "path": "assets/exif-gallery-10-beach-golden-hour.webp",
+      "bytes": 447350,
+      "sha256": "e02a746282f0dce43ce24e40a3f11a0ef10da17ac20e5c7b81ef46ef8489b9c9"
+    },
+    {
+      "path": "assets/exif-gallery-11-guests-walking.webp",
+      "bytes": 220134,
+      "sha256": "df7887852b5b4c6c662b26c4c84b09f6786be256560a3af909fc821d1cc868cc"
+    },
+    {
+      "path": "assets/exif-gallery-12-pool-ocean-view.webp",
+      "bytes": 391258,
+      "sha256": "1e4f2844f5215c88a51d62968c72539cea59b78158eb61a230021d793764d7c3"
+    },
+    {
+      "path": "assets/exif-gallery-13-tropical-leaves.webp",
+      "bytes": 82138,
+      "sha256": "7771d7e0e8fb1ca7d6c03657361d56fab4fecf1527a16f3688cdbdc03b50471c"
+    },
+    {
+      "path": "assets/exif-logo-light-v2.png",
+      "bytes": 19409,
+      "sha256": "441a153c33a2fac77575611c92d6647a65f452429063b315b9138cd5b1dc0106"
+    },
+    {
+      "path": "assets/exif-logo-trim.png",
+      "bytes": 90965,
+      "sha256": "3e9d46a60e8343a675361232615dd2e74d01df85fc2d2858f6706d81ffe8a009"
+    },
+    {
+      "path": "assets/signal-dark.png",
+      "bytes": 12871,
+      "sha256": "94e30e10c7a8402e488fc0616006d32562d3fd4b67ec5fbae9226ae90aef27a7"
+    },
+    {
+      "path": "bridge-comparison.html",
+      "bytes": 1738,
+      "sha256": "7cc78c7cb6d09bc8ab8930ac9c1f4e46c3588fe65a5a4ce334b83f1a89821784"
+    },
+    {
+      "path": "bridge-fragment.css",
+      "bytes": 1115,
+      "sha256": "fd207fa7ab0aa5feea50a1b3ee850a3bff129cb16f93fde6b5427f6ce1963d72"
+    },
+    {
+      "path": "bridge-fragment.html",
+      "bytes": 302,
+      "sha256": "32c60a189abc859bd3e51179e1aa729611392e4f9d75850b860993ed425f3d96"
+    },
+    {
+      "path": "capture-record.json",
+      "bytes": 5798,
+      "sha256": "f6faf8906f055612553eac3b98e98f39b1b9566fae742d92600196b458ea401b"
+    },
+    {
+      "path": "gallery-edit.html",
+      "bytes": 3191,
+      "sha256": "66e24aa20de5c4ef6242d1271092154931225ef4f02107860e59003f2e4ef7be"
+    },
+    {
+      "path": "gallery-sources.html",
+      "bytes": 4133,
+      "sha256": "e36f415eab4f0da9679a153531694e7610138ea1d4699589e1c90538ea788dd9"
+    },
+    {
+      "path": "hero-mobile-board.html",
+      "bytes": 852,
+      "sha256": "b4a03fcb3785705e6fe7e6fbcc038084a260defa17b3a67948af083fd9f7b68f"
+    },
+    {
+      "path": "hero-preservation.json",
+      "bytes": 1290,
+      "sha256": "972ffa7423cd3d6749b28375617df98a63fde0e99f5be954df3c59eb829ae099"
+    },
+    {
+      "path": "homepage-a-desktop.html",
+      "bytes": 572,
+      "sha256": "8ad2a9a2127e973722cd2bf537df2607209a7f39da18ea6844429c6719ae536a"
+    },
+    {
+      "path": "homepage-a-mobile.html",
+      "bytes": 566,
+      "sha256": "523e08f88f7704ac01b03876d88e27df53964753b62aba313688b77f0982f416"
+    },
+    {
+      "path": "homepage-b-desktop.html",
+      "bytes": 516,
+      "sha256": "8029e06a756969c6d8dffdb40f043784c37ec24edcb382a37ea3effe278c657d"
+    },
+    {
+      "path": "homepage-b-mobile.html",
+      "bytes": 511,
+      "sha256": "d2e77a090db9c6d1d1620a03f80c6882db6ab6df7356c676ae061eea15ce52a3"
+    },
+    {
+      "path": "images/approach-mobile-opening.jpg",
+      "bytes": 78027,
+      "sha256": "6e035de2f27a91cc31046ac812fb020b8b888caf713a1548fefcbb6c66733497"
+    },
+    {
+      "path": "images/approach-mobile.jpg",
+      "bytes": 162442,
+      "sha256": "389c0b68443be7d3bbe9411b3b8c28e3a46aabf303192728e1b36b3e360d8176"
+    },
+    {
+      "path": "images/approach.jpg",
+      "bytes": 249778,
+      "sha256": "b77ce50b96e559d7b0584145b54a820d1af7e1279e4d81b8dde25b1c58ae041b"
+    },
+    {
+      "path": "images/bridge-comparison.jpg",
+      "bytes": 257393,
+      "sha256": "69731f188b2595eed805c72ef804e6b983280aae1264e36877ca016d964039cd"
+    },
+    {
+      "path": "images/bridge-short-desktop.png",
+      "bytes": 53300,
+      "sha256": "f1d772769e2d2450a6872816e22f5c0d516fafd88475e593e39f1c23aa753c6e"
+    },
+    {
+      "path": "images/bridge-short-mobile.png",
+      "bytes": 29611,
+      "sha256": "e3514a4c3ed631d6da89d5b0fe4e1f5545777728fae90cbffc6a6d36d1c8c686"
+    },
+    {
+      "path": "images/cards-desktop.png",
+      "bytes": 97409,
+      "sha256": "e62a6ff4cb571bea75f45392d8877dc8320b01a244bab68cbaa0931991e1d26a"
+    },
+    {
+      "path": "images/cards-mobile.png",
+      "bytes": 59998,
+      "sha256": "761ada7fd8517e00f85da9ca292ced65740e8f0d9d42edcaede0048af94bbbb9"
+    },
+    {
+      "path": "images/dear-desktop.png",
+      "bytes": 28387,
+      "sha256": "ce22baa1a25db98aeadb204cea13c56a5b17d1ba5416973156377685e6c91c72"
+    },
+    {
+      "path": "images/dear-mobile.png",
+      "bytes": 17017,
+      "sha256": "c2f2cd839ad4a657d5dba8baf4fe56ce6d330b94e098c563db17e6f5c008d9fd"
+    },
+    {
+      "path": "images/gallery-edit-desktop.png",
+      "bytes": 505595,
+      "sha256": "19d304e09f8cb79796d372a9cd6cc05f304d815e6890fe887ed02add226326f8"
+    },
+    {
+      "path": "images/gallery-edit-mobile.png",
+      "bytes": 114994,
+      "sha256": "076c836dd31428fbb9d1e5b7a1ba182009fb51c81fc673ccd19476ed8360b3de"
+    },
+    {
+      "path": "images/gallery-edit.jpg",
+      "bytes": 337895,
+      "sha256": "eab056dfa66ba213bd08c24d66050e963bf3f30de060c6c59f4d9802e291da9c"
+    },
+    {
+      "path": "images/gallery-sources.jpg",
+      "bytes": 406638,
+      "sha256": "417788268fa030c054fcf001232f986ad759f58bd4012853b7df6b416603ba39"
+    },
+    {
+      "path": "images/hero-desktop-en.jpg",
+      "bytes": 183975,
+      "sha256": "f774309115bbb8e08bc9980e16e41d671151385aaf0d465c7520f319f934d909"
+    },
+    {
+      "path": "images/hero-desktop-en.png",
+      "bytes": 792129,
+      "sha256": "9dd50dafc8d8c27cf25c10acf42cd599dcd1a209f58814683b86c7facc2a108f"
+    },
+    {
+      "path": "images/hero-mobile-board.jpg",
+      "bytes": 313942,
+      "sha256": "971cebd11ed1aeb54fa8caaee04887a25c5bff300e7ef049a63a34ca873292d2"
+    },
+    {
+      "path": "images/hero-mobile-en.jpg",
+      "bytes": 115153,
+      "sha256": "940b18b4fe71a3158561818976e48c4fc9d2ee0b1f0f32037b6927f509d82250"
+    },
+    {
+      "path": "images/hero-mobile-en.png",
+      "bytes": 579669,
+      "sha256": "ace3264e5878d2997937466df8c6a97bff6b6c199b6adb833a81af08cf198a93"
+    },
+    {
+      "path": "images/hero-mobile-es.jpg",
+      "bytes": 116400,
+      "sha256": "82f1277230127f831ba8dceb45ce532dc333dd648f9215910f245d015c95309e"
+    },
+    {
+      "path": "images/hero-mobile-es.png",
+      "bytes": 580328,
+      "sha256": "3ccae23673597213c43063892a1db8da01320f9bb5803218fdb43e8f72fd6af7"
+    },
+    {
+      "path": "images/hero-mobile-small-en.jpg",
+      "bytes": 103471,
+      "sha256": "06414962c48c46ebfc5ae1a5596a366f066100c2b162f28a1617fa5895d8cef7"
+    },
+    {
+      "path": "images/hero-mobile-small-en.png",
+      "bytes": 514249,
+      "sha256": "d89a27d98a23201b11ef5f4ade0a5982ee7da45b6ab28507dda87b38d7d51b48"
+    },
+    {
+      "path": "images/hero-mobile-small-es.jpg",
+      "bytes": 104310,
+      "sha256": "0ea1ff3c9c995fc6c3fd379b7f9e7d2c873634d2fc6ae21fd1befe8736cd147c"
+    },
+    {
+      "path": "images/hero-mobile-small-es.png",
+      "bytes": 514610,
+      "sha256": "28501063f2dcc0dfd0f08c6d988de1d2948d1db66d16f921cc32274355f5ab59"
+    },
+    {
+      "path": "images/homepage-a-desktop.jpg",
+      "bytes": 549332,
+      "sha256": "705aeeca747f026d26f4c9c64ddec65c0dc367e83cabeff6999deaa3a79ff2b5"
+    },
+    {
+      "path": "images/homepage-a-mobile.jpg",
+      "bytes": 259971,
+      "sha256": "d723246edfebf4af3e7045ba6d15e7c7fa96b2f2698e344821f5730a46ced80a"
+    },
+    {
+      "path": "images/homepage-b-desktop.jpg",
+      "bytes": 489839,
+      "sha256": "581c99ae46fd2fddad89471e9b3e61d931be66a1af548488381d5347cb256413"
+    },
+    {
+      "path": "images/homepage-b-mobile.jpg",
+      "bytes": 231719,
+      "sha256": "1a79ed828798d8195973c433f7f471723d21a1e96849e082b1c433c0c2ecc659"
+    },
+    {
+      "path": "images/original-comparison-desktop.png",
+      "bytes": 213038,
+      "sha256": "e02d9a13e3b70b8d47f68a3e25845ad0bada4b29b19938b26bb974b26d79930e"
+    },
+    {
+      "path": "images/original-comparison-mobile.png",
+      "bytes": 78875,
+      "sha256": "9f55cb015af5c29eeb9863a4c92fa05176c8927bf5d337930e87e7f662e5a0a2"
+    },
+    {
+      "path": "images/protected-hero-desktop.jpg",
+      "bytes": 178237,
+      "sha256": "2e0dc2e2cfaf5ae170ff5638a4b71e38e24a208e5e6fba7f7736398236ea4f9d"
+    },
+    {
+      "path": "images/protected-hero-desktop.png",
+      "bytes": 785360,
+      "sha256": "b7a59484bd82653a228f9017868e088fc890bf98fc8012f6bbc359a2a4427cb1"
+    },
+    {
+      "path": "images/protected-hero-mobile-es.jpg",
+      "bytes": 109490,
+      "sha256": "6e02ae10cfcc5c3a7e03c76491e0ce4e711d162e36e77b5053c6ea48fe62ae14"
+    },
+    {
+      "path": "images/protected-hero-mobile-es.png",
+      "bytes": 573220,
+      "sha256": "6b5b69a93d0afe8b31f043623def6f8e236b30b238b424d6cc5afba61f351495"
+    },
+    {
+      "path": "images/protected-hero-mobile-small-es.jpg",
+      "bytes": 97099,
+      "sha256": "2aec174448c21e7596b53242717709e3179bc003cfe69a033b0fb1702237b734"
+    },
+    {
+      "path": "images/protected-hero-mobile-small-es.png",
+      "bytes": 507787,
+      "sha256": "96b5c52971195009488dfed3a9fb69eda23f9d5014effcd3be1b4ee9a7b1287c"
+    },
+    {
+      "path": "images/protected-hero-mobile-small.jpg",
+      "bytes": 97312,
+      "sha256": "666956197f4010d58f519f3cd0fa278de8a1437e1e3aa9feba99a267c63fea07"
+    },
+    {
+      "path": "images/protected-hero-mobile-small.png",
+      "bytes": 508135,
+      "sha256": "62d0422757aa7fef088e3a1d360d0a9f93790023f2497dc0aa7f3a409e276672"
+    },
+    {
+      "path": "images/protected-hero-mobile.jpg",
+      "bytes": 109206,
+      "sha256": "66823cd55849b0dd4e1673cacfd4640ed2a3991c4afeecf20fe1bde731052e57"
+    },
+    {
+      "path": "images/protected-hero-mobile.png",
+      "bytes": 573239,
+      "sha256": "d586610a61a3cf4e9e84719e2b5e48f2c287fbf500893f7634210d9e0e8259c3"
+    },
+    {
+      "path": "images/storyboard-a.jpg",
+      "bytes": 267251,
+      "sha256": "f47aca8831787cf904c155d5e8f84af24edb08efca1ba2559fa09e780ea492b8"
+    },
+    {
+      "path": "images/storyboard-b.jpg",
+      "bytes": 270457,
+      "sha256": "90af4ad23bdc19262dd3dfcd18dfe9e4b3a62d71178342b70ac48d3ba11f3358"
+    },
+    {
+      "path": "images/what-we-do-mobile-opening.jpg",
+      "bytes": 66823,
+      "sha256": "802f0e0765ac9840d0ef14d163a7f71f95d7b50630ff6d2b069144d5f2751262"
+    },
+    {
+      "path": "images/what-we-do-mobile.jpg",
+      "bytes": 162892,
+      "sha256": "b8a061d4f71fce1a764af6683e90a970e518e0a7b10c8393e0aa08e865e98f59"
+    },
+    {
+      "path": "images/what-we-do.jpg",
+      "bytes": 225855,
+      "sha256": "5a03306908714e00ffdc928eb7a5c2684056c027a86cd549037e115438eccd15"
+    },
+    {
+      "path": "index.html",
+      "bytes": 1585,
+      "sha256": "5b545dcad86e84b714581c4e9aa3fcada559cee661c4f1f423ca63a390619173"
+    },
+    {
+      "path": "materials/PHOTO-DIRECTION-NOTE-01.md",
+      "bytes": 1324,
+      "sha256": "8a1bc2ced754d1f68052244e8fabf84515c34b5ba283cabc70f925092d746f76"
+    },
+    {
+      "path": "method/build.py",
+      "bytes": 26657,
+      "sha256": "2601c78d492176107f0c71b32763ccea27820d48ac868d59427ca8cd1c65534c"
+    },
+    {
+      "path": "method/capture.cjs",
+      "bytes": 9764,
+      "sha256": "f9b3b30094611b1c49e6be5b15308af2756b573b32731feea96b49fee13df5cc"
+    },
+    {
+      "path": "method/render.cjs",
+      "bytes": 6137,
+      "sha256": "f2a2a46bfea3632b1dfb36719c3c3f017802b38447db83d84819f98df8af0ad4"
+    },
+    {
+      "path": "protection-record.json",
+      "bytes": 9753,
+      "sha256": "a65a36bd30dc73b0894a6085b001866ba7d3d91dd37ac4031103de77f23e8c15"
+    },
+    {
+      "path": "render-record.json",
+      "bytes": 10883,
+      "sha256": "58c7fed3f4187930b99739454f857f5cc2d7270e6c65d798a0baea55287a6682"
+    },
+    {
+      "path": "review-deck.html",
+      "bytes": 4352,
+      "sha256": "3a8d669ed6b28b4fa9f63867afc7e32b493c7b94a2d2925610f8242efcf179c6"
+    },
+    {
+      "path": "storyboard-a.html",
+      "bytes": 3140,
+      "sha256": "d2dc037566aeee7bc7dfe9796d502b7cf563adbf17af23558be55074f8110a12"
+    },
+    {
+      "path": "storyboard-b.html",
+      "bytes": 3246,
+      "sha256": "2fc41834f43110e46bd5be9af5e1529d8975eca7a0985f7d075ce68e58e15d30"
+    },
+    {
+      "path": "what-we-do.html",
+      "bytes": 2914,
+      "sha256": "09b67700a495a56250af2397dfc870630845d6aa65b5888b56a46255d030f332"
+    }
+  ]
+}

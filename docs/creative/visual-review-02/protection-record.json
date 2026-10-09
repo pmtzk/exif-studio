@@ -1,0 +1,317 @@
+{
+  "baseline_commit": "7534e259b69175423f5e68462d9cbffa1fe945a7",
+  "checkpoints": {
+    "original": "9a02ab7b17f779d6a2e5190731d428508c3da7ff",
+    "v2": "017ee32f22b7c1197251e1059b9121977d070fb5",
+    "v3": "337ee2dc22937064d86fe648052daa6b5e39e4f2",
+    "prototype": "7534e259b69175423f5e68462d9cbffa1fe945a7"
+  },
+  "website_files": [
+    {
+      "path": "_redirects",
+      "git_blob": "e0d76bb7c577fe290dc5adabc1dd0f0625e787ea"
+    },
+    {
+      "path": "approach.html",
+      "git_blob": "8e4762782e44b7bba45950246d2de9c43e2deb23"
+    },
+    {
+      "path": "assets/css/180902-mobile-fix.css",
+      "git_blob": "2e393771458893f30750101cfcc01b020943978d"
+    },
+    {
+      "path": "assets/css/180902-nav-cta.css",
+      "git_blob": "4e119e0894160abfbe0bb4fd935ba3fb991fc90b"
+    },
+    {
+      "path": "assets/css/180902.css",
+      "git_blob": "e274e3141e0e8cd529843fb27d393b56b877c048"
+    },
+    {
+      "path": "assets/css/190926-final.css",
+      "git_blob": "39e443d9f9c29383a335113b914b5c7b4e7a2757"
+    },
+    {
+      "path": "assets/css/190926.css",
+      "git_blob": "60fd31521a517f91cc77c1ee9ae9ee040a799108"
+    },
+    {
+      "path": "assets/css/approach-cards-mobile-resilience.css",
+      "git_blob": "797348b10a648235084646c688685a7e8e7bc402"
+    },
+    {
+      "path": "assets/css/approach-cards.css",
+      "git_blob": "a8fd952eb382bb0a78e7e610a9ecc06d5c8ff7b0"
+    },
+    {
+      "path": "assets/css/drawer-foundation.css",
+      "git_blob": "f7929c501bd03b091dcfa9151c24f1a0a92a90f9"
+    },
+    {
+      "path": "assets/css/editorial-painpoint.css",
+      "git_blob": "33496f5f7a6f1c60c3e9d6f560342b5e9b3502da"
+    },
+    {
+      "path": "assets/css/hero-desktop.css",
+      "git_blob": "85e1248cccfb886e65508d7f6fabf61ff26c2b71"
+    },
+    {
+      "path": "assets/css/hero-mobile.css",
+      "git_blob": "7af81ca17455acd6d455de63547ee450f3ec65da"
+    },
+    {
+      "path": "assets/css/interaction-prototypes.css",
+      "git_blob": "87de11f5d01dc51256ff1bd47e2f87591d8e0f8e"
+    },
+    {
+      "path": "assets/css/mobile-header-authority.css",
+      "git_blob": "779e5b81f121f4f0736ac4784b2c02c37ae0bd7c"
+    },
+    {
+      "path": "assets/css/motion-gallery.css",
+      "git_blob": "f7e2d3f7810982e0feb58ec180c63831d4163946"
+    },
+    {
+      "path": "assets/css/nav-composition.css",
+      "git_blob": "c87b4bc4628f9bc045b2c46124ad2fba5dbb14c8"
+    },
+    {
+      "path": "assets/css/nav-context.css",
+      "git_blob": "9de1fae19a08393673ebc9f1bd99be3baa216d0c"
+    },
+    {
+      "path": "assets/css/recognition-closing.css",
+      "git_blob": "703693d289de3cdd379a96fe154a934eab51036c"
+    },
+    {
+      "path": "assets/css/recognition-vertical-loop.css",
+      "git_blob": "935241ec6f5fe8d355628073cf89d9a569c13835"
+    },
+    {
+      "path": "assets/css/site-v1.css",
+      "git_blob": "c7f4f71302c20545345b13356466cd10cf3c339a"
+    },
+    {
+      "path": "assets/css/styles.css",
+      "git_blob": "46f457d2fcf2ea660a32b45cad836aae22d98dd2"
+    },
+    {
+      "path": "assets/css/website-v2.css",
+      "git_blob": "2b2841ec015c335fd0164ff649ad6ddf21d553b4"
+    },
+    {
+      "path": "assets/css/website-v3.css",
+      "git_blob": "7416b5121fd86b12f41efac54f14dd5d70c9a48d"
+    },
+    {
+      "path": "assets/fonts/TanWhistling-Regular.woff2",
+      "git_blob": "d4fb3444fe45611919085891046da297fb10c561"
+    },
+    {
+      "path": "assets/img/exif-fullbleed.jpg",
+      "git_blob": "89e11ded709e57208fca9eb638a7afc02a2199b6"
+    },
+    {
+      "path": "assets/img/exif-gallery-01-lounge.webp",
+      "git_blob": "b7949ae0dc01ab79227c518f7fb6916add856fec"
+    },
+    {
+      "path": "assets/img/exif-gallery-02-orchid-dining.webp",
+      "git_blob": "7d1788d6310f187064fc0b6bca3087c1e2348c77"
+    },
+    {
+      "path": "assets/img/exif-gallery-03-terrace-hammock.webp",
+      "git_blob": "78963a956e8242c359f07f7513da811b84307b74"
+    },
+    {
+      "path": "assets/img/exif-gallery-04-restaurant-interior.webp",
+      "git_blob": "71e1533599670555811a48ff2ec3ec06a40cd100"
+    },
+    {
+      "path": "assets/img/exif-gallery-05-basketball-court.webp",
+      "git_blob": "b8ccc496a3d85b80e67c48fdc6d4718fcbbe2fe8"
+    },
+    {
+      "path": "assets/img/exif-gallery-06-restaurant-reflection.webp",
+      "git_blob": "c36ee247b8883c630cab950c4cad7ecf6cb88c37"
+    },
+    {
+      "path": "assets/img/exif-gallery-07-table-tennis.webp",
+      "git_blob": "f58af5a58ffcccdee41615c29bcf12951d3043a1"
+    },
+    {
+      "path": "assets/img/exif-gallery-08-pool-loungers.webp",
+      "git_blob": "ab63392fa453def9c6f06b6635bd5f18b866a2c8"
+    },
+    {
+      "path": "assets/img/exif-gallery-09-sunset-ocean.webp",
+      "git_blob": "357aca36b328e97967005c0f863ce9b46ae97743"
+    },
+    {
+      "path": "assets/img/exif-gallery-10-beach-golden-hour.webp",
+      "git_blob": "2885493361b00183e7545126307d24fe20682deb"
+    },
+    {
+      "path": "assets/img/exif-gallery-11-guests-walking.webp",
+      "git_blob": "5d5df8bdd047ad52403e024702f66c34046694dd"
+    },
+    {
+      "path": "assets/img/exif-gallery-12-pool-ocean-view.webp",
+      "git_blob": "a2d36c3b6868cde00fbade1062d0371c8a2cbf4c"
+    },
+    {
+      "path": "assets/img/exif-gallery-13-tropical-leaves.webp",
+      "git_blob": "77b1d7ad60af5c461d212fd8cb86febe7dd5cd14"
+    },
+    {
+      "path": "assets/img/exif-logo-light-v2.png",
+      "git_blob": "6016778bc130c62523125105b8503aa25e988db1"
+    },
+    {
+      "path": "assets/img/exif-logo-trim.png",
+      "git_blob": "37e6817be164eb26157c32894ab8ce3f22293495"
+    },
+    {
+      "path": "assets/img/exif-social-preview.png.png",
+      "git_blob": "92d302ca5b606ee487905954290ab885cfefcb2f"
+    },
+    {
+      "path": "assets/img/favicon-180.png",
+      "git_blob": "39c10b969c67fdc44907ca1d9ba524b5166efbc3"
+    },
+    {
+      "path": "assets/img/favicon-32.png",
+      "git_blob": "ed3a321b40d2efa2ea68d73acc57717d44dfd78a"
+    },
+    {
+      "path": "assets/img/favicon-48.png",
+      "git_blob": "21cfe15e5d26b8da07f16df59b5f1a67695e697a"
+    },
+    {
+      "path": "assets/img/favicon-512.png",
+      "git_blob": "eb5d64b0d704354518a86468a897fea94920b6ae"
+    },
+    {
+      "path": "assets/img/hero-couch-doorway.jpg",
+      "git_blob": "cf26d8ff7b6a111898e986b6c6ecc06e12e7f01e"
+    },
+    {
+      "path": "assets/img/loader-frame-01.webp",
+      "git_blob": "ab9d2ab17de14cf83dab621f6438f3c1a735eaa1"
+    },
+    {
+      "path": "assets/img/loader-frame-02.webp",
+      "git_blob": "a6048fc1566255a8ee3195c0a1abad1456dda53a"
+    },
+    {
+      "path": "assets/img/production-poolside-v2.jpg",
+      "git_blob": "f4b19013bff0b2493ccdb2a0a9f64e31bc848610"
+    },
+    {
+      "path": "assets/img/signal-dark.png",
+      "git_blob": "d34181c9a4d2232b843211a6c66d1be8bf6e6ae1"
+    },
+    {
+      "path": "assets/img/signal-light.png",
+      "git_blob": "e98adbfb27686925161bb0bc12868f90f1f6a3b3"
+    },
+    {
+      "path": "assets/img/work-chair-detail.jpg",
+      "git_blob": "0599f4cdab3eb79da976538ba8970d950a9f9c61"
+    },
+    {
+      "path": "assets/img/work-exterior-view.jpg",
+      "git_blob": "65a3258ede95a5231de466742aaacb41f37f5fd1"
+    },
+    {
+      "path": "assets/img/work-human-moment.jpg",
+      "git_blob": "eb800848b84bd77660310d6b455a0221b9cf3ad3"
+    },
+    {
+      "path": "assets/img/work-open-air-space.jpg",
+      "git_blob": "904b8bef4668890603fcb6efdc3cd8a179399d09"
+    },
+    {
+      "path": "assets/js/180902.js",
+      "git_blob": "84433092a98e857e1f50aeb7498a345438fd433a"
+    },
+    {
+      "path": "assets/js/190926.js",
+      "git_blob": "9935763865b164a78f3b9a5d799c55ff9917e9e0"
+    },
+    {
+      "path": "assets/js/approach-cards.js",
+      "git_blob": "bc4def1e2afc304d1884e0171e55f5ce2dd20285"
+    },
+    {
+      "path": "assets/js/editorial-painpoint.js",
+      "git_blob": "181315739bdf1b6b064111366d53efe529afbdec"
+    },
+    {
+      "path": "assets/js/interaction-prototypes.js",
+      "git_blob": "ee4f78c4f2d07f78e07d1ff10e011f0edf4b5efb"
+    },
+    {
+      "path": "assets/js/measurement.js",
+      "git_blob": "891d41a789ad1069ebaca08df17bd976f2daaee2"
+    },
+    {
+      "path": "assets/js/motion-gallery.js",
+      "git_blob": "0a2b52dbc5cff3da78cf79916c55a468628ce308"
+    },
+    {
+      "path": "assets/js/nav-context.js",
+      "git_blob": "203e3c2aeb82e9ce5cfc88783459d18b6a1b46c3"
+    },
+    {
+      "path": "assets/js/site-config.js",
+      "git_blob": "ac6e2a44a170eb6da671db2875be0b941fa227aa"
+    },
+    {
+      "path": "assets/js/site-v1.js",
+      "git_blob": "ecb2f60b98f04b8ce69295c772d310eb17d4df11"
+    },
+    {
+      "path": "assets/js/site-v2.js",
+      "git_blob": "c897f55ee50a177b5c920b5eb11747bda4ef6bfd"
+    },
+    {
+      "path": "assets/js/site-v3.js",
+      "git_blob": "7643af06971a6c3f90fbc0be13ea611967fbafcf"
+    },
+    {
+      "path": "dear-exif.html",
+      "git_blob": "08fef02a4f16185dee051b757ca8a5e26e5b569d"
+    },
+    {
+      "path": "expertise.html",
+      "git_blob": "2ed4ff18abb5720cb7bc6a2129c719758ec77925"
+    },
+    {
+      "path": "index.html",
+      "git_blob": "bd1b7fcf7237cb7feeb5d55b21ffd150367521c4"
+    },
+    {
+      "path": "inquire.html",
+      "git_blob": "5f67c855a55189763451449cafead9b6492f44d5"
+    },
+    {
+      "path": "robots.txt",
+      "git_blob": "c0fb54a0d459bdec21c8cc65c20e4b21b68b9124"
+    },
+    {
+      "path": "site.webmanifest",
+      "git_blob": "4527052ad548db5325ff9f722e8cd527cb278786"
+    },
+    {
+      "path": "sitemap.xml",
+      "git_blob": "5fe4c683bd47fcd60d345b94502f7e7a320f12a1"
+    },
+    {
+      "path": "studio.html",
+      "git_blob": "f712aafbe10f757895275a2ec3d60d4190272410"
+    }
+  ],
+  "documentation_baseline_commit": "a4314cb39e261f597109326e8fb8a07491e09882",
+  "purpose": "Static visual-review mockups only. Website files remain unchanged."
+}
