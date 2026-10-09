@@ -1,7 +1,9 @@
 name: Runtime regressions
 on:
   push:
-    branches: [fix/code-audit-2026-09-30]
+    branches: [fix/code-audit-2026-09-30, "feat/exif-website-evolution-v2-*"]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,3 +22,5 @@ jobs:
           done
       - name: Run simulated browser regression tests
         run: node tests/runtime-regressions.cjs
+      - name: Run V2 route, qualification and measurement contracts
+        run: node tests/v2-regressions.cjs

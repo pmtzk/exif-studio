@@ -1,115 +1,73 @@
 # EXIF Studio — website
 
-Static HTML/CSS/JS deployed from the repository root. There is no build step and no package dependency.
+Static HTML/CSS/JavaScript, deployed from the repository root. No build step, framework or application package dependencies.
 
-## Pages
+## Pages and routes
 
-- `index.html` — homepage
-- `studio.html` — studio/founder page
-- `dear-exif.html` — inquiry form
+| Destination | Clean route | Source |
+| --- | --- | --- |
+| Home | `/` | `index.html` |
+| What We Do | `/expertise` | `expertise.html` |
+| Approach | `/approach` | `approach.html` |
+| Studio / founder letter | `/studio` | `studio.html` |
+| Discuss Your Property | `/inquire` | `inquire.html` |
 
-## Shared runtime
+Cloudflare Pages reads `_redirects` for the four clean route rewrites. Existing `.html` files remain available. `dear-exif.html` preserves its legacy redirect to the homepage letter. Removed Visual Direction & Production routes still redirect to Home. Work, Field Notes and Assessment are reserved future architecture, without placeholder pages.
 
-- `assets/css/styles.css` — global tokens, typography, layout primitives, forms and footer
-- `assets/css/nav-composition.css` — drawer composition
-- `assets/css/180902-mobile-fix.css` — mobile navigation corrections
-- `assets/css/180902-nav-cta.css` — drawer CTA styling
-- `assets/css/nav-context.css` — persistent header/nav chrome
-- `assets/js/site-v1.js` — drawer behavior, form submission and footer year
-- `assets/js/nav-context.js` — the single site-wide header contrast sampler
+## Development and checks
 
-Navigation styles and scripts are linked explicitly from each HTML page. `site-v1.js` owns the shared site behavior without injecting stylesheets.
-
-## Homepage runtime
-
-CSS is loaded explicitly in cascade order from `index.html`:
-
-1. `styles.css`
-2. `180902.css`
-3. `190926.css`
-4. `approach-cards.css`
-5. `hero-desktop.css`
-6. `190926-final.css`
-7. shared navigation CSS
-8. `editorial-painpoint.css`
-9. `motion-gallery.css`
-10. `hero-mobile.css`
-
-`hero-mobile.css` contains the mobile hero/loader rules that previously lived inside a JavaScript-generated `<style>` block.
-
-Homepage JavaScript is explicit and ordered at the end of `index.html`:
-
-1. `site-v1.js`
-2. `nav-context.js`
-3. `180902.js` — reveal observer + cinematic hero/loader
-4. `190926.js` — desktop split-colour hero + gallery markup
-5. `editorial-painpoint.js`
-6. `motion-gallery.js`
-7. `approach-cards.js`
-
-No homepage module injects another stylesheet or script at runtime.
-
-The current editorial gap markup now lives directly in `index.html`. The obsolete diagnosis/reading section and legacy Selected Work markup were removed from initial HTML; `#selected-work` is now a small mount point that becomes the motion gallery on DOM ready.
-
-## Assets currently in use
-
-- `assets/img/exif-logo-trim.png` — header logo/mask source
-- `assets/img/signal-dark.png` / `signal-light.png` — signal marks
-- `assets/img/exif-fullbleed.jpg` — final desktop hero image
-- `assets/img/loader-frame-*.webp` plus selected gallery WebP images — cinematic loader sequence
-- `assets/img/hero-couch-doorway.jpg` — loader/fallback hero frame
-- `assets/img/exif-gallery-*.webp` — motion gallery
-- `assets/fonts/TanWhistling-Regular.woff2`
-
-## Removed during cleanup
-
-The following files had no active runtime reference and were removed:
-
-- `assets/js/180902-mobile-legacy.js`
-- `assets/css/hero-structural-mask.css`
-- `assets/img/production-poolside.jpg`
-- `assets/img/exif-logo.png`
-- `assets/img/exif-logo-light.png`
-- `assets/img/favicon-16.png`
-- `assets/img/favicon.ico`
-
-## Performance state
-
-The hero/loader assets still load at startup because they are part of the opening sequence. The hidden gallery warm-up was removed. Gallery images now use native lazy loading and no gallery image receives high fetch priority. The gallery animation remains idle while the section is offscreen and wakes before entry through an IntersectionObserver root margin.
-
-The largest remaining performance opportunity is image optimization. Several JPEGs are hundreds of KB and some gallery files are close to 1 MB. Converting them to appropriately sized WebP/AVIF derivatives will produce a larger byte reduction than further JavaScript cleanup.
-
-## Manual decisions / follow-ups
-
-1. If The Seasons should be served through Adobe Fonts, add the licensed Adobe kit link to all page heads. The current CSS has serif fallbacks.
-2. Optimize remaining JPEG assets through an image pipeline. Keep archival masters outside the deployed asset folder.
-3. The dated CSS files remain separate because their cascade defines the approved visual state. Rename or merge them only after visual regression testing.
-4. Several active rules refer to an undefined `--sans` token, and zero-padded gallery-slot selectors do not match the generated class names. These visual corrections require preview comparison; see the audit.
-5. The legacy First Look and `#audit` links are no longer present in the current navigation. Do not recreate removed pages from stale documentation.
-
-## Review and tests
-
-The September 30 review is documented in [CODE-AUDIT-2026-09-30.md](CODE-AUDIT-2026-09-30.md).
-
-Run the dependency-free regression suite with Node 18 or newer:
+From the repository root, with Node 18+:
 
 ```sh
 node tests/runtime-regressions.cjs
+node tests/v2-regressions.cjs
+for script in assets/js/*.js tests/*.cjs; do
+  node --check "$script" || exit
+done
 ```
 
-Tests simulate browser APIs and mock Formspree; they do not send letters. The review branch has a GitHub Actions workflow for Node syntax checks and regression tests. Browser layout, real keyboard/touch behavior, image decoding and real Formspree delivery still require manual verification.
+The original 18 regression scenarios simulate browser APIs and mock Formspree. V2 contracts check pages, routes, qualification fields, asset references and measurement privacy. CI runs both dependency-free suites on the V2 branch and pull requests to main.
 
-## Form
+For simple local serving:
 
-The Dear EXIF form on the homepage posts to the configured Formspree endpoint. `site-v1.js` submits it asynchronously and reports success/error inline; `dear-exif.html` redirects legacy visits to that section.
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
 
-## Deployment
+Python serves `.html` paths directly; it does not process Cloudflare `_redirects`. To validate clean routes and real browser behavior, use the browser harness:
 
-Cloudflare Pages can deploy the repository root directly:
+```sh
+node tests/browser-v2.cjs
+node tests/touch-v2.cjs
+```
 
-- Build command: none
-- Build output directory: `/`
+This developer QA command requires Playwright and Chromium, already available in the prepared cloud machine. They are test tools, not site dependencies. `EXIF_CHROMIUM_PATH` can select another installed Chromium executable; `EXIF_ARTIFACT_DIR` selects an artifact folder outside the checkout (default `/workspace/artifacts/exif-v2/after`). `touch-v2.cjs` uses the running Python server (override with `EXIF_TEST_ORIGIN`) for native emulated touch, final Spanish title bounds, clipping fallback and short viewports. The main browser harness starts an ephemeral local server that applies the checkout's 200 rewrites. It blocks external requests, mocks Formspree and writes current-run browser results only after success. It exercises EN/ES at 360/390/768/860/1024/1440px, forms, drawer focus/geometry, page transitions/history, gallery controls, failed images and no-JS fallback. It does not validate Safari, external font delivery, Cloudflare itself, real form delivery or calendar booking.
 
-Keep checkpoint branches intact before large visual or runtime changes.
+## Runtime and preservation
 
-Cloudflare Pages reads `_redirects`; legacy visits to the removed Visual Direction & Production page resolve permanently to the homepage.
+`site-v1.js` owns language persistence, the editorial drawer, page transitions and Dear EXIF. `nav-context.js` mounts the viewport drawer, preserves the desktop close proxy and samples header contrast. Homepage modules retain their responsibilities:
+
+- `180902.js`: reveal observer and cinematic first-entry loader/hero.
+- `190926.js`: split-color title, gallery markup and URL normalization.
+- `editorial-painpoint.js`: comparison narrative and scroll choreography.
+- `motion-gallery.js`: continuous track, controls, wheel/drag/touch, pause and reduced motion.
+- `approach-cards.js`: the expanding Observe / Decide / Create deck and word summary.
+
+Historical CSS files remain explicitly linked in their existing order. `website-v2.css` is a final additive layer for new pages and targeted refinements. `--sans` now aliases the existing sans family. The gallery's dormant zero-padded size variants remain dormant so the approved sequence is preserved; actual image dimensions now prevent incorrect pre-decode proportions. Original photographs/fonts and the founder letter are unchanged.
+
+`site-config.js` supplies reviewed public configuration. `measurement.js` implements local, allowlisted events without transmitting data. `site-v2.js` supplies bilingual page metadata and the inquiry form. Every page has a static/no-JavaScript navigation fallback; the original letter becomes fully expanded without scripts. English is the static default; interactive language switching requires JavaScript.
+
+## Conversion and integrations
+
+The homepage retains Dear EXIF and its existing Formspree endpoint. The inquiry page requests name, email, property name/website, relationship and project context, with an optional explanation. It truthfully offers follow-up availability for a free 30-minute discovery conversation. Success means an accepted inquiry, not a booked meeting.
+
+No booking URL or analytics provider is configured. See [integration requirements](docs/WEBSITE-V2-INTEGRATIONS.md) before enabling either in `assets/js/site-config.js`. No tokens or credentials belong in site files. Analytics payloads exclude names, emails, property details and raw campaign strings. A real provider must confirm bookings before booking completion can be counted.
+
+## Review and deployment
+
+- [Preservation inventory](docs/WEBSITE-V2-PRESERVATION-AUDIT.md)
+- [V2 implementation and validation report](docs/WEBSITE-V2-REVIEW.md)
+- [Scheduling, measurement and publication requirements](docs/WEBSITE-V2-INTEGRATIONS.md)
+- [September 30 audit](CODE-AUDIT-2026-09-30.md) and [historical V1 notes](V1-NOTES-2026-09-21.md)
+
+Cloudflare Pages deploys the root with no build command. V2 is delivered on a development branch for review; do not merge, change production settings or publish unapproved material during implementation. Review image ownership/licensing/release questions before new photographic case studies or promotion. The Seasons still uses existing fallbacks until a licensed kit is supplied. Browser screenshots are review evidence, not proof of publication rights, real Formspree delivery or production readiness.
