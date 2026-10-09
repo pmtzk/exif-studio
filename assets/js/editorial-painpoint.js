@@ -5,6 +5,7 @@ function initEditorialPainpoint(){
   section.dataset.editorialReady='true';
   var hookSmall=section.querySelector('.choice-hook p'),hookTitle=section.querySelector('.choice-hook h2'),contextLines=section.querySelectorAll('.choice-context p'),lead=section.querySelector('.choice-scale .lead'),option=section.querySelector('.choice-option'),many=section.querySelector('.choice-many'),decision=section.querySelector('.choice-decision'),decisionMain=decision&&decision.querySelector('strong'),decisionOther=decision&&decision.querySelector('em'),workImage=section.querySelector('.choice-work-entry img');
   var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var compact=section.classList.contains('home-choice');
   var current={},target={},raf=0,last=performance.now();
   var keys=['hookSmallX','hookTitleX','contextAX','contextBX','leadY','optionX','manyX','decisionOpacity','decisionBlur','decisionY','otherOpacity','otherBlur','otherY','imageScale','imageY'];
   function clamp01(v){return Math.max(0,Math.min(1,v));}
@@ -16,7 +17,9 @@ function initEditorialPainpoint(){
     var c1=progress(contextLines[0],.98,.45),c2=progress(contextLines[1],.98,.45);target.contextAX=(.5-c1)*38;target.contextBX=(c2-.5)*48;
     var lp=progress(lead,.96,.55);target.leadY=(1-lp)*15;
     var sp=progress(option||many,.99,.30),distance=innerWidth<860?18:Math.min(105,innerWidth*.065);target.optionX=(1-sp)*distance*.52;target.manyX=(1-sp)*-distance;
-    if(decision){var dr=decision.getBoundingClientRect(),dp=smoothstep((innerHeight*.94-dr.top)/(innerHeight*.64));target.decisionOpacity=.18+.82*dp;target.decisionBlur=(1-dp)*(innerWidth<860?5.5:8);target.decisionY=(1-dp)*(innerWidth<860?18:30);var ep=smoothstep((dp-.34)/.66);target.otherOpacity=ep;target.otherBlur=(1-ep)*(innerWidth<860?4:6);target.otherY=(1-ep)*(innerWidth<860?12:20);}
+    // In the short bridge, resolve the decision later so the question leads.
+    // Existing pages retain their original timing; scroll remains entirely native.
+    if(decision){var dr=decision.getBoundingClientRect(),dp=smoothstep((innerHeight*(compact ? .62 : .94)-dr.top)/(innerHeight*(compact ? .40 : .64)));target.decisionOpacity=.18+.82*dp;target.decisionBlur=(1-dp)*(innerWidth<860?5.5:8);target.decisionY=(1-dp)*(innerWidth<860?18:30);var ep=smoothstep((dp-.34)/.66);target.otherOpacity=ep;target.otherBlur=(1-ep)*(innerWidth<860?4:6);target.otherY=(1-ep)*(innerWidth<860?12:20);}
     if(workImage){var ir=workImage.getBoundingClientRect(),ip=clamp01((innerHeight-ir.top)/(innerHeight+ir.height));target.imageScale=1.075-ip*.055;target.imageY=(.5-ip)*28;}
     ensureRAF();
   }

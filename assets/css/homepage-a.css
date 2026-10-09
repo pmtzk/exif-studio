@@ -1,0 +1,39 @@
+/* Controlled Homepage A. The loader, hero and gallery controllers are untouched.
+   All changes are scoped to this homepage; inner-page cascades remain unchanged. */
+.homepage-a main{position:relative}
+.homepage-a .home-invitation{color:var(--ink);z-index:5}
+.home-invitation p{margin:0 0 4px;max-width:34ch;font:500 9px/1.5 var(--font-sans);letter-spacing:.14em;text-transform:uppercase}
+.home-invitation a{display:inline-flex;align-items:center;gap:18px;min-height:44px;border-bottom:1px solid currentColor;font:400 14px/1.4 var(--font-sans);color:inherit;text-decoration:none}
+.home-invitation a:hover{border-bottom-color:transparent}
+/* Three connected beats, using the original comparison's scroll resolution.
+   Normal document flow: no pinning, scroll interception or additional timer. */
+.homepage-a .home-choice{padding:0!important}
+.home-choice>.wrap{width:100%;max-width:none;margin:0;position:relative;padding:78px 6vw 148px}
+.home-choice .choice-hook{width:65%;margin:0;padding:0}
+.home-choice .choice-hook p{font-size:18px;margin-bottom:24px}
+.home-choice .choice-hook h2{font-size:clamp(76px,8.6vw,140px);margin:0;line-height:.82;max-width:none}
+.home-choice .choice-context{display:block;position:absolute;left:70%;right:6%;top:110px;margin:0;padding:0}
+.home-choice .choice-context p{font-size:clamp(18px,1.7vw,25px);line-height:1.25;max-width:18ch;margin:0}
+.home-choice .choice-decision{min-height:0;margin:72px 0 0 59%;padding:0!important;display:flex;flex-direction:column}
+.home-choice .choice-decision strong{font-size:clamp(52px,5.3vw,86px);line-height:.86;letter-spacing:-.055em}
+.home-choice .choice-decision em{font-size:clamp(27px,2.5vw,40px);margin:22px 0 0;align-self:flex-end}
+@media(min-width:860px){
+ .homepage-a .home-invitation{position:absolute;left:6vw;top:26svh;max-width:22vw}
+}
+@media(max-width:859px){
+ /* Undo only the added V2 hero lift/shade. Original photographic behavior wins. */
+ .homepage-a #what-exif-does .exif-hero-copy{bottom:max(5.3vh,40px)!important}
+ .homepage-a .exif-hero-shade{background:linear-gradient(180deg,rgba(5,14,10,.10) 0%,rgba(5,14,10,.015) 42%,rgba(5,14,10,.27) 100%)}
+ .homepage-a .home-invitation{position:relative;min-height:136px;padding:20px 28px;background:var(--cream)}
+ .home-invitation a{font-size:13px}
+ .home-choice>.wrap{padding:42px 28px 134px}
+ .home-choice .choice-hook{width:100%}
+ .home-choice .choice-hook p{font-size:14px;max-width:25ch;margin-bottom:22px}
+ .home-choice .choice-hook h2{font-size:clamp(50px,15vw,76px);max-width:none;line-height:.86}
+ .home-choice .choice-context{position:static;margin-top:34px}
+ .home-choice .choice-context p{font-size:16px;max-width:24ch}
+ .home-choice .choice-decision{margin:54px 0 0 12%}
+ .home-choice .choice-decision strong{font-size:clamp(41px,11.3vw,62px);line-height:.92}
+ .home-choice .choice-decision em{font-size:27px;margin-top:20px}
+}
+@media(prefers-reduced-motion:reduce){.home-invitation a{transition:none}}

@@ -1,0 +1,498 @@
+{
+  "browser": "151.0.7922.173",
+  "externalFonts": "External HTTPS blocked equally in the archive and prototype for deterministic comparison; local font files remain available.",
+  "captures": [
+    {
+      "version": "original",
+      "mode": "desktop",
+      "status": 200,
+      "metrics": {
+        "hero": {
+          "top": 76,
+          "height": 900
+        },
+        "bridge": {
+          "top": 976,
+          "height": 2513.84375
+        },
+        "gallery": {
+          "top": 3489.84375,
+          "height": 810
+        },
+        "pageHeight": 8118
+      },
+      "errors": [],
+      "input": "Native mouse wheel",
+      "inputs": [
+        {
+          "elapsed": 5469,
+          "y": 0
+        },
+        {
+          "elapsed": 6109,
+          "y": 120
+        },
+        {
+          "elapsed": 6763,
+          "y": 240
+        },
+        {
+          "elapsed": 7430,
+          "y": 360
+        },
+        {
+          "elapsed": 8070,
+          "y": 480
+        },
+        {
+          "elapsed": 8731,
+          "y": 600
+        },
+        {
+          "elapsed": 9388,
+          "y": 720
+        },
+        {
+          "elapsed": 10034,
+          "y": 840
+        },
+        {
+          "elapsed": 10674,
+          "y": 960
+        },
+        {
+          "elapsed": 11388,
+          "y": 1080
+        },
+        {
+          "elapsed": 12027,
+          "y": 1200
+        },
+        {
+          "elapsed": 12665,
+          "y": 1320
+        },
+        {
+          "elapsed": 13302,
+          "y": 1440
+        },
+        {
+          "elapsed": 13939,
+          "y": 1560
+        },
+        {
+          "elapsed": 14587,
+          "y": 1680
+        },
+        {
+          "elapsed": 15251,
+          "y": 1800
+        },
+        {
+          "elapsed": 15875,
+          "y": 1920
+        },
+        {
+          "elapsed": 16517,
+          "y": 2040
+        },
+        {
+          "elapsed": 17152,
+          "y": 2160
+        },
+        {
+          "elapsed": 17809,
+          "y": 2280
+        },
+        {
+          "elapsed": 18469,
+          "y": 2400
+        },
+        {
+          "elapsed": 19105,
+          "y": 2520
+        },
+        {
+          "elapsed": 19738,
+          "y": 2640
+        },
+        {
+          "elapsed": 20367,
+          "y": 2760
+        },
+        {
+          "elapsed": 21000,
+          "y": 2880
+        },
+        {
+          "elapsed": 21637,
+          "y": 3000
+        },
+        {
+          "elapsed": 22272,
+          "y": 3120
+        },
+        {
+          "elapsed": 22918,
+          "y": 3240
+        },
+        {
+          "elapsed": 23574,
+          "y": 3360
+        },
+        {
+          "elapsed": 24227,
+          "y": 3480
+        },
+        {
+          "elapsed": 24878,
+          "y": 3600
+        }
+      ],
+      "elapsed": 28312,
+      "downloadFile": "before-desktop.mp4",
+      "encodedDuration": 29.0,
+      "encodedBytes": 2975558
+    },
+    {
+      "version": "original",
+      "mode": "mobile",
+      "status": 200,
+      "metrics": {
+        "hero": {
+          "top": 0,
+          "height": 844
+        },
+        "bridge": {
+          "top": 844,
+          "height": 1615.5625
+        },
+        "gallery": {
+          "top": 2459.5625,
+          "height": 650
+        },
+        "pageHeight": 7096
+      },
+      "errors": [],
+      "input": "Native emulated touch via Chromium CDP",
+      "inputs": [
+        {
+          "elapsed": 5479,
+          "y": 0
+        },
+        {
+          "elapsed": 6306,
+          "y": 108
+        },
+        {
+          "elapsed": 7175,
+          "y": 203
+        },
+        {
+          "elapsed": 8228,
+          "y": 298
+        },
+        {
+          "elapsed": 9266,
+          "y": 393
+        },
+        {
+          "elapsed": 10299,
+          "y": 488
+        },
+        {
+          "elapsed": 11372,
+          "y": 583
+        },
+        {
+          "elapsed": 12406,
+          "y": 678
+        },
+        {
+          "elapsed": 13530,
+          "y": 773
+        },
+        {
+          "elapsed": 14599,
+          "y": 868
+        },
+        {
+          "elapsed": 15675,
+          "y": 963
+        },
+        {
+          "elapsed": 16710,
+          "y": 1058
+        },
+        {
+          "elapsed": 17729,
+          "y": 1153
+        },
+        {
+          "elapsed": 18802,
+          "y": 1248
+        },
+        {
+          "elapsed": 19914,
+          "y": 1343
+        },
+        {
+          "elapsed": 21007,
+          "y": 1438
+        },
+        {
+          "elapsed": 22058,
+          "y": 1533
+        },
+        {
+          "elapsed": 23079,
+          "y": 1628
+        },
+        {
+          "elapsed": 24105,
+          "y": 1723
+        },
+        {
+          "elapsed": 25113,
+          "y": 1818
+        },
+        {
+          "elapsed": 26189,
+          "y": 1913
+        },
+        {
+          "elapsed": 27214,
+          "y": 2008
+        },
+        {
+          "elapsed": 28244,
+          "y": 2103
+        },
+        {
+          "elapsed": 29306,
+          "y": 2198
+        },
+        {
+          "elapsed": 30370,
+          "y": 2293
+        },
+        {
+          "elapsed": 31469,
+          "y": 2388
+        },
+        {
+          "elapsed": 32496,
+          "y": 2483
+        },
+        {
+          "elapsed": 33528,
+          "y": 2578
+        }
+      ],
+      "elapsed": 37428,
+      "downloadFile": "before-mobile.mp4",
+      "encodedDuration": 37.6,
+      "encodedBytes": 1718981
+    },
+    {
+      "version": "homepage-a",
+      "mode": "desktop",
+      "status": 200,
+      "metrics": {
+        "hero": {
+          "top": 76,
+          "height": 900
+        },
+        "bridge": {
+          "top": 976,
+          "height": 738.640625
+        },
+        "gallery": {
+          "top": 1714.640625,
+          "height": 810
+        },
+        "pageHeight": 4371
+      },
+      "errors": [],
+      "input": "Native mouse wheel",
+      "inputs": [
+        {
+          "elapsed": 5908,
+          "y": 0
+        },
+        {
+          "elapsed": 6588,
+          "y": 120
+        },
+        {
+          "elapsed": 7272,
+          "y": 240
+        },
+        {
+          "elapsed": 8014,
+          "y": 360
+        },
+        {
+          "elapsed": 8715,
+          "y": 480
+        },
+        {
+          "elapsed": 9399,
+          "y": 600
+        },
+        {
+          "elapsed": 10087,
+          "y": 720
+        },
+        {
+          "elapsed": 10779,
+          "y": 840
+        },
+        {
+          "elapsed": 11419,
+          "y": 960
+        },
+        {
+          "elapsed": 12215,
+          "y": 1080
+        },
+        {
+          "elapsed": 12898,
+          "y": 1200
+        },
+        {
+          "elapsed": 13582,
+          "y": 1320
+        },
+        {
+          "elapsed": 14235,
+          "y": 1440
+        },
+        {
+          "elapsed": 14877,
+          "y": 1560
+        },
+        {
+          "elapsed": 15530,
+          "y": 1680
+        },
+        {
+          "elapsed": 16172,
+          "y": 1800
+        }
+      ],
+      "elapsed": 20171,
+      "downloadFile": "after-desktop.mp4",
+      "encodedDuration": 20.12,
+      "encodedBytes": 3053233
+    },
+    {
+      "version": "homepage-a",
+      "mode": "mobile",
+      "status": 200,
+      "metrics": {
+        "hero": {
+          "top": 0,
+          "height": 844
+        },
+        "bridge": {
+          "top": 980,
+          "height": 592.4375
+        },
+        "gallery": {
+          "top": 1572.4375,
+          "height": 666
+        },
+        "pageHeight": 4760
+      },
+      "errors": [],
+      "input": "Native emulated touch via Chromium CDP",
+      "inputs": [
+        {
+          "elapsed": 5493,
+          "y": 0
+        },
+        {
+          "elapsed": 6365,
+          "y": 104
+        },
+        {
+          "elapsed": 7256,
+          "y": 199
+        },
+        {
+          "elapsed": 8300,
+          "y": 294
+        },
+        {
+          "elapsed": 9391,
+          "y": 389
+        },
+        {
+          "elapsed": 10449,
+          "y": 484
+        },
+        {
+          "elapsed": 11525,
+          "y": 579
+        },
+        {
+          "elapsed": 12655,
+          "y": 674
+        },
+        {
+          "elapsed": 13778,
+          "y": 769
+        },
+        {
+          "elapsed": 14941,
+          "y": 864
+        },
+        {
+          "elapsed": 16069,
+          "y": 959
+        },
+        {
+          "elapsed": 17188,
+          "y": 1054
+        },
+        {
+          "elapsed": 18322,
+          "y": 1149
+        },
+        {
+          "elapsed": 19419,
+          "y": 1244
+        },
+        {
+          "elapsed": 20459,
+          "y": 1339
+        },
+        {
+          "elapsed": 21513,
+          "y": 1434
+        },
+        {
+          "elapsed": 22575,
+          "y": 1529
+        },
+        {
+          "elapsed": 23609,
+          "y": 1624
+        },
+        {
+          "elapsed": 24680,
+          "y": 1719
+        }
+      ],
+      "elapsed": 28148,
+      "downloadFile": "after-mobile.mp4",
+      "encodedDuration": 28.64,
+      "encodedBytes": 1523537
+    }
+  ],
+  "captureDate": "2026-10-09",
+  "protectedOriginal": "9a02ab7b17f779d6a2e5190731d428508c3da7ff",
+  "implementationBaseline": "b539f86b6f27578170aaa56c0ad42c721d13198b",
+  "mobileInputBoundary": "Both mobile recordings use native Chromium emulated vertical touch in the outer 12px margin. A separate original test at x185 stalled over the gallery (overscroll containment); current-gallery vertical touch is covered independently by the browser regression."
+}

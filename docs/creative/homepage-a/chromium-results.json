@@ -1,0 +1,21 @@
+{
+  "engine": "chromium",
+  "browser": "151.0.7922.173",
+  "checks": 994,
+  "cases": [
+    "Protected assets, all inner pages, navigation, hero fallback, Dear EXIF and footer byte equality",
+    "chromium 1440px en: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 1440px es: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 390px en: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 390px es: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 360px en: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 360px es: loader, hero, cinematic bridge, gallery, cards, letter, CTA, history",
+    "chromium 1440px en: 25 native drawer journeys, all five direct pages",
+    "chromium 1440px es: 25 native drawer journeys, all five direct pages",
+    "chromium 390px es: 25 native drawer journeys, all five direct pages",
+    "chromium 390px en: 25 native drawer journeys, all five direct pages",
+    "chromium reduced motion and gallery input",
+    "chromium no-JS fallback"
+  ],
+  "passed": true
+}

@@ -1,0 +1,14 @@
+{
+  "browser": "26.5",
+  "cases": [
+    "1440px en: loader, hero invitation, native menu open/close, CTA, four direct inner pages and language",
+    "1440px es: loader, hero invitation, native menu open/close, CTA, four direct inner pages and language",
+    "390px en: loader, hero invitation, native menu open/close, CTA, four direct inner pages and language",
+    "390px es: loader, hero invitation, native menu open/close, CTA, four direct inner pages and language",
+    "1440px: all three cards with reduced motion",
+    "390px: all three cards with reduced motion"
+  ],
+  "failures": [],
+  "physicalSafari": false,
+  "fullDefaultMotionSuite": "Page crashed during card selection. Focused checks below do not certify default-motion cards or physical Safari."
+}
