@@ -19,8 +19,8 @@
 .v3-service-folios{display:grid;grid-template-columns:minmax(0,.38fr) minmax(0,1fr);gap:7vw;margin-top:58px}
 .v3-folio-index{align-self:start;position:sticky;top:115px}
 .v3-index-intro{font:400 .85rem/1.6 var(--font-sans);max-width:25ch;margin:0 0 40px}
-.v3-folio-index button{display:block;width:100%;min-height:64px;padding:22px 0;text-align:left;background:none;border:0;border-top:1px solid var(--v3-rule);color:inherit;font:400 clamp(1.6rem,2.5vw,2.7rem)/1.05 var(--font-serif);letter-spacing:-.035em;cursor:pointer;transition:padding .22s var(--v3-ease),opacity .22s ease}
-.v3-folio-index button[aria-selected="false"]{opacity:.5}.v3-folio-index button[aria-selected="true"]{padding-left:14px;font-style:italic;opacity:1}
+.v3-folio-index [data-folio]{display:block;width:100%;min-height:64px;padding:22px 0;text-align:left;background:none;border:0;border-top:1px solid var(--v3-rule);color:inherit;font:400 clamp(1.6rem,2.5vw,2.7rem)/1.05 var(--font-serif);letter-spacing:-.035em;cursor:pointer;transition:padding .22s var(--v3-ease),opacity .22s ease}
+.v3-folio-index [data-folio][aria-selected="false"]{opacity:.5}.v3-folio-index [data-folio][aria-selected="true"]{padding-left:14px;font-style:italic;opacity:1}
 .v3-folio-pages{min-width:0}.v3-site .v3-service-page{display:block;padding:0 0 38px;border:0;min-width:0}
 .v3-service-page .v2-scope-number{display:block;margin:34px 0 18px}
 .v3-service-page h2{font-size:clamp(2.2rem,4vw,4.5rem);max-width:19ch;margin-bottom:35px}
@@ -114,8 +114,8 @@
  .v3-site .v2-page-intro{padding-top:148px;padding-bottom:55px}.v3-site .v2-page-lede{padding-left:18px}
  .v3-site .v2-principle .wrap{display:block}.v3-site .v2-principle-copy{margin-top:35px}
  .v3-service-folios{display:block;margin-top:35px}.v3-folio-index{position:static;margin-bottom:48px}
- .v3-index-intro{margin-bottom:22px;max-width:100%}.v3-folio-index button{font-size:1.65rem;min-height:64px;padding:15px 0;max-width:100%}
- .v3-folio-index button[aria-selected="true"]{padding-left:12px}
+ .v3-index-intro{margin-bottom:22px;max-width:100%}.v3-folio-index [data-folio]{font-size:1.65rem;min-height:64px;padding:15px 0;max-width:100%}
+ .v3-folio-index [data-folio][aria-selected="true"]{padding-left:12px}
  .v3-service-page h2{font-size:2.3rem;max-width:100%}.v3-site .v3-service-page .v2-scope-copy{margin:0}
  .v3-specimen{min-height:300px;padding-top:28px}.v3-examination-text span,.v3-direction-text span{font-size:clamp(2rem,7.5vw,4rem)}
  .v3-reading-rule{top:calc(22px + var(--reading,.2)*160px)}
@@ -152,3 +152,6 @@
 .v3-specimen-controls input[type="range"]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--v1-ink);margin-top:-5.5px}
 .v3-specimen-controls input[type="range"]::-moz-range-track{height:1px;background:currentColor}
 .v3-specimen-controls input[type="range"]::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:var(--v1-ink)}
+/* Keep the live contrast state authoritative over older language-control rules. */
+html body.v3-site:not(.nav-open) header.site-header.nav-lang-on-dark>.wrap>.lang-toggle{color:var(--cream)!important}
+html body.v3-site.nav-open header.site-header>.wrap>.lang-toggle{color:var(--ink)!important}

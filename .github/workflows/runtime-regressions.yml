@@ -1,7 +1,7 @@
 name: Runtime regressions
 on:
   push:
-    branches: [fix/code-audit-2026-09-30, "feat/exif-website-evolution-v2-*"]
+    branches: [fix/code-audit-2026-09-30, "feat/exif-website-evolution-v2-*", "feat/exif-creative-experience-v3-*"]
   pull_request:
     branches: [main]
   workflow_dispatch:

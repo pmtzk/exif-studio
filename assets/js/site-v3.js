@@ -17,7 +17,7 @@
    panels.forEach(function(p,i){p.setAttribute('role','tabpanel');p.setAttribute('aria-labelledby','folio-tab-'+i);p.hidden=i!==n;p.classList.remove('is-changing');if(i===n&&!reduced){void p.offsetWidth;p.classList.add('is-changing');}});
    if(focus)tabs[n].focus({preventScroll:true});
   }
-  tabs.forEach(function(t,i){t.addEventListener('click',function(){select(i,false);});t.addEventListener('keydown',function(e){var next=active;if(e.key==='ArrowDown'||e.key==='ArrowRight')next=(active+1)%tabs.length;else if(e.key==='ArrowUp'||e.key==='ArrowLeft')next=(active+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();select(next,true);});});
+  tabs.forEach(function(t,i){t.addEventListener('click',function(e){e.preventDefault();select(i,false);});t.addEventListener('keydown',function(e){var next=active;if(e.key==='ArrowDown'||e.key==='ArrowRight')next=(active+1)%tabs.length;else if(e.key==='ArrowUp'||e.key==='ArrowLeft')next=(active+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();select(next,true);});});
   all('.v3-specimen-controls').forEach(function(el){el.hidden=false;});select(0,false);
   var range=document.querySelector('#reading-line'),note=document.querySelector('#reading-note');
   var reading=[['What is actually present?','¿Qué está realmente presente?'],['What does the representation promise?','¿Qué promete la representación?'],['What might a guest understand?','¿Qué podría entender un huésped?']];
@@ -56,7 +56,7 @@
   function wake(){if(!raf&&observing&&!document.hidden){if(typeof requestAnimationFrame==='function')raf=requestAnimationFrame(paint);else paint();}}
   // Observe the scope; one scheduled frame per scroll, no continuous animation loop.
   var scope=index?index.closest('.v2-scope'):bridge.closest('.v2-introduction');
-  if('IntersectionObserver' in window&&scope){visibilityObserver=new IntersectionObserver(function(entries){observing=entries[0].isIntersecting;if(observing)wake();},{rootMargin:'200px'});visibilityObserver.observe(scope);}
+  if('IntersectionObserver' in window&&scope){visibilityObserver=new IntersectionObserver(function(entries){observing=entries[0].isIntersecting;if(observing)wake();},{rootMargin:'0px'});visibilityObserver.observe(scope);}
   window.addEventListener('scroll',wake,{passive:true});window.addEventListener('resize',wake,{passive:true});document.addEventListener('visibilitychange',wake);window.addEventListener('exif:languagechange',wake);
   function motion(e){reduced=e.matches;paint();}
   if(preference){if(preference.addEventListener)preference.addEventListener('change',motion);else if(preference.addListener)preference.addListener(motion);}
