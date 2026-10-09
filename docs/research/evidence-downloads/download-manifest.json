@@ -1,0 +1,49 @@
+{
+  "archives": [
+    {
+      "filename": "exif-research-01-study-and-index.zip",
+      "bytes": 5131554,
+      "sha256": "02f6de96571ae0b32c89b45e661aa1f0b1278d210a76b6f101a00eb3267e9bda",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-01-study-and-index.zip",
+      "entries": 51
+    },
+    {
+      "filename": "exif-research-02-tengile.zip",
+      "bytes": 28186532,
+      "sha256": "81f57fb51b039925d3d51b54532bff6930785bd38762ea92c0eed89423d57161",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-02-tengile.zip",
+      "entries": 41
+    },
+    {
+      "filename": "exif-research-03-white-desert.zip",
+      "bytes": 27587468,
+      "sha256": "9ec694321879d5e4c7b5fdc00a8214d1cfe5499a03a4e723c82331f84a81cc91",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-03-white-desert.zip",
+      "entries": 54
+    },
+    {
+      "filename": "exif-research-04-art-of-documentary.zip",
+      "bytes": 23832034,
+      "sha256": "549b4838898411a59978f06cd6ca53fb614140d5f2f17f529bf2118c21d2ecff",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-04-art-of-documentary.zip",
+      "entries": 52
+    },
+    {
+      "filename": "exif-research-05-horeca-social.zip",
+      "bytes": 13740878,
+      "sha256": "8c5dae2ccf7deff4e8a8fbeb43aca69311eedf69d0c1e1dfcd04e0eededb8783",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-05-horeca-social.zip",
+      "entries": 53
+    },
+    {
+      "filename": "exif-research-06-vero.zip",
+      "bytes": 11812083,
+      "sha256": "d950e3fcf68ee9ebef9be35629a30d7c7a9d6ffdfa277690b9985731c97da625",
+      "url": "https://github.com/pmtzk/exif-studio/raw/refs/heads/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/exif-research-06-vero.zip",
+      "entries": 48
+    }
+  ],
+  "liveScreenshots": 211,
+  "liveRecordings": 29,
+  "combinedContentsVerified": true
+}

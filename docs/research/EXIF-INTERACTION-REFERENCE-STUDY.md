@@ -2,9 +2,9 @@
 
 Research run: **2026-10-09, 03:25–03:47 UTC**. Baseline: `2289050f0eeb150a337019facf9372ec158846fb`, branch `feat/exif-creative-experience-v3-2026-10-09`. Research only. Website source, branches and production were not changed.
 
-**Published evidence:** [GitHub Release](https://github.com/pmtzk/exif-studio/releases/tag/exif-reference-research-2026-10-09) · [Download the evidence ZIP](https://github.com/pmtzk/exif-studio/releases/download/exif-reference-research-2026-10-09/exif-interaction-reference-study.zip).
+**Published evidence:** [GitHub Release](https://github.com/pmtzk/exif-studio/releases/tag/exif-reference-research-2026-10-09) · [Download the six evidence archives](https://github.com/pmtzk/exif-studio/blob/feat/exif-creative-experience-v3-2026-10-09/docs/research/evidence-downloads/README.md).
 
-The ZIP includes this report, the portable evidence viewer, 211 live screenshots, 29 recordings and diagnostic logs. Extract it, then open `docs/research/reference-evidence/index.html`. Relative evidence links below resolve inside the extracted packet; the large evidence files are distributed through the release asset rather than committed to the repository.
+The six ZIPs together include this report, the portable evidence viewer, 211 live screenshots, 29 recordings and diagnostic logs. Extract all six into the same folder, then open `docs/research/reference-evidence/index.html`. Relative evidence links below resolve inside the extracted packet. GitHub's release asset upload endpoint returned HTTP 401 for both the full ZIP and a tiny test ZIP, so the archives are available as ordinary GitHub downloads under `docs/research/evidence-downloads/`, linked from the release page. Website files are unchanged.
 
 ## Findings for creative review
 
