@@ -1,0 +1,17 @@
+{
+  "cases": 12,
+  "passed": [
+    "Final Spanish title and CTA bounds 360",
+    "Final Spanish title and CTA bounds 390",
+    "Final Spanish title and CTA bounds 768",
+    "Final Spanish title and CTA bounds 860",
+    "Final Spanish title and CTA bounds 1024",
+    "Final Spanish title and CTA bounds 1440",
+    "Native emulated touch: overflow:clip",
+    "Native emulated touch: clip-path fallback",
+    "Short viewport drawer/cards 360x640",
+    "Short viewport drawer/cards 390x700",
+    "Short viewport drawer/cards 768x540",
+    "Short viewport drawer/cards 860x600"
+  ]
+}

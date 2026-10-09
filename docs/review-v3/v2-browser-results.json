@@ -1,0 +1,25 @@
+{
+  "cases": 19,
+  "assertions": 560,
+  "passed": [
+    "360px en pages, drawer geometry and preserved components",
+    "360px es pages, drawer geometry and preserved components",
+    "390px en pages, drawer geometry and preserved components",
+    "390px es pages, drawer geometry and preserved components",
+    "768px en pages, drawer geometry and preserved components",
+    "768px es pages, drawer geometry and preserved components",
+    "860px en pages, drawer geometry and preserved components",
+    "860px es pages, drawer geometry and preserved components",
+    "1024px en pages, drawer geometry and preserved components",
+    "1024px es pages, drawer geometry and preserved components",
+    "1440px en pages, drawer geometry and preserved components",
+    "1440px es pages, drawer geometry and preserved components",
+    "Keyboard boundary, close proxy, responsive lifecycle and language persistence",
+    "Inquiry validation, duplicate guard, bilingual failures, retry and truthful success",
+    "Dear EXIF still preserves drafts and reports mocked successful letters",
+    "Gallery manual controls, pause, reduced motion and pointer drag",
+    "No-JavaScript navigation and form fallback remain reachable",
+    "Failed and slow images release loader and keep the inquiry route usable",
+    "Mock provider URL switches the interface without duplicated qualification"
+  ]
+}

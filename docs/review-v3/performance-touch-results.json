@@ -1,0 +1,8 @@
+{
+  "cases": 3,
+  "passed": [
+    "390px native tap: service, emphasis, reading range, disclosure and study",
+    "768px native tap: service, emphasis, reading range, disclosure and study",
+    "Idle/offscreen RAF sleeps; scroll bursts coalesce"
+  ]
+}

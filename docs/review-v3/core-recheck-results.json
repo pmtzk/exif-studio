@@ -1,0 +1,10 @@
+{
+  "cases": 4,
+  "assertions": 38,
+  "passed": [
+    "Keyboard boundary, close proxy, responsive lifecycle and language persistence",
+    "Inquiry validation, duplicate guard, bilingual failures, retry and truthful success",
+    "Dear EXIF still preserves drafts and reports mocked successful letters",
+    "Gallery manual controls, pause, reduced motion and pointer drag"
+  ]
+}
