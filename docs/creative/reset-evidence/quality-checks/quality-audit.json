@@ -1,0 +1,65 @@
+[
+  {
+    "kind": "chromium-reduced",
+    "version": "original",
+    "browser": "151.0.7922.173",
+    "errors": [],
+    "actions": [
+      {
+        "action": "card decide",
+        "expanded": "true"
+      }
+    ]
+  },
+  {
+    "kind": "chromium-reduced",
+    "version": "prototype",
+    "browser": "151.0.7922.173",
+    "errors": [],
+    "actions": [
+      {
+        "action": "card decide",
+        "expanded": "true"
+      },
+      {
+        "action": "study decide",
+        "copy": "IN PRACTICE / AN EDITORIAL EXERCISE\nBefore the image.\n\nA small study in attention. Original language, no commissioned property or claimed result.\n\nA place to arrive.\nA reason to stay.\nOBSERVE\nINTERPRET\nDECIDE\n03 / DECIDE\n\nChoose a verified detail and give it a clear place in the story. Hierarchy is a decision about what deserves attention before arrival.\n\nThis exercise demonstrates an editorial question, not a client case study. A property-specific interpretation requires research and permission to publish its material."
+      },
+      {
+        "action": "reading range keyboard end",
+        "note": "What might a guest understand?"
+      },
+      {
+        "action": "service emphasis reason",
+        "copy": "A setting.\nA feeling.\nA reason.\n\nChoose what leads.\n\nSetting\nFeeling\nReason"
+      },
+      {
+        "action": "service format page",
+        "copy": "A page: make the distinguishing detail visible before asking for action."
+      },
+      {
+        "action": "process working note",
+        "open": "",
+        "copy": "Inside this stage\nYOUR CONTRIBUTION\nYou bring context, access and existing materials.\nWHAT TAKES SHAPE\nA shared question and an agreed scope."
+      },
+      {
+        "action": "input geometry",
+        "y": 1176.34375
+      }
+    ]
+  },
+  {
+    "kind": "webkit-mobile",
+    "version": "original",
+    "status": "partial inspection; incomplete",
+    "limitation": "Initial host validation reported missing libGLESv2.so.2. Existing workspace graphics libraries allowed a subsequent launch with host validation skipped. Original hero, drawer, Spanish hero, comparison, gallery and cards screenshots were captured. The page then crashed during the Decide card click/wait; the prototype WebKit visit was not reached. The cause of the browser-process crash is not established. This is not verification on physical iPhone Safari.",
+    "captured_files": [
+      "original-webkit-mobile-cards.jpg",
+      "original-webkit-mobile-comparison.jpg",
+      "original-webkit-mobile-drawer.jpg",
+      "original-webkit-mobile-gallery.jpg",
+      "original-webkit-mobile-hero.jpg",
+      "original-webkit-mobile-spanish-hero.jpg"
+    ]
+  }
+]
