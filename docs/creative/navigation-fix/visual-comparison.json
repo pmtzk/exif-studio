@@ -1,0 +1,22 @@
+[
+  {
+    "before": "1440-en-before-drawer.png",
+    "after": "1440-en-after-drawer.png",
+    "pixel_identical": true
+  },
+  {
+    "before": "1440-es-before-drawer.png",
+    "after": "1440-es-after-drawer.png",
+    "pixel_identical": true
+  },
+  {
+    "before": "390-en-before-drawer.png",
+    "after": "390-en-after-drawer.png",
+    "pixel_identical": true
+  },
+  {
+    "before": "390-es-before-drawer.png",
+    "after": "390-es-after-drawer.png",
+    "pixel_identical": true
+  }
+]

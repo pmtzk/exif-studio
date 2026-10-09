@@ -4,10 +4,10 @@ const root=path.resolve(__dirname,'..');const read=p=>fs.readFileSync(path.join(
 let passed=0;function test(name,fn){fn();passed++;console.log('PASS '+name);}
 const pages=['index','expertise','approach','studio','inquire'];
 test('All five pages have bilingual shared navigation, canonical metadata and real destinations',()=>{
- for(const page of pages){const html=read(page+'.html');assert.match(html,/data-en=/);assert.match(html,/data-es=/);assert.match(html,/<link rel="canonical" href="https:\/\/exif\.studio\/(?:expertise|approach|studio|inquire)?"/);assert.match(html,/id="main-content"/);assert.match(html,/class="skip-link"/);for(const route of ['expertise','approach','studio','inquire'])assert.match(html,new RegExp('href="/'+route+'"'));assert.match(html,/assets\/js\/site-v2.js/);}
+ for(const page of pages){const html=read(page+'.html');assert.match(html,/data-en=/);assert.match(html,/data-es=/);assert.match(html,/<link rel="canonical" href="https:\/\/exif\.studio\/(?:expertise|approach|studio|inquire)?"/);assert.match(html,/id="main-content"/);assert.match(html,/class="skip-link"/);for(const route of ['expertise','approach','studio','inquire'])assert.match(html,new RegExp('href="/'+route+'\\.html"'));assert.match(html,/assets\/js\/site-v2.js/);}
 });
-test('Clean routes rewrite to existing HTML and reserved destinations are unpublished',()=>{
- const redirects=read('_redirects');for(const page of pages.slice(1))assert.match(redirects,new RegExp('^/'+page+' /'+page+'\\.html 200$','m'));
+test('Cloudflare native clean routes avoid canonical loops and reserved destinations are unpublished',()=>{
+ const redirects=read('_redirects');for(const page of pages.slice(1))assert(!new RegExp('^/'+page+' /'+page+'\\.html 200$','m').test(redirects),'Cloudflare canonical redirect loop: '+page);
  for(const route of ['work','field-notes','assessment']){assert(!fs.existsSync(path.join(root,route+'.html')));for(const page of pages)assert(!read(page+'.html').includes('href="/'+route+'"'));}
  const sitemap=read('sitemap.xml');assert.equal((sitemap.match(/<loc>/g)||[]).length,5);
 });

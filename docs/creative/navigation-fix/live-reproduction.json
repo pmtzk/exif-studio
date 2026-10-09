@@ -1,0 +1,340 @@
+[
+  {
+    "engine": "chromium",
+    "preview": "https://43c27cb7.exif-studio.pages.dev",
+    "open": {
+      "drawerOpen": true,
+      "inert": false,
+      "pointerEvents": "auto"
+    },
+    "errors": [],
+    "redirects": [
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      }
+    ],
+    "directError": "page.goto: net::ERR_TOO_MANY_REDIRECTS at https://43c27cb7.exif-studio.pages.dev/expertise\nCall log:\n\u001b[2m  - navigating to \"https://43c27cb7.exif-studio.pages.dev/expertise\", waiting until \"load\"\u001b[22m\n"
+  },
+  {
+    "engine": "webkit",
+    "preview": "https://43c27cb7.exif-studio.pages.dev",
+    "open": {
+      "drawerOpen": true,
+      "inert": false,
+      "pointerEvents": "auto"
+    },
+    "errors": [],
+    "redirects": [
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise?exif_source=direct",
+        "location": "/expertise?exif_source=direct"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      },
+      {
+        "url": "https://43c27cb7.exif-studio.pages.dev/expertise",
+        "location": "/expertise"
+      }
+    ],
+    "directError": "page.goto: Load cannot follow more than 20 redirections\nCall log:\n\u001b[2m  - navigating to \"https://43c27cb7.exif-studio.pages.dev/expertise\", waiting until \"load\"\u001b[22m\n"
+  }
+]
