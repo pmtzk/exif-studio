@@ -145,3 +145,7 @@
 .site-header.nav-toggle-on-dark .nav-toggle{color:var(--cream)!important}.site-header.nav-toggle-on-light .nav-toggle,body.nav-open .site-header .nav-toggle{color:var(--ink)!important}
 .v2-folio .v2-label:first-child{flex:none;white-space:nowrap}.v2-folio .v2-label:last-child{text-align:right}
 @media(max-width:859px){html[lang="es"] .exif-drawer .v1-nav-label:not(.is-hover-copy){font-size:clamp(1.7rem,8vw,4rem)}}
+/* Clip the moving photographs without creating nested native scroll containers.
+   Hidden overflow captured vertical touch scrolling despite touch-action:pan-y. */
+.motion-gallery,.motion-gallery-viewport{overflow:visible;clip-path:inset(0);overscroll-behavior:auto}
+@supports(overflow:clip){.motion-gallery,.motion-gallery-viewport{overflow:clip;clip-path:none;overscroll-behavior-x:contain;overscroll-behavior-y:auto}}
