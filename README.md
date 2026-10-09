@@ -71,3 +71,5 @@ No booking URL or analytics provider is configured. See [integration requirement
 - [September 30 audit](CODE-AUDIT-2026-09-30.md) and [historical V1 notes](V1-NOTES-2026-09-21.md)
 
 Cloudflare Pages deploys the root with no build command. V2 is delivered on a development branch for review; do not merge, change production settings or publish unapproved material during implementation. Review image ownership/licensing/release questions before new photographic case studies or promotion. The Seasons still uses existing fallbacks until a licensed kit is supplied. Browser screenshots are review evidence, not proof of publication rights, real Formspree delivery or production readiness.
+
+Current preservation review: [rendered V1/V2 comparisons](docs/review-v2/README.md) include committed desktop/mobile/tablet EN/ES screenshots that can be viewed through GitHub on an iPad with repository access. [The review report](docs/WEBSITE-V2-REVIEW.md) records the confirmed typography fix, independently repeated checks, creative decisions and the live-preview/network blockers. No verified public preview URL is available from this environment.

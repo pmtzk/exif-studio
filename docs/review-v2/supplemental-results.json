@@ -1,0 +1,13 @@
+{
+  "cases": 8,
+  "checks": [
+    "1440px en: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "1440px es: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "390px en: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "390px es: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "768px en: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "768px es: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "1024px en: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects",
+    "1024px es: CTA, home/drawer/five-page overflow, native wheel X/Y, console, routes and legacy redirects"
+  ]
+}

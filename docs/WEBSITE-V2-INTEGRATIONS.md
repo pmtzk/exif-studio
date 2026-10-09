@@ -43,6 +43,6 @@ Commercial funnel: relevant visitor → inquiry/booking started → inquiry acce
 - Existing font fallbacks remain; The Seasons is not downloaded or newly licensed. Google Fonts and self-hosted identity assets retain their existing configuration.
 - Formspree account delivery, anti-abuse/account settings and inbox receipt need an approved intentional test. Automated tests mock its responses and send no letters.
 - Cloudflare clean routes use `_redirects`; the local Python server does not natively implement those rules. Browser test harness resolves them locally. Confirm branch-preview routing before promoting production.
-- No production deployment/settings change, main merge, calendar-account change, purchase or publication of unapproved work is authorized.
+- Development-branch preview and screenshot delivery are authorized for review. No production deployment/settings change, main merge, calendar-account change, purchase or publication of unapproved work is authorized. Preview access blockers are recorded in the [review report](WEBSITE-V2-REVIEW.md).
 
 Paid diagnostic sequence: Discovery Call → scope and price proposal → client acceptance → initial payment → detailed owner questionnaire → required data/materials → research and assessment → findings/recommendations → client decision about further work. This is an intended operational sequence; no payment or engagement is represented as having occurred.
