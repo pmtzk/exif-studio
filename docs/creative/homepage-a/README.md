@@ -30,6 +30,8 @@ The films show real local browser journeys at normal speed, including the unchan
 
 Reproduce functional checks: start `node tests/review-server.cjs /absolute/path/to/exif-studio 8080`, then `node tests/homepage-a.cjs`. The [capture method](method/record.cjs) records the protected original archive and current checkout; update its absolute roots for another environment.
 
+**Live verification:** both viewport sizes passed 10 native navigation journeys and eight direct inner-page entries each on the HTTPS preview, with EN/ES retained and no page exceptions. Google Fonts loaded successfully. Both paired desktop videos and both mobile videos played after the review buttons were clicked. Cloudflare’s injected RUM beacon failed in this environment without affecting navigation.
+
 The separate preview review player and four small MP4s live under `assets/review/homepage-a/` because Cloudflare excludes `docs/` from its output. They are not fetched by the website and add no homepage interaction or inner-page changes. GitHub file links require repository access.
 
 Kept on `feat/exif-interaction-prototypes-2026-10-09`. No merge or production deployment. The additional pre-A checkpoint is `checkpoint-exif-before-homepage-a-2026-10-09` at `b539f86`.

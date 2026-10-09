@@ -31,5 +31,44 @@
   "fonts": "Google Fonts Jost stylesheet and WOFF2 loaded with HTTP 200",
   "sourceVerification": "Published homepage CSS, bridge JS and all five HTML files match committed source after stripping Cloudflare-injected Analytics.",
   "nonfatalNetworkFailures": "Cloudflare RUM beacon submissions failed in this environment; navigation and content loaded successfully.",
-  "recordingPlayer": "Research docs excluded by Cloudflare build. Separate player added under assets/review/homepage-a; verification pending preview build."
+  "recordingPlayer": {
+    "url": "https://d7944b77.exif-studio.pages.dev/assets/review/homepage-a/",
+    "status": 200,
+    "tlsVerification": true,
+    "groups": [
+      {
+        "mode": "desktop",
+        "videos": [
+          {
+            "src": "https://d7944b77.exif-studio.pages.dev/assets/review/homepage-a/recordings/before-desktop.mp4",
+            "time": 2.009994,
+            "paused": false
+          },
+          {
+            "src": "https://d7944b77.exif-studio.pages.dev/assets/review/homepage-a/recordings/after-desktop.mp4",
+            "time": 2.009658,
+            "paused": false
+          }
+        ]
+      },
+      {
+        "mode": "mobile",
+        "videos": [
+          {
+            "src": "https://d7944b77.exif-studio.pages.dev/assets/review/homepage-a/recordings/before-mobile.mp4",
+            "time": 2.008145,
+            "paused": false
+          },
+          {
+            "src": "https://d7944b77.exif-studio.pages.dev/assets/review/homepage-a/recordings/after-mobile.mp4",
+            "time": 2.007834,
+            "paused": false
+          }
+        ]
+      }
+    ]
+  },
+  "playerCommit": "c9d5b52",
+  "privateRepository": true,
+  "downloadAccess": "GitHub file links require repository access; all four films are publicly playable and downloadable through the isolated Cloudflare branch preview."
 }
