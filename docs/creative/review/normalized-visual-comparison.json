@@ -1,0 +1,210 @@
+[
+  {
+    "baseline": "images/normalized/1440-en-baseline-cards-expanded.png",
+    "after": "images/normalized/1440-en-after-cards-expanded.png",
+    "baseline_dimensions": [
+      1440,
+      576
+    ],
+    "after_dimensions": [
+      1440,
+      576
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-en-baseline-cards.png",
+    "after": "images/normalized/1440-en-after-cards.png",
+    "baseline_dimensions": [
+      1440,
+      576
+    ],
+    "after_dimensions": [
+      1440,
+      576
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-en-baseline-gallery.png",
+    "after": "images/normalized/1440-en-after-gallery.png",
+    "baseline_dimensions": [
+      1390,
+      470
+    ],
+    "after_dimensions": [
+      1390,
+      470
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-en-baseline-recognition.png",
+    "after": "images/normalized/1440-en-after-recognition.png",
+    "baseline_dimensions": [
+      1440,
+      1920
+    ],
+    "after_dimensions": [
+      1440,
+      1920
+    ],
+    "pixel_identical": false
+  },
+  {
+    "baseline": "images/normalized/1440-es-baseline-cards-expanded.png",
+    "after": "images/normalized/1440-es-after-cards-expanded.png",
+    "baseline_dimensions": [
+      1440,
+      570
+    ],
+    "after_dimensions": [
+      1440,
+      570
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-es-baseline-cards.png",
+    "after": "images/normalized/1440-es-after-cards.png",
+    "baseline_dimensions": [
+      1440,
+      570
+    ],
+    "after_dimensions": [
+      1440,
+      570
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-es-baseline-gallery.png",
+    "after": "images/normalized/1440-es-after-gallery.png",
+    "baseline_dimensions": [
+      1390,
+      470
+    ],
+    "after_dimensions": [
+      1390,
+      470
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/1440-es-baseline-recognition.png",
+    "after": "images/normalized/1440-es-after-recognition.png",
+    "baseline_dimensions": [
+      1440,
+      1975
+    ],
+    "after_dimensions": [
+      1440,
+      1975
+    ],
+    "pixel_identical": false
+  },
+  {
+    "baseline": "images/normalized/390-en-baseline-cards-expanded.png",
+    "after": "images/normalized/390-en-after-cards-expanded.png",
+    "baseline_dimensions": [
+      390,
+      1404
+    ],
+    "after_dimensions": [
+      390,
+      1404
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/390-en-baseline-cards.png",
+    "after": "images/normalized/390-en-after-cards.png",
+    "baseline_dimensions": [
+      390,
+      1404
+    ],
+    "after_dimensions": [
+      390,
+      1404
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/390-en-baseline-gallery.png",
+    "after": "images/normalized/390-en-after-gallery.png",
+    "baseline_dimensions": [
+      350,
+      388
+    ],
+    "after_dimensions": [
+      350,
+      388
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/390-en-baseline-recognition.png",
+    "after": "images/normalized/390-en-after-recognition.png",
+    "baseline_dimensions": [
+      390,
+      1620
+    ],
+    "after_dimensions": [
+      390,
+      1620
+    ],
+    "pixel_identical": false
+  },
+  {
+    "baseline": "images/normalized/390-es-baseline-cards-expanded.png",
+    "after": "images/normalized/390-es-after-cards-expanded.png",
+    "baseline_dimensions": [
+      390,
+      1404
+    ],
+    "after_dimensions": [
+      390,
+      1404
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/390-es-baseline-cards.png",
+    "after": "images/normalized/390-es-after-cards.png",
+    "baseline_dimensions": [
+      390,
+      1404
+    ],
+    "after_dimensions": [
+      390,
+      1404
+    ],
+    "pixel_identical": false
+  },
+  {
+    "baseline": "images/normalized/390-es-baseline-gallery.png",
+    "after": "images/normalized/390-es-after-gallery.png",
+    "baseline_dimensions": [
+      350,
+      388
+    ],
+    "after_dimensions": [
+      350,
+      388
+    ],
+    "pixel_identical": true
+  },
+  {
+    "baseline": "images/normalized/390-es-baseline-recognition.png",
+    "after": "images/normalized/390-es-after-recognition.png",
+    "baseline_dimensions": [
+      390,
+      1567
+    ],
+    "after_dimensions": [
+      390,
+      1567
+    ],
+    "pixel_identical": false
+  }
+]

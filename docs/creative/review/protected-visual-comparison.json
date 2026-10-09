@@ -1,0 +1,362 @@
+[
+  {
+    "file": "1440-en-create-expanded.png",
+    "pixels_over_tolerance": 39439,
+    "percentage": 3.0431,
+    "mean_absolute_channel_difference": 1.2359
+  },
+  {
+    "file": "1440-en-dear-exif-expanded.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-dear-exif.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-drawer-closed.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-drawer-open.png",
+    "pixels_over_tolerance": 4741,
+    "percentage": 0.3658,
+    "mean_absolute_channel_difference": 0.0663
+  },
+  {
+    "file": "1440-en-founder-letter.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-gallery-next.png",
+    "pixels_over_tolerance": 390332,
+    "percentage": 30.1182,
+    "mean_absolute_channel_difference": 18.1838
+  },
+  {
+    "file": "1440-en-gallery-paused.png",
+    "pixels_over_tolerance": 371078,
+    "percentage": 28.6326,
+    "mean_absolute_channel_difference": 22.7937
+  },
+  {
+    "file": "1440-en-gallery.png",
+    "pixels_over_tolerance": 356852,
+    "percentage": 27.5349,
+    "mean_absolute_channel_difference": 21.1931
+  },
+  {
+    "file": "1440-en-hero.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-inquire.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-en-loader.png",
+    "pixels_over_tolerance": 11522,
+    "percentage": 0.889,
+    "mean_absolute_channel_difference": 0.3902
+  },
+  {
+    "file": "1440-en-observe-decide-create.png",
+    "pixels_over_tolerance": 129930,
+    "percentage": 10.0255,
+    "mean_absolute_channel_difference": 5.7267
+  },
+  {
+    "file": "1440-en-recognition.png",
+    "pixels_over_tolerance": 24366,
+    "percentage": 1.8801,
+    "mean_absolute_channel_difference": 0.7164
+  },
+  {
+    "file": "1440-en-studio.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-create-expanded.png",
+    "pixels_over_tolerance": 670906,
+    "percentage": 51.7674,
+    "mean_absolute_channel_difference": 77.4334
+  },
+  {
+    "file": "1440-es-dear-exif-expanded.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-dear-exif.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-drawer-closed.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-drawer-open.png",
+    "pixels_over_tolerance": 5188,
+    "percentage": 0.4003,
+    "mean_absolute_channel_difference": 0.0735
+  },
+  {
+    "file": "1440-es-founder-letter.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-gallery-next.png",
+    "pixels_over_tolerance": 460159,
+    "percentage": 35.5061,
+    "mean_absolute_channel_difference": 27.2624
+  },
+  {
+    "file": "1440-es-gallery-paused.png",
+    "pixels_over_tolerance": 438168,
+    "percentage": 33.8093,
+    "mean_absolute_channel_difference": 26.9803
+  },
+  {
+    "file": "1440-es-gallery.png",
+    "pixels_over_tolerance": 435836,
+    "percentage": 33.6293,
+    "mean_absolute_channel_difference": 26.2054
+  },
+  {
+    "file": "1440-es-hero.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-inquire.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "1440-es-loader.png",
+    "pixels_over_tolerance": 16589,
+    "percentage": 1.28,
+    "mean_absolute_channel_difference": 0.7735
+  },
+  {
+    "file": "1440-es-observe-decide-create.png",
+    "pixels_over_tolerance": 153941,
+    "percentage": 11.8782,
+    "mean_absolute_channel_difference": 7.7667
+  },
+  {
+    "file": "1440-es-recognition.png",
+    "pixels_over_tolerance": 141828,
+    "percentage": 10.9435,
+    "mean_absolute_channel_difference": 13.9362
+  },
+  {
+    "file": "1440-es-studio.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-create-expanded.png",
+    "pixels_over_tolerance": 109741,
+    "percentage": 31.2652,
+    "mean_absolute_channel_difference": 21.3105
+  },
+  {
+    "file": "390-en-dear-exif-expanded.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-dear-exif.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-drawer-closed.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-drawer-open.png",
+    "pixels_over_tolerance": 775,
+    "percentage": 0.2208,
+    "mean_absolute_channel_difference": 0.0424
+  },
+  {
+    "file": "390-en-founder-letter.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-gallery-next.png",
+    "pixels_over_tolerance": 70148,
+    "percentage": 19.9852,
+    "mean_absolute_channel_difference": 10.7618
+  },
+  {
+    "file": "390-en-gallery-paused.png",
+    "pixels_over_tolerance": 59745,
+    "percentage": 17.0214,
+    "mean_absolute_channel_difference": 10.8009
+  },
+  {
+    "file": "390-en-gallery.png",
+    "pixels_over_tolerance": 49383,
+    "percentage": 14.0692,
+    "mean_absolute_channel_difference": 8.7251
+  },
+  {
+    "file": "390-en-hero.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0013
+  },
+  {
+    "file": "390-en-inquire.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-en-loader.png",
+    "pixels_over_tolerance": 16329,
+    "percentage": 4.6521,
+    "mean_absolute_channel_difference": 3.6058
+  },
+  {
+    "file": "390-en-observe-decide-create.png",
+    "pixels_over_tolerance": 153106,
+    "percentage": 43.6199,
+    "mean_absolute_channel_difference": 30.1986
+  },
+  {
+    "file": "390-en-recognition.png",
+    "pixels_over_tolerance": 7076,
+    "percentage": 2.016,
+    "mean_absolute_channel_difference": 0.4171
+  },
+  {
+    "file": "390-en-studio.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-create-expanded.png",
+    "pixels_over_tolerance": 224347,
+    "percentage": 63.9165,
+    "mean_absolute_channel_difference": 121.813
+  },
+  {
+    "file": "390-es-dear-exif-expanded.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-dear-exif.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-drawer-closed.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-drawer-open.png",
+    "pixels_over_tolerance": 493,
+    "percentage": 0.1405,
+    "mean_absolute_channel_difference": 0.0269
+  },
+  {
+    "file": "390-es-founder-letter.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-gallery-next.png",
+    "pixels_over_tolerance": 68525,
+    "percentage": 19.5228,
+    "mean_absolute_channel_difference": 10.5634
+  },
+  {
+    "file": "390-es-gallery-paused.png",
+    "pixels_over_tolerance": 59414,
+    "percentage": 16.9271,
+    "mean_absolute_channel_difference": 10.3757
+  },
+  {
+    "file": "390-es-gallery.png",
+    "pixels_over_tolerance": 65934,
+    "percentage": 18.7846,
+    "mean_absolute_channel_difference": 12.741
+  },
+  {
+    "file": "390-es-hero.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-inquire.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  },
+  {
+    "file": "390-es-loader.png",
+    "pixels_over_tolerance": 14449,
+    "percentage": 4.1165,
+    "mean_absolute_channel_difference": 2.7168
+  },
+  {
+    "file": "390-es-observe-decide-create.png",
+    "pixels_over_tolerance": 187947,
+    "percentage": 53.5462,
+    "mean_absolute_channel_difference": 58.8507
+  },
+  {
+    "file": "390-es-recognition.png",
+    "pixels_over_tolerance": 7956,
+    "percentage": 2.2667,
+    "mean_absolute_channel_difference": 0.4892
+  },
+  {
+    "file": "390-es-studio.png",
+    "pixels_over_tolerance": 0,
+    "percentage": 0.0,
+    "mean_absolute_channel_difference": 0.0
+  }
+]

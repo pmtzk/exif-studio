@@ -1,0 +1,16 @@
+{
+  "assertions": 252,
+  "widths": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "languages": [
+    "en",
+    "es"
+  ],
+  "checkpoint": "337ee2dc22937064d86fe648052daa6b5e39e4f2",
+  "passed": true
+}

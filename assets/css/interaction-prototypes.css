@@ -1,0 +1,38 @@
+/* Review prototypes: exclusively scoped. Protected media and controllers untouched. */
+.exif-artifact {margin-bottom:54px;color:var(--v1-ink);}
+.exif-artifact > h2 {font-family:var(--font-serif);font-weight:400;font-size:clamp(2rem,3.2vw,3.8rem);line-height:1.05;max-width:17ch;margin:20px 0 28px;}
+.exif-artifact-label,.exif-passage-label {font-family:var(--font-sans);font-size:11px;line-height:1.6;letter-spacing:.1em;text-transform:uppercase;}
+.exif-artifact-choices {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.exif-artifact-choices[hidden],.exif-artifact [hidden] {display:none;}
+.exif-artifact-choices button {font:inherit;font-size:13px;color:inherit;background:transparent;border:1px solid currentColor;padding:12px 15px;min-height:44px;cursor:pointer;}
+.exif-artifact-choices button[aria-pressed="true"] {background:var(--v1-ink);color:var(--v1-cream);}
+.exif-artifact-choices button:focus-visible {outline:2px solid currentColor;outline-offset:4px;}
+.exif-artifact-sheet {border-top:1px solid currentColor;border-bottom:1px solid currentColor;padding:28px 0;}
+.exif-artifact-sheet article {min-height:470px;}
+.exif-artifact-sheet article+article {border-top:1px solid currentColor;padding-top:28px;margin-top:28px;}
+.exif-artifact.is-enhanced .exif-artifact-sheet article {margin:0;border:0;padding:0;}
+.exif-artifact-subject {font-family:var(--font-serif);font-weight:400;font-size:clamp(2rem,4vw,4.4rem);line-height:1.05;max-width:14ch;margin:34px 0;}
+.exif-artifact-notes {font-size:15px;line-height:1.7;max-width:45ch;border-left:1px solid currentColor;padding-left:20px;}
+.exif-artifact-notes p {margin:10px 0;}
+.exif-artifact-emphasis {font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3.5rem);font-style:italic;line-height:1.1;margin:24px 0;max-width:18ch;}
+.exif-artifact-reason {font-size:13px;line-height:1.75;max-width:65ch;margin:30px 0 0;}
+.exif-artifact-output {border:1px solid currentColor;padding:30px;max-width:580px;margin-top:24px;}
+.exif-artifact-output h3 {font-family:var(--font-serif);font-size:clamp(2rem,3.6vw,3.8rem);line-height:1.06;font-weight:400;max-width:12ch;margin:0 0 28px;}
+.exif-artifact-output p:last-child {font-size:14px;line-height:1.65;max-width:38ch;}
+.exif-artifact-print-rule {width:50px;height:1px;background:currentColor;margin:24px 0;}
+.exif-artifact.is-enhanced article:not([hidden]) {animation:exif-artifact-enter .24s ease-out;}
+@keyframes exif-artifact-enter {from{opacity:.6;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.exif-passage {--passage:1;position:relative;color:var(--v1-ink);margin:0 auto;width:min(88%,1200px);height:350px;display:grid;align-items:center;overflow:hidden;}
+.exif-passage-frame {position:absolute;inset:calc(32px - var(--passage)*24px) calc(18% - var(--passage)*16%);pointer-events:none;}
+.exif-passage-frame i {position:absolute;width:28px;height:28px;border-color:currentColor;border-style:solid;}
+.exif-passage-frame i:nth-child(1){top:0;left:0;border-width:1px 0 0 1px;}
+.exif-passage-frame i:nth-child(2){top:0;right:0;border-width:1px 1px 0 0;}
+.exif-passage-frame i:nth-child(3){bottom:0;left:0;border-width:0 0 1px 1px;}
+.exif-passage-frame i:nth-child(4){bottom:0;right:0;border-width:0 1px 1px 0;}
+.exif-passage-caption {padding:36px 12%;}
+.exif-passage-caption h2 {font-family:var(--font-serif);font-weight:400;font-size:clamp(2.3rem,4.8vw,5rem);line-height:1.05;white-space:pre-line;margin:18px 0;}
+.exif-passage-caption>p:last-child {font-size:13px;line-height:1.6;}
+.exif-passage-label {transform:translateX(calc(12px - var(--passage)*12px));}
+.exif-passage-rule {position:absolute;bottom:27px;left:12%;height:1px;width:calc(20% + var(--passage)*65%);background:currentColor;}
+@media(max-width:859px){.exif-artifact-sheet article{min-height:560px;}.exif-artifact-output{padding:22px;}.exif-artifact-choices{gap:6px;}.exif-artifact-choices button{padding:12px 10px;font-size:12px;}.exif-passage{height:340px;width:92%;}.exif-passage-caption{padding:30px 12%;}.exif-passage-frame{inset:calc(28px - var(--passage)*20px) calc(12% - var(--passage)*10%);}}
+@media(prefers-reduced-motion:reduce){.exif-artifact.is-enhanced article:not([hidden]){animation:none;}.exif-passage{--passage:1!important;}}
