@@ -1,0 +1,35 @@
+{
+  "implementationCommit": "ca58548",
+  "preview": "https://da6f2909.exif-studio.pages.dev/",
+  "tlsVerification": true,
+  "desktop": {
+    "viewport": [
+      1440,
+      900
+    ],
+    "nativeNavigationJourneys": 10,
+    "directInnerPageEntries": 8,
+    "languages": [
+      "en",
+      "es"
+    ],
+    "pageErrors": []
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "nativeNavigationJourneys": 10,
+    "directInnerPageEntries": 8,
+    "languages": [
+      "en",
+      "es"
+    ],
+    "pageErrors": []
+  },
+  "fonts": "Google Fonts Jost stylesheet and WOFF2 loaded with HTTP 200",
+  "sourceVerification": "Published homepage CSS, bridge JS and all five HTML files match committed source after stripping Cloudflare-injected Analytics.",
+  "nonfatalNetworkFailures": "Cloudflare RUM beacon submissions failed in this environment; navigation and content loaded successfully.",
+  "recordingPlayer": "Research docs excluded by Cloudflare build. Separate player added under assets/review/homepage-a; verification pending preview build."
+}

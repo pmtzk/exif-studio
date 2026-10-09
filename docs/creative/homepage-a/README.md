@@ -1,6 +1,6 @@
 # Homepage A — controlled moving prototype
 
-[Working branch preview](https://feat-exif-interaction-protot.exif-studio.pages.dev/) · [Watch the paired recordings](https://feat-exif-interaction-protot.exif-studio.pages.dev/docs/creative/homepage-a/index.html)
+[Working branch preview](https://feat-exif-interaction-protot.exif-studio.pages.dev/) · [Watch the paired recordings](https://feat-exif-interaction-protot.exif-studio.pages.dev/assets/review/homepage-a/index.html)
 
 | Browser recording | Protected original | Homepage A |
 | --- | --- | --- |
@@ -24,10 +24,12 @@ The bridge retains four original statements. Its question settles first; “Your
 - All existing assets except the comparison controller are byte-identical to the pre-A baseline. All four inner pages, navigation, routing, original loader/hero controllers and styles, gallery code/image order, cards, Dear EXIF and founder letter are protected. The mobile EN first photographic viewport is pixel-identical to the original in the matched lossless captures.
 - WebKit verification is partial: its full default-motion test crashed during animated card selection, as in the earlier original-site audit. See [focused results](webkit-focused.json). No physical iPhone Safari verification is claimed.
 
-[Chromium results](chromium-results.json) · [Protection record](protection.json) · [Capture inputs and geometry](recordings/capture.json)
+[Published preview verification](live-verification.json) · [Chromium results](chromium-results.json) · [Protection record](protection.json) · [Capture inputs and geometry](recordings/capture.json)
 
 The films show real local browser journeys at normal speed, including the unchanged loader. External HTTPS/fonts were blocked equally for deterministic archive comparison. Mobile uses native Chromium emulated touch in the outer 12 px margin: the original archive traps vertical touch over its gallery. The current gallery passed separate horizontal and vertical touch checks. These limits are not hidden by the films. Source comparison: original `9a02ab7`, pre-A `b539f86`.
 
 Reproduce functional checks: start `node tests/review-server.cjs /absolute/path/to/exif-studio 8080`, then `node tests/homepage-a.cjs`. The [capture method](method/record.cjs) records the protected original archive and current checkout; update its absolute roots for another environment.
+
+The separate preview review player and four small MP4s live under `assets/review/homepage-a/` because Cloudflare excludes `docs/` from its output. They are not fetched by the website and add no homepage interaction or inner-page changes. GitHub file links require repository access.
 
 Kept on `feat/exif-interaction-prototypes-2026-10-09`. No merge or production deployment. The additional pre-A checkpoint is `checkpoint-exif-before-homepage-a-2026-10-09` at `b539f86`.
