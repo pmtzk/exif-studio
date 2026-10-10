@@ -1,0 +1,17 @@
+(function(){
+  'use strict';
+  var page=document.querySelector('.exif-whatwedo');
+  if(!page)return;
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced||!('IntersectionObserver' in window))return;
+  page.classList.add('wwd-motion');
+  var items=page.querySelectorAll('[data-reveal]');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting)return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  },{threshold:.12,rootMargin:'0px 0px -36px 0px'});
+  items.forEach(function(item){observer.observe(item);});
+})();
