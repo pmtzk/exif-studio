@@ -8,7 +8,7 @@
   color:var(--wwd-ink);
   overflow:clip;
 }
-.exif-whatwedo .wwd-wrap{width:min(100% - 2*var(--gutter,clamp(1.25rem,4vw,3rem)),1440px);margin-inline:auto}
+.exif-whatwedo .wwd-wrap{width:min(100%,1440px);padding-inline:var(--gutter,clamp(1.25rem,4vw,3rem));margin-inline:auto}
 .exif-whatwedo .wwd-kicker,
 .exif-whatwedo .wwd-index,
 .exif-whatwedo .wwd-image-note{
