@@ -95,8 +95,8 @@
 }
 .exif-whatwedo .wwd-service-copy>p{max-width:38ch;font-size:1rem;line-height:1.75}
 .exif-whatwedo .wwd-deliverables{margin:1.7rem 0 0;padding:0;list-style:none;max-width:39ch}
-.exif-whatwedo .wwd-deliverables li{padding:.58rem 0;border-bottom:1px solid var(--wwd-rule);font-size:.86rem;line-height:1.5}
-.exif-whatwedo .wwd-deliverables li:first-child{border-top:1px solid var(--wwd-rule)}
+.exif-whatwedo .wwd-deliverables li{position:relative;padding:.3rem 0 .3rem 1rem;font-size:.86rem;line-height:1.5}
+.exif-whatwedo .wwd-deliverables li::before{content:'—';position:absolute;left:0;color:var(--wwd-green)}
 .exif-whatwedo .wwd-service-media{margin:0;position:relative;overflow:hidden;background:rgba(28,54,42,.06)}
 .exif-whatwedo .wwd-service-media img{
   display:block;width:100%;aspect-ratio:1.12/1;object-fit:cover;
